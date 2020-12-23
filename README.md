@@ -1,4 +1,4 @@
-# Web-Page-to-play-back-Surveillance-Recordings-and-be-alerted
+# Web Page to play back my Surveillance Recordings, includes client-side alerting and ability to disable system alerts for current weather and such
 
 I had to develop this - a web page and some server-side scripting for personal use.  The cameras in my system are all IP cameras that only output the stream in rtsp, not the newer streaming protocols, so this web page is not set up for live views.  If your camera live streams come to you as a newer http protocol, just modify this and add some video elements where you want them. The server runs Ubuntu 20.04 (not included here) and the web server is lightweight bash scripting forked from bashttpd and tricked out (included here). **bashttpd bash script takes the place of Apache or nginx to serve this web page**, so that saves you the trouble of learning one of those web servers.  Alerts are sent by email from the server to as many recipient destinations as desired, which is expected to include SMS/MMS translator[s] for alerting via cell phone messaging.
 
