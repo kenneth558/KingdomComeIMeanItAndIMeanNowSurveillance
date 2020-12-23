@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #This must get executed prior to excessive numbers of files created.  Once every day seems OK
 errmsg="The following files already exist, so ALL files created during this run will be named with \"_additional\" as part of the archive file name"
 errmsgdisplayed=false
