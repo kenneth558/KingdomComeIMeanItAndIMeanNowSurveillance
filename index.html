@@ -691,7 +691,7 @@ onclick="
         {objectelement[i].contentDocument.links[0].click();
 }}">
 <br><br>
-<input type="button" value="Attempt to queue the videos pulled up, playing or paused. Retry as nec." id="qbtn" 
+<input type="button" value="Queue the playing or paused videos to queue-to time. Retry until success" id="qbtn" 
 style="font-size:25px;"
 onclick="var objectelement=document.getElementsByClassName('mp4obj');
 
@@ -703,7 +703,8 @@ onclick="var objectelement=document.getElementsByClassName('mp4obj');
           }
          }
         }
-">
+"><br>
+<big>Queue-to time is one minute prior to time shown in the text box above.  Allowing pre-loading between retries is best practice</big>
 <br><br>
 <input type="button" value="Pause all videos" id="pausebtn" style="font-size:25px;" onclick="var objectelement=document.getElementsByClassName('mp4obj');
         for(var i=0;i<objectelement.length;i++)
@@ -949,24 +950,24 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
          {glonended( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')});//always comes in tandem with and after a pause
 //         elmnt.contentDocument.body.children[0].addEventListener("abort",function(item)
 //         {alert(item.type);glonabort( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
-         elmnt.contentDocument.body.children[0].addEventListener("pause",function(item)
-         {glonpause( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
+//         elmnt.contentDocument.body.children[0].addEventListener("pause",function(item)
+//         {glonpause( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
 //         elmnt.contentDocument.body.children[0].addEventListener("play",function(item)
 //         {alert(item.type);glonplay( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
 //         elmnt.contentDocument.body.children[0].addEventListener("seeking",function(item)
 //         {alert(item.type);glonseeking( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')});//comes often at beginning of video playing
-         elmnt.contentDocument.body.children[0].addEventListener("stalled",function(item)
-         {alert(item.type);glonstalled( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
+//occurs when losing time due to network         elmnt.contentDocument.body.children[0].addEventListener("stalled",function(item)
+//         {alert(item.type);glonstalled( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
 //occurs when losing time due to network         elmnt.contentDocument.body.children[0].addEventListener("waiting",function(item)
 //         {alert(item.type);glonwaiting( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
 //occurs when losing time due to network          elmnt.contentDocument.body.children[0].addEventListener("suspend",function(item)
 //         {alert(item.type + ' ' + elmnt.contentDocument.body.children[0].buffered.end(elmnt.contentDocument.body.children[0].buffered.length-1) );glonsuspend( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')});//comes when each chunk series finishes downloading excluding final one
-         elmnt.contentDocument.body.children[0].addEventListener("ratechange",function(item)
-         {glonratechange( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
+//         elmnt.contentDocument.body.children[0].addEventListener("ratechange",function(item)
+//         {glonratechange( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
 //         elmnt.contentDocument.body.children[0].addEventListener("error",function(item)
 //         {alert(item.type);glonerror( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
-         elmnt.contentDocument.body.children[0].addEventListener("loadend",function(item)
-         {alert(item.type);glonloadend( this.contentDocument.body.children[0].currentSrc, getElementById('sysjpgmp4_motion'), '', '', '', '', '')})
+//         elmnt.contentDocument.body.children[0].addEventListener("loadend",function(item)
+//         {alert(item.type);glonloadend( this.contentDocument.body.children[0].currentSrc, getElementById('sysjpgmp4_motion'), '', '', '', '', '')})
 //         elmnt.contentDocument.body.children[0].addEventListener("playing",function(item)
 //         {glonplaying( this.contentDocument.body.children[0].currentSrc, getElementById('sysjpgmp4_motion'), '', '', '', '', '')})
 //         elmnt.contentDocument.body.children[0].addEventListener("progress",function(item)
@@ -986,8 +987,6 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
           }
   }
 }
-
-
 function glonloadeddata( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onloadeddata. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
