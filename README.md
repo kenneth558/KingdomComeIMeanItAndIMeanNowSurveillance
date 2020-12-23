@@ -7,7 +7,7 @@ NOTE: Alerting of events is configured via emails sent out.  For this functional
 NOTE: Most features require server-side customizations to the http server script (included).  Most functionality will be lost if this page is served without using the tricked out bashttpd script serving this page to do it.
 
 Please don't expect this page to radiate impressive beauty, but it does do me a world of good in functionality such as -
-  - accept week long predictable "don't wake me up" time windows as files both per camera and system-wide.  Events in the form of .jpg files will continue to record so you can research later if you missed anything.
+  - accept week long predictable "don't wake me up" time windows as files both per camera and system-wide.  Events in the form of .jpg files will continue to be recorded as .jpgs when they happen so you can research later if you missed anything, they just won't produce alerts.
   - play a sound repeatedly when an alert is sent out
 
 There is room for improvement if you want to: the playback synchronizing algorithm only synchronizes the recorded streams to one place - the very beginning of playback of an event you're researching.  As those streams play, they will lose synchronization due to small unpredictable signal acquisition outages and so forth.
