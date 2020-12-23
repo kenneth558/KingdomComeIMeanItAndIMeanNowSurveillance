@@ -1,0 +1,94 @@
+#!/bin/bash
+#This must get executed prior to excessive numbers of files created.  Once every day seems OK
+errmsg="The following files already exist, so ALL files created during this run will be named with \"_additional\" as part of the archive file name"
+errmsgdisplayed=false
+if [[ "$1." == "." ]];then daysago=5;else daysago=$1;fi
+daysagoplusone=$((daysago + 1))
+#echo "daysago=$daysago"
+#echo "daysagoplusone=$daysagoplusone"
+if [[ -f /camera_snapshots/archives/camera_south_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_south_driveway.tar.gz ]];then
+    errmsgdisplayed="true" && echo "$errmsg"
+    echo "    /camera_snapshots/archives/camera_south_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_south_driveway.tar.gz"
+fi
+if [[ -f /camera_snapshots/archives/camera_front_parking/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_front_parking.tar.gz ]];then
+    if [[ "$errmsgdisplayed" == "false" ]];then
+        errmsgdisplayed="true" && echo "$errmsg"
+    fi
+    echo "    /camera_snapshots/archives/camera_front_parking/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_front_parking.tar.gz"
+fi
+if [[ -f /camera_snapshots/archives/camera_east_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_east_driveway.tar.gz ]];then
+    if [[ "$errmsgdisplayed" == "false" ]];then
+        errmsgdisplayed="true" && echo "$errmsg"
+    fi
+    echo "    /camera_snapshots/archives/camera_east_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_east_driveway.tar.gz"
+fi
+if [[ -f /camera_snapshots/archives/camera_sw_corner/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_sw_corner.tar.gz ]];then
+    if [[ "$errmsgdisplayed" == "false" ]];then
+        errmsgdisplayed="true" && echo "$errmsg"
+    fi
+    echo "    /camera_snapshots/archives/camera_sw_corner/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_sw_corner.tar.gz"
+fi
+if [[ -f /camera_snapshots/archives/camera_ne_corner/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_ne_corner.tar.gz ]];then
+    if [[ "$errmsgdisplayed" == "false" ]];then
+        errmsgdisplayed="true" && echo "$errmsg"
+    fi
+    echo "    /camera_snapshots/archives/camera_ne_corner/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_ne_corner.tar.gz"
+fi
+if [[ -f /var/www/camera_streams/archives/camera_south_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_south_driveway.tar.gz ]];then
+    if [[ "$errmsgdisplayed" == "false" ]];then
+        errmsgdisplayed="true" && echo "$errmsg"
+    fi
+    echo "    /var/www/camera_streams/archives/camera_south_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_south_driveway.tar.gz"
+fi
+if [[ -f /var/www/camera_streams/archives/camera_front_parking/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_front_parking.tar.gz ]];then
+    if [[ "$errmsgdisplayed" == "false" ]];then
+        errmsgdisplayed="true" && echo "$errmsg"
+    fi
+    echo "    /var/www/camera_streams/archives/camera_front_parking/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_front_parking.tar.gz"
+fi
+if [[ -f /var/www/camera_streams/archives/camera_east_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_east_driveway.tar.gz ]];then
+    if [[ "$errmsgdisplayed" == "false" ]];then
+        errmsgdisplayed="true" && echo "$errmsg"
+    fi
+    echo "    /var/www/camera_streams/archives/camera_east_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_east_driveway.tar.gz"
+fi
+if [[ -f /var/www/camera_streams/archives/camera_sw_corner/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_sw_corner.tar.gz ]];then
+    if [[ "$errmsgdisplayed" == "false" ]];then
+        errmsgdisplayed="true" && echo "$errmsg"
+    fi
+    echo "    /var/www/camera_streams/archives/camera_sw_corner/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_sw_corner.tar.gz"
+fi
+if [[ -f /var/www/camera_streams/archives/camera_ne_corner/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_ne_corner.tar.gz ]];then
+    if [[ "$errmsgdisplayed" == "false" ]];then
+        errmsgdisplayed="true" && echo "$errmsg"
+    fi
+    echo "    /var/www/camera_streams/archives/camera_ne_corner/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_ne_corner.tar.gz"
+fi
+if [[ "$2." == "test." ]];then exit;fi
+nohup tar -cf /camera_snapshots/archives/camera_south_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_south_driveway$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_south_driveway/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+sleep 1
+nohup tar -cf /camera_snapshots/archives/camera_front_parking/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_front_parking$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_front_parking/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+sleep 1
+nohup tar -cf /camera_snapshots/archives/camera_east_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_east_driveway$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_east_driveway/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+sleep 1
+nohup tar -cf /camera_snapshots/archives/camera_sw_corner/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_sw_corner$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_sw_corner/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+sleep 1
+nohup tar -cf /camera_snapshots/archives/camera_ne_corner/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_ne_corner$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_ne_corner/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+sleep 1
+
+#DO NOT INDENT THESE NOHUP COMMANDS.  THEY ARE PARSED AND USED FOR CALCULATING THE NUMBER OF CAMERAS INTENDED ALWAYS TO RECORD
+nohup tar -cf /var/www/camera_streams/archives/camera_south_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_south_driveway$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_south_driveway/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+sleep 1
+nohup tar -cf /var/www/camera_streams/archives/camera_front_parking/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_front_parking$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_front_parking/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+sleep 1
+nohup tar -cf /var/www/camera_streams/archives/camera_east_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_east_driveway$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_east_driveway/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+sleep 1
+nohup tar -cf /var/www/camera_streams/archives/camera_sw_corner/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_sw_corner$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_sw_corner/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+sleep 1
+nohup tar -cf /var/www/camera_streams/archives/camera_ne_corner/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_ne_corner$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_ne_corner/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+echo "Camera files backup is now in progress."
+
+#SECTION FOR TESTING ANNOUNCEMENT MESSAGE
+#if [[ false ]];then
+#nohup tar -cf /var/www/camera_streams/archives/camera_ne_corner/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_ne_corner$( [[ "$errmsgdisplayed"=="true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_ne_corner/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+#fi
