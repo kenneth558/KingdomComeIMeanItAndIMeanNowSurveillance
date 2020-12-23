@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+echo
+echo "    One archive file will be made that holds all desired files compressed."
+echo "The name of that file will include the date of the first of all the files."
+echo "That date is intended to be the date of the event that all the files being"
+echo "selected are related to."
+echo
+read -p "OPTIONAL - Enter a descriptive filename to be used: /var/important_video_archives/" archivenametmp
+echo "    Now, selecting only from the scrollable lists due to a lack of"
+echo "full path names elsewhere, drop the list of files here.  Ensure the last"
+echo "file of each group dropped gets entered to where the cursor advances to"
+echo "the line following it."
+echo "    Unless each drop begins with the cursor on a clean line, file names"
+echo "will get joined together into nonsensical character strings. Therefore"
+echo "the cursor must be at the beginning of a blank line before dropping more"
+echo "files.  Go ahead now and drop groups of files to archive.  When totally"
+echo "finished with all files related to this event, press <Enter> at a blank"
+echo "line to send it without a file name, which will start the archive action"
+echo "..."
+rm -f /home/homeowner/listofimportantfilestoarchive
+while read filename;do
+     [[ -z "$filename" ]] && break
+     echo "$filename" >> /home/homeowner/listofimportantfilestoarchive
+done
+if [[ "$archivenametmp." == "." ]]; then
+  archivenametmp="/var/important_video_archives/important_event"
+else
+  archivenametmp="/var/important_video_archives/$archivenametmp"
+fi
+
+timevar=$(ls -l --time-style=+%b" "%d" "%H:%M:%S $(head -n1 /home/homeowner/listofimportantfilestoarchive)|awk '{print $6"-"$7"-"substr($8,1,2)"-"substr($8,4,2)}')
+archivename="$archivenametmp"_$timevar
+#$(ls -l --time-style=+%b" "%d" "%H:%M:%S $(head -n1 /home/homeowner/listofimportantfilestoarchive)|awk '{print $6"-"$7"-"substr($8,1,2)"-"substr($8,4,2)}')
+#archivename="/important_video_archives/important_event_$(date +%Y%m%d%H%M)"
+# Example of a timevar=Nov-25-23-56.  Need to change it to MMDDhhmm by converting ${timevar}
+if [[ -f "$archivename.tar.gz" ]];then
+    if [[ -f "$archivename.1.tar.gz" ]];then
+      archivename="$archivename.2.tar.gz"
+    else
+      archivename="$archivename.1.tar.gz"
+    fi
+else
+
+#create
+archivename="$archivename.tar.gz"
+fi
+timevar=${timevar/-/ }
+timevar=${timevar/-/ }
+timevar=${timevar/-/:}
+nohup tar -cf "$archivename" --auto-compress $(</home/homeowner/listofimportantfilestoarchive) 2>/dev/null;touch -t $(date -d "$timevar" +%m%d%H%M) "$archivename" &
+success="Your archival is being saved as $archivename.  You are free to log out or otherwise go on."
+echo "$success"
+
+
+
