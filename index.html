@@ -311,7 +311,7 @@ width="1512px" height="100px" style="font-size:15px;overflow:auto;border:3px sol
 </video>
 -->
 <br>
-</td></tr><tr><td style="border:1px ridge black">
+</td></tr><tr><td style="border:1px solid black">
 <center><b><a href="#ne_location_on_page">NE Corner</a></b><br>
 <input disabled id="camapp_lst" size="41" style="border:1px ridge blue;" value="working..."><br>
 <input disabled id="camapp_lst1" size="41" style="border:1px ridge blue;" value="working..."><br>
@@ -363,7 +363,7 @@ In here could be the recipient list
 <b>
 <br>System-wide:</b><br>
 <small>
-<table width="1450px"><tr><td>
+<table width="1450px" style="border:1px solid black"><tr><td>
 All system recordings mingled together except MOTION_DETECTIONs, then time-arranged.  Notes: mp4 timestamps are the ending of the events recorded in them, not their beginning,
 &nbsp;<b>top mp4 for each camera won't immediately be complete to play.</b> 
 </td>
@@ -483,11 +483,14 @@ be learned from a file timestamp</textarea>
 </td>
 </tr>
 </table>
+</td>
+</tr>
+</table>
 </div>
 
 <div id="byview" class="tabcontent">
 <br><b><big>Separate Camera Recordings.  Click a border to list/unlist:</big></b>
-<table style="border:1px ridge black">
+<table style="border:1px solid black">
 <tr><td valign="top">
 <table><tr><td class="camtitle"><!-- FUTURE --Use a layout pattern for these that will facilitate swapping them around style="border:5px ridge fuchsia">-->
 
@@ -708,9 +711,9 @@ onclick="var objectelement=document.getElementsByClassName('mp4obj');
 
 </td></tr>
 </table>
+
 </td></tr>
 </table>
-
 </div>
 <h3><ul><li>Video snippets are about 6 minutes, so that is as early as the currently recording .mp4 will be ready;<br>
 i.e.,the  most recent .mp4 (at the top of the listed stream files) video will never immediately play<br>
