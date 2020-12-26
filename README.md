@@ -14,5 +14,6 @@ There is room for improvement if you want to: the playback synchronizing algorit
 
 Instructions: copy all these files to your Ubuntu 20.04 server.  Look at the source code in all files and build the directories referenced, customized as you desire.  Move the index.html into the directory you built for it.  Create the user you want to run this under, considering anyone pulling up the web page will have those same rights.  Assign rights and file permissions.  There is no live stream server for the rtsp live streams, but on my server I use **socat** to buffer the live streams going to off-page rtsp player[s] on clients.
 
+https://raw.githubusercontent.com/kenneth558/a/master/Screenshot%20from%202020-12-26%2006-45-03.png
 https://raw.githubusercontent.com/kenneth558/a/master/Surveillance%20Recordings%20Web%20Page%20all%20objects%20closed.png
 https://raw.githubusercontent.com/kenneth558/a/master/Surveillance%20Recordings%20Web%20Page%20two%20objects%20open.png
