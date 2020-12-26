@@ -358,18 +358,16 @@ In here could be the recipient list
 <div id="system_wide" class="tabcontent">
 
 
-<table  style="border:1px solid black"><tr><td>
 
 </small>
 <b>
 <br>System-wide:</b><br>
 <small>
-<table width="1450px" style="border:1px solid black">
-<tr><td width="83%">
+<table width="1450px"><tr><td>
 All system recordings mingled together except MOTION_DETECTIONs, then time-arranged.  Notes: mp4 timestamps are the ending of the events recorded in them, not their beginning,
 &nbsp;<b>top mp4 for each camera won't immediately be complete to play.</b> 
-</td><td width="17%">
-</td></tr>
+</td>
+</tr>
 <tr>
 <td>
     <object id="sysjpgmp4_motion" type="text/html" 
@@ -382,15 +380,10 @@ style="font-size:15px;overflow:auto;border:5px solid black;border-width:20px 3px
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
 </object>
-</td>
-<td valign="top">
+<table width="1450px"><tr><td>
+All system snapshots except for the overly ubiquitous, plain MOTION_DETECTION.  For best control, drop them into a spare viewer.  Alerts are produced by enough of these per any camera which are named other than MOTION_DETECTION: 
 </td>
 </tr>
-</table>
-<table width="1450px"><tr><td width="83%">
-All system snapshots except for the overly ubiquitous, plain MOTION_DETECTION.  For best control, drop them into a spare viewer.  Alerts are produced by enough of these per any camera which are named other than MOTION_DETECTION: 
-</td><td width="17%">
-</td></tr>
 <tr>
 <td>
     <object id="sysjpg_motion" type="text/html" 
@@ -445,7 +438,7 @@ onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border
 <td>
 <table><tr><td valign="middle">
   <form  method="put">
-<textarea cols="35" rows="40" style="font-size: 12pt" name="files_to_archive">
+<textarea cols="131" rows="32" style="font-size: 12pt" name="files_to_archive">
 Replace all this text in following 
 these instructions:
 
@@ -474,7 +467,7 @@ instructions in this process.
 NO SANITY CHECKING YET, SO FOLLOW 
 THESE RULES PERFECTLY.</textarea>
 <br>
-<textarea cols="35" rows="5" style="font-size: 12pt" name="name_for_archive">
+<textarea cols="131" rows="5" style="font-size: 12pt" name="name_for_archive">
 Replace this text with a no-space
 descriptive event name to include 
 license plate and colors but not 
@@ -484,9 +477,6 @@ be learned from a file timestamp</textarea>
   </form>
 <a href="/var/important_video_archives/mostrecent200" target="_blank"><h3>Show current event archives</h3></a>
 </td></tr></table>
-</td>
-</tr>
-</table>
 </td>
 </tr>
 </table>
@@ -1266,7 +1256,7 @@ test.dispatchEvent(event);
         font-family: Tahoma, Verdana, Arial, sans-serif;
     }
 </style -->
-    <button onclick="play()">Play alert sound</button> 
+    <button onclick="play()">Test alert sound</button> 
     <button onclick="checkforcache()">Check browser cache capability</button> 
   
     <script> 
