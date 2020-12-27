@@ -114,6 +114,7 @@ document.links[19].href='http://' + window.location.hostname + ':15080';//set fo
 <!-- alert(latestalert.innerHTML);
 -->
 var StartTimeOfInterest;
+<!-- var StartCamOfInterest; -->
 var StartTimeOfInterestDT=new Date();
 var StartTimeOfInterestmSec;
 var StartTimeOfInterestmSecminus60=new Date();
@@ -146,6 +147,11 @@ streamListings["fpmp4"] = "/var/www/camera_streams/camera_front_parking/";
 streamListings["nemp4"] = "/var/www/camera_streams/camera_ne_corner/";
 streamListings["edmp4"] = "/var/www/camera_streams/camera_east_driveway/";
 streamListings["sdmp4"] = "/var/www/camera_streams/camera_south_driveway/";
+streamListings["11"] = "East Driveway" ;//These correspond to 192.168.0.nn or 192.168.0.n_ since they are 2 characters long extracted from the file name
+streamListings["14"] = "Southwest Corner"
+streamListings["15"] = "Northeast corner"
+streamListings["12"] = "Front parking lot"
+streamListings["13"] = "South Driveway"
 
 </script>
 <datalist id="tickmarks">
@@ -492,12 +498,8 @@ be learned from a file timestamp</textarea>
 <br><b><big>Separate Camera Recordings.  Click a border to list/unlist:</big></b>
 <table style="border:1px solid black">
 <tr><td valign="top">
+
 <table><tr><td class="camtitle"><!-- FUTURE --Use a layout pattern for these that will facilitate swapping them around style="border:5px ridge fuchsia">-->
-
-
-
-
-
 
 <a name="sw_corner_location_on_page"></a>
 <a href="" target="_blank"><h3>Southwest Corner</h3></a>
@@ -505,14 +507,14 @@ be learned from a file timestamp</textarea>
 <td class="bb">
 <a href=/../../camera_snapshots/camera_sw_corner/>Event Snapshots.  For best control, drop into a spare viewer.</a>
 <br><br><br>
-    <object id="swjpg" type="text/plain" value="Click here to collect these snapshots" 
+<object id="swjpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_sw_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" width="1080px" height="810px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object>
 </td></tr><tr>
 <td class="bb">
 <a href=/var/www/camera_streams/camera_sw_corner/>Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a>
-<br><br><br><div>
+<br><br><br>
     <object id="swmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" width="945px" height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
@@ -522,7 +524,9 @@ onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border
 </object>
 
 </td></tr>
+
 <tr><td></td></tr>
+
 <tr><td class="camtitle">
 
 <a name="sd_location_on_page"></a>
@@ -531,9 +535,9 @@ onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border
 <td class="bb">
 <a href=/../../camera_snapshots/camera_south_driveway/>Event Snapshots.   For best control, drop into a spare viewer.</a>
 <br><br><br>
-    <object id="sdjpg" type="text/plain" value="Click here to collect these snapshots" 
+<object id="sdjpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_south_driveway/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" width="700px" height="880px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_south_driveway/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" width="1080px" height="810px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object></td></tr>
 <tr><td class="bb">
 <a href=/var/www/camera_streams/camera_south_driveway/>Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a>
@@ -546,18 +550,15 @@ onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border
    <param name="currenttime" value=0>
 </object>
 
-
-
-
 </td>
 </tr>
 </table>
+
+
 </td>
 <td valign="top" align="left">
 <table style="border:2px ridge blue"><tr>
 <td class="camtitle">
-
-
 
 <a name="ed_location_on_page"></a>
 <a href="" target="_blank"><h3>East Driveway</h3></a>
@@ -597,7 +598,6 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px
 <tr>
 <td  class="bb" valign="top">
 <a href=/../../camera_snapshots/camera_front_parking>Event Snapshots.  For best control, drop into a spare viewer.</a><br><br><br>
-<div>
     <object id="fpjpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_front_parking/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
@@ -638,7 +638,7 @@ width="1000px" height="560px"
 <tr>
 <td class="bb">
 <a href=/../../camera_snapshots/camera_ne_corner/>Event Snapshots.   For best control, drop into a spare viewer.</a>
-<br><br><br><div>
+<br><br><br>
     <object id="nejpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_ne_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" width="960px" height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
@@ -646,7 +646,7 @@ onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border
 </td></tr>
 <td class="bb">
 <a href=/var/www/camera_streams/camera_ne_corner/>Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a>
-<br><br><br><div>
+<br><br><br>
     <object id="nemp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" width="960px" height="720px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
@@ -659,7 +659,9 @@ onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border
 <tr><td>
 <table width="100%">
 <tr><td align='middle'>
-<input disabled id="StartTimeOfInterestEl" style="font-size:25px;border:1px ridge blue;background:white" value="StartTimeOfInterest" height="100px"><br>
+<input disabled id="StartTimeOfInterestEl" style="font-size:25px;border:1px ridge blue;background:white" value="Time Of Interest" height="100px">
+<input disabled id="StartCamOfInterestEl" style="font-size:25px;border:1px ridge blue;background:white" value="View Of Interest" height="100px">
+<br>
 <input type="button" value="List all video views of 1 minute prior to most recently opened .jpg event" id="lsbtn" 
 style="font-size:25px;"
 onclick="
@@ -911,8 +913,10 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
            StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
            StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
            StartTimeOfInterestEl.value='    ' + StartTimeOfInterest.substr(0,19)
+           StartCamOfInterestEl.value=streamListings[elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText.substr(elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText.indexOf('192.168.0.') + 10,2)]
            lsbtn.name='!var!www!camera_streams!camera_*'
       }
+//      else {alert('unknown file type for ' + elmnt.id + ':' + elmnt.contentDocument.body.children[0].innerHTML + ', ' + elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText)}
     })
   }
   else
@@ -924,13 +928,13 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
            if (elmnt.contentDocument.body.children[1] == 'undefined' || elmnt.contentDocument.body.children[1] == null)
            {
                    var mbed = document.createElement("EMBED");
-                   var attsrc =  document.createAttribute("src")
+                   var attsrc = document.createAttribute("src")
                    mbed.setAttributeNode(attsrc);
-                   var atttyp =  document.createAttribute("type")
+                   var atttyp = document.createAttribute("type")
                    mbed.setAttributeNode(atttyp);
-                   var attwid =  document.createAttribute("width")
+                   var attwid = document.createAttribute("width")
                    mbed.setAttributeNode(attwid);
-                   var atthei =  document.createAttribute("height")
+                   var atthei = document.createAttribute("height")
                    mbed.setAttributeNode(atthei);
                    elmnt.contentDocument.body.appendChild(mbed);
            }
