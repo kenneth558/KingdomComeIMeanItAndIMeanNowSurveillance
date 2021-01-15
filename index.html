@@ -854,7 +854,7 @@ function glonended( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
                  {objectelement[i].contentDocument.body.children[0].play()}}
         })
     }
-    elmnt.contentDocument.body.children[0].src=elmnt.contentWindow[0].document.children[0].innerText.substring(30)
+    elmnt.contentDocument.body.children[0].src=elmnt.contentWindow[0].document.children[0].innerText.substring(elmnt.contentWindow[0].document.children[0].innerText.indexOf("\/",30))
     elmnt.contentDocument.body.children[0].playbackRate=playbackrate
     elmnt.contentDocument.body.children[1].src=elmnt.contentDocument.body.children[0].src + '\?nextbymodifiedtime'
     elmnt.children["currenttime"].value=0;
@@ -907,7 +907,7 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
       if(elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText.endsWith('.mp4'))
       {
 //         alert('The file chosen in this table construct is type .mp4')
-         var timestamp=elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[0].outerHTML.substr(18)
+         var timestamp=elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[0].outerHTML.substr(18).replace(/&nbsp;/g," ").replace("nbsp;","")
          timestamp=timestamp.substring(0,timestamp.indexOf(" ]"))
          elmnt.children["timestamp"].value=timestamp
          var endTime = new Date(timestamp.substring(0,20))
@@ -923,7 +923,7 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
       else if(elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText.endsWith('.jpg'))
       {
 //         alert('The link is jpg inside this construct');//We need to always know the timestamp of the last .jpg file viewed so we can populate the .mp4 windows for that event timeframe
-           StartTimeOfInterest=elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[0].outerHTML.substr(18)
+           StartTimeOfInterest=elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[0].outerHTML.substr(18).replace(/&nbsp;/g," ").replace("nbsp;","")
            StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
            StartTimeOfInterestDT=new Date(StartTimeOfInterest)
            StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
