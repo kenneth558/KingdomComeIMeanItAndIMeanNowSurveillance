@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Surveillance Recordings</title>
+        <title>Loading...  No functions allowed while loading...</title>
+<!--        <title>Surveillance Recordings</title> -->
         <meta charset="utf-8"/> 
 <!-- 
 THIS WEB PAGE CONTAINS NUMEROUS FEATURES ONLY AVAILABLE IN TANDEM WITH SERVER-SIDE CUSTOMIZATIONS.  
@@ -98,6 +99,7 @@ document.links[10].href='http://' + window.location.hostname + ':10080';//set fo
 document.links[13].href='http://' + window.location.hostname + ':6080';//set for East Driveway 6080
 document.links[16].href='http://' + window.location.hostname + ':9080';//set for Front Parking Lot 9080
 document.links[19].href='http://' + window.location.hostname + ':15080';//set for NE Corner 15080
+document.title='Surveillance Recordings'
 ">
 <script type="text/javascript"><!-- THIS REALLY DOESN'T WORK SO EACH ANNOUNCEMENT WILL HAVE TO HAVE ITS OWN ID AND SCRIPT TAG WITH IT -->
   var x = document.getElementsByClassName("announcement");
@@ -369,9 +371,12 @@ In here could be the recipient list
 <b>
 <br>System-wide:</b><br>
 <small>
-<table width="1450px" style="border:1px solid black"><tr><td>
+<table width="2250px"><tr><td>
+VIDEOS + SNAPSHOTS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NOTE: Most recent videos not available instantly
+<!--
 All system recordings mingled together except MOTION_DETECTIONs, then time-arranged.  Notes: mp4 timestamps are the ending of the events recorded in them, not their beginning,
 &nbsp;<b>top mp4 for each camera won't immediately be complete to play.</b> 
+-->
 </td>
 </tr>
 <tr>
@@ -380,21 +385,53 @@ All system recordings mingled together except MOTION_DETECTIONs, then time-arran
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="this.data=this.data;" 
 data="/camera_snapshots/camera_*/*jpg /var/www/camera_streams/camera_*/*mp4-MOTION" 
-width="1700px" 
-height="900px" 
+width="1400px" 
+height="180px" 
 style="font-size:15px;overflow:auto;border:5px solid black;border-width:20px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
 </object>
+<big><big>A shared video/image element is in progress here but commented out during production operation</big></big>
+</td></tr>
+</td><td>
+<!--
+<tr><td style="border:1px solid black">
+<video 
+onclick="this.style.display='none';img_sysjpg_motion.style.display='blocking';"
+id="vid_sysjpgmp4_motion"
+width="1000px" height="650px" 
+style="display:blocking;"
+controls>
+<source src="" type="">
+Selected video file
+</video>
+<img 
+onclick="this.style.display='none';vid_sysjpgmp4_motion.style.display='blocking';"
+id="img_sysjpg_motion"
+width="1000px" height="650px"
+style="display:blocking;"
+src=""
+alt="Most recent event jpg"> -->
+<!-- src="/../../camera_snapshots/*/*jpg-MOTION/\?*[0-9.]{1,2}minutesbefore*"
+ =~ /../../camera_snapshots/*/*jpg?1minutesbefore2020-12-18 21:23:41.057728372
+ -->
+<!-- </td></tr> -->
+
+<tr><td>
 <table width="1450px"><tr><td>
-All system snapshots except for the overly ubiquitous, plain MOTION_DETECTION.  For best control, drop them into a spare viewer.  Alerts are produced by enough of these per any camera which are named other than MOTION_DETECTION: 
+SNAPSHOTS
+<!-- All system snapshots except for the overly ubiquitous, plain MOTION_DETECTION.  For best control, drop them into a spare viewer.  Alerts are produced by enough of these per any camera which are named other than MOTION_DETECTION: 
+-->
 </td>
 </tr>
 <tr>
 <td>
     <object id="sysjpg_motion" type="text/html" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="this.data=this.data;" data="/../../camera_snapshots/*/*jpg-MOTION" width="1700px" height="900px" style="font-size:15px;overflow:auto;border:5px solid black;border-width:20px 3px 3px;">
+onclick="this.data=this.data;" data="/../../camera_snapshots/*/*jpg-MOTION" 
+width="1400px" 
+height="180px" 
+style="font-size:15px;overflow:auto;border:5px solid black;border-width:20px 3px 3px;">
 </object>
 </td>
 </tr>
@@ -420,7 +457,10 @@ All system streams - <b>USE THIS LIST FOR EVENT ARCHIVING STREAMS. Top file for 
 <td>
     <object id="sysmp4mostrecent" type="text/html" data="/var/www/camera_streams/*/*mp4/mostrecent10" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.data.includes('mostrecent10')) {this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/var/www/camera_streams/*/*mp4';} else {this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='/var/www/camera_streams/*/*mp4/mostrecent10';}" width="1700px" height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+onclick="if (this.data.includes('mostrecent10')) {this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/var/www/camera_streams/*/*mp4';} else {this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='/var/www/camera_streams/*/*mp4/mostrecent10';}" 
+width="1400px" 
+height="350px" 
+style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
 </object>
@@ -436,7 +476,10 @@ onclick="if (this.data.includes('mostrecent10')) {this.style.border='3px solid b
 <td>
     <object id="sysjpgs" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/*/*jpg';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" width="1720px" height="900px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/*/*jpg';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+width="1400px" 
+height="350px" 
+style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object>
 </td>
 </tr>
@@ -565,9 +608,129 @@ height="880px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 
 </td>
 <td valign="top" align="left">
-<table style="border:2px ridge blue"><tr>
-<td class="camtitle">
+<table style="border:2px ridge blue">
 
+
+<tr><td>
+<table width="100%">
+<tr><td align='middle'>
+<input type="button" value="List all video views of 1 minute prior to most recently opened .jpg event" id="lsbtn" 
+style="font-size:25px;"
+onclick="
+    var objectelement=document.getElementsByClassName('mp4obj')
+    for(var i=0;i<objectelement.length;i++)
+    {
+        objectelement[i].type='text/html';
+        objectelement[i].style.border='3px solid blue';
+        objectelement[i].style.borderWidth='20px 3px 3px';
+        objectelement[i].data=streamListings[objectelement[i].id] + '*?1minutesbefore' + StartTimeOfInterest;
+    }">
+<br>
+<input type="button" value="Start videos" id="startbtn" style="font-size:25px;" onclick="var objectelement=document.getElementsByClassName('mp4obj');
+        for(var i=0;i<objectelement.length;i++)
+        {if(objectelement[i].contentWindow != 'undefined' && objectelement[i].contentWindow != null && objectelement[i].contentWindow[0] != 'undefined' && objectelement[i].contentWindow[0] != null)
+        {if(objectelement[i].contentWindow[0].body != 'undefined' && objectelement[i].contentDocument.body.children[0].localName == 'video')
+        {objectelement[i].contentDocument.body.children[0].play()}
+        else if(objectelement[i].contentDocument.body.children[0].localName == 'table' && objectelement[i].contentDocument.links[0] != 'undefined' && objectelement[i].contentWindow[0].links[0] != null)
+        {alert('Unexpected page configuration.  Report to a developer if it happens excessively: ' + objectelement[i].contentDocument.URL + ' and ' + objectelement[i].contentWindow[0].body.links[0].innerText);}}
+        else
+        {objectelement[i].contentDocument.links[0].click();
+}}">
+<br>
+<input disabled id="StartTimeOfInterestEl" style="font-size:25px;border:1px ridge blue;background:white" value="Time Of Interest" height="100px">
+<input disabled id="StartCamOfInterestEl" style="font-size:25px;border:1px ridge blue;background:white" value="View Of Interest" height="100px">
+<br>
+<br>
+<!--<input type="button" value="Queue the playing or paused videos to queue-to time. Retry until success" id="qbtn" 
+onclick="         let videoneedsqueueing = new Array(objectelement.length);//This var is not used yet.  Future use is to auto-queue all videos with merely a single button click instead of manually retrying
+-->
+<input type="button" value="Queue the playing or paused videos to queue-to time." id="qbtn" 
+style="font-size:25px;background:#e6e6e6"
+onclick="var objectelement=document.getElementsByClassName('mp4obj');
+         let videoneedsqueueing = new Array(objectelement.length)
+         var notalldoneyet=false
+         for(var i=0;i<objectelement.length;i++){videoneedsqueueing[i]=false}
+
+         for(var i=0;i<objectelement.length;i++)
+         {
+             if(objectelement[i].contentWindow != 'undefined' && objectelement[i].contentWindow != null && objectelement[i].contentWindow[0] != 'undefined' && objectelement[i].contentWindow[0] != null)
+             {
+                 if(objectelement[i].contentWindow[0].body != 'undefined' && objectelement[i].contentDocument.body.children[0].localName == 'video')
+                 {
+                     if(objectelement[i].contentDocument.body.children[0].currentTime != objectelement[i].children['currenttime'].value)
+                     {
+                         objectelement[i].contentDocument.body.children[0].currentTime=objectelement[i].children['currenttime'].value
+                         if(objectelement[i].contentDocument.body.children[0].currentTime < objectelement[i].children['currenttime'].value)
+                         {
+                             if(this.style.background != 'Chartreuse'){this.value='Queue the playing or paused videos to queue-to time. Retry until success';this.style.background='Chartreuse'}
+                             videoneedsqueueing[i]=true
+                             var notalldoneyet=true
+                         }
+                         else
+                         {objectelement[i].contentDocument.body.children[0].pause()}
+                     }
+                     else
+                     {
+                        objectelement[i].contentDocument.body.children[0].pause()
+                     }
+                 }
+             }
+         }
+         if(notalldoneyet == false){this.value='Queue the playing or paused videos to queue-to time.';this.style.background='#e6e6e6'}
+"><br>
+<!--
+         var notalldoneyet=false
+         for(var i=0;i<objectelement.length;i++)
+         {if(videoneedsqueueing[i]==true)
+           {;//Track all of these entering and continue to bang on them until their currenttime is as desired
+                if(objectelement[i].contentDocument.body.children[0].currentTime < objectelement[i].children['currenttime'].value)
+                {
+alert('id=' + objectelement[i].id + ', objectelement[i].contentDocument.body.children[0].currentTime=' + objectelement[i].contentDocument.body.children[0].currentTime + ', objectelement[i].children["currenttime"].value=' + objectelement[i].children['currenttime'].value)
+                     objectelement[i].contentDocument.body.children[0].currentTime=objectelement[i].children['currenttime'].value
+                     notalldoneyet=true
+                }
+                else {
+objectelement[i].contentDocument.body.children[0].pause()
+;videoneedsqueueing[i]=false}
+           }
+           if(i == objectelement.length - 1){if(notalldoneyet == true){i = -1;notalldoneyet=false}}
+         }
+-->
+<!--
+ -->
+<!--               if(objectelement[i].contentDocument.body.children[0].currentTime != objectelement[i].children['currenttime'].value){objectelement[i].contentDocument.body.children[0].currentTime=objectelement[i].children['currenttime'].value}  -->
+<big>Queue-to time is one minute prior to time shown in the text box above.  Allowing pre-loading between retries is best practice</big>
+<br><br>
+<input type="button" value="Pause all videos" id="pausebtn" style="font-size:25px;" 
+onclick="var objectelement=document.getElementsByClassName('mp4obj');
+        for(var i=0;i<objectelement.length;i++)
+        {if(objectelement[i].contentWindow != 'undefined' && objectelement[i].contentWindow != null && objectelement[i].contentWindow[0] != 'undefined' && objectelement[i].contentWindow[0] != null)
+        {if(objectelement[i].contentWindow[0].body != 'undefined' && objectelement[i].contentDocument.body.children[0].localName == 'video')
+        {objectelement[i].contentDocument.body.children[0].pause()}}}">
+&nbsp;&nbsp;
+<input type="button" value="Close the video players in this section" id="closebtn" style="font-size:25px;" 
+onclick="var objectelement=document.getElementsByClassName('mp4obj');
+        for(var i=0;i<objectelement.length;i++)
+        {
+            if(objectelement[i].contentWindow != 'undefined' && objectelement[i].contentWindow != null && objectelement[i].contentWindow[0] != 'undefined' && objectelement[i].contentWindow[0] != null)
+                {
+                if(objectelement[i].contentWindow[0].body != 'undefined' && objectelement[i].contentDocument.body.children[0].localName == 'video')
+                {
+                    objectelement[i].click()}
+                }
+        }">
+<br><br>
+<input type="button" value="Relax the courtesy of videos while any other loads their next one" style="font-size:18px;" id="courtesybtn" style="background:white" onclick="if(this.style.backgroundColor == 'white'){this.style.background='#d9ecd0';this.value='Enforce courtesy of videos while any other loads their next one'}else{this.style.background='white';this.value='Relax courtesy of videos while any other loads their next one'}">
+</td></tr>
+</table>
+</td></tr>
+
+
+
+
+
+
+<tr><td class="camtitle">
 <a name="ed_location_on_page"></a>
 <a href="" target="_blank"><h3>East Driveway</h3></a>
 </td></tr>
@@ -597,11 +760,17 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0>
 </object>
-
 </td></tr>
-<tr>
-<td class="camtitle">
 
+
+</table>
+</td>
+<td valign="top">
+<table style="border:2px ridge blue"><tr><td></td></tr>
+
+
+
+<tr><td class="camtitle">
 <a name="fp_location_on_page"></a>
 <a href="" target="_blank"> <h3>Front parking lot</h3></a>
 </td>
@@ -632,17 +801,18 @@ width="1000px" height="560px"
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0>
-</object>
+</object></td></tr>
 
 
-</td></tr></table>
 
-</td>
-<td valign="top">
-<table style="border:2px ridge blue"><tr><td></td></tr>
+
+
+
+
+
+
+
 <tr><td class="camtitle">
-
-
 <a name="ne_location_on_page"></a>
 <a href="" target="_blank"> <h3>Northeast corner</h3></a>
 </td>
@@ -670,61 +840,7 @@ height="720px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0>
 </object>
-</td>
-</tr>
-<tr><td>
-<table width="100%">
-<tr><td align='middle'>
-<input disabled id="StartTimeOfInterestEl" style="font-size:25px;border:1px ridge blue;background:white" value="Time Of Interest" height="100px">
-<input disabled id="StartCamOfInterestEl" style="font-size:25px;border:1px ridge blue;background:white" value="View Of Interest" height="100px">
-<br>
-<input type="button" value="List all video views of 1 minute prior to most recently opened .jpg event" id="lsbtn" 
-style="font-size:25px;"
-onclick="
-    var objectelement=document.getElementsByClassName('mp4obj')
-    for(var i=0;i<objectelement.length;i++)
-    {
-        objectelement[i].type='text/html';
-        objectelement[i].style.border='3px solid blue';
-        objectelement[i].style.borderWidth='20px 3px 3px';
-        objectelement[i].data=streamListings[objectelement[i].id] + '*?1minutesbefore' + StartTimeOfInterest;
-    }">
-<br><br>
-<input type="button" value="Start videos" id="startbtn" style="font-size:25px;" onclick="var objectelement=document.getElementsByClassName('mp4obj');
-        for(var i=0;i<objectelement.length;i++)
-        {if(objectelement[i].contentWindow != 'undefined' && objectelement[i].contentWindow != null && objectelement[i].contentWindow[0] != 'undefined' && objectelement[i].contentWindow[0] != null)
-        {if(objectelement[i].contentWindow[0].body != 'undefined' && objectelement[i].contentDocument.body.children[0].localName == 'video')
-        {objectelement[i].contentDocument.body.children[0].play()
-}
-        else if(objectelement[i].contentDocument.body.children[0].localName == 'table' && objectelement[i].contentDocument.links[0] != 'undefined' && objectelement[i].contentWindow[0].links[0] != null)
-        {alert('Unexpected page configuration.  Report to a developer if it happens excessively: ' + objectelement[i].contentDocument.URL + ' and ' + objectelement[i].contentWindow[0].body.links[0].innerText);}}
-        else
-        {objectelement[i].contentDocument.links[0].click();
-}}">
-<br><br>
-<input type="button" value="Queue the playing or paused videos to queue-to time. Retry until success" id="qbtn" 
-style="font-size:25px;"
-onclick="var objectelement=document.getElementsByClassName('mp4obj');
-
-        for(var i=0;i<objectelement.length;i++)
-        {if(objectelement[i].contentWindow != 'undefined' && objectelement[i].contentWindow != null && objectelement[i].contentWindow[0] != 'undefined' && objectelement[i].contentWindow[0] != null)
-         {if(objectelement[i].contentWindow[0].body != 'undefined' && objectelement[i].contentDocument.body.children[0].localName == 'video')
-          {
-               if(objectelement[i].contentDocument.body.children[0].currentTime != objectelement[i].children['currenttime'].value){objectelement[i].contentDocument.body.children[0].currentTime=objectelement[i].children['currenttime'].value}
-          }
-         }
-        }
-"><br>
-<big>Queue-to time is one minute prior to time shown in the text box above.  Allowing pre-loading between retries is best practice</big>
-<br><br>
-<input type="button" value="Pause all videos" id="pausebtn" style="font-size:25px;" onclick="var objectelement=document.getElementsByClassName('mp4obj');
-        for(var i=0;i<objectelement.length;i++)
-        {if(objectelement[i].contentWindow != 'undefined' && objectelement[i].contentWindow != null && objectelement[i].contentWindow[0] != 'undefined' && objectelement[i].contentWindow[0] != null)
-        {if(objectelement[i].contentWindow[0].body != 'undefined' && objectelement[i].contentDocument.body.children[0].localName == 'video')
-        {objectelement[i].contentDocument.body.children[0].pause()}}}">
-<br><br><input type="button" value="Relax the courtesy of videos while any other loads their next one" style="font-size:18px;" id="courtesybtn" style="background:white" onclick="if(this.style.backgroundColor == 'white'){this.style.background='#d9ecd0';this.value='Enforce courtesy of videos while any other loads their next one'}else{this.style.background='white';this.value='Relax courtesy of videos while any other loads their next one'}">
 </td></tr>
-</table>
 
 
 </td></tr>
@@ -733,19 +849,46 @@ onclick="var objectelement=document.getElementsByClassName('mp4obj');
 </td></tr>
 </table>
 </div>
-<h3><ul><li>Video snippets are about 6 minutes, so that is as early as the currently recording .mp4 will be ready;<br>
+<h3><ul>
+<li>
+"Time Of Interest" and "View Of Interest" are determined from the file last-modified (creation) time of most<br>
+recent jpg snapshot rendered, but one minute prior to that is used as the reasonable queue-to point.  Last-<br>
+modified times of files are also used and assumed equal the exact recording end time of mp4 files...not<br>
+always perfect equalities, but no better synchronizing method exists that can be used.
+</li>
+<li>
+Javascript limitations necessitate using multiple buttons instead of just one button to perform loading then<br>
+queueing, sorry about that.  It's just that videos must get loaded enough to start playing before the queueing<br>
+function can be executed, and only a human operator can enforce that rule.  A related rule is that you may<br>
+NOT start using page whatsoever, not even page scrolling, until entire page is completely finished rendering<br>
+and calculating values, or unbeknownst to you, startup code will never finish initializing remaining aspects<br>
+of the page, leaving bugs in the page's partially-loaded code.
+</li>
+<li>
+Video snippets are about 6 minutes, so that is as early as the currently recording .mp4 will be ready;<br>
 i.e.,the  most recent .mp4 (at the top of the listed stream files) video will never immediately play<br>
 since it is not finished recording. Snapshot files on the other hand, are always ready for viewing.<br>
-</li><li>To navigate upward to the higher directory use the browser back arrow.<br>
-</li><li>When viewing or playing by simple clicking, the back button can end the player app if the focus is on it.<br>
-</li><li>Motion Detect snapshots often get pared down by system code in order to reduce clutter. The indication<br>
+</li>
+<li>
+To navigate upward to the higher directory use the browser back arrow.<br>
+</li>
+<li>
+When viewing or playing by simple clicking, the back button can end the player app if the focus is on it.<br>
+</li>
+<li>
+Motion Detect snapshots often get pared down by system code in order to reduce clutter. The indication<br>
 that happened would be an error message when trying to show the snapshot; refresh the listing.
-</li><li>I also want to be able to have this page play recordings of all cameras simultaneously & synchronized &<br> 
+</li>
+<li>
+I also want to be able to have this page play recordings of all cameras simultaneously & synchronized &<br> 
 play next file without intervention. That is to utilize a column to the left of the listing boxes to drop into.  <br>
 One of those columns exists as a first step of that intent.<br>
-</li><li>My research is indicating that push notifications to Android devices might not be possible without Google's<br>
+</li>
+<li>
+My research is indicating that push notifications to Android devices might not be possible without Google's<br>
 servers and some registration key they generate being required.  I feel there should be some other way (like<br>
-HTML5 push) that the shop server can directly trigger an Android notification.  Hopefully I'll find it soon.</li>
+HTML5 push) that the shop server can directly trigger an Android notification.  Hopefully I'll find it soon.
+</li>
 </h3>
 Camera login credentials are no longer embedded in the URLs so that the five minute stream time limit can be defeated<br>
 Login credentials for camera streams are username = [youngest brother first name in reverse case]123<br>
@@ -854,9 +997,12 @@ function glonended( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
                  {objectelement[i].contentDocument.body.children[0].play()}}
         })
     }
+//alert(elmnt.contentWindow[0].document.children[0].innerText)
     elmnt.contentDocument.body.children[0].src=elmnt.contentWindow[0].document.children[0].innerText.substring(elmnt.contentWindow[0].document.children[0].innerText.indexOf("\/",30))
+//    alert(elmnt.contentDocument.body.children[0].src)
     elmnt.contentDocument.body.children[0].playbackRate=playbackrate
     elmnt.contentDocument.body.children[1].src=elmnt.contentDocument.body.children[0].src + '\?nextbymodifiedtime'
+//    alert(elmnt.contentDocument.body.children[1].src)
     elmnt.children["currenttime"].value=0;
 }
 function glonerror( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
@@ -894,7 +1040,7 @@ function glonkeyup( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 }
 
 function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) 
-{
+{;//The following seems to have acquired a bug in recent revisions
   if (elmnt.contentDocument.body.children[0] != 'undefined' && elmnt.contentDocument.body.children[0] != null && elmnt.contentDocument.body.children[0].localName == 'table' && elmnt.contentDocument.body.children[0].tBodies[0].rows[0].cells[1] != 'undefined' && elmnt.contentDocument.body.children[0].tBodies[0].rows[0].cells[1] != null)
   {
     if(elmnt.contentDocument.body.children[0].tBodies[0] == 'undefined' || elmnt.contentDocument.body.children[0].tBodies[0] == null){alert('Too many event files to list with ' + currSrc + '.  Delete overrunning ones on server.');return}
