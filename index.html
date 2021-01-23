@@ -76,7 +76,8 @@ SORRY FOR ANY UGLINESS YOU FIND...I AM NOT A BEAUTICIAN, AND I HAD ANOTHER PROJE
     }
 </style>
     </head>
-    <body onload = "url0='rtsp://';
+    <body  style="margin:0;padding:0"
+onload = "url0='rtsp://';
 url1='kERRY123:Kerry123@';
 url2=':9';url3='554/Streaming/Channels/10';url4='2';  camapp_ul.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;
                                            url4='1'; camapp_ul1.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;
@@ -94,9 +95,9 @@ slidersw(10);
 sliderfp(10);
 sliderne(10);
 slideres(45);
-document.links[ 7].href='http://' + window.location.hostname + ':14080';//set for SW Corner 14080
+document.links[ 7].href='http://' + window.location.hostname + ':6080';//set for East Driveway 6080
 document.links[10].href='http://' + window.location.hostname + ':10080';//set for South Driveway 10080
-document.links[13].href='http://' + window.location.hostname + ':6080';//set for East Driveway 6080
+document.links[13].href='http://' + window.location.hostname + ':14080';//set for Dock 14080
 document.links[16].href='http://' + window.location.hostname + ':9080';//set for Front Parking Lot 9080
 document.links[19].href='http://' + window.location.hostname + ':15080';//set for NE Corner 15080
 document.title='Surveillance Recordings'
@@ -121,6 +122,7 @@ var StartTimeOfInterestDT=new Date();
 var StartTimeOfInterestmSec;
 var StartTimeOfInterestmSecminus60=new Date();
 
+var playingjpgs = [];//the size of this array could be the number of jpg viewers on page
 var checkingAlerted = null;
 var previousalert = null; 
 let requestAlerted = new XMLHttpRequest();
@@ -130,7 +132,7 @@ var thiscomplexevent = 'something';
 var element = null;
 requestAlerted.onload = function() { thiscomplexevent = requestAlerted.response; };
 function openSection(event, arg1){;}
-var month = new Array();
+var month = [];
 month["Jan"] = "-01-";
 month["Feb"] = "-02-";
 month["Mar"] = "-03-";
@@ -143,14 +145,14 @@ month["Sep"] = "-09-";
 month["Oct"] = "-10-";
 month["Nov"] = "-11-";
 month["Dec"] = "-12-";
-var streamListings = new Array();
+var streamListings = [];
 streamListings["swmp4"] = "/var/www/camera_streams/camera_sw_corner/";
 streamListings["fpmp4"] = "/var/www/camera_streams/camera_front_parking/";
 streamListings["nemp4"] = "/var/www/camera_streams/camera_ne_corner/";
 streamListings["edmp4"] = "/var/www/camera_streams/camera_east_driveway/";
 streamListings["sdmp4"] = "/var/www/camera_streams/camera_south_driveway/";
 streamListings["11"] = "East Driveway" ;//These correspond to 192.168.0.nn or 192.168.0.n_ since they are 2 characters long extracted from the file name
-streamListings["14"] = "Southwest Corner"
+streamListings["14"] = "Dock"
 streamListings["15"] = "Northeast corner"
 streamListings["12"] = "Front parking lot"
 streamListings["13"] = "South Driveway"
@@ -161,17 +163,30 @@ streamListings["13"] = "South Driveway"
 <option value="360" label="6 hrs"></option>
 </datalist>
 <!-- Tab links change the name of tablinks so it shows, change rest to drop 1 so they don't-->
-<div class="tablinks">
-  <button class="tablinks" style="font-size:21px;" onclick="if(document.getElementById('title').style.display == 'none'){document.getElementById('title').style.display = 'block'}else{document.getElementById('title').style.display = 'none';}">Title</button>
-  <button class="tablinks" style="font-size:21px;" onclick="if(document.getElementById('alertchecking').style.display == 'none'){document.getElementById('alertchecking').style.display = 'block'}else{document.getElementById('alertchecking').style.display = 'none';}">Alert Checking</button>
-  <button class="tablinks" style="font-size:21px;" onclick="if(document.getElementById('disablesandlivelinks').style.display == 'none'){document.getElementById('disablesandlivelinks').style.display = 'block'}else{document.getElementById('disablesandlivelinks').style.display = 'none';}">Links to lives streams and suspend alerts</button>
-  <button class="tablinks" style="font-size:21px;" onclick="if(document.getElementById('system_wide').style.display == 'none'){document.getElementById('system_wide').style.display = 'block'}else{document.getElementById('system_wide').style.display = 'none';}">Combined views recordings</button>
-  <button class="tablinks" style="font-size:21px;" onclick="if(document.getElementById('byview').style.display == 'none'){document.getElementById('byview').style.display = 'block'}else{document.getElementById('byview').style.display = 'none';}">Separated views recordings</button>
+<div>
+  <button  id="btnsystem_wide" class="tablinks" style="font-size:21px;" 
+onclick="tabactivate(this)">
+Combined views recordings</button>
+  <button id="btnalertchecking" class="tablinks" style="font-size:21px;" 
+onclick="tabactivate(this)">
+Alert Checking</button>
+  <button  id="btndisablesandlivelinks" class="tablinks" style="font-size:21px;" 
+onclick="tabactivate(this)">
+Links to live streams and suspend alerts</button>
+  <button id="btnbyview" class="tablinks" style="font-size:21px;" 
+onclick="tabactivate(this)">
+Separated views recordings</button>
+  <button id="btntitlediv" class="tablinks" style="font-size:21px;" 
+onclick="tabactivate(this)">
+Help</button>
+  <button id="btnnotes" class="tablinks" style="font-size:21px;" 
+onclick="tabactivate(this)">
+Notes</button>
 </div>
 <!--  <button class="tablinks" onclick="if(document.getElementById('byview').style.display == 'none'){document.getElementById('byview').style.display = 'block'}else{document.getElementById('byview').style.display = 'none';}">Recording by view</button> -->
 
 <small><small>
-<div id="title" class="tabcontent">
+<div id="titlediv" class="tabcontent" style="display:none">
 <table width="1535px" style="border:3px solid black"><tr><td><center>
 <b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center><small>
 <label></label>
@@ -189,7 +204,7 @@ button gets back to the listing again.
 </div>
 
 
-<div id="alertchecking" class="tabcontent">
+<div id="alertchecking" class="tabcontent"  style="display:none">
 <table><tr><td width="1535px">
 <input type="button" 
 id="alertCheck" style="width:300px;height:75px;font-size:20px;background:white;border-radius:15px;border-color:black;border-width:10px;" 
@@ -228,8 +243,9 @@ else { this.value='Alert checking is ON.  If you\'re traveling, you\'ll risk you
 <!-- </td></tr>
 <tr>
 <td><center>-->
+<tr height="130px"><td>
 <small>
-<a href="/../../links_to_alerting_activity/"><b>Recent Alerts</b></a>&nbsp;&nbsp;&nbsp;<small>Click title to see all recent alerts. Click border to toggle between listing all or just most recent 1 (traffic sparing)</small></small></td></tr><tr height="130px"><td>
+<a href="/../../links_to_alerting_activity/"><b>Recent Alerts</b></a>&nbsp;&nbsp;&nbsp;<small>Click title to see all recent alerts. Click border to toggle between listing all or just most recent 1 (traffic sparing)</small></small>
     <object id="alertsdirectory" type="text/html" 
 data="/../../links_to_alerting_activity/mostrecent1" 
 onclick="if (this.data.includes('/mostrecent1')){this.data='/../../links_to_alerting_activity'}else{this.data='/../../links_to_alerting_activity/mostrecent1'};" 
@@ -244,9 +260,11 @@ onload="if(alertsdirectory.contentWindow.document.body.children[0].localName == 
           }
         else {previousalert=null;}
         glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-width="1512px" height="100px" style="font-size:15px;overflow:auto;border:3px solid black;border-width:20px 30px 3px 3px;">
+width="1512px" height="1200px" style="font-size:15px;overflow:auto;border:3px solid black;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
+   <param name="currenttime" value=0 />
+   <param name="playingjpgs_number" value="0" />
     </object>
 </td></tr></table>
 </div>
@@ -256,7 +274,7 @@ width="1512px" height="100px" style="font-size:15px;overflow:auto;border:3px sol
 
 
 
-<div id="disablesandlivelinks" class="tabcontent">
+<div id="disablesandlivelinks" class="tabcontent"  style="display:none">
 <small><small>
 <table width="1450px"  style="border:3px solid black"><tr><td>
 <table style="border:1px solid black" width="1150px"><tr><td>
@@ -277,7 +295,7 @@ width="1512px" height="100px" style="font-size:15px;overflow:auto;border:3px sol
 <br>
 </td></tr><tr><td style="border:1px ridge black">
 <center><b>
-<a href="#sw_corner_location_on_page">SW Corner, Low View</a></b><br>
+<a href="#sw_corner_location_on_page">Dock</a></b><br>
 <input disabled id="camapp_lr" size="41" style="border:1px ridge blue;" value="working..."><br>
 <input disabled id="camapp_lr1" size="41" style="border:1px ridge blue;" value="working..."><br>
   <br><label><b>Short term alerts disable (this camera only)</b></label><br>
@@ -324,7 +342,7 @@ width="1512px" height="100px" style="font-size:15px;overflow:auto;border:3px sol
 <input disabled id="camapp_lst" size="41" style="border:1px ridge blue;" value="working..."><br>
 <input disabled id="camapp_lst1" size="41" style="border:1px ridge blue;" value="working..."><br>
   <br><label><b>Short term alerts disable (this camera only)</b></label><br>
-  <form  method="put">
+  <form method="put">
   <input type="range" id="ne_corner" oninput="sliderne()" name="!home!homeowner!camera_snapshots!camera_ne_corner!settimeout"
          min="0" max="360" value="4" step="1" list="tickmarks">
   <input type="submit" id="nesubmit" value="Set to n minutes">
@@ -371,16 +389,68 @@ In here could be the recipient list
 <b>
 <br>System-wide:</b><br>
 <small>
-<table width="2250px"><tr><td>
+<table width="2250px">
+<tr><td>
+<table width="1450px"><tr><td>
+SNAPSHOTS
+<!-- All system snapshots except for the overly ubiquitous, plain MOTION_DETECTION.  For best control, drop them into a spare viewer.  Alerts are produced by enough of these per any camera which are named other than MOTION_DETECTION: 
+-->
+</td></tr>
+<tr valign="top"><td valign="top">
+
+  <button id="playsnaps1" class="playsnaps" style="font-size:21px;" 
+onclick="img_sysjpgmp4_snap.style.display='block';img_sysjpgmp4_snap.src='/../../camera_snapshots/*/*jpg-MOTION?servethis'">
+Play snaps</button>
+<!-- <br><button>spare</button>-->
+    <object id="sysjpg_motion" type="text/html" 
+onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+onclick="this.data=this.data;" data="/../../camera_snapshots/*/*jpg-MOTION" 
+width="1400px" 
+height="180px" 
+style="font-size:15px;overflow:auto;border:5px solid black;border-width:20px 3px 3px;">
+</object>
+<!-- <big><big>A shared video/image element is in progress here but commented out during production operation</big></big> -->
+</td></tr>
+<tr><td style="border:1px solid black"
+onclick=
+"if(img_sysjpgmp4_snap.style.display == 'block'){img_sysjpgmp4_snap.style.display='none'}else{img_sysjpgmp4_snap.style.display='block'}"
+>
+
+<img
+onclick=
+"this.style.display='none';if(this.style.display == 'block'){this.style.display='none'}else{this.style.display='block'}"
+id="img_sysjpgmp4_snap"
+width="2250px" height="1650px" 
+style="display:none;"
+/>
+<br>
+<!--
+<source src="" type="">
+Selected snapshot list
+</image>
+<img 
+onclick="this.style.display='none';vid_sysjpgmp4_motion.style.display='blocking';"
+id="img_sysjpg_motion"
+width="1000px" height="650px"
+style="display:blocking;"
+src=""
+alt="Most recent event jpg">
+<!-- src="/../../camera_snapshots/*/*jpg-MOTION/\?*[0-9.]{1,2}minutesbefore*"
+ =~ /../../camera_snapshots/*/*jpg?1minutesbefore2020-12-18 21:23:41.057728372
+ -->
+</td></tr>
+</td></tr>
+
+
+<tr><td>
 VIDEOS + SNAPSHOTS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NOTE: Most recent videos not available instantly
 <!--
 All system recordings mingled together except MOTION_DETECTIONs, then time-arranged.  Notes: mp4 timestamps are the ending of the events recorded in them, not their beginning,
 &nbsp;<b>top mp4 for each camera won't immediately be complete to play.</b> 
 -->
-</td>
-</tr>
-<tr>
-<td>
+</td></tr>
+
+<tr><td>
     <object id="sysjpgmp4_motion" type="text/html" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="this.data=this.data;" 
@@ -390,55 +460,12 @@ height="180px"
 style="font-size:15px;overflow:auto;border:5px solid black;border-width:20px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
+   <param name="currenttime" value=0 />
+   <param name="playingjpgs_number" value="1" />
 </object>
-<big><big>A shared video/image element is in progress here but commented out during production operation</big></big>
 </td></tr>
 </td><td>
-<!--
-<tr><td style="border:1px solid black">
-<video 
-onclick="this.style.display='none';img_sysjpg_motion.style.display='blocking';"
-id="vid_sysjpgmp4_motion"
-width="1000px" height="650px" 
-style="display:blocking;"
-controls>
-<source src="" type="">
-Selected video file
-</video>
-<img 
-onclick="this.style.display='none';vid_sysjpgmp4_motion.style.display='blocking';"
-id="img_sysjpg_motion"
-width="1000px" height="650px"
-style="display:blocking;"
-src=""
-alt="Most recent event jpg"> -->
-<!-- src="/../../camera_snapshots/*/*jpg-MOTION/\?*[0-9.]{1,2}minutesbefore*"
- =~ /../../camera_snapshots/*/*jpg?1minutesbefore2020-12-18 21:23:41.057728372
- -->
-<!-- </td></tr> -->
-
 <tr><td>
-<table width="1450px"><tr><td>
-SNAPSHOTS
-<!-- All system snapshots except for the overly ubiquitous, plain MOTION_DETECTION.  For best control, drop them into a spare viewer.  Alerts are produced by enough of these per any camera which are named other than MOTION_DETECTION: 
--->
-</td>
-</tr>
-<tr>
-<td>
-    <object id="sysjpg_motion" type="text/html" 
-onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="this.data=this.data;" data="/../../camera_snapshots/*/*jpg-MOTION" 
-width="1400px" 
-height="180px" 
-style="font-size:15px;overflow:auto;border:5px solid black;border-width:20px 3px 3px;">
-</object>
-</td>
-</tr>
-
-
-<tr>
-<td>
 <!--
 <textarea cols="35" style="font-size: 12pt">SAMPLE TEXTAREA</textarea>
 -->
@@ -459,10 +486,12 @@ All system streams - <b>USE THIS LIST FOR EVENT ARCHIVING STREAMS. Top file for 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.data.includes('mostrecent10')) {this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/var/www/camera_streams/*/*mp4';} else {this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='/var/www/camera_streams/*/*mp4/mostrecent10';}" 
 width="1400px" 
-height="350px" 
+height="1400px" 
 style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
+   <param name="currenttime" value=0 />
+   <param name="playingjpgs_number" value="2" />
 </object>
 </td>
 </tr>
@@ -476,11 +505,15 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px
 <td>
     <object id="sysjpgs" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/*/*jpg';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/*/*jpg';"
 width="1400px" 
-height="350px" 
+height="1400px" 
 style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object>
+<!--
+onclick="if (this.type == 'text/plain') {
+ } else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" -->
+
 </td>
 </tr>
 </table></td>
@@ -537,57 +570,49 @@ be learned from a file timestamp</textarea>
 </table>
 </div>
 
-<div id="byview" class="tabcontent">
-<br><b><big>Separate Camera Recordings.  Click a border to list/unlist:</big></b>
+<div id="byview" class="tabcontent" style="display:none">
+<br><b><big>Separate Camera Recordings.  Click a border to list/unlist:</big>&nbsp;Stream elements are now aligned to the middle</b>
 <table style="border:1px solid black">
 <tr><td valign="top">
-
-<table><tr><td class="camtitle"><!-- FUTURE --Use a layout pattern for these that will facilitate swapping them around style="border:5px ridge fuchsia">-->
-
-<a name="sw_corner_location_on_page"></a>
-<a href="" target="_blank"><h3>Southwest Corner</h3></a>
-</td></tr><tr>
-<td class="bb">
-<a href=/../../camera_snapshots/camera_sw_corner/>Event Snapshots.  For best control, drop into a spare viewer.</a>
-<br><br><br>
-<object id="swjpg" type="text/plain" value="Click here to collect these snapshots" 
-onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_sw_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
-width="945px" 
-height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
-</object>
-</td></tr><tr>
-<td class="bb">
-<a href=/var/www/camera_streams/camera_sw_corner/>Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a>
-<br><br><br>
-    <object id="swmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
-onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
-width="945px" 
-height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
-   <param name="timestamp" value="initial" />
-   <param name="nextfilename" value="initial" />
-   <param name="currenttime" value=0>
-</object>
-
-</td></tr>
-
+<table>
 <tr><td></td></tr>
 
 <tr><td class="camtitle">
-
-<a name="sd_location_on_page"></a>
-<a href="" target="_blank"><h3>South Driveway</h3></a>
-</td></tr><tr>
-<td class="bb">
-<a href=/../../camera_snapshots/camera_south_driveway/>Event Snapshots.   For best control, drop into a spare viewer.</a>
-<br><br><br>
-<object id="sdjpg" type="text/plain" value="Click here to collect these snapshots" 
+<a name="ed_location_on_page"></a>
+<a href="" target="_blank"><h3>East Drive</h3></a>
+</td></tr>
+<tr><td class="bb" valign="top">
+<a href=/../../camera_snapshots/camera_east_driveway>Event Snapshots.  For best control, drop into a spare viewer.</a><br><br><br>
+    <object id="edjpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_south_driveway/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
-width="700px" 
-height="880px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
-</object></td></tr>
+onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_east_driveway';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+width="1000px" 
+height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+</object>
+</td></tr>
+<tr><td class="bb">
+<a href=/var/www/camera_streams/camera_east_driveway/>Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a><br><br><br>
+    <object id="edmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
+onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+onclick="if (this.type == 'text/plain') 
+{this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} 
+else 
+{this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+width="1000px" 
+height="560px" 
+style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+   <param name="timestamp" value="initial" />
+   <param name="nextfilename" value="initial" />
+   <param name="currenttime" value=0 />
+   <param name="playingjpgs_number" value="3" />
+</object>
+</td></tr>
+
+<tr><td class="camtitle">
+<a name="sd_location_on_page"></a>
+<a href="" target="_blank"><h3>South Drive</h3></a>
+</td></tr>
+
 <tr><td class="bb">
 <a href=/var/www/camera_streams/camera_south_driveway/>Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a>
 <br><br><br>
@@ -598,11 +623,23 @@ width="700px"
 height="880px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
-   <param name="currenttime" value=0>
-</object>
+   <param name="currenttime" value=0 />
+   <param name="playingjpgs_number" value="4" />
+</object></td></tr>
 
-</td>
-</tr>
+<tr><td class="bb">
+<a href=/../../camera_snapshots/camera_south_driveway/>Event Snapshots.   For best control, drop into a spare viewer.</a>
+<br><br><br>
+<object id="sdjpg" type="text/plain" value="Click here to collect these snapshots" 
+onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_south_driveway/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+width="700px" 
+height="880px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+</object></td></tr>
+
+
+
+
 </table>
 
 
@@ -610,9 +647,42 @@ height="880px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <td valign="top" align="left">
 <table style="border:2px ridge blue">
 
+<tr><td class="camtitle"><!-- FUTURE --Use a layout pattern for these that will facilitate swapping them around style="border:5px ridge fuchsia">-->
+<a name="sw_corner_location_on_page"></a>
+<a href="" target="_blank"><h3>Dock</h3></a>
+</td></tr>
+<tr><td class="bb">
+<a href=/../../camera_snapshots/camera_sw_corner/>Event Snapshots.  For best control, drop into a spare viewer.</a>
+<br><br><br>
+<object id="swjpg" type="text/plain" value="Click here to collect these snapshots" 
+onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_sw_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+width="945px" 
+height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+</object>
+</td></tr>
+
+<tr><td class="bb">
+<a href=/var/www/camera_streams/camera_sw_corner/>Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a>
+<br><br><br>
+    <object id="swmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
+onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+width="945px" 
+height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+   <param name="timestamp" value="initial" />
+   <param name="nextfilename" value="initial" />
+   <param name="currenttime" value=0 />
+   <param name="playingjpgs_number" value="5" />
+</object>
+</td></tr>
+
+
+
 
 <tr><td>
 <table width="100%">
+
 <tr><td align='middle'>
 <input type="button" value="List all video views of 1 minute prior to most recently opened .jpg event" id="lsbtn" 
 style="font-size:25px;"
@@ -626,6 +696,12 @@ onclick="
         objectelement[i].data=streamListings[objectelement[i].id] + '*?1minutesbefore' + StartTimeOfInterest;
     }">
 <br>
+<input disabled id="StartTimeOfInterestEl" style="font-size:25px;border:1px ridge blue;background:white" value="Time Of Interest" height="100px">
+<input disabled id="StartCamOfInterestEl" style="font-size:25px;border:1px ridge blue;background:white" value="View Of Interest" height="100px">
+<br>
+<!--<input type="button" value="Queue the playing or paused videos to queue-to time. Retry until success" id="qbtn" 
+onclick="         var videoneedsqueueing = [objectelement.length];//This var is not used yet.  Future use is to auto-queue all videos with merely a single button click instead of manually retrying
+-->
 <input type="button" value="Start videos" id="startbtn" style="font-size:25px;" onclick="var objectelement=document.getElementsByClassName('mp4obj');
         for(var i=0;i<objectelement.length;i++)
         {if(objectelement[i].contentWindow != 'undefined' && objectelement[i].contentWindow != null && objectelement[i].contentWindow[0] != 'undefined' && objectelement[i].contentWindow[0] != null)
@@ -636,18 +712,10 @@ onclick="
         else
         {objectelement[i].contentDocument.links[0].click();
 }}">
-<br>
-<input disabled id="StartTimeOfInterestEl" style="font-size:25px;border:1px ridge blue;background:white" value="Time Of Interest" height="100px">
-<input disabled id="StartCamOfInterestEl" style="font-size:25px;border:1px ridge blue;background:white" value="View Of Interest" height="100px">
-<br>
-<br>
-<!--<input type="button" value="Queue the playing or paused videos to queue-to time. Retry until success" id="qbtn" 
-onclick="         let videoneedsqueueing = new Array(objectelement.length);//This var is not used yet.  Future use is to auto-queue all videos with merely a single button click instead of manually retrying
--->
 <input type="button" value="Queue the playing or paused videos to queue-to time." id="qbtn" 
 style="font-size:25px;background:#e6e6e6"
 onclick="var objectelement=document.getElementsByClassName('mp4obj');
-         let videoneedsqueueing = new Array(objectelement.length)
+         var videoneedsqueueing = [objectelement.length]
          var notalldoneyet=false
          for(var i=0;i<objectelement.length;i++){videoneedsqueueing[i]=false}
 
@@ -730,39 +798,6 @@ onclick="var objectelement=document.getElementsByClassName('mp4obj');
 
 
 
-<tr><td class="camtitle">
-<a name="ed_location_on_page"></a>
-<a href="" target="_blank"><h3>East Driveway</h3></a>
-</td></tr>
-<tr>
-<td class="bb" valign="top">
-<a href=/../../camera_snapshots/camera_east_driveway>Event Snapshots.  For best control, drop into a spare viewer.</a><br><br><br>
-    <object id="edjpg" type="text/plain" value="Click here to collect these snapshots" 
-onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_east_driveway';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
-width="1000px" 
-height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
-</object>
-</td>
-</tr><tr>
-<td class="bb">
-<a href=/var/www/camera_streams/camera_east_driveway/>Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a><br><br><br>
-    <object id="edmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
-onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') 
-{this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} 
-else 
-{this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
-width="1000px" 
-height="560px" 
-style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
-   <param name="timestamp" value="initial" />
-   <param name="nextfilename" value="initial" />
-   <param name="currenttime" value=0>
-</object>
-</td></tr>
-
-
 </table>
 </td>
 <td valign="top">
@@ -772,7 +807,7 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px
 
 <tr><td class="camtitle">
 <a name="fp_location_on_page"></a>
-<a href="" target="_blank"> <h3>Front parking lot</h3></a>
+<a href="" target="_blank"> <h3>Front lot</h3></a>
 </td>
 </tr>
 <tr>
@@ -784,8 +819,9 @@ onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border
 width="1000px" 
 height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object>
-</td>
-</tr>
+</td></tr>
+
+
 <tr><td class="bb">
 <a href=/var/www/camera_streams/camera_front_parking/>Streams - <b>top one won't immediately be complete to play.</b>   For best control, drop others into a spare player.</a><br><br><br>
     <object id="fpmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
@@ -800,7 +836,8 @@ width="1000px" height="560px"
  style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
-   <param name="currenttime" value=0>
+   <param name="currenttime" value=0 />
+   <param name="playingjpgs_number" value="6" />
 </object></td></tr>
 
 
@@ -815,20 +852,10 @@ width="1000px" height="560px"
 <tr><td class="camtitle">
 <a name="ne_location_on_page"></a>
 <a href="" target="_blank"> <h3>Northeast corner</h3></a>
-</td>
-</tr>
-<tr>
-<td class="bb">
-<a href=/../../camera_snapshots/camera_ne_corner/>Event Snapshots.   For best control, drop into a spare viewer.</a>
-<br><br><br>
-    <object id="nejpg" type="text/plain" value="Click here to collect these snapshots" 
-onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_ne_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
-width="960px" 
-height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
-</object>
 </td></tr>
-<td class="bb">
+
+
+<tr><td class="bb">
 <a href=/var/www/camera_streams/camera_ne_corner/>Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a>
 <br><br><br>
     <object id="nemp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
@@ -838,9 +865,24 @@ width="960px"
 height="720px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
-   <param name="currenttime" value=0>
+   <param name="currenttime" value=0 />
+   <param name="playingjpgs_number" value="7" />
 </object>
 </td></tr>
+
+
+
+<tr><td class="bb">
+<a href=/../../camera_snapshots/camera_ne_corner/>Event Snapshots.   For best control, drop into a spare viewer.</a>
+<br><br><br>
+    <object id="nejpg" type="text/plain" value="Click here to collect these snapshots" 
+onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_ne_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+width="960px" 
+height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+</object>
+</td></tr>
+
 
 
 </td></tr>
@@ -849,6 +891,7 @@ height="720px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </td></tr>
 </table>
 </div>
+<div id="notes" class="tabcontent" style="display:none">
 <h3><ul>
 <li>
 "Time Of Interest" and "View Of Interest" are determined from the file last-modified (creation) time of most<br>
@@ -893,8 +936,21 @@ HTML5 push) that the shop server can directly trigger an Android notification.  
 Camera login credentials are no longer embedded in the URLs so that the five minute stream time limit can be defeated<br>
 Login credentials for camera streams are username = [youngest brother first name in reverse case]123<br>
              password is the same as the username but in proper case<br>
+    <button onclick="play()">Test alert sound</button> 
+    <button onclick="checkforcache()">Check browser cache capability</button> 
+</div>
 </small></small>
 <script>
+function tabactivate( btn ) {
+var btnset = document.getElementsByClassName('tablinks');
+for(var i=0;i<btnset.length;i++)
+{if(btnset[i].id != btn.id){document.getElementById(btnset[i].id.substring(3)).style.display = 'none';
+<!-- document.getElementById(btn.id).style.background='#CCCCCC' -->
+}else
+{document.getElementById(btnset[i].id.substring(3)).style.display = 'block';
+<!-- document.getElementById(btn.id).style.background='#FFFFFF' -->
+}}
+}
 function glonabort( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onabort. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -1040,7 +1096,7 @@ function glonkeyup( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 }
 
 function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) 
-{;//The following seems to have acquired a bug in recent revisions
+{
   if (elmnt.contentDocument.body.children[0] != 'undefined' && elmnt.contentDocument.body.children[0] != null && elmnt.contentDocument.body.children[0].localName == 'table' && elmnt.contentDocument.body.children[0].tBodies[0].rows[0].cells[1] != 'undefined' && elmnt.contentDocument.body.children[0].tBodies[0].rows[0].cells[1] != null)
   {
     if(elmnt.contentDocument.body.children[0].tBodies[0] == 'undefined' || elmnt.contentDocument.body.children[0].tBodies[0] == null){alert('Too many event files to list with ' + currSrc + '.  Delete overrunning ones on server.');return}
@@ -1425,8 +1481,6 @@ test.dispatchEvent(event);
         font-family: Tahoma, Verdana, Arial, sans-serif;
     }
 </style -->
-    <button onclick="play()">Test alert sound</button> 
-    <button onclick="checkforcache()">Check browser cache capability</button> 
   
     <script> 
         function play() { 

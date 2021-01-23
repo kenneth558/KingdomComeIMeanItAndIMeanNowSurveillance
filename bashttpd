@@ -437,11 +437,13 @@ function serve_dir_or_file_from() {
   local URL_PATH="${1}/${3}"
   shift
   URL_PATH=$(urldecode "${URL_PATH}") 
+
+# ?servethem serve_file()
 #  echo "URL_PATH=${URL_PATH}" >> /var/log/bashttpd.log
   while [[ ${URL_PATH:0:2} == "//" ]];do URL_PATH="${URL_PATH:1}";done
   echo "URL_PATH=${URL_PATH}" >> /var/log/bashttpd.log
   [[ $URL_PATH == *..* ]] && fail_with 400
-   # Serve index file if exists in requested directory
+   # Serve index file if exists in requested directory 
   [[ -d "${URL_PATH}" && -f "${URL_PATH}/index.html" && -r "${URL_PATH}/index.html" ]] && \
      URL_PATH="${URL_PATH}/index.html"
   if [[ -f "${URL_PATH}" ]]; then
@@ -490,6 +492,10 @@ function serve_dir_or_file_from() {
   elif [[ "${URL_PATH}" =~ important* ]]; then
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH}|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH}" 'BEGIN {print css_style "<table>"}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre $10 "\">" $10 "</a></td></tr>"} END {print "</table>"}')"
+
+#  elif [[  "${URL_PATH}" =~ .*?servethis* ]];then
+#      URL_PATH="$(ls -t ${URL_PATH%%?*}|head -n${URL_PATH##*servethis}|tail -n1)"
+#      serve_dir_or_file_from()
 
   elif [[ "${URL_PATH}" =~ .*?.*settimeout=[0-9]{1,6}$ ]]; then
 #URL_PATH=~/var/www/html/index.html?!home!homeowner!camera_snapshots!camera_sw_corner!settimeout=10
