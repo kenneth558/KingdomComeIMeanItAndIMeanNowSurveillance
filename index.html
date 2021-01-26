@@ -260,7 +260,7 @@ onload="if(alertsdirectory.contentWindow.document.body.children[0].localName == 
           }
         else {previousalert=null;}
         glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-width="1512px" height="1200px" style="font-size:15px;overflow:auto;border:3px solid black;border-width:20px 30px 3px 3px;">
+width="1900px" height="1200px" style="font-size:15px;overflow:auto;border:3px solid black;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
@@ -398,9 +398,8 @@ SNAPSHOTS
 </td></tr>
 <tr valign="top"><td valign="top">
 
-  <button id="playsnaps1" class="playsnaps" style="font-size:21px;" 
-onclick="img_sysjpgmp4_snap.style.display='block';img_sysjpgmp4_snap.src='/../../camera_snapshots/*/*jpg-MOTION?servethis'">
-Play snaps</button>
+<!--  <button id="playsnaps1" class="playsnaps" style="font-size:21px;" 
+onclick="img_sysjpgmp4_snap.style.display='block';img_sysjpgmp4_snap.src='/../../camera_snapshots/*/*jpg-MOTION?servethis'">-->
 <!-- <br><button>spare</button>-->
     <object id="sysjpg_motion" type="text/html" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -410,19 +409,28 @@ height="180px"
 style="font-size:15px;overflow:auto;border:5px solid black;border-width:20px 3px 3px;">
 </object>
 <!-- <big><big>A shared video/image element is in progress here but commented out during production operation</big></big> -->
+<br>
+  <button id="playsnaps1" class="playsnaps" style="font-size:21px;" 
+onclick="img_sysjpgmp4_snap.style.display='block';img_sysjpgmp4_snap.data='/../../camera_snapshots/*/*jpg?servethis'">
+Add ip address to snaps for group drag-dropping into browser window (Now functional very cool in Firefox, which also has the best memory management for that.  Call me if you need help)</button>
 </td></tr>
 <tr><td style="border:1px solid black"
 onclick=
 "if(img_sysjpgmp4_snap.style.display == 'block'){img_sysjpgmp4_snap.style.display='none'}else{img_sysjpgmp4_snap.style.display='block'}"
 >
-
-<img
+Every link in here will open in its own new window, or new tab if you have your browser set for tabs <big><big><big><bold> Most recent six motion detections are subject to deletion at any time</bold></big></big></big>
+<!-- needs to have setInterval, clearInterval with a static var.  Note that a camera of interest might only have motion detects but we still may want to traverse those snaps -->
+<object
 onclick=
 "this.style.display='none';if(this.style.display == 'block'){this.style.display='none'}else{this.style.display='block'}"
 id="img_sysjpgmp4_snap"
 width="2250px" height="1650px" 
 style="display:none;"
-/>
+>
+<param name="camera_dir" value="" />
+<param name="next_snap" value="0" />
+<param name="spare" value="" />
+</object>
 <br>
 <!--
 <source src="" type="">
@@ -582,7 +590,7 @@ be learned from a file timestamp</textarea>
 <a href="" target="_blank"><h3>East Drive</h3></a>
 </td></tr>
 <tr><td class="bb" valign="top">
-<a href=/../../camera_snapshots/camera_east_driveway>Event Snapshots.  For best control, drop into a spare viewer.</a><br><br><br>
+<a href="/../../camera_snapshots/camera_east_driveway/" target="_blank">Event Snapshots.  For best control, drop into a spare viewer.</a><br><br><br>
     <object id="edjpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_east_driveway';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
@@ -591,7 +599,7 @@ height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </object>
 </td></tr>
 <tr><td class="bb">
-<a href=/var/www/camera_streams/camera_east_driveway/>Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a><br><br><br>
+<a href="/var/www/camera_streams/camera_east_driveway/" target="_blank">Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a><br><br><br>
     <object id="edmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') 
@@ -614,7 +622,7 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px
 </td></tr>
 
 <tr><td class="bb">
-<a href=/var/www/camera_streams/camera_south_driveway/>Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a>
+<a href="/var/www/camera_streams/camera_south_driveway/" target="_blank">Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a>
 <br><br><br>
     <object id="sdmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -628,7 +636,7 @@ height="880px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </object></td></tr>
 
 <tr><td class="bb">
-<a href=/../../camera_snapshots/camera_south_driveway/>Event Snapshots.   For best control, drop into a spare viewer.</a>
+<a href="/../../camera_snapshots/camera_south_driveway/" target="_blank">Event Snapshots.   For best control, drop into a spare viewer.</a>
 <br><br><br>
 <object id="sdjpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -652,7 +660,7 @@ height="880px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <a href="" target="_blank"><h3>Dock</h3></a>
 </td></tr>
 <tr><td class="bb">
-<a href=/../../camera_snapshots/camera_sw_corner/>Event Snapshots.  For best control, drop into a spare viewer.</a>
+<a href="/../../camera_snapshots/camera_sw_corner/" target="_blank">Event Snapshots.  For best control, drop into a spare viewer.</a>
 <br><br><br>
 <object id="swjpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -663,7 +671,7 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </td></tr>
 
 <tr><td class="bb">
-<a href=/var/www/camera_streams/camera_sw_corner/>Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a>
+<a href="/var/www/camera_streams/camera_sw_corner/" target="_blank">Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a>
 <br><br><br>
     <object id="swmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -698,20 +706,13 @@ onclick="
 <br>
 <input disabled id="StartTimeOfInterestEl" style="font-size:25px;border:1px ridge blue;background:white" value="Time Of Interest" height="100px">
 <input disabled id="StartCamOfInterestEl" style="font-size:25px;border:1px ridge blue;background:white" value="View Of Interest" height="100px">
+<input type="button" value="Start videos" 
+id="startbtn0" style="font-size:25px;" 
+onclick="startbtncclick();">
 <br>
 <!--<input type="button" value="Queue the playing or paused videos to queue-to time. Retry until success" id="qbtn" 
 onclick="         var videoneedsqueueing = [objectelement.length];//This var is not used yet.  Future use is to auto-queue all videos with merely a single button click instead of manually retrying
 -->
-<input type="button" value="Start videos" id="startbtn" style="font-size:25px;" onclick="var objectelement=document.getElementsByClassName('mp4obj');
-        for(var i=0;i<objectelement.length;i++)
-        {if(objectelement[i].contentWindow != 'undefined' && objectelement[i].contentWindow != null && objectelement[i].contentWindow[0] != 'undefined' && objectelement[i].contentWindow[0] != null)
-        {if(objectelement[i].contentWindow[0].body != 'undefined' && objectelement[i].contentDocument.body.children[0].localName == 'video')
-        {objectelement[i].contentDocument.body.children[0].play()}
-        else if(objectelement[i].contentDocument.body.children[0].localName == 'table' && objectelement[i].contentDocument.links[0] != 'undefined' && objectelement[i].contentWindow[0].links[0] != null)
-        {alert('Unexpected page configuration.  Report to a developer if it happens excessively: ' + objectelement[i].contentDocument.URL + ' and ' + objectelement[i].contentWindow[0].body.links[0].innerText);}}
-        else
-        {objectelement[i].contentDocument.links[0].click();
-}}">
 <input type="button" value="Queue the playing or paused videos to queue-to time." id="qbtn" 
 style="font-size:25px;background:#e6e6e6"
 onclick="var objectelement=document.getElementsByClassName('mp4obj');
@@ -730,7 +731,7 @@ onclick="var objectelement=document.getElementsByClassName('mp4obj');
                          objectelement[i].contentDocument.body.children[0].currentTime=objectelement[i].children['currenttime'].value
                          if(objectelement[i].contentDocument.body.children[0].currentTime < objectelement[i].children['currenttime'].value)
                          {
-                             if(this.style.background != 'Chartreuse'){this.value='Queue the playing or paused videos to queue-to time. Retry until success';this.style.background='Chartreuse'}
+                             if(this.style.background != 'Chartreuse'){this.value='Queue the playing or paused videos to queue-to time. Manually retry until success';this.style.background='Chartreuse'}
                              videoneedsqueueing[i]=true
                              var notalldoneyet=true
                          }
@@ -776,6 +777,11 @@ onclick="var objectelement=document.getElementsByClassName('mp4obj');
         {if(objectelement[i].contentWindow[0].body != 'undefined' && objectelement[i].contentDocument.body.children[0].localName == 'video')
         {objectelement[i].contentDocument.body.children[0].pause()}}}">
 &nbsp;&nbsp;
+<input type="button" value="Start videos" 
+id="startbtn1" style="font-size:25px;" onclick="
+startbtncclick()
+">
+<br>
 <input type="button" value="Close these video players" id="closebtn" style="font-size:25px;" 
 onclick="var objectelement=document.getElementsByClassName('mp4obj');
         for(var i=0;i<objectelement.length;i++)
@@ -812,7 +818,7 @@ onclick="var objectelement=document.getElementsByClassName('mp4obj');
 </tr>
 <tr>
 <td  class="bb" valign="top">
-<a href=/../../camera_snapshots/camera_front_parking>Event Snapshots.  For best control, drop into a spare viewer.</a><br><br><br>
+<a href="/../../camera_snapshots/camera_front_parking/" target="_blank">Event Snapshots.  For best control, drop into a spare viewer.</a><br><br><br>
     <object id="fpjpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_front_parking/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
@@ -823,7 +829,7 @@ height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 
 
 <tr><td class="bb">
-<a href=/var/www/camera_streams/camera_front_parking/>Streams - <b>top one won't immediately be complete to play.</b>   For best control, drop others into a spare player.</a><br><br><br>
+<a href="/var/www/camera_streams/camera_front_parking/" target="_blank">Streams - <b>top one won't immediately be complete to play.</b>   For best control, drop others into a spare player.</a><br><br><br>
     <object id="fpmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', this.contentDocument.body.children[0].tagName, '', '', '')"
@@ -856,7 +862,7 @@ width="1000px" height="560px"
 
 
 <tr><td class="bb">
-<a href=/var/www/camera_streams/camera_ne_corner/>Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a>
+<a href="/var/www/camera_streams/camera_ne_corner/" target="_blank">Streams - <b>top one won't immediately be complete to play.</b>  For best control, drop others into a spare player.</a>
 <br><br><br>
     <object id="nemp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -873,7 +879,7 @@ height="720px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 
 
 <tr><td class="bb">
-<a href=/../../camera_snapshots/camera_ne_corner/>Event Snapshots.   For best control, drop into a spare viewer.</a>
+<a href="/../../camera_snapshots/camera_ne_corner/"  target="_blank">Event Snapshots.   For best control, drop into a spare viewer.</a>
 <br><br><br>
     <object id="nejpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -941,6 +947,29 @@ Login credentials for camera streams are username = [youngest brother first name
 </div>
 </small></small>
 <script>
+function startbtncclick() 
+{
+   var objectelement=document.getElementsByClassName('mp4obj');
+   for(var i=0;i<objectelement.length;i++)
+   {
+      if(objectelement[i].contentWindow != 'undefined' && objectelement[i].contentWindow != null && objectelement[i].contentWindow[0] != 'undefined' && objectelement[i].contentWindow[0] != null)
+      {
+         if(objectelement[i].contentWindow[0].body != 'undefined' && objectelement[i].contentDocument.body.children[0].localName == 'video')
+         {
+            objectelement[i].contentDocument.body.children[0].play()
+         }
+         else if(objectelement[i].contentDocument.body.children[0].localName == 'table' && objectelement[i].contentDocument.links[0] != 'undefined' && objectelement[i].contentWindow[0].links[0] != null)
+         {
+            alert('Unexpected page configuration.  Report to a developer if it happens excessively: ' + objectelement[i].contentDocument.URL + ' and ' + objectelement[i].contentWindow[0].body.links[0].innerText);
+         }
+      }
+      else
+      {
+         objectelement[i].contentDocument.links[0].click();
+      }
+   }
+}
+
 function tabactivate( btn ) {
 var btnset = document.getElementsByClassName('tablinks');
 for(var i=0;i<btnset.length;i++)
@@ -1140,6 +1169,14 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
   else
   {
 //is now a loaded or loading jpg or mp4 viewer with the [first] image already appearing in the window. 
+//      alert('videoHeight=' + elmnt.contentDocument.body.children[0].videoHeight)
+//      alert('videoWidth=' + elmnt.contentDocument.body.children[0].videoWidth)
+elmnt.parentElement.clientHeight=elmnt.contentDocument.body.children[0].videoHeight
+elmnt.Height=elmnt.contentDocument.body.children[0].videoHeight
+elmnt.clientHeight=elmnt.contentDocument.body.children[0].videoHeight
+elmnt.contentDocument.body.children[0].scrollHeight=elmnt.contentDocument.body.children[0].videoHeight
+elmnt.contentDocument.body.clientHeight=elmnt.contentDocument.body.children[0].videoHeight
+elmnt.contentDocument.body.clientWidth=elmnt.contentDocument.body.children[0].videoWidth
       if(elmnt.contentDocument.body.children[0].localName == 'video')
       {
            elmnt.contentDocument.body.children[0].playbackRate=2
