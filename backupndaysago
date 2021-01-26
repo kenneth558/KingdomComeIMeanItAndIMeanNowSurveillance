@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #This must get executed prior to excessive numbers of files created.  Once every day seems OK
 errmsg="The following files already exist, so ALL files created during this run will be named with \"_additional\" as part of the archive file name"
 errmsgdisplayed=false
@@ -65,6 +65,37 @@ if [[ -f /var/www/camera_streams/archives/camera_ne_corner/$(date --date=$daysag
     echo "    /var/www/camera_streams/archives/camera_ne_corner/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_ne_corner.tar.gz"
 fi
 if [[ "$2." == "test." ]];then exit;fi
+
+# Note the better directory to send the archives to from similar moves, if it exists:
+#if [[ -d /media/usb-drive/"Ken's area" ]];then
+# nohup mv /var/www/camera_streams/archives/camera_ne_corner/* /media/usb-drive/"Ken's area"/camera_ne_corner/Dec2020/ 1>/dev/null 2>/dev/null &
+# nohup mv /var/www/camera_streams/archives/camera_sw_corner/* /media/usb-drive/"Ken's area"/camera_sw_corner/Dec2020/ 1>/dev/null 2>/dev/null &
+# nohup mv /var/www/camera_streams/archives/camera_south_driveway/* /media/usb-drive/"Ken's area"/camera_south_driveway/Dec2020/ 1>/dev/null 2>/dev/null &
+# nohup mv /var/www/camera_streams/archives/camera_east_driveway/* /media/usb-drive/"Ken's area"/camera_east_driveway/Dec2020/ 1>/dev/null 2>/dev/null &
+# nohup mv /var/www/camera_streams/archives/camera_front_parking/* /media/usb-drive/"Ken's area"/camera_front_parking/Dec2020/ 1>/dev/null 2>/dev/null &
+#nohup tar -cf /camera_snapshots/archives/camera_south_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_south_driveway$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_south_driveway/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+#sleep 1
+#nohup tar -cf /camera_snapshots/archives/camera_front_parking/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_front_parking$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_front_parking/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+#sleep 1
+#nohup tar -cf /camera_snapshots/archives/camera_east_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_east_driveway$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_east_driveway/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+#sleep 1
+#nohup tar -cf /camera_snapshots/archives/camera_sw_corner/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_sw_corner$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_sw_corner/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+#sleep 1
+#nohup tar -cf /camera_snapshots/archives/camera_ne_corner/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_ne_corner$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_ne_corner/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+#sleep 1
+
+#DO NOT INDENT THESE NOHUP COMMANDS.  THEY ARE PARSED AND USED FOR CALCULATING THE NUMBER OF CAMERAS INTENDED ALWAYS TO RECORD
+#nohup tar -cf /var/www/camera_streams/archives/camera_south_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_south_driveway$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_south_driveway/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+#sleep 1
+#nohup tar -cf /var/www/camera_streams/archives/camera_front_parking/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_front_parking$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_front_parking/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+#sleep 1
+#nohup tar -cf /var/www/camera_streams/archives/camera_east_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_east_driveway$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_east_driveway/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+#sleep 1
+#nohup tar -cf /var/www/camera_streams/archives/camera_sw_corner/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_sw_corner$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_sw_corner/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+#sleep 1
+#nohup tar -cf /var/www/camera_streams/archives/camera_ne_corner/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_ne_corner$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_ne_corner/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+#else
+
 nohup tar -cf /camera_snapshots/archives/camera_south_driveway/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_south_driveway$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_south_driveway/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
 sleep 1
 nohup tar -cf /camera_snapshots/archives/camera_front_parking/$(date --date=$daysago-days-ago +%Y%m%d)_snapshots_archive_front_parking$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_front_parking/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
@@ -86,6 +117,7 @@ sleep 1
 nohup tar -cf /var/www/camera_streams/archives/camera_sw_corner/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_sw_corner$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_sw_corner/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
 sleep 1
 nohup tar -cf /var/www/camera_streams/archives/camera_ne_corner/$(date --date=$daysago-days-ago +%Y%m%d)_streams_archive_ne_corner$( [[ "$errmsgdisplayed" == "true" ]] && echo "_additional" ).tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_ne_corner/* -daystart -mtime -$daysagoplusone ! -mtime -$daysago) 2>/dev/null &
+#fi
 echo "Camera files backup is now in progress."
 
 #SECTION FOR TESTING ANNOUNCEMENT MESSAGE

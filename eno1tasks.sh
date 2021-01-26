@@ -1,14 +1,12 @@
 #!/bin/bash
-#SMTP MAIL SERVER IS HARD-CODED TO smtp.gmail.com:587 
-ACCOUNT_NAME=
-ACCOUNT_PASSWORD=
 #  Can get rid of writing the diag files when done with development
 #rm /etc/network/if-up.d/vars
 #ADDR="$(ip -o address|grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)"
 #goto just_recover
 if [[ -z $(ps auxf|grep -v grep|grep -c "inotifywait -m /etc/emails_awaiting/ -r -e create") ]];then
-      nohup inotifywait -m /etc/emails_awaiting/ -r -e create 2>/dev/null|while read path action file; do if [[ "$file" == "recipients.txt" ]];then until cat "$path"content|mail -s "$(cat "$path"subject.txt)" "$(cat "$path""$file")" 2>/dev/null; do sleep 189;done && [[ -f "$path"attachmentsforremainingemails.txt ]] && \
-      while read -r jpgnametoattach;do /home/homeowner/smtp-cli --server=smtp.gmail.com:587 -4 --user=$ACCOUNT_NAME --pass=$ACCOUNT_PASSWORD $(cat "$path""picturerecipients.txt"|awk -F, '{for (x=1;x<=NF;x++){printf "--to="$x" "}}') --from="$(cat "$path"subject.txt|awk '{printf $1}')"@gwaamc.com --subject="$(cat "$path"subject.txt)" --attach="$jpgnametoattach" 2>/dev/null;done < "$path"namesofjpgstoattach.txt;rm -r "$path" 2>/dev/null;fi;done &
+      nohup inotifywait -m /etc/emails_awaiting/ -r -e create 2>/dev/null|while read path action file; do if [[ "$file" == "recipients.txt" ]];then until cat "$path"content|sudo -u "$(cat "$path"subject.txt|awk '{printf $1}')" mail -s "$(cat "$path"subject.txt)" "$(cat "$path""$file")" 2>/dev/null; do sleep 189;done && [[ -f "$path"attachmentsforremainingemails.txt ]] && while read -r jpgnametoattach;do sudo -u "$(cat "$path"subject.txt|awk '{printf $1}')" /home/homeowner/smtp-cli --server=smtp.gmail.com:587 -4 --user=gwaamcfirewall --pass=post-ISIS4311979ken $(cat "$path""picturerecipients.txt"|awk -F, '{for (x=1;x<=NF;x++){printf "--to="$x" "}}') --from="$(cat "$path"subject.txt|awk '{printf $1}')"@gwaamc.com --subject="$(cat "$path"subject.txt)" --attach="$jpgnametoattach" 2>/dev/null;done < "$path"namesofjpgstoattach.txt;rm -r "$path" 2>/dev/null;fi;done &
+#     nohup inotifywait -m /etc/emails_awaiting/ -r -e create 2>/dev/null|while read path action file; do if [[ "$file" == "recipients.txt" ]];then until cat "$path"content|sudo -u "$(cat "$path"subject.txt|awk '{printf $1}')" mail -s "$(cat "$path"subject.txt)" "$(cat "$path""$file")" 2>/dev/null; do sleep 189;done && [[ -f "$path"attachmentsforremainingemails.txt ]] && \
+#     while read -r jpgnametoattach;do sudo -u "$(cat "$path"subject.txt|awk '{printf $1}')" /home/homeowner/smtp-cli --server=smtp.gmail.com:587 -4 --user=gwaamcfirewall --pass=post-ISIS4311979ken $(cat "$path""picturerecipients.txt"|awk -F, '{for (x=1;x<=NF;x++){printf "--to="$x" "}}') --from="$(cat "$path"subject.txt|awk '{printf $1}')"@gwaamc.com --subject="$(cat "$path"subject.txt)" --attach="$jpgnametoattach" 2>/dev/null;done < "$path"namesofjpgstoattach.txt;rm -r "$path" 2>/dev/null;fi;done &
 #We need to write timeout file if it was an event and then rm -r "$path"
 #For event files the above line needs to put a timeout file in /home/homeowner/$path where path is gained from the subject line of event files
 fi
@@ -121,7 +119,7 @@ touch /etc/network/if-up.d/Enteredipchangescriptdotsh
     fi
 [ "$1." == "-force." ] && exit
 
-just_recover:
+#just_recover:
 nohup socat -T300 TCP4-LISTEN:6080,fork,reuseaddr TCP:192.168.0.11:6080 2>/dev/null &
 nohup socat -T300 TCP4-LISTEN:6554,fork,reuseaddr TCP:192.168.0.11:6554 2>/dev/null &
 nohup socat -T300 TCP4-LISTEN:9080,fork,reuseaddr TCP:192.168.0.12:9081 2>/dev/null &
@@ -133,7 +131,7 @@ nohup socat -T300 TCP4-LISTEN:14554,fork,reuseaddr TCP:192.168.0.14:7554 2>/dev/
 nohup socat -T300 TCP4-LISTEN:15080,fork,reuseaddr TCP:192.168.0.15:7080 2>/dev/null &
 nohup socat -T300 TCP4-LISTEN:15554,fork,reuseaddr TCP:192.168.0.15:7554 2>/dev/null &
 
-goto skip_cleanup
+#goto skip_cleanup
 while [[ "$(ps x|grep -v grep|grep 'ffmpeg -rtsp_transport udp -i rtsp://kERRY123:Kerry123@192.168.0.11:6554/Streaming/channels/101.*-c copy')." != "." ]]; do
     kill $(ps x|grep -v grep|grep -m1 'ffmpeg -rtsp_transport udp -i rtsp://kERRY123:Kerry123@192.168.0.11:6554/Streaming/channels/101.*-c copy'|awk '{printf $1}') 2>/dev/null
     sleep 1
@@ -155,7 +153,7 @@ while [[ "$(ps x|grep -v grep|grep 'ffmpeg -rtsp_transport udp -i rtsp://kERRY12
     sleep 1
 done
 
-skip_cleanup:
+#skip_cleanup:
 #Consider trying to use nice someday on these lines to ensure their priority
 nohup ffmpeg -rtsp_transport udp -i "rtsp://kERRY123:Kerry123@192.168.0.11:6554/Streaming/channels/101" -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 \
 -c:v libx264 -f segment -segment_time 360 -segment_format_options movflags=+faststart -reset_timestamps 1 -avoid_negative_ts 1 -c copy -flags +global_header \
@@ -185,7 +183,6 @@ nohup inotifywait -m /var/www/camera_streams/ -r -e create 2>/dev/null|while rea
 
 nohup inotifywait -m /home/homeowner/camera_snapshots/ -r -e create 2>/dev/null|while read path action file; do if [[ $file == "timeout" ]]; then nohup ${SHELL} -c "sleep $(cat $path$file); rm -f $path$file" 2>/dev/null &  fi;done &
 nohup inotifywait -m /camera_snapshots/ -r -e create 2>/dev/null|while read pathandcamera action file;do if [ -f /home/homeowner"$pathandcamera"timeout ] && [[ ! $(ps auxf|grep -v grep|grep -A2 /home/homeowner"$pathandcamera"|grep sleep) ]];then rm /home/homeowner"$pathandcamera"timeout;fi;if [ -f /home/homeowner/camera_snapshots/timeout ] && [[ ! $(ps auxf|grep -v grep|grep -A2 '/home/homeowner/camera_snapshots/ '|grep sleep) ]];then rm /home/homeowner/camera_snapshots/timeout;fi;times=$(tail -n1 /home/homeowner"$pathandcamera"/events_reqd|awk '{printf $1}');if [[ -z ${file##*MOTION*} ]];then listing="$(ls -ltr $pathandcamera|tail -n$(((times * 2) + 1)))";while [ $(grep -c MOTION <<< "$listing") == $(((times * 2) + 1)) ];do rm $pathandcamera$(tail -n$((times + 1)) <<< "$listing"|head -n1|awk '{print $9}');listing="$(ls -ltr $pathandcamera|tail -n$(((times * 2) + 1)))";done;fi;if [ ! -f /home/homeowner/giveme90seconds ] && [ ! -f /home/homeowner"$pathandcamera"timeout ] && [[ ! -z "${pathandcamera##*/archives/*}" ]] && [ ! -f /home/homeowner/camera_snapshots/timeout ] && (for alertblackouttimestxt in $(cat /home/homeowner"$pathandcamera"alertblackouttimefiles.txt);do cat "$alertblackouttimestxt"|grep -v ^#|awk -v dow=$(date +%w) -v hr=$(date +%H) -v min=$(date +%M) '{if (substr($0,dow+1,1) != " " && ((substr($0,9,2) == hr && substr($0,12,2) <= min) || substr($0,9,2) < hr) && ((substr($0,15,2) == hr && substr($0,18,2) >= min) || substr($0,15,2) > hr) ){exit 1}}' || exit;done);then numofalarmswithintimeframe=0;lsresults="$(ls -lt --full-time "$pathandcamera"|sed 1d|head -n$((times * 2)))";numofalarmswithintimeframe=$(stdbuf -o0 awk '{print $6" "$7}' <<< "$(ls -lt --full-time "$pathandcamera"|sed 1d)"|while read datestamp;do if [[ $(($(date +%s) - $(date +%s -d "$datestamp"))) -le $(tail -n1 /home/homeowner"$pathandcamera"/events_reqd|awk '{printf $2}') ]];then numofalarmswithintimeframe=$((numofalarmswithintimeframe + 1));echo $numofalarmswithintimeframe;else break;fi;done|tail -n1);filenamesofevents="$(head -n$(( numofalarmswithintimeframe < times ? numofalarmswithintimeframe : times )) <<< "$lsresults"|awk -v path=$pathandcamera '{a[i++]=$9} END {for (j=i-1; j>=0;) print path a[j--]}')";numofnonmotionevents=$(grep -cv MOTION <<< "$filenamesofevents");if [[ $numofnonmotionevents -ge 1 ]] && [[ $numofalarmswithintimeframe -ge $times ]] || [[ $numofnonmotionevents -ge $((times / 2)) ]];then echo -e "filenamesofevents=$filenamesofevents" >> /home/homeowner"$pathandcamera"/log;cp /home/homeowner"$pathandcamera"/timeout.desired /home/homeowner"$pathandcamera"/timeout;mailingdirname="/etc/emails_awaiting/eventmail$(date +%Y%m%d%H%M%S)";mkdir "$mailingdirname";newdirname=/links_to_alerting_activity/$(date +%b%d_%H:%M:%S);mkdir $newdirname 2>/dev/null;while read newfilename;do ln -s "${newfilename}" "$newdirname/${newfilename##*/}";done <<< "$filenamesofevents";echo -e "$filenamesofevents" >> "$mailingdirname/attachmentsforremainingemails.txt";cp "$mailingdirname/attachmentsforremainingemails.txt" "$mailingdirname/namesofjpgstoattach.txt";camera="${pathandcamera%%/}";echo "${camera##*/} $numofalarmswithintimeframe complex events in $(tail -n1 /home/homeowner"$pathandcamera"/events_reqd|awk '{printf $2}') seconds" >> "$mailingdirname/content";cat "$mailingdirname/attachmentsforremainingemails.txt" >> "$mailingdirname/content";echo "from $(ifconfig eno1|head -n2|tail -n1|awk '{printf $2"\n"}') " >> "$mailingdirname/content";cat "$mailingdirname/attachmentsforremainingemails.txt" >> /home/homeowner"$pathandcamera"/log;echo "${camera##*/} $(grep -v -m1 MOTION <<< "$filenamesofevents"|grep -o [A-Z]*[A-Z]_[A-Z]*) $(date)" > "$mailingdirname/subject.txt";cp /home/homeowner/picturerecipients.txt "$mailingdirname/picturerecipients.txt";cp /home/homeowner/eventrecipients.txt "$mailingdirname/recipients.txt";fi;fi;done 1>/dev/null 2>/dev/null &
-nohup inotifywait -m /etc/emails_awaiting/ -r -e create 2>/dev/null|while read path action file; do if [[ "$file" == "recipients.txt" ]];then until cat "$path"content|mail -s "$(cat "$path"subject.txt)" "$(cat "$path""$file")" 2>/dev/null; do sleep 189;done && [[ -f "$path"attachmentsforremainingemails.txt ]] && while read -r jpgnametoattach;do /home/homeowner/smtp-cli --server=smtp.gmail.com:587 -4 --user=$ACCOUNT_NAME --pass=$ACCOUNT_PASSWORD $(cat "$path""picturerecipients.txt"|awk -F, '{for (x=1;x<=NF;x++){printf "--to="$x" "}}') --from="$(cat "$path"subject.txt|awk '{printf $1}')"@gwaamc.com --subject="$(cat "$path"subject.txt)" --attach="$jpgnametoattach" 2>/dev/null;done < "$path"namesofjpgstoattach.txt;rm -r "$path" 2>/dev/null;fi;done &
 
 nohup /home/homeowner/bashttpd -s -m 1>/dev/null 2>/dev/null &
 # ln -s "$pathandcamera""$file" /links_to_alerting_activity/
