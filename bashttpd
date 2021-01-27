@@ -472,7 +472,7 @@ function serve_dir_or_file_from() {
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" 'BEGIN {print css_style "<table class=\"elif3\">"}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" $10 "</a></td></tr>"} END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ .*links_to_alerting_activity/mostrecent[0-9]{1,3}$ ]]; then
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%/mostrecent*}|sort -rk6 -rk7|head -n$(( ${URL_PATH##*mostrecent} + 1 ))|awk -v linkpre="$(ip -o address | \
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%/mostrecent*}|head -n$(( ${URL_PATH##*mostrecent} + 1 ))|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH%%/mostrecent*}" \
 'BEGIN {print css_style "<table class=\"elif4\">";line=0}{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> \
 <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} else \
@@ -484,7 +484,7 @@ function serve_dir_or_file_from() {
 #         END {print "</table>"}')" || fail_with 403
 
   elif [[ "${URL_PATH}" =~ .*links_to_alerting_activity ]]; then
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|sort -rk6 -rk7|awk -v linkpre="$(ip -o address | \
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH}" \
 'BEGIN {print css_style "<table class=\"elif5\">";line=0}{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> \
 <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} else \
@@ -580,7 +580,7 @@ function serve_dir_or_file_from() {
 
   elif [[ -d "${URL_PATH}" ]]; then
      [[ -x "${URL_PATH}" ]] && \
-          serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|sort -rk6 -rk7|awk -v linkpre="$(ip -o address | \
+          serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v linkpre="$(ip -o address | \
              grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH}" \
 'BEGIN {print css_style "<table class=\"elif10\">"}{printf "<tr><td aria-label=\"[&nbsp;"}{if($6==""){i=length(path);for (;i>0;i--){if (substr(path,i,1)=="/") break} \
 if(substr(path,i+1,7)=="camera_") {printf substr(path,i+1+7)} else {printf substr(path,i+1)} printf " ]\"></td><td> </td></tr>"} \
