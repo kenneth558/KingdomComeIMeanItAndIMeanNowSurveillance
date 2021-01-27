@@ -121,7 +121,8 @@ var StartTimeOfInterest;
 var StartTimeOfInterestDT=new Date();
 var StartTimeOfInterestmSec;
 var StartTimeOfInterestmSecminus60=new Date();
-
+var windows = [];
+var winOpen;
 var playingjpgs = [];//the size of this array could be the number of jpg viewers on page
 var checkingAlerted = null;
 var previousalert = null; 
@@ -182,6 +183,16 @@ Help</button>
   <button id="btnnotes" class="tablinks" style="font-size:21px;" 
 onclick="tabactivate(this)">
 Notes</button>
+  <button id="btntrack_snaps" class="collectlinks" style="font-size:21px;background:white" 
+onclick="if(this.innerText.includes('Start track'))
+{
+    this.innerText='Tracking snapshot windows being opened would now be ON except I don\'t have it working yet';this.style.background='Chartreuse'
+}
+else
+{
+   this.innerText='Start tracking opened snapshots for later playback';this.style.background='white'
+}">
+Start tracking opened snapshots for later playback</button>
 </div>
 <!--  <button class="tablinks" onclick="if(document.getElementById('byview').style.display == 'none'){document.getElementById('byview').style.display = 'block'}else{document.getElementById('byview').style.display = 'none';}">Recording by view</button> -->
 
@@ -418,7 +429,7 @@ Add ip address to snaps for group drag-dropping into browser window (Now functio
 onclick=
 "if(img_sysjpgmp4_snap.style.display == 'block'){img_sysjpgmp4_snap.style.display='none'}else{img_sysjpgmp4_snap.style.display='block'}"
 >
-Every link in here will open in its own new window, or new tab if you have your browser set for tabs <big><big><big><bold> Most recent six motion detections are subject to deletion at any time</bold></big></big></big>
+Every link in here will open in its own new window, or new tab if you have your browser set for tabs <big><big><big><bold> Most recent six motion detections per camera are subject to deletion at any time</bold></big></big></big>
 <!-- needs to have setInterval, clearInterval with a static var.  Note that a camera of interest might only have motion detects but we still may want to traverse those snaps -->
 <object
 onclick=

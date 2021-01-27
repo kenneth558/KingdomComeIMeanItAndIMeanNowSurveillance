@@ -452,27 +452,27 @@ function serve_dir_or_file_from() {
   if [[ -f "${URL_PATH}" ]]; then
      [[ -r "${URL_PATH}" ]] && \
         serve_file "${URL_PATH}" "$@" || fail_with 403
-
+#the html table elements are given classes for troubleshooting purposes back to one of these if construct options
   elif [[ "${URL_PATH}" =~ .*\*jpg/mostrecent[0-9]{1,3}$ ]] || [[ "${URL_PATH}" =~ .*\*mp4/mostrecent[0-9]{1,3}$ ]]; then
       local cams_active=$(grep -c '^nohup.*streams' /home/homeowner/backupndaysago)
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%?mostrecent*}|head -n${URL_PATH##*mostrecent}|awk -v headlines=${URL_PATH##*mostrecent} -v linkpre="$(ip -o address | \
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%?mostrecent*}|sort -rk6 -rk7|head -n${URL_PATH##*mostrecent}|awk -v headlines=${URL_PATH##*mostrecent} -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v cams_needed=$cams_active \
          'BEGIN {toptencounter=0;print css_style "<table class=\"elif0\">"}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre "/" substr($10,2,length($10)-1) "\" target=\"_blank\">" substr($10,1,length($10)) "</a></td></tr>";toptencounter++;if (toptencounter <= 2*cams_needed) {topten[toptencounter]=substr($10,1,length($10)-length(array[split($10,array,"/")]));uniques[topten[toptencounter]]++}} END {if(headlines == 2*cams_needed){for (element in uniques){activecams++};if(activecams<cams_needed){print "<tr><big><big><big><big><div id=\"announcement\">ALERT - ONLY " activecams " OUT OF " cams_needed " CAMERAS ARE BEING RECORDED. IMMEDIATE ATTENTION ADVISED</div></big></big></big></big><script type=\"text/javascript\">alert(\"ALERT - ONLY " activecams " OUT OF " cams_needed " CAMERAS ARE BEING RECORDED. IMMEDIATE ATTENTION ADVISED\");setInterval(function(){announcement.style.visibility=(announcement.style.visibility==\"hidden\" ? \"\" \: \"hidden\");},750);play();</script></tr>"}} print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ .*\*jpg-MOTION/mostrecent[0-9]{1,3}$ ]]; then
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -t ${URL_PATH%%-MOTION*}|grep -v MOTION|head -n${URL_PATH##*mostrecent}|awk -v linkpre="$(ip -o address | \
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -t ${URL_PATH%%-MOTION*}|grep -v MOTION|sort -rk6 -rk7|head -n${URL_PATH##*mostrecent}|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" 'BEGIN {print css_style "<table class=\"elif1\">"}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre "/" substr($10,3,length($10)-2) "\" target=\"_blank\">" substr($10,1,length($10)-1) "</a></td></tr>"} END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ .*\*jpg-MOTION$ ]] || [[ "${URL_PATH}" =~ .*\*mp4-MOTION$ ]]; then
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%-MOTION*}|grep -v MOTION|awk -v linkpre="$(ip -o address | \
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%-MOTION*}|grep -v MOTION|sort -rk6 -rk7|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" 'BEGIN {print css_style "<table class=\"elif2\">"}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" $10 "</a></td></tr>"} END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ .*\*mp4$ ]] || [[ "${URL_PATH}" =~ .*\*jpg$ ]]; then
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v linkpre="$(ip -o address | \
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|sort -rk6 -rk7|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" 'BEGIN {print css_style "<table class=\"elif3\">"}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" $10 "</a></td></tr>"} END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ .*links_to_alerting_activity/mostrecent[0-9]{1,3}$ ]]; then
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%/mostrecent*}|head -n$(( ${URL_PATH##*mostrecent} + 1 ))|awk -v linkpre="$(ip -o address | \
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%/mostrecent*}|sort -rk6 -rk7|head -n$(( ${URL_PATH##*mostrecent} + 1 ))|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH%%/mostrecent*}" \
 'BEGIN {print css_style "<table class=\"elif4\">";line=0}{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> \
 <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} else \
@@ -484,21 +484,21 @@ function serve_dir_or_file_from() {
 #         END {print "</table>"}')" || fail_with 403
 
   elif [[ "${URL_PATH}" =~ .*links_to_alerting_activity ]]; then
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v linkpre="$(ip -o address | \
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|sort -rk6 -rk7|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH}" \
 'BEGIN {print css_style "<table class=\"elif5\">";line=0}{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> \
 <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} else \
 {printf $12 "\"";if (line==1){printf " id=\"latestalert\""}};printf " target=\"_blank\">";if (substr($1,1,1) != "l"){printf $10} else {printf linkpre $12}; printf "</a></td></tr>";line=line+1} END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ .*/mostrecent[0-9]{1,3}$ ]]; then
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%/mostrecent*}|head -n$(( ${URL_PATH##*mostrecent} + 1 ))|awk -v linkpre="$(ip -o address | \
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%/mostrecent*}|sort -rk6 -rk7|head -n$(( ${URL_PATH##*mostrecent} + 1 ))|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH%%/mostrecent*}" \
 'BEGIN {print css_style "<table class=\"elif6\">"}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> \
 <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10} else \
 {printf $12} printf "\" target=\"_blank\">";if (substr($1,1,1)!="l"){printf $10} else {printf $12} printf "</a></td></tr>"} END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ important* ]]; then
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH}|awk -v linkpre="$(ip -o address | \
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH}|sort -rk6 -rk7|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH}" 'BEGIN {print css_style "<table class=\"elif7\">"}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" $10 "</a></td></tr>"} END {print "</table>"}')"
 
   elif [[  "${URL_PATH}" =~ .*?servethis* ]];then
@@ -508,7 +508,7 @@ function serve_dir_or_file_from() {
 #"$(ls ${URL_PATH%%?*}|head -n2)" || fail_with 403
 #      serve_static_string "$(ls -t ${URL_PATH%%\?*}|awk -v linkpre="$(ip -o address | \
 #         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080"  -v path="${URL_PATH}" '{print linkpre $0}')" || fail_with 403
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH%%\?*}|awk -v linkpre="$(ip -o address | \
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH%%\?*}|sort -rk6 -rk7|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH}" 'BEGIN {print css_style "<table class=\"elif8\">"} \
          {print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" linkpre $10 "</a></td></tr>"} \
          END {print "</table>"}')" || fail_with 403
@@ -580,7 +580,7 @@ function serve_dir_or_file_from() {
 
   elif [[ -d "${URL_PATH}" ]]; then
      [[ -x "${URL_PATH}" ]] && \
-          serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v linkpre="$(ip -o address | \
+          serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|sort -rk6 -rk7|awk -v linkpre="$(ip -o address | \
              grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH}" \
 'BEGIN {print css_style "<table class=\"elif10\">"}{printf "<tr><td aria-label=\"[&nbsp;"}{if($6==""){i=length(path);for (;i>0;i--){if (substr(path,i,1)=="/") break} \
 if(substr(path,i+1,7)=="camera_") {printf substr(path,i+1+7)} else {printf substr(path,i+1)} printf " ]\"></td><td> </td></tr>"} \
