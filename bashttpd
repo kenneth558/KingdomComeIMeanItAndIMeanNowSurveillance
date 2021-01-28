@@ -465,7 +465,7 @@ function serve_dir_or_file_from() {
 
   elif [[ "${URL_PATH}" =~ .*\*jpg-MOTION$ ]] || [[ "${URL_PATH}" =~ .*\*mp4-MOTION$ ]]; then
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%-MOTION*}|grep -v MOTION|sort -rk6 -rk7|awk -v linkpre="$(ip -o address | \
-         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" 'BEGIN {print css_style "<table class=\"elif2\">"}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" $10 "</a></td></tr>"} END {print "</table>"}')"
+         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH%%-MOTION*}" 'BEGIN {print css_style "<table class=\"elif2\">";lines=0}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" $10 "</a></td>lines=lines+1;</tr>"} END {print "</table>";if(lines<1){print "Argument list too long: too many files exist in " path " to process"}}')"
 
   elif [[ "${URL_PATH}" =~ .*\*mp4$ ]] || [[ "${URL_PATH}" =~ .*\*jpg$ ]]; then
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|sort -rk6 -rk7|awk -v linkpre="$(ip -o address | \
@@ -510,7 +510,7 @@ function serve_dir_or_file_from() {
 #         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080"  -v path="${URL_PATH}" '{print linkpre $0}')" || fail_with 403
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH%%\?*}|sort -rk6 -rk7|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH}" 'BEGIN {print css_style "<table class=\"elif8\">"} \
-         {print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" linkpre $10 "</a></td></tr>"} \
+         {print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre $10 "\" onclick=\"window[windowx++]=window.open(href);alert();return false;\" target=\"_blank\">" linkpre $10 "</a></td></tr>"} \
          END {print "</table>"}')" || fail_with 403
 #      serve_static_string "$(ls -t ${URL_PATH%%-MOTION*}|head -n1)" || fail_with 403
 #      serve_file "$(ls -t ${URL_PATH%%\?*}|head -n1)" || fail_with 403
