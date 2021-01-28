@@ -122,6 +122,7 @@ var StartTimeOfInterestDT=new Date();
 var StartTimeOfInterestmSec;
 var StartTimeOfInterestmSecminus60=new Date();
 var windows = [];
+var windowx = 0;
 var winOpen;
 var playingjpgs = [];//the size of this array could be the number of jpg viewers on page
 var checkingAlerted = null;
@@ -132,6 +133,10 @@ var lastcomplexevent = 'something';
 var thiscomplexevent = 'something';
 var element = null;
 requestAlerted.onload = function() { thiscomplexevent = requestAlerted.response; };
+function do_me_false( anchr ){
+alert(anchr.href)
+return false
+}
 function openSection(event, arg1){;}
 var month = [];
 month["Jan"] = "-01-";
@@ -186,11 +191,14 @@ Notes</button>
   <button id="btntrack_snaps" class="collectlinks" style="font-size:21px;background:white" 
 onclick="if(this.innerText.includes('Start track'))
 {
-    this.innerText='Tracking snapshot windows being opened would now be ON except I don\'t have it working yet';this.style.background='Chartreuse'
+    this.innerText='Tracking snapshot windows being opened would now be ON except I don\'t have it working yet due to inability to get transient variables to cross to global scope';this.style.background='Chartreuse';windowx=0;
 }
 else
 {
-   this.innerText='Start tracking opened snapshots for later playback';this.style.background='white'
+   this.innerText='Start tracking opened snapshots for later playback';this.style.background='white';
+windows.forEach(function(windw){
+windw.open()
+})
 }">
 Start tracking opened snapshots for later playback</button>
 </div>
@@ -256,6 +264,7 @@ else { this.value='Alert checking is ON.  If you\'re traveling, you\'ll risk you
 <td><center>-->
 <tr height="130px"><td>
 <small>
+<!-- <a href="/../../links_to_alerting_activity/" onclick="return do_me_false(this)"><b>Recent Alerts</b></a>&nbsp;&nbsp;&nbsp;<small>Click title to see all recent alerts. Click border to toggle between listing all or just most recent 1 (traffic sparing)</small></small> -->
 <a href="/../../links_to_alerting_activity/"><b>Recent Alerts</b></a>&nbsp;&nbsp;&nbsp;<small>Click title to see all recent alerts. Click border to toggle between listing all or just most recent 1 (traffic sparing)</small></small>
     <object id="alertsdirectory" type="text/html" 
 data="/../../links_to_alerting_activity/mostrecent1" 
@@ -958,6 +967,11 @@ Login credentials for camera streams are username = [youngest brother first name
 </div>
 </small></small>
 <script>
+function collectthis( _href ){
+<!--   windows[itself]=windows.open(_href) -->
+   alert('Jpg saved');
+   return false;
+}
 function startbtncclick() 
 {
    var objectelement=document.getElementsByClassName('mp4obj');
