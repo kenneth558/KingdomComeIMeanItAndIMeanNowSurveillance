@@ -1,0 +1,19 @@
+#!/bin/bash
+###$!/usr/bin/env
+#targetdate=$(ls -tr /var/www/camera_streams/archives/*/*|head|awk -F/ 'BEGIN {oldest="9"} {if($7<oldest){oldest=$7}} END {print substr(oldest,1,8)}');for archivefilename in $(ls /var/www/camera_streams/archives/*/$targetdate*); do nohup mv $archivefilename /camera_streams_archives$(awk -F/ '{print "/" $6}' <<< $archivefilename) >/dev/null 2>/dev/null &  done >/dev/null 2>/dev/null
+
+monthname=Jan2021
+echo "Month name = $monthname"
+read -p "Enter 3 character month name and year, no spaces: " monthname
+monthnum=01
+read -p "Enter two digit month number: $monthnum " monthnum
+echo "Moving archives for "
+echo "Month name = $monthname"
+echo "Month number = $monthnum"
+echo "to usb drive"
+read -p "Press <enter> to continue or ^c to stop"
+
+for cam in camera_front_parking camera_east_driveway camera_south_driveway camera_sw_corner camera_ne_corner; do \
+nohup mv /camera_snapshots/archives/"$cam"/2021"$monthnum"*.tar.gz /media/usb-drive/"Ken's area"/"$cam"/"$monthname"/ 1>/dev/null 2>/dev/null & \
+nohup mv /var/www/camera_streams/archives/"$cam"/2021"$monthnum"*.tar.gz /media/usb-drive/"Ken's area"/"$cam"/"$monthname"/ 1>/dev/null 2>/dev/null & done
+
