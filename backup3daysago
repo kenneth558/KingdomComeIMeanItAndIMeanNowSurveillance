@@ -1,0 +1,23 @@
+#!/bin/bash
+#This must get executed prior to excessive numbers of files created.  Once every day seems OK
+nohup tar -cf /camera_snapshots/archives/camera_south_driveway/$(date --date=3-days-ago +%Y%m%d)_snapshots_archive_south_driveway.tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_south_driveway/* -daystart -mtime -4 ! -mtime -3) 2>/dev/null &
+sleep 1
+nohup tar -cf /camera_snapshots/archives/camera_front_parking/$(date --date=3-days-ago +%Y%m%d)_snapshots_archive_front_parking.tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_front_parking/* -daystart -mtime -4 ! -mtime -3) 2>/dev/null &
+sleep 1
+nohup tar -cf /camera_snapshots/archives/camera_east_driveway/$(date --date=3-days-ago +%Y%m%d)_snapshots_archive_east_driveway.tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_east_driveway/* -daystart -mtime -4 ! -mtime -3) 2>/dev/null &
+sleep 1
+nohup tar -cf /camera_snapshots/archives/camera_sw_corner/$(date --date=3-days-ago +%Y%m%d)_snapshots_archive_sw_corner.tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_sw_corner/* -daystart -mtime -4 ! -mtime -3) 2>/dev/null &
+sleep 1
+nohup tar -cf /camera_snapshots/archives/camera_ne_corner/$(date --date=3-days-ago +%Y%m%d)_snapshots_archive_ne_corner.tar.gz --auto-compress --remove-files $(find /camera_snapshots/camera_ne_corner/* -daystart -mtime -4 ! -mtime -3) 2>/dev/null &
+sleep 1
+
+nohup tar -cf /var/www/camera_streams/archives/camera_south_driveway/$(date --date=3-days-ago +%Y%m%d)_streams_archive_south_driveway.tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_south_driveway/* -daystart -mtime -4 ! -mtime -3) 2>/dev/null &
+sleep 1
+nohup tar -cf /var/www/camera_streams/archives/camera_front_parking/$(date --date=3-days-ago +%Y%m%d)_streams_archive_front_parking.tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_front_parking/* -daystart -mtime -4 ! -mtime -3) 2>/dev/null &
+sleep 1
+nohup tar -cf /var/www/camera_streams/archives/camera_east_driveway/$(date --date=3-days-ago +%Y%m%d)_streams_archive_east_driveway.tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_east_driveway/* -daystart -mtime -4 ! -mtime -3) 2>/dev/null &
+sleep 1
+nohup tar -cf /var/www/camera_streams/archives/camera_sw_corner/$(date --date=3-days-ago +%Y%m%d)_streams_archive_sw_corner.tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_sw_corner/* -daystart -mtime -4 ! -mtime -3) 2>/dev/null &
+sleep 1
+nohup tar -cf /var/www/camera_streams/archives/camera_ne_corner/$(date --date=3-days-ago +%Y%m%d)_streams_archive_ne_corner.tar.gz --auto-compress --remove-files $(find /var/www/camera_streams/camera_ne_corner/* -daystart -mtime -4 ! -mtime -3) 2>/dev/null &
+echo "Camera files backup is now in progress."
