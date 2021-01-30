@@ -483,12 +483,13 @@ function serve_dir_or_file_from() {
 #         {print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" linkpre $10 "</a></td></tr>"} \
 #         END {print "</table>"}')" || fail_with 403
 
+#THE BUTTON ONCLICK PROGRAMMING BELOW NEEDS WORK.  THE INTENT IS THAT AN ARRAY CALLED GETS FILLED WITH WINDOW HANDLES THAT GET OPENED BY ONCLICK OF THEIR ANCHOR TAGS.  THAT ARRAY IS CYCLED THROUGH IN 500MS STEPS OPENING EACH WINDOW
   elif [[ "${URL_PATH}" =~ .*links_to_alerting_activity ]]; then
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v linkpre="$(ip -o address | \
-         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH}" \
-'BEGIN {print css_style "<table class=\"elif5\">";line=0}{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> \
+         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH}" -v subpath="${URL_PATH##*/links_to_alerting_activity}" \
+'BEGIN {printf css_style "<script type=\"text/javascript\">var windws = []; var windwsx=0;</script><table class=\"elif5\"><tr><td></td><td>";if(subpath!=""){printf "<button style=\"font-size\:22px;background\:white\" onclick=\"setInterval(function(){windws.forEach(windw){window.open(windw)}},500)\">Play all the snapshot windows you opened</button>&nbsp;(Open them first, of course.  THIS FEATURE IS UNDER DEVELOPMENT AND NOT WORKING YET)"}print "</td></tr>";line=0}{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> \
 <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} else \
-{printf $12 "\"";if (line==1){printf " id=\"latestalert\""}};printf " target=\"_blank\">";if (substr($1,1,1) != "l"){printf $10} else {printf linkpre $12}; printf "</a></td></tr>";line=line+1} END {print "</table>"}')"
+{printf $12 "\"";if (line==1){printf " id=\"latestalert\""}};printf "\" onclick=\"alert();windws[windowsx++]=windows.open(href);\" target=\"_blank\">";if (substr($1,1,1) != "l"){printf $10} else {printf linkpre $12}; printf "</a></td></tr>";line=line+1} END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ .*/mostrecent[0-9]{1,3}$ ]]; then
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%/mostrecent*}|head -n$(( ${URL_PATH##*mostrecent} + 1 ))|awk -v linkpre="$(ip -o address | \

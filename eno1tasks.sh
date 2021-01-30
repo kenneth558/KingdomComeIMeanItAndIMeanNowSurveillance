@@ -3,13 +3,13 @@
 #rm /etc/network/if-up.d/vars
 #ADDR="$(ip -o address|grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)"
 #goto just_recover
-if [[ -z $(ps auxf|grep -v grep|grep -c "inotifywait -m /etc/emails_awaiting/ -r -e create") ]];then
+#if [[ -z $(ps auxf|grep -v grep|grep -c "inotifywait -m /etc/emails_awaiting/ -r -e create") ]];then
       nohup inotifywait -m /etc/emails_awaiting/ -r -e create 2>/dev/null|while read path action file; do if [[ "$file" == "recipients.txt" ]];then until cat "$path"content|sudo -u "$(cat "$path"subject.txt|awk '{printf $1}')" mail -s "$(cat "$path"subject.txt)" "$(cat "$path""$file")" 2>/dev/null; do sleep 189;done && [[ -f "$path"attachmentsforremainingemails.txt ]] && while read -r jpgnametoattach;do sudo -u "$(cat "$path"subject.txt|awk '{printf $1}')" /home/homeowner/smtp-cli --server=smtp.gmail.com:587 -4 --user=gwaamcfirewall --pass=post-ISIS4311979ken $(cat "$path""picturerecipients.txt"|awk -F, '{for (x=1;x<=NF;x++){printf "--to="$x" "}}') --from="$(cat "$path"subject.txt|awk '{printf $1}')"@gwaamc.com --subject="$(cat "$path"subject.txt)" --attach="$jpgnametoattach" 2>/dev/null;done < "$path"namesofjpgstoattach.txt;rm -r "$path" 2>/dev/null;fi;done &
 #     nohup inotifywait -m /etc/emails_awaiting/ -r -e create 2>/dev/null|while read path action file; do if [[ "$file" == "recipients.txt" ]];then until cat "$path"content|sudo -u "$(cat "$path"subject.txt|awk '{printf $1}')" mail -s "$(cat "$path"subject.txt)" "$(cat "$path""$file")" 2>/dev/null; do sleep 189;done && [[ -f "$path"attachmentsforremainingemails.txt ]] && \
 #     while read -r jpgnametoattach;do sudo -u "$(cat "$path"subject.txt|awk '{printf $1}')" /home/homeowner/smtp-cli --server=smtp.gmail.com:587 -4 --user=gwaamcfirewall --pass=post-ISIS4311979ken $(cat "$path""picturerecipients.txt"|awk -F, '{for (x=1;x<=NF;x++){printf "--to="$x" "}}') --from="$(cat "$path"subject.txt|awk '{printf $1}')"@gwaamc.com --subject="$(cat "$path"subject.txt)" --attach="$jpgnametoattach" 2>/dev/null;done < "$path"namesofjpgstoattach.txt;rm -r "$path" 2>/dev/null;fi;done &
 #We need to write timeout file if it was an event and then rm -r "$path"
 #For event files the above line needs to put a timeout file in /home/homeowner/$path where path is gained from the subject line of event files
-fi
+#fi
 
 while [[ "$(ifconfig|grep 'eno1: flags='|grep '<UP,')." == "." ]]; do
    sleep 1

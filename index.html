@@ -231,7 +231,7 @@ value="Alert checking is now OFF"
 onclick="if(alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
 {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
 else {element=null;}
-if(typeof(element) != 'undefined' && element != null){ previousalert=element.innerText;
+if(typeof(element) != 'undefined' && element != null){ previousalert=element.innerText.trim();
                                                      }
 else { previousalert=null;
      }
@@ -241,10 +241,12 @@ else { this.value='Alert checking is ON.  If you\'re traveling, you\'ll risk you
         checkingAlerted=setInterval(
            function()
              {if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
-                   {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
+                   {
+if(typeof alertsdirectory.contentDocument.body.children[0].children[0].children[2] != 'null'){element=alertsdirectory.contentDocument.body.children[0].children[0].children[2]}else{element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
+                   }
               else {element=null;}
                      if(typeof(element) != 'undefined' && element != null) 
-                        {if (element.innerText !== previousalert)   {if (element.innerText == ''){previousalert=element.innerText;
+                        {if (element.innerText.trim() !== previousalert)   {if (element.innerText.trim() == ''){previousalert=element.innerText.trim();
                                                                                                   } 
                                                                     }
                         }
@@ -254,7 +256,7 @@ else { this.value='Alert checking is ON.  If you\'re traveling, you\'ll risk you
         if(alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
              {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
         else {element=null;}
-        if(typeof(element) != 'undefined' && element != null){if (element.innerText !== previousalert){if(!element.innerText.endsWith('.jpg')){previousalert=element.innerText};
+        if(typeof(element) != 'undefined' && element != null){if (element.innerText.trim() !== previousalert){if(!element.innerText.endsWith('.jpg')){previousalert=element.innerText.trim()};
                                                                                                        }
                                                              }
         alertsdirectory.data=alertsdirectory.data;
@@ -271,14 +273,22 @@ data="/../../links_to_alerting_activity/mostrecent1"
 onclick="if (this.data.includes('/mostrecent1')){this.data='/../../links_to_alerting_activity'}else{this.data='/../../links_to_alerting_activity/mostrecent1'};" 
 onload="if(alertsdirectory.contentWindow.document.body.children[0].localName == 'img'){return}
         if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
-          {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
+          {
+if(typeof alertsdirectory.contentDocument.body.children[0].children[0].children[2] != 'null'){element=alertsdirectory.contentDocument.body.children[0].children[0].children[2]}else{element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
+          }
         else {element=null;}
-        if(element != 'undefined' && element != null)
-          {if (element.innerText !== previousalert)
-             {if (alertCheck.value.substr(alertCheck.value.length-1,1) != 'F' && previousalert != null && element.innerText !== null && !element.innerText.endsWith('.jpg')){play();}else {if(!element.innerText.endsWith('.jpg')){previousalert=element.innerText};}
+        if(element != 'undefined' && typeof element != 'null')
+          {if (element.innerText.trim() != previousalert)
+             {if (alertCheck.value.substr(alertCheck.value.length-1,1) != 'F' && previousalert != null && element.innerText.trim() != null && !element.innerText.endsWith('.jpg'))
+                 {play()
+                 }
+              else 
+                 {if(!element.innerText.endsWith('.jpg'))
+                     {previousalert=element.innerText.trim()
+                     };
+                 }
              }
           }
-        else {previousalert=null;}
         glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 width="1900px" height="1200px" style="font-size:15px;overflow:auto;border:3px solid black;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
