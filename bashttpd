@@ -453,30 +453,43 @@ function serve_dir_or_file_from() {
      [[ -r "${URL_PATH}" ]] && \
         serve_file "${URL_PATH}" "$@" || fail_with 403
 #the html table elements are given classes for troubleshooting purposes back to one of these if construct options
+#events needing captures are best added client-side during onload
   elif [[ "${URL_PATH}" =~ .*\*jpg/mostrecent[0-9]{1,3}$ ]] || [[ "${URL_PATH}" =~ .*\*mp4/mostrecent[0-9]{1,3}$ ]]; then
       local cams_active=$(grep -c '^nohup.*streams' /home/homeowner/backupndaysago)
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%?mostrecent*}|sort -rk6 -rk7|head -n${URL_PATH##*mostrecent}|awk -v headlines=${URL_PATH##*mostrecent} -v linkpre="$(ip -o address | \
-         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v cams_needed=$cams_active \
-         'BEGIN {toptencounter=0;print css_style "<table class=\"elif0\">"}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre "/" substr($10,2,length($10)-1) "\" target=\"_blank\">" substr($10,1,length($10)) "</a></td></tr>";toptencounter++;if (toptencounter <= 2*cams_needed) {topten[toptencounter]=substr($10,1,length($10)-length(array[split($10,array,"/")]));uniques[topten[toptencounter]]++}} END {if(headlines == 2*cams_needed){for (element in uniques){activecams++};if(activecams<cams_needed){print "<tr><big><big><big><big><div id=\"announcement\">ALERT - ONLY " activecams " OUT OF " cams_needed " CAMERAS ARE BEING RECORDED. IMMEDIATE ATTENTION ADVISED</div></big></big></big></big><script type=\"text/javascript\">alert(\"ALERT - ONLY " activecams " OUT OF " cams_needed " CAMERAS ARE BEING RECORDED. IMMEDIATE ATTENTION ADVISED\");setInterval(function(){announcement.style.visibility=(announcement.style.visibility==\"hidden\" ? \"\" \: \"hidden\");},750);play();</script></tr>"}} print "</table>"}')"
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%?mostrecent*}|head -n${URL_PATH##*mostrecent}|awk -v headlines=${URL_PATH##*mostrecent} -v linkpre="$(ip -o address | \
+         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v cams_needed=$cams_active '
+BEGIN {toptencounter=0;print css_style "<table class=\"elif0\" style=\"width:100%\">"}
+{print "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre "/" substr($10,2,length($10)-1) "\" target=\"_blank\">" substr($10,1,length($10)) "</a></td></tr>";toptencounter++;if (toptencounter <= 2*cams_needed) {topten[toptencounter]=substr($10,1,length($10)-length(array[split($10,array,"/")]));uniques[topten[toptencounter]]++}} 
+END {if(headlines == 2*cams_needed){for (element in uniques){activecams++};if(activecams<cams_needed){print "<tr><big><big><big><big><div id=\"announcement\">ALERT - ONLY " activecams " OUT OF " cams_needed " CAMERAS ARE BEING RECORDED. IMMEDIATE ATTENTION ADVISED</div></big></big></big></big><script type=\"text/javascript\">alert(\"ALERT - ONLY " activecams " OUT OF " cams_needed " CAMERAS ARE BEING RECORDED. IMMEDIATE ATTENTION ADVISED\");setInterval(function(){announcement.style.visibility=(announcement.style.visibility==\"hidden\" ? \"\" \: \"hidden\");},750);play();</script></tr>"}} print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ .*\*jpg-MOTION/mostrecent[0-9]{1,3}$ ]]; then
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -t ${URL_PATH%%-MOTION*}|grep -v MOTION|sort -rk6 -rk7|head -n${URL_PATH##*mostrecent}|awk -v linkpre="$(ip -o address | \
-         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" 'BEGIN {print css_style "<table class=\"elif1\">"}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre "/" substr($10,3,length($10)-2) "\" target=\"_blank\">" substr($10,1,length($10)-1) "</a></td></tr>"} END {print "</table>"}')"
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -t ${URL_PATH%%-MOTION*}|grep -v MOTION|head -n${URL_PATH##*mostrecent}|awk -v linkpre="$(ip -o address | \
+         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" '
+BEGIN {print css_style "<table class=\"elif1\" style=\"width:100%\">"}
+{print "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre "/" substr($10,3,length($10)-2) "\" target=\"_blank\">" substr($10,1,length($10)-1) "</a></td></tr>"} 
+END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ .*\*jpg-MOTION$ ]] || [[ "${URL_PATH}" =~ .*\*mp4-MOTION$ ]]; then
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%-MOTION*}|grep -v MOTION|sort -rk6 -rk7|awk -v linkpre="$(ip -o address | \
-         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH%%-MOTION*}" 'BEGIN {print css_style "<table class=\"elif2\">";lines=0}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" $10 "</a></td></tr>";lines=lines+1;} END {print "</table>";if(lines<1){print "Argument list too long: too many files exist in " path " to process"}}')"
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%-MOTION*}|grep -v MOTION|awk -v linkpre="$(ip -o address | \
+         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH%%-MOTION*}" '
+BEGIN {print css_style "<table class=\"elif2\" style=\"width:100%\">";lines=0}
+{print "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" $10 "</a></td></tr>";lines=lines+1;} 
+END {print "</table>";if(lines<1){print "Argument list too long: too many files exist in " path " to process"}}')"
 
   elif [[ "${URL_PATH}" =~ .*\*mp4$ ]] || [[ "${URL_PATH}" =~ .*\*jpg$ ]]; then
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|sort -rk6 -rk7|awk -v linkpre="$(ip -o address | \
-         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" 'BEGIN {print css_style "<table class=\"elif3\">"}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" $10 "</a></td></tr>"} END {print "</table>"}')"
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v linkpre="$(ip -o address | \
+         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" '
+BEGIN {print css_style "<table class=\"elif3\" style=\"width:100%\">"}
+{print "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" $10 "</a></td></tr>"} 
+END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ .*links_to_alerting_activity/mostrecent[0-9]{1,3}$ ]]; then
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%/mostrecent*}|head -n$(( ${URL_PATH##*mostrecent} + 1 ))|awk -v linkpre="$(ip -o address | \
-         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH%%/mostrecent*}" \
-'BEGIN {print css_style "<table class=\"elif4\">";line=0}{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> \
-<a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} else \
-{printf $12 "\"";if (line==1){printf " id=\"latestalert\""}};printf " target=\"_blank\">";if (substr($1,1,1) != "l"){printf $10} else {printf linkpre $12}; printf "</a></td></tr>";line=line+1} END {print "</table>"}')"
+         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH%%/mostrecent*}" '
+BEGIN {print css_style "<table class=\"elif4\" style=\"width:100%\">";line=0}
+{printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} \
+else {printf $12 "\"";if (line==1){printf " id=\"latestalert\""}};printf " target=\"_blank\">";if (substr($1,1,1) != "l"){printf $10} else {printf linkpre $12}; printf "</a></td></tr>";line=line+1} 
+END {print "</table>"}')"
 #
 #      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH%%\?*}|awk -v linkpre="$(ip -o address | \
 #         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH}" 'BEGIN {print css_style "<table class=\"elif4\">"} \
@@ -486,21 +499,38 @@ function serve_dir_or_file_from() {
 #THE BUTTON ONCLICK PROGRAMMING BELOW NEEDS WORK.  THE INTENT IS THAT AN ARRAY CALLED GETS FILLED WITH WINDOW HANDLES THAT GET OPENED BY ONCLICK OF THEIR ANCHOR TAGS.  THAT ARRAY IS CYCLED THROUGH IN 500MS STEPS OPENING EACH WINDOW
   elif [[ "${URL_PATH}" =~ .*links_to_alerting_activity ]]; then
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v linkpre="$(ip -o address | \
-         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH}" -v subpath="${URL_PATH##*/links_to_alerting_activity}" \
-'BEGIN {printf css_style "<script type=\"text/javascript\">var windws = []; var windwsx=0;</script><table class=\"elif5\"><tr><td></td><td>";if(subpath!=""){printf "<button style=\"font-size\:22px;background\:white\" onclick=\"setInterval(function(){windws.forEach(windw){window.open(windw)}},500)\">Play all the snapshot windows you opened</button>&nbsp;(Open them first, of course.  THIS FEATURE IS UNDER DEVELOPMENT AND NOT WORKING YET.  ALSO NOTE THESE SNAPSHOTS ARE NOT REGISTERED IN THE SEPARATED VIEWS SECTION)"}print "</td></tr>";line=0}{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> \
-<a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} else \
-{printf $12 "\"";if (line==1){printf " id=\"latestalert\""}};printf "\" onclick=\"windws[windowsx++]=windows.open(href);\" target=\"_blank\">";if (substr($1,1,1) != "l"){printf $10} else {printf linkpre $12}; printf "</a></td></tr>";line=line+1} END {print "</table>"}')"
+         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH}" -v subpath="${URL_PATH##*/links_to_alerting_activity}" '
+BEGIN {printf css_style "<script type=\"text/javascript\">var windws = []; var windwsx=0;</script><table class=\"elif5\" style=\"width:100%\" \
+onload=\"var mousedownedhere;\
+elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("mousedown",function(item){mousedownedhere=item.pageY;})\
+elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("mouseup",function(item){\
+var downrowindex=Math.trunc((mousedownedhere+2)/((elmnt.contentDocument.body.children[0].tBodies[0].clientHeight+2)/elmnt.contentDocument.body.children[0].tBodies[0].childElementCount)-.5); \
+if(elmnt.contentDocument.body.children[0].tBodies[0].rows[downrowindex].cells[1].innerText.endsWith('.jpg')) \
+{var uprowindex=Math.trunc((item.pageY+2)/((elmnt.contentDocument.body.children[0].tBodies[0].clientHeight+2)/elmnt.contentDocument.body.children[0].tBodies[0].childElementCount)-.5) \
+if(downrowindex != uprowindex) \
+{var frames=[];var windwz=[];var playing=true;var on_frame=0; \
+var timer;let rowindex=downrowindex;do {frames[rowindex]=elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].firstElementChild.href; \
+windwz[rowindex] = window.open(frames[rowindex]); \
+if(downrowindex < uprowindex){rowindex++}else{rowindex--}}while(rowindex!=uprowindex)}}})\"><tr><td></td><td>";if(subpath!=""){printf "<button style=\"font-size\:22px;background\:white\" onclick=\"setInterval(function(){windws.forEach(windw){window.open(windw)}},500)\">Play all the snapshot windows you opened</button>&nbsp;(Open them first, of course.  THIS FEATURE IS UNDER DEVELOPMENT AND NOT WORKING YET.  ALSO NOTE THESE SNAPSHOTS ARE NOT REGISTERED IN THE SEPARATED VIEWS SECTION LIKE OTHERS WHEN YOU OPEN THEM)"}print "</td></tr>";line=0}
+
+{printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} \
+else {printf $12 "\"";if (line==1){printf " id=\"latestalert\""}};printf " onclick=\"windws[windowsx++]=windows.open(href);\" target=\"_blank\">";if (substr($1,1,1) != "l"){printf $10} else {printf linkpre $12}; printf "</a></td></tr>";line=line+1} 
+END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ .*/mostrecent[0-9]{1,3}$ ]]; then
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%/mostrecent*}|head -n$(( ${URL_PATH##*mostrecent} + 1 ))|awk -v linkpre="$(ip -o address | \
-         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH%%/mostrecent*}" \
-'BEGIN {print css_style "<table class=\"elif6\">"}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> \
-<a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10} else \
-{printf $12} printf "\" target=\"_blank\">";if (substr($1,1,1)!="l"){printf $10} else {printf $12} printf "</a></td></tr>"} END {print "</table>"}')"
+         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH%%/mostrecent*}" '
+BEGIN {print css_style "<table class=\"elif6\">"}
+{print "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10} \
+else {printf $12} printf "\" target=\"_blank\">";if (substr($1,1,1)!="l"){printf $10} else {printf $12} printf "</a></td></tr>"} 
+END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ important* ]]; then
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH}|sort -rk6 -rk7|awk -v linkpre="$(ip -o address | \
-         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH}" 'BEGIN {print css_style "<table class=\"elif7\">"}{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" $10 "</a></td></tr>"} END {print "</table>"}')"
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH}|awk -v linkpre="$(ip -o address | \
+         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH}" '
+BEGIN {print css_style "<table class=\"elif7\">"}
+{print "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" $10 "</a></td></tr>"} 
+END {print "</table>"}')"
 
   elif [[  "${URL_PATH}" =~ .*?servethis* ]];then
 #      serve_static_string "${URL_PATH%%\?*}"
@@ -509,9 +539,10 @@ function serve_dir_or_file_from() {
 #"$(ls ${URL_PATH%%?*}|head -n2)" || fail_with 403
 #      serve_static_string "$(ls -t ${URL_PATH%%\?*}|awk -v linkpre="$(ip -o address | \
 #         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080"  -v path="${URL_PATH}" '{print linkpre $0}')" || fail_with 403
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH%%\?*}|sort -rk6 -rk7|awk -v linkpre="$(ip -o address | \
-         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH}" 'BEGIN {print css_style "<table class=\"elif8\">"} \
-         {print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre $10 "\" onclick=\"return do_me_false(this);\" target=\"_blank\">" linkpre $10 "</a></td></tr>"} \
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH%%\?*}|awk -v linkpre="$(ip -o address | \
+         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH}" '
+BEGIN {print css_style "<table class=\"elif8\">"}
+{print "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre $10 "\" onclick=\"return do_me_false(this);\" target=\"_blank\">" linkpre $10 "</a></td></tr>"} \
          END {print "</table>"}')" || fail_with 403
 #      serve_static_string "$(ls -t ${URL_PATH%%-MOTION*}|head -n1)" || fail_with 403
 #      serve_file "$(ls -t ${URL_PATH%%\?*}|head -n1)" || fail_with 403
@@ -561,7 +592,8 @@ function serve_dir_or_file_from() {
   elif [[ "${URL_PATH}" =~ .*\?nextbymodifiedtime$ ]]; then
       URL_PATH=${URL_PATH%%\?*}
       echo "${line}  ${URL_PATH}" >> /home/homeowner/bashttpd.log
-      serve_static_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -tr "${URL_PATH%/*}"|grep -A1 "${URL_PATH##*/}"|tail -n1|awk -v filepath="${URL_PATH%/*}" '{printf $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;" filepath "/" $10;print ""}')"
+      serve_static_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -tr "${URL_PATH%/*}"|grep -A1 "${URL_PATH##*/}"|tail -n1|awk -v filepath="${URL_PATH%/*}" '
+{printf $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;" filepath "/" $10;print ""}')"
 
   elif [[ "${URL_PATH}" =~ .*\?*[0-9.]{1,2}minutesbefore* ]]; then
 #URL_PATH =~ /var/www/camera_streams/camera_ne_corner/*?1minutesbefore2020-12-18 21:23:41.057728372
@@ -575,18 +607,23 @@ function serve_dir_or_file_from() {
 #      echo "Trapped a minutesbefore put: ${StartTimeOfInterest} ${URL_PATH}" >> /home/homeowner/bashttpd.log
       findResults="$(find ${URL_PATH} -name "*.mp4" -newermt "$(date --date="$StartTimeOfInterest $minsbefore minutes ago")" ! -newermt "$(date --date="$StartTimeOfInterest $((7 - minsbefore)) minutes hence")")"
 #      echo -e "1. findResults=${findResults}"  >> /home/homeowner/bashttpd.log
-      findResults="$(while read filename;do ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N "$filename";done <<< "$findResults"|awk -v linkpre="$(ip -o address | grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" 'BEGIN {printf css_style "<table class=\"elif9\">"}{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td><a href=\"http\://" linkpre path "/" $10 "\">" $10 "</a></td></tr>"} END {print "</table>"}')"
+      findResults="$(while read filename;do ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N "$filename";done <<< "$findResults"|awk -v linkpre="$(ip -o address | grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" '
+BEGIN {printf css_style "<table class=\"elif9\">"}
+{printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"><a href=\"http\://" linkpre path "/" $10 "\">" $10 "</a></td></tr>"} 
+END {print "</table>"}')"
 #      echo -e "2. findResults=${findResults}"  >> /home/homeowner/bashttpd.log
       serve_html_string "${findResults}"
 
   elif [[ -d "${URL_PATH}" ]]; then
      [[ -x "${URL_PATH}" ]] && \
           serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v linkpre="$(ip -o address | \
-             grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH}" \
-'BEGIN {print css_style "<table class=\"elif10\">"}{printf "<tr><td aria-label=\"[&nbsp;"}{if($6==""){i=length(path);for (;i>0;i--){if (substr(path,i,1)=="/") break} \
+             grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH}" '
+BEGIN {print css_style "<table class=\"elif10\" style=\"width:100%\">"}
+{printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;"}{if($6==""){i=length(path);for (;i>0;i--){if (substr(path,i,1)=="/") break} \
 if(substr(path,i+1,7)=="camera_") {printf substr(path,i+1+7)} else {printf substr(path,i+1)} printf " ]\"></td><td> </td></tr>"} \
-else{printf $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td> <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10} else \
-{printf $12} printf "\" target=\"_blank\">";if (substr($1,1,1)!="l"){printf $10} else {printf $12} printf "</a>"}}{print "</td></tr>"} END {print "</table>"}')" \
+else{printf $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10} \
+else {printf $12} printf "\" target=\"_blank\">";if (substr($1,1,1)!="l"){printf $10} else {printf $12} printf "</a>"}}{print "</td></tr>"} 
+END {print "</table>"}')" \
            || fail_with 403
 #Need sanity coding for "bash: /bin/ls: Argument list too long"
 #        serve_dir  "${URL_PATH}" "$@" \
