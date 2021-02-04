@@ -2,24 +2,12 @@
 <html lang="en">
     <head>
         <title>Loading...  No functions allowed while loading...</title>
-<!--        <title>Surveillance Recordings</title> -->
         <meta charset="utf-8"/> 
 <!-- 
 THIS WEB PAGE CONTAINS NUMEROUS FEATURES ONLY AVAILABLE IN TANDEM WITH SERVER-SIDE CUSTOMIZATIONS.  
 I DON'T KNOW WHETHER STANDARD WEB SERVERS CAN BE SO CUSTOMIZED; I DIDN'T EVEN WANT TO TRY TO. 
 ON MY SERVER,  MY ONLY WEB SERVER IS bashttp BASH SCRIPT WEB SERVER FOUNDATION, WHICH I THEN TRICKED OUT.  
 LOOK FOR IT IN MY GITHUB SPACE.
-
-I HOPE I'VE LAID THIS OUT MODULARLY ENOUGH THAT IF YOUR MONITOR IS WIDE OR NARROW OR FOR ANY OTHER REASON YOU WANT
-THE .mp4 PLAY <OBJECT> ELEMENTS TO DIFFERENT POSITIONS AND DIMENSIONS THAN I HAVE THEM, YOU SHOULD FIND IT EASY 
-ENOUGH TO CHANGE THEIR POSITIONS AND DIMENSIONS.  THEIR LAYOUT HEREIN IS GRABBED OUT OF THIN AIR, SO LIKELY NOT UP
-TO ANYONE'S STANDARDS.
-
-MUCH IMPROVEMENT IS POSSIBLE ALONG THE LINES OF KEEPING THE PLAYING VIDEOS BETTER SYNCHRONIZED.  I MAY OR MAY NOT SO CONTINUE THIS
-
-NOTE THAT SOME COMMENTS CONTAINED IN THIS SOURCE CODE MAY HAVE BEEN APPLICABLE UNTIL SOME STAGE OF DEVELOPMENT, BUT NOT ANY MORE.
-
-SORRY FOR ANY UGLINESS YOU FIND...I AM NOT A BEAUTICIAN, AND I HAD ANOTHER PROJECT THAT NEEDED MY ATTENTION FAR MORE THAN THIS ONE
 -->
 <style type="text/css">
     body 
@@ -77,7 +65,8 @@ SORRY FOR ANY UGLINESS YOU FIND...I AM NOT A BEAUTICIAN, AND I HAD ANOTHER PROJE
 </style>
     </head>
     <body  style="margin:0;padding:0"
-onload = "url0='rtsp://';
+onload = "
+url0='rtsp://';
 url1='kERRY123:Kerry123@';
 url2=':9';url3='554/Streaming/Channels/10';url4='2';  camapp_ul.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;
                                            url4='1'; camapp_ul1.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;
@@ -100,9 +89,34 @@ document.links[10].href='http://' + window.location.hostname + ':10080';//set fo
 document.links[13].href='http://' + window.location.hostname + ':14080';//set for Dock 14080
 document.links[16].href='http://' + window.location.hostname + ':9080';//set for Front Parking Lot 9080
 document.links[19].href='http://' + window.location.hostname + ':15080';//set for NE Corner 15080
-document.title='Surveillance Recordings'
-">
+tellBrowser()
+document.title='Surveillance Recordings';">
 <script type="text/javascript"><!-- THIS REALLY DOESN'T WORK SO EACH ANNOUNCEMENT WILL HAVE TO HAVE ITS OWN ID AND SCRIPT TAG WITH IT -->
+
+function tellBrowser(){
+/* Opera 8.0+*/
+var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+/* Firefox 1.0+*/
+var isFirefox = typeof InstallTrigger !== 'undefined';
+
+/* Safari 3.0+ "[object HTMLElementConstructor]" */
+var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+
+/* Internet Explorer 6-11*/
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+/* Edge 20+*/
+var isEdge = !isIE && !!window.StyleMedia;
+
+/* Chrome 1 - 71*/
+var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+
+/* Blink engine detection*/
+var isBlink = (isChrome || isOpera) && !!window.CSS;
+
+}
+
   var x = document.getElementsByClassName("announcement");
   for (var i = 0; i < x.length; i++) {
     x[i].style.display = "none";
@@ -124,7 +138,7 @@ var StartTimeOfInterestmSecminus60=new Date();
 var windows = [];
 var windowx = 0;
 var winOpen;
-var playingjpgs = [];//the size of this array could be the number of jpg viewers on page
+var playingjpgs = [];/*the size of this array could be the number of jpg viewers on page*/
 var checkingAlerted = null;
 var previousalert = null; 
 let requestAlerted = new XMLHttpRequest();
@@ -157,7 +171,7 @@ streamListings["fpmp4"] = "/var/www/camera_streams/camera_front_parking/";
 streamListings["nemp4"] = "/var/www/camera_streams/camera_ne_corner/";
 streamListings["edmp4"] = "/var/www/camera_streams/camera_east_driveway/";
 streamListings["sdmp4"] = "/var/www/camera_streams/camera_south_driveway/";
-streamListings["11"] = "East Driveway" ;//These correspond to 192.168.0.nn or 192.168.0.n_ since they are 2 characters long extracted from the file name
+streamListings["11"] = "East Driveway" ;/*These correspond to 192.168.0.nn or 192.168.0.n_ since they are 2 characters long extracted from the file name*/
 streamListings["14"] = "Dock"
 streamListings["15"] = "Northeast corner"
 streamListings["12"] = "Front parking lot"
@@ -188,7 +202,7 @@ Help</button>
   <button id="btnnotes" class="tablinks" style="font-size:21px;" 
 onclick="tabactivate(this)">
 Notes</button>
-  <button id="btntrack_snaps" class="collectlinks" style="font-size:21px;background:white" 
+  <button id="btntrack_snaps" class="collectlinks" style="font-size:22px;background:white" 
 onclick="if(this.innerText.includes('Start track'))
 {
     this.innerText='Tracking snapshot windows being opened would now be ON except I don\'t have it working yet due to inability to get transient variables to cross to global scope';this.style.background='Chartreuse';windowx=0;
@@ -196,11 +210,11 @@ onclick="if(this.innerText.includes('Start track'))
 else
 {
    this.innerText='Start tracking opened snapshots for later playback';this.style.background='white';
-windows.forEach(function(windw){
-windw.open()
-})
+windows.forEach(function(windw){windw.open()})
 }">
 Start tracking opened snapshots for later playback</button>
+
+<button style="font-size:22px;background:white" onclick="launch()">JPG set advancing</button>
 </div>
 <!--  <button class="tablinks" onclick="if(document.getElementById('byview').style.display == 'none'){document.getElementById('byview').style.display = 'block'}else{document.getElementById('byview').style.display = 'none';}">Recording by view</button> -->
 
@@ -246,9 +260,8 @@ if(typeof alertsdirectory.contentDocument.body.children[0].children[0].children[
                    }
               else {element=null;}
                      if(typeof(element) != 'undefined' && element != null) 
-                        {if (element.innerText.trim() !== previousalert)   {if (element.innerText.trim() == ''){previousalert=element.innerText.trim();
-                                                                                                  } 
-                                                                    }
+                        {if (element.innerText.trim() !== previousalert)   {if (element.innerText.trim() == ''){previousalert=element.innerText.trim();}else{{soundalarm()}
+                                                                 }
                         }
                      else {previousalert=null;}
                alertsdirectory.data=alertsdirectory.data;
@@ -271,25 +284,32 @@ if(typeof alertsdirectory.contentDocument.body.children[0].children[0].children[
     <object id="alertsdirectory" type="text/html" 
 data="/../../links_to_alerting_activity/mostrecent1" 
 onclick="if (this.data.includes('/mostrecent1')){this.data='/../../links_to_alerting_activity'}else{this.data='/../../links_to_alerting_activity/mostrecent1'};" 
-onload="if(alertsdirectory.contentWindow.document.body.children[0].localName == 'img'){return}
-        if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
-          {
-if(typeof alertsdirectory.contentDocument.body.children[0].children[0].children[2] != 'null'){element=alertsdirectory.contentDocument.body.children[0].children[0].children[2]}else{element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
-          }
-        else {element=null;}
-        if(element != 'undefined' && typeof element != 'null')
-          {if (element.innerText.trim() != previousalert)
-             {if (alertCheck.value.substr(alertCheck.value.length-1,1) != 'F' && previousalert != null && element.innerText.trim() != null && !element.innerText.endsWith('.jpg'))
-                 {play()
+onload="if(alertsdirectory.contentWindow.readyState != 'complete' || alertsdirectory.contentWindow.document.body.children[0].localName != 'table'){return}
+        if(alertsdirectory.contentDocument.body.children[0].rows.length > 1)
+        { 
+            alertsdirectory.contentDocument.body.children[0].rows.length > 2 ? element=alertsdirectory.contentDocument.body.children[0].rows[2].cells[1] : element=alertsdirectory.contentDocument.body.children[0].rows[1].cells[1]
+            if(!element.innerText.endsWith('.jpg'))
+            {
+               
+            }
+        }
+        else{element='';previousalert=''}
+        if(element != 'undefined' && element != null)
+        {if (element.innerText.trim() != previousalert)
+             {
+
+if (alertCheck.value.substr(alertCheck.value.length-1,1) != 'F' && previousalert != null && element.innerText.trim() != null && !element.innerText.endsWith('.jpg'))
+                 {
                  }
               else 
                  {if(!element.innerText.endsWith('.jpg'))
-                     {previousalert=element.innerText.trim()
-                     };
+                     {
+                         previousalert=element.innerText.trim()
+                     }
                  }
              }
-          }
-        glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+             glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')
+        }"
 width="1900px" height="1200px" style="font-size:15px;overflow:auto;border:3px solid black;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
@@ -417,7 +437,7 @@ In here could be the recipient list
 
 </small>
 <b>
-<br>System-wide:</b><br>
+<br>System-wide:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None of these this page (combined views page) span months correctly right now<br>
 <small>
 <table width="2250px">
 <tr><td>
@@ -596,6 +616,7 @@ be learned from a file timestamp</textarea>
   <input type="submit" id="archiveevent" value="Submit for archiving" disabled="true">
   </form>
 <a href="/var/important_video_archives/mostrecent200" target="_blank"><h3>Show previous events archive</h3></a>
+Command: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ./importants
 </td></tr></table>
 </td>
 </tr>
@@ -972,16 +993,104 @@ HTML5 push) that the shop server can directly trigger an Android notification.  
 Camera login credentials are no longer embedded in the URLs so that the five minute stream time limit can be defeated<br>
 Login credentials for camera streams are username = [youngest brother first name in reverse case]123<br>
              password is the same as the username but in proper case<br>
-    <button onclick="play()">Test alert sound</button> 
+    <button onclick="playalert()">Test alert sound</button> 
     <button onclick="checkforcache()">Check browser cache capability</button> 
+    <br><button onclick="launch()">Sandbox JPG player</button>Only click this after opening latest alert event into the snapshot list
 </div>
 </small></small>
-<script>
+
+<!-- <script>
+
+function change(){
+    document.getElementById('film').src='frames/'+frames[on_frame]; //I have my images in a folder named frames
+    on_frame++;
+    if(on_frame==frames.length){on_frame=0;}
+    if(playing){
+        timer=setTimeout(change,document.getElementById('framerate').value?document.getElementById('framerate').value:50);
+    }
+}
+
+function play(){
+    document.getElementById('actionbutton').removeEventListener('click',play);
+    document.getElementById('actionbutton').addEventListener('click',pause);
+    document.getElementById('actionbutton').innerHTML='Pause';
+    clearInterval(timer);
+    playing=true;
+    change();
+}
+
+function pause(){
+    document.getElementById('actionbutton').removeEventListener('click',pause);
+    document.getElementById('actionbutton').addEventListener('click',play);
+    document.getElementById('actionbutton').innerHTML='Play'; 
+    playing=false; 
+
+}
+
+function stop(){
+    document.getElementById('actionbutton').removeEventListener('click',pause);
+    document.getElementById('actionbutton').addEventListener('click',play);
+    document.getElementById('actionbutton').innerHTML='Play'; 
+    playing=false; 
+    on_frame=0;
+}
+
+function goFrame(x){
+    if((x>-1)&&(x<=frames.length)){
+        on_frame=x;
+        if(!playing){document.getElementById('film').src='frames/'+frames[on_frame];}
+    }
+    else{
+        alert('Out of range');
+    }
+}
+-->
+<!-- var frames=['frame1.png','frame2.png','frame3.png','frame4.png','frame5.png','frame6.png','frame7.png','frame8.png','frame9.png','frame10.png']; 
+the frames will point to the jpg list of the <div> in block
+
+var divinblock = getElementBy
+-->
+<!--var playing=true;
+var on_frame=0;
+var timer;
+-->
+<!--
+    document.body.innerHTML='<img id="film" src="frames/'+frames[on_frame]+'"/><br/><button id="actionbutton">Play</button><button onclick="stop()">Stop</button><br/>Milliseconds between frames:<input type="text" id="framerate" value="50"/><br/>Go to frame:<input type="text" id="gotoframe"><button onclick="goFrame(document.getElementById(\'gotoframe\').value);">Go</button>';   
+    document.getElementById('actionbutton').addEventListener('click',play); 
+    play();
+} -->
+<script type="text/javascript">
+//var frames=['frame1.png','frame2.png','frame3.png','frame4.png','frame5.png','frame6.png','frame7.png','frame8.png','frame9.png','frame10.png'];
+var playing=true;
+var on_frame=0;
+var timer;
+function launch(){
+    document.body.innerHTML='<img id="film" src="frames/'+frames[on_frame]+'"/><br/><button id="actionbutton">Play</button><button onclick="stop()">Stop</button><br/>Milliseconds between frames:<input type="text" id="framerate" value="50"/><br/>Go to frame:<input type="text" id="gotoframe"><button onclick="goFrame(document.getElementById(\'gotoframe\').value);">Go</button>';   
+    document.getElementById('actionbutton').addEventListener('click',play); 
+    play();
+}
+</script>
+    <script type="text/javascript"> 
+        function soundalarm() { 
+            var audio = new Audio( 
+'https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3'); 
+            audio.play(); 
+        } 
+function checkforcache() { if ('caches' in window){ alert ('This browser supports cache, FUTURE Considering to use it for sounds, pictures, videos, etc.')} 
+else {alert('This browser cannot cache');}
+                          }
+
+function change(){return true}
+function goFrame(){return true}
+function launch(){return true}
+function launch(){return true}
 function collectthis( _href ){
-<!--   windows[itself]=windows.open(_href) -->
+/* <!--   windows[itself]=windows.open(_href) -->*/
    alert('Jpg saved');
    return false;
 }
+</script>
+    <script type="text/javascript"> 
 function startbtncclick() 
 {
    var objectelement=document.getElementsByClassName('mp4obj');
@@ -1004,6 +1113,8 @@ function startbtncclick()
       }
    }
 }
+</script>
+    <script type="text/javascript"> 
 
 function tabactivate( btn ) {
 var btnset = document.getElementsByClassName('tablinks');
@@ -1015,6 +1126,8 @@ for(var i=0;i<btnset.length;i++)
 <!-- document.getElementById(btn.id).style.background='#FFFFFF' -->
 }}
 }
+</script>
+    <script type="text/javascript"> 
 function glonabort( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onabort. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -1024,6 +1137,8 @@ function glonanimationcancel( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 
 function glonanimationend( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onanimationend. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
+</script>
+    <script type="text/javascript"> 
 function glonanimationiteration( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onanimationiteration. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -1060,6 +1175,8 @@ function gloncopy( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 function gloncuechange( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element oncuechange. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
+</script>
+    <script type="text/javascript"> 
 function gloncut( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element oncut. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -1099,8 +1216,11 @@ function glonemptied( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 function glonencrypted( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onencrypted. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
+</script>
+    <script type="text/javascript"> 
 function glonended( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) 
 {
+if(qbtn.style.backgroundColor == 'rgb(230, 230, 230)'){
    elmnt.children["timestamp"].value=elmnt.contentWindow[0].document.children[0].innerText.substring(0,30)
    var playbackrate=elmnt.contentDocument.body.children[0].playbackRate
    if(courtesybtn.style.backgroundColor == 'white')
@@ -1125,9 +1245,12 @@ function glonended( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
 //    alert(elmnt.contentDocument.body.children[1].src)
     elmnt.children["currenttime"].value=0;
 }
+}
 function glonerror( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onerror. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
+</script>
+    <script type="text/javascript"> 
 function glonfocus( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onfocus. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -1158,37 +1281,64 @@ function glonkeypress( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 function glonkeyup( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onkeyup. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
-
+</script>
+    <script type="text/javascript"> 
+var mousedownedhere;
 function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) 
 {
   if (elmnt.contentDocument.body.children[0] != 'undefined' && elmnt.contentDocument.body.children[0] != null && elmnt.contentDocument.body.children[0].localName == 'table' && elmnt.contentDocument.body.children[0].tBodies[0].rows[0].cells[1] != 'undefined' && elmnt.contentDocument.body.children[0].tBodies[0].rows[0].cells[1] != null)
   {
-    if(elmnt.contentDocument.body.children[0].tBodies[0] == 'undefined' || elmnt.contentDocument.body.children[0].tBodies[0] == null){alert('Too many event files to list with ' + currSrc + '.  Delete overrunning ones on server.');return}
+    if(elmnt.contentDocument.body.children[0].tBodies[0] == 'undefined' || elmnt.contentDocument.body.children[0].tBodies[0] == null)
+{alert('Too many event files to list with ' + currSrc + '.  Delete overrunning ones on server.')}
+    elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("mousedown",function(item)
+    {mousedownedhere=item.pageY
+    })
+    elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("mouseup",function(item)
+    {
+         var downrowindex=Math.trunc((mousedownedhere+2)/((elmnt.contentDocument.body.children[0].tBodies[0].clientHeight+2)/elmnt.contentDocument.body.children[0].tBodies[0].childElementCount)-.5)
+         if(elmnt.contentDocument.body.children[0].tBodies[0].rows[downrowindex].cells[1].innerText.endsWith('.jpg'))
+         {
+              var uprowindex=Math.trunc((item.pageY+2)/((elmnt.contentDocument.body.children[0].tBodies[0].clientHeight+2)/elmnt.contentDocument.body.children[0].tBodies[0].childElementCount)-.5)
+              if(downrowindex != uprowindex)
+              {
+/*alert(currSrc)*/
+/*if(currSrc.includes('-MOTION'))*/
+/*                 {alert('NO MOTION DETECTIONS IN THIS ELEMENT.  You\'ve selected ' + (downrowindex-uprowindex) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you want to actually select!')}*/
+/*               else */
+                 alert('You\'ve selected ' + (downrowindex-uprowindex) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you want to actually select!')
+                 var frames=[]
+                 var windwz=[]
+                 var playing=true;
+                 var on_frame=0;
+                 var timer;
+                 let rowindex=downrowindex;do
+                 {
+                     frames[rowindex]=elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].firstElementChild.href
+                     windwz[rowindex] = window.open(frames[rowindex]) /* save each window handle in an array of them*/
+                     if(downrowindex < uprowindex){rowindex++}else{rowindex--}
+                 }while(rowindex!=uprowindex)
+              }
+         }
+    })
+
     elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("click",function(item)
     {
-//alert(item.type)
-//The hard-coded 2 pixel corrections below might need to be adjusted for border widths or other style settings the web server might send differently in the future:
+/*The hard-coded 2 pixel corrections below might need to be adjusted for border widths or other style settings the web server might send differently in the future:*/
       var rowindex=Math.trunc((item.pageY+2)/((elmnt.contentDocument.body.children[0].tBodies[0].clientHeight+2)/elmnt.contentDocument.body.children[0].tBodies[0].childElementCount)-.5)
       var filename=elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText
       if(elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText.endsWith('.mp4'))
       {
-//         alert('The file chosen in this table construct is type .mp4')
+/*         alert('The file chosen in this table construct is type .mp4')*/
          var timestamp=elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[0].outerHTML.substr(18).replace(/&nbsp;/g," ").replace("nbsp;","")
          timestamp=timestamp.substring(0,timestamp.indexOf(" ]"))
          elmnt.children["timestamp"].value=timestamp
          var endTime = new Date(timestamp.substring(0,20))
          var endTimemSec=endTime.getTime()+timestamp.substr(21)/1000000
-//         alert(endTime)
-//         alert('End time in mSec=' + endTime.getTime()+timestamp.substr(21)/1000000);//gives us mSec....elmnt.contentDocument.body.children[0].mozFragmentEnd * 1000)
-//         alert('Start time in mSec=' + (endTime.getTime()+timestamp.substr(21)/1000000)-(elmnt.contentDocument.body.children[0].mozFragmentEnd * 1000));//gives us mSec
-//         alert('Start time shown=' + getTime(startTimemSec))
-//         alert(timestamp.substring(0,6) + ', ' + timestamp.substr(7,8))
-//         alert(endTime)
-//         alert(elmnt.children["timestamp"].value);//along with this an event handler?
       }
       else if(elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText.endsWith('.jpg'))
       {
-//         alert('The link is jpg inside this construct');//We need to always know the timestamp of the last .jpg file viewed so we can populate the .mp4 windows for that event timeframe
+/*         alert('The link is jpg inside this construct');*/
+/*We need to always know the timestamp of the last .jpg file viewed so we can populate the .mp4 windows for that event timeframe*/
            StartTimeOfInterest=elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[0].outerHTML.substr(18).replace(/&nbsp;/g," ").replace("nbsp;","")
            StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
            StartTimeOfInterestDT=new Date(StartTimeOfInterest)
@@ -1198,20 +1348,21 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
            StartCamOfInterestEl.value=streamListings[elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText.substr(elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText.indexOf('192.168.0.') + 10,2)]
            lsbtn.name='!var!www!camera_streams!camera_*'
       }
-//      else {alert('unknown file type for ' + elmnt.id + ':' + elmnt.contentDocument.body.children[0].innerHTML + ', ' + elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText)}
     })
+
+
+
+
   }
   else
   {
-//is now a loaded or loading jpg or mp4 viewer with the [first] image already appearing in the window. 
-//      alert('videoHeight=' + elmnt.contentDocument.body.children[0].videoHeight)
-//      alert('videoWidth=' + elmnt.contentDocument.body.children[0].videoWidth)
-elmnt.parentElement.clientHeight=elmnt.contentDocument.body.children[0].videoHeight
-elmnt.Height=elmnt.contentDocument.body.children[0].videoHeight
-elmnt.clientHeight=elmnt.contentDocument.body.children[0].videoHeight
-elmnt.contentDocument.body.children[0].scrollHeight=elmnt.contentDocument.body.children[0].videoHeight
-elmnt.contentDocument.body.clientHeight=elmnt.contentDocument.body.children[0].videoHeight
-elmnt.contentDocument.body.clientWidth=elmnt.contentDocument.body.children[0].videoWidth
+/*is now a loaded or loading jpg or mp4 viewer with the [first] image already appearing in the window. */
+      elmnt.parentElement.clientHeight=elmnt.contentDocument.body.children[0].videoHeight
+      elmnt.Height=elmnt.contentDocument.body.children[0].videoHeight
+      elmnt.clientHeight=elmnt.contentDocument.body.children[0].videoHeight
+      elmnt.contentDocument.body.children[0].scrollHeight=elmnt.contentDocument.body.children[0].videoHeight
+      elmnt.contentDocument.body.clientHeight=elmnt.contentDocument.body.children[0].videoHeight
+      elmnt.contentDocument.body.clientWidth=elmnt.contentDocument.body.children[0].videoWidth
       if(elmnt.contentDocument.body.children[0].localName == 'video')
       {
            elmnt.contentDocument.body.children[0].playbackRate=2
@@ -1229,51 +1380,24 @@ elmnt.contentDocument.body.clientWidth=elmnt.contentDocument.body.children[0].vi
                    elmnt.contentDocument.body.appendChild(mbed);
            }
            elmnt.contentDocument.body.children[1].type='text/plain'
-           elmnt.contentDocument.body.children[1].hidden=true;//doesn't really work without going through the contenWindow[0] that won't exist yet
+           elmnt.contentDocument.body.children[1].hidden=true;/*doesn't really work without going through the contenWindow[0] that won't exist yet*/
            elmnt.contentDocument.body.children[1].width="1"
            elmnt.contentDocument.body.children[1].height="1"
-//         console.log(elmnt.contentWindow.contentDocument.children[0].innerText)
-         elmnt.contentDocument.body.children[0].addEventListener("ended",function(item)
-         {glonended( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')});//always comes in tandem with and after a pause
-//         elmnt.contentDocument.body.children[0].addEventListener("abort",function(item)
-//         {alert(item.type);glonabort( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
-//         elmnt.contentDocument.body.children[0].addEventListener("pause",function(item)
-//         {glonpause( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
-//         elmnt.contentDocument.body.children[0].addEventListener("play",function(item)
-//         {alert(item.type);glonplay( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
-//         elmnt.contentDocument.body.children[0].addEventListener("seeking",function(item)
-//         {alert(item.type);glonseeking( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')});//comes often at beginning of video playing
-//occurs when losing time due to network         elmnt.contentDocument.body.children[0].addEventListener("stalled",function(item)
-//         {alert(item.type);glonstalled( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
-//occurs when losing time due to network         elmnt.contentDocument.body.children[0].addEventListener("waiting",function(item)
-//         {alert(item.type);glonwaiting( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
-//occurs when losing time due to network          elmnt.contentDocument.body.children[0].addEventListener("suspend",function(item)
-//         {alert(item.type + ' ' + elmnt.contentDocument.body.children[0].buffered.end(elmnt.contentDocument.body.children[0].buffered.length-1) );glonsuspend( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')});//comes when each chunk series finishes downloading excluding final one
-//         elmnt.contentDocument.body.children[0].addEventListener("ratechange",function(item)
-//         {glonratechange( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
-//         elmnt.contentDocument.body.children[0].addEventListener("error",function(item)
-//         {alert(item.type);glonerror( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')})
-//         elmnt.contentDocument.body.children[0].addEventListener("loadend",function(item)
-//         {alert(item.type);glonloadend( this.contentDocument.body.children[0].currentSrc, getElementById('sysjpgmp4_motion'), '', '', '', '', '')})
-//         elmnt.contentDocument.body.children[0].addEventListener("playing",function(item)
-//         {glonplaying( this.contentDocument.body.children[0].currentSrc, getElementById('sysjpgmp4_motion'), '', '', '', '', '')})
-//         elmnt.contentDocument.body.children[0].addEventListener("progress",function(item)
-//         {alert(item.type);glonprogress( this.contentDocument.body.children[0].currentSrc, getElementById('sysjpgmp4_motion'), '', '', '', '', '')})
-//         elmnt.contentDocument.body.children[0].addEventListener("transitionstart",function(item)
-//         {glontransitionstart( sysjpgmp4_motion.contentDocument.body.children[0].currentSrc, getElementById('sysjpgmp4_motion'), '', '', '', '', '')})
-         var timestamp=elmnt.children["timestamp"].value
-//         alert('Ending file timestamp=' + timestamp);//This is the last modified time of the file just beginning to play. IT IS ONLY CONTAINING 60 SECONDS PRIOR TO THE EVENT OF INTEREST, SO NOW WE MUST SUBTRACT 60 SEC FROM StartTimeOfInterest
-//         alert(elmnt.contentDocument.body.children[0].currentTime)
-         elmnt.contentDocument.body.children[1].src=elmnt.contentDocument.body.children[0].currentSrc + '\?nextbymodifiedtime'
-         var endTime=new Date(timestamp.substring(0,20))
-         var endTimemSec=endTime.getTime()+(timestamp.substr(21)/1000000)
-         var startTimemSec=endTimemSec-(elmnt.contentDocument.body.children[0].mozFragmentEnd * 1000)
-         var startTimeReadable=new Date()
-         startTimeReadable.setTime(startTimemSec)
-         elmnt.children["currenttime"].value=((StartTimeOfInterestmSecminus60-startTimemSec)/1000)
-          }
+           elmnt.contentDocument.body.children[0].addEventListener("ended",function(item)
+           {glonended( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')});/*always comes in tandem with and after a pause*/
+           var timestamp=elmnt.children["timestamp"].value
+           elmnt.contentDocument.body.children[1].src=elmnt.contentDocument.body.children[0].currentSrc + '\?nextbymodifiedtime'
+           var endTime=new Date(timestamp.substring(0,20))
+           var endTimemSec=endTime.getTime()+(timestamp.substr(21)/1000000)
+           var startTimemSec=endTimemSec-(elmnt.contentDocument.body.children[0].mozFragmentEnd * 1000)
+           var startTimeReadable=new Date()
+           startTimeReadable.setTime(startTimemSec)
+           elmnt.children["currenttime"].value=((StartTimeOfInterestmSecminus60-startTimemSec)/1000)
+      }
   }
 }
+</script>
+    <script type="text/javascript"> 
 function glonloadeddata( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onloadeddata. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -1310,13 +1434,13 @@ function glonmouseover( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 function glonmouseup( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onmouseup. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
+</script>
+    <script type="text/javascript"> 
 function glonpaste( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onpaste. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
 function glonpause( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
-//   alert("Element onpause. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 ;
-// must pause all the other players until resume
 }
 function glonplay( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onplay. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
@@ -1339,6 +1463,8 @@ function glonpointerleave( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 function glonpointermove( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onpointermove. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
+</script>
+    <script type="text/javascript"> 
 function glonpointerout( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onpointerout. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -1352,10 +1478,12 @@ function glonprogress( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onprogress. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
 function glonratechange( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
-//   alert("Element onratechange. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
+/*   alert("Element onratechange. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);*/
 ;
-//must change all videos to maintain synchronization
+/*must change all videos to maintain synchronization*/
 }
+</script>
+    <script type="text/javascript"> 
 function glonreset( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onreset. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -1380,10 +1508,12 @@ function glonselectstart( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 function glonshow( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onshow. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
+</script>
+    <script type="text/javascript"> 
 function glonstalled( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onstalled. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 ;
-//must pause all other players until resumed
+/*must pause all other players until resumed*/
 }
 function glonsubmit( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onsubmit. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
@@ -1409,6 +1539,8 @@ function glontransitionrun( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) 
 function glontransitionstart( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element ontransitionstart. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
+</script>
+    <script type="text/javascript"> 
 function glonvolumechange( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onvolumechange. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -1434,17 +1566,19 @@ function glonwheel( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onwheel. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
 
-//WindowOrWorkerGlobalScope.setTimeout() for setting a flag for the object.
+/*WindowOrWorkerGlobalScope.setTimeout() for setting a flag for the object.*/
 if (window.File && window.FileReader && window.FileList && window.Blob) {
-  // Great success! All the File APIs are supported.
+  /* Great success! All the File APIs are supported.*/
 } else {
   alert('HTML5 is NOT fully supported enough in this browser.  Can you upgrade it?');
 }
+</script>
+    <script type="text/javascript"> 
 
 var vidul = document.getElementById("camembed_ul");
 
 function playVid() {
-<!--  vidul.src=document.links[3].href; -->
+/* <!--  vidul.src=document.links[3].href; -->*/
   vidul.play();
 }
 
@@ -1456,48 +1590,15 @@ function notimeoutfilehere() {
    alert("No timeout file");
  return false;
 }
-var sdsubmit = document.getElementById("sdsubmit");
 
-function whatdoesthefilesay(filename, destinationid) {
-return;
-}
-//    var reader = new FileReader();
-//    reader.onloadend = function(event) {
-//        var contents = event.target.result;
-//        sdsubmit.value=contents;
-//        alert(contents);
-//    };
-//    reader.onloadstart = function(event) {
-//        alert("Starting read of " + window.location.hostname + ":8080/home/homeowner/camera_snapshots/default_timeout_for_newly_added_cameras");
-//    }
-//    reader.onerror = function(event) {
-//        console.error("File could not be read! Code " + event.target.error.code);
-//       sdsubmit.value=event.target.error.code;
-//    };
-//return;
-//    reader.readAsText(window.location.hostname + ":8080/home/homeowner/camera_snapshots/default_timeout_for_newly_added_cameras");
-//      alert(window.location.hostname + ":8080/home/homeowner/camera_snapshots/default_timeout_for_newly_added_cameras");
-//}
-
-var sdsliderbarinput = document.getElementById("south_driveway");
 function slidersd(a) {
+var sdsliderbarinput = document.getElementById("south_driveway");
+var sdsubmit = document.getElementById("sdsubmit");
    if (a !== undefined) {sdsliderbarinput.value = a;}
 
    var timeoutfilename = "/home/homeowner/camera_snapshots/default_timeout_for_newly_added_cameras";
-//   var timeoutfile = "/home/homeowner/camera_snapshots/camera_south_driveway/timeout";
     var destinationid="sdsubmit";
-//    whatdoesthefilesay(timeoutfilename, destinationid);
     sdsubmit.value = "Set to " + sdsliderbarinput.value + " minutes";
-//   var timeoutfile = $('<iframe><img src="' + timeoutfilename + '" /></iframe>');
-//   var timeoutfile = $('<iframe><object type="text/text" data=="' + timeoutfilename + '" width="10px" height="10px"></object></iframe>');
-//   var timeoutfile = $( '<object type="text/text" data=="' + timeoutfilename + '" onerror="notimeoutfilehere()"></object>');
-//   if ($(timeoutfile.find().attr() > 0 {
-//       sdsubmit.value += " but in timeout";
-//       sdsubmit.disabled = "true";      
-//   }
-//   else {
-//      sdsubmit.disabled = "";
-//   }
 }
 
 var fpsliderbarinput = document.getElementById("front_parking");
@@ -1513,6 +1614,8 @@ function slidered(a) {
    if (a !== undefined) {edsliderbarinput.value = a;}
    edsubmit.value = "Set to " + edsliderbarinput.value + " minutes";
 }
+</script>
+    <script type="text/javascript"> 
 
 var swsliderbarinput = document.getElementById("sw_corner");
 var swsubmit = document.getElementById("swsubmit");
@@ -1535,214 +1638,18 @@ function slideres(a) {
    this.essubmit.value = "Set to " + essliderbarinput.value + " minutes";
 }
 </script>
-    <!-- 
-var test = document.createElement("object");
-test.addEventListener("testV", function(e) {
-  console.log("vanilla test handler");
- });
-var event = new CustomEvent("testV");
-test.dispatchEvent(event);
-
- -->
-<!-- /html -->
-<!-- <title>Welcome to nginx!</title -->
-<!-- style
-    body {
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-    }
-</style -->
-  
-    <script> 
-        function play() { 
+    <script type="text/javascript"> 
+        function playalert() { 
             var audio = new Audio( 
 'https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3'); 
             audio.play(); 
         } 
-function checkforcache() { if ('caches' in window){ alert ('This browser supports cache, FUTURE Considering to use it for sounds, pictures, videos, etc.')} 
-else {alert('This browser cannot cache');}
-                          }
+</script>
+    <script type="text/javascript"> 
+function checkforcache() { 
+   if ('caches' in window){ alert('This browser supports cache, FUTURE Considering to use it for sounds, pictures, videos, etc.')} 
+   else {alert('This browser cannot cache');}
+}
     </script> 
 </body>
 </html>
-
-<!--
-
-
-
-Jordan Irabor
-Jordan is an innovative software developer with over five years of experience developing software with high standards and ensuring clarity and quality. He also follows the latest blogs and writes technical articles, as a guest author, on several platforms.
-Working with the JavaScript Cache API
-
-June 17, 2020 5 min read
-Introduction
-
-    The Cache API provides a mechanism for storing network requests and retrieving their corresponding responses during run-time. It can be used in the absence of an internet connection (or presence of a flaky one) and this makes it integral to the building of progressive web applications (fully optimised web applications that work offline like native applications).
-
-Because it is impossible to predetermine your user-base at development time, it is important to build web services that can be accessed by a broad spectrum of users who may not have the best hardware or may have slow internet connections.
-
-Progressive web applications were created to ensure that web services work on all devices. On mobile devices, they are designed to deliver a user experience that is close to that of native applications. Under the hood, PWAs use service workers to achieve the ideal behavior, and they leverage the Cache API for extra control over network resources.
-
-This Google web fundamentals page describes service workers like this:
-
-    A service worker is a script that your browser runs in the background, separate from a web page, opening the door to features that don’t need a web page or user interaction. Today, they already include features like push notifications and background sync. In the future, service workers might support other things like periodic sync or geofencing. A core feature of a service worker is the ability to intercept and handle network requests, including programmatically managing a cache of responses.
-
-We can see that caching can play an important role in the workflow of service workers. This article shows how the Cache API can be used in a service worker, and as a general mechanism of resource storage.
-
-All the code in this tutorial can be found in this repository, feel free to fork it or send in a PR.
-Detecting the Cache API
-
-In modern browsers, each origin has a cache storage and we can inspect it by opening the browser developer tools:
-
-    On Chrome: Application > Cache > Cache Storage
-    On Firefox: Storage > Cache
-
-    Pro tip: In Chrome, you can visit chrome://inspect/#service-workers and click on the “inspect” option (directly under the origin of any already opened tab) to view logging statements for the actions of the service-worker.js script.
-
-The Cache API is available in all modern browsers:
-
-    Edge >= 17
-    Opera >= 27
-    Safari >= 11.1
-    Firefox >= 39
-    Chrome >= 40
-    iOS Safari = 11.4 >
-    UC Browser 11.8 >=
-    Chrome for Android >= 67
-
-Because older browsers may not support the API, it is good practice to check for its availability before attempting to reference it. The caches property is available on the window object and we can check that it is implemented in the browser with this snippet:
-
-if ('caches' in window){
-    // you can safely insert your snippet here
-}
-
-Usage
-
-The Cache API is a great choice for caching URL-addressable resources, that is, you should use the Cache API when you work with network resources that are necessary to load your application. If your application deals with lots of data, you may cache the data that the user will most likely need on page load. These resources may include file-based content, assets, API responses, and web pages.
-
-For the storage of significant amounts of structured data (including files/blobs), you should ideally use the IndexedDB API.
-
-The Cache API ships with several methods to perform the following (CRUD) operations:
-
-    Create a new cache
-    Add (update) items to a cache
-    Retrieve items from a cache
-    Delete items from a cache
-
-Let’s go over some ways to use these methods in our code.
-Create a new cache
-
-Before we can start storing request-response pairs into our cache storage, we need to create a cache instance. Each origin can have multiple cache objects within its cache storage. We can create a new cache object using the caches.open() method:
-
-const newCache = await caches.open('new-cache');
-
-The snippet above receives the name of the cache as the single parameter and goes on to create the cache with that name. The caches.open() method first checks if a cache with that name already exists. If it doesn’t, it creates it and returns a Promise that resolves with the Cache object.
-
-After the snippet executes, we will now have a new cache object that can be referenced with the name new-cache.
-Adding items to a cache
-
-There are three main ways to add items to the cache:
-
-    add
-    addAll
-    put
-
-All of these methods return a Promise, now let’s go over each of these and see how they differ from one another.
-Cache.add()
-
-The first method, cache.add(), takes a single parameter that can either be a URL string literal or a Request object. A call to thecache.add() method will make a Fetch request to the network and store the response in the associated cache object:
-
-newCache.add('/cats.json')
-
-or to gain more control, we can use a request object:
-
-const options = {
-    method: "GET",
-    headers: new Headers({
-        'Content-Type': 'text/html'
-    }),
-  }  
-newCache.add(new Request('/cats.json', options))
-
-    Note: If the fetch is unsuccessful and an error response is returned, nothing is stored in the cache and the
-    Promise rejects.
-
-Cache.addAll()
-
-This method works similarly to the cache.add() method except that it takes in an array of request URL string literals or Request objects and returns a promise when all the resources have been cached:
-
-const urls = ['pets/cats.json', 'pets/dogs.json'];
-newCache.addAll(urls);
-
-    Note: The promise rejects if one or more items in the array of requests are not cached. Also, while the items in the array are being cached, a new entry overwrites any matching existing entry.
-
-Cache.put()
-
-The Cache.put method works quite differently from the rest as it allows an extra layer of control. The put() method takes two parameters, the first can either be a URL string literal or a Request object, the second is a Response either from the network or generated within your code:
-
-// Retrieve cats.json and cache the response
-newCache.put('./cats.json')
-
-// Create a new entry for cats.json and store the generated response
-newCache.put('/cats.json', new Response('{"james": "kitten", "daniel": "kitten"}'))
-
-// Fetch a response from an external address and create a new entry for cats.json
-newCache.put('https://pets/cats.json');
-
-The put method allows an extra layer of control as it lets you store responses that do not depend on CORS or other responses that are dependent on a server response status code.
-
-    Pro tip: The first two methods — add() and addAll() — are dependent on the state of CORS on the server the data is being requested from. If a CORS check fails, nothing gets cached and the Promise rejects. Using put(), on the other hand, gives you extra confidence as you can set an in-house response.
-
-Retrieving items from a cache
-
-After we’ve added some items to the cache, we need to be able to retrieve them during run-time. We can use the match() method to retrieve our cached responses:
-
-// retrieve a new response
-const request = '/cats.json';
-const response = await newCache.match(request);
-
-In the code above, we passed in a request variable to the match method, if the request variable is a URL string, it is converted to a Request object and used as an argument. The match method will return a Promise that resolves to a Response object if a matching entry is found.
-
-The browser uses different factors in determining if two or more Requests match. A Request may have the same URL as another but use a different HTTP method. Two such requests are considered to be different by the browser.
-
-When using the match method, we can also pass an options object as the second parameter. This object has key value pairs that tell match to ignore specific factors when matching a request:
-
-// create an options object
-const options = {
-        ignoreVary: true, // ignore differences in Headers
-        ignoreMethod: true, // ignore differences in HTTP methods
-        ignoreSearch: true // ignore differences in query strings
-    }
-
-// then we pass it in here
-const response = await newCache.match(request, options);
-
-In a case where more than one cache item matches, the oldest one is returned. If we intend to retrieve all matching responses, we can use the matchAll() method.
-Removing items from a cache
-
-We might not need a cache entry anymore and want it deleted. We can delete a cache entry using the delete() method:
-
-// delete a cache entry
-const request = '/cats.json';
-newCache.delete(request);
-
-In the code above, we saved a URL string in the request variable but we can also pass in a Request object to the delete method. In a case where we have more than one matching entries, we can pass in a similar options Object as we did with the match method.
-Deleting a cache
-
-Finally, we can delete a cache by calling the delete() method on the caches property of the window object. Let’s delete our cache in the snippet below:
-
-// delete an existing cache
-caches.delete('new-cache');
-
-    Note: When a cache is deleted, the delete() method returns a Promise if the cache was actually deleted and a false if something went wrong or the cache doesn’t exist.
-
-Conclusion
-
-In this article, we took a tour of the Cache API and discussed its usefulness to the development of progressive web applications. We also explored its CRUD methods and saw how easily we can retrieve responses and store requests.
-
-    Note: For security reasons, a cache is bound to the current origin and other origins cannot access the caches set up for other origins.
-
-All the code in this tutorial can be found in this repository, feel free to fork it or send in a PR.
-
--->
