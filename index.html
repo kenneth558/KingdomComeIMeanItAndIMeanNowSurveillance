@@ -297,13 +297,13 @@ else
     <object id="alertsdirectory" type="text/html" 
 data="/../../links_to_alerting_activity/mostrecent1" 
 onclick="if (this.data.includes('/mostrecent1')){this.data='/../../links_to_alerting_activity'}else{this.data='/../../links_to_alerting_activity/mostrecent1'};" 
-onload="if(alertsdirectory.contentWindow.readyState != 'complete' || alertsdirectory.contentWindow.document.body.children[0].localName != 'table'){return}
+onload="if(this.contentWindow.readyState != 'complete' || this.contentWindow.document.body.children[0].localName != 'table'){return}
         if(alertsdirectory.contentDocument.body.children[0].rows.length > 1)
         { 
             alertsdirectory.contentDocument.body.children[0].rows.length > 2 ? element=alertsdirectory.contentDocument.body.children[0].rows[2].cells[1] : element=alertsdirectory.contentDocument.body.children[0].rows[1].cells[1]
             if(!element.innerText.endsWith('.jpg'))
             {
-               
+               element='';previousalert=''
             }
         }
         else{element='';previousalert=''}
