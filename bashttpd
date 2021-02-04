@@ -488,7 +488,7 @@ END {print "</table>"}')"
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH%%/mostrecent*}" '
 BEGIN {print css_style "<table class=\"elif4\" style=\"width:100%\">";line=0}
 {printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} \
-else {printf $12 "\"";if (line==1){printf " id=\"latestalert\""}};printf " target=\"_blank\">";if (substr($1,1,1) != "l"){printf $10} else {printf linkpre $12}; printf "</a></td></tr>";line=line+1} 
+else {printf $12 "\"";if (line==1){printf " id=\"latestalert\""}};printf ">";if (substr($1,1,1) != "l"){printf $10} else {printf linkpre $12}; printf "</a></td></tr>";line=line+1} 
 END {print "</table>"}')"
 #
 #      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH%%\?*}|awk -v linkpre="$(ip -o address | \
@@ -500,18 +500,7 @@ END {print "</table>"}')"
   elif [[ "${URL_PATH}" =~ .*links_to_alerting_activity ]]; then
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH}" -v subpath="${URL_PATH##*/links_to_alerting_activity}" '
-BEGIN {printf css_style "<script type=\"text/javascript\">var windws = []; var windwsx=0;</script><table class=\"elif5\" style=\"width:100%\" \
-onload=\"var mousedownedhere;\
-elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("mousedown",function(item){mousedownedhere=item.pageY;})\
-elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("mouseup",function(item){\
-var downrowindex=Math.trunc((mousedownedhere+2)/((elmnt.contentDocument.body.children[0].tBodies[0].clientHeight+2)/elmnt.contentDocument.body.children[0].tBodies[0].childElementCount)-.5); \
-if(elmnt.contentDocument.body.children[0].tBodies[0].rows[downrowindex].cells[1].innerText.endsWith('.jpg')) \
-{var uprowindex=Math.trunc((item.pageY+2)/((elmnt.contentDocument.body.children[0].tBodies[0].clientHeight+2)/elmnt.contentDocument.body.children[0].tBodies[0].childElementCount)-.5) \
-if(downrowindex != uprowindex) \
-{var frames=[];var windwz=[];var playing=true;var on_frame=0; \
-var timer;let rowindex=downrowindex;do {frames[rowindex]=elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].firstElementChild.href; \
-windwz[rowindex] = window.open(frames[rowindex]); \
-if(downrowindex < uprowindex){rowindex++}else{rowindex--}}while(rowindex!=uprowindex)}}})\"><tr><td></td><td>";if(subpath!=""){printf "<button style=\"font-size\:22px;background\:white\" onclick=\"setInterval(function(){windws.forEach(windw){window.open(windw)}},500)\">Play all the snapshot windows you opened</button>&nbsp;(Open them first, of course.  THIS FEATURE IS UNDER DEVELOPMENT AND NOT WORKING YET.  ALSO NOTE THESE SNAPSHOTS ARE NOT REGISTERED IN THE SEPARATED VIEWS SECTION LIKE OTHERS WHEN YOU OPEN THEM)"}print "</td></tr>";line=0}
+BEGIN {printf css_style "<table class=\"elif5\" style=\"width:100%\"><tr><td></td><td>";if(subpath!=""){printf "<button style=\"font-size\:22px;background\:white\" onclick=\"setInterval(function(){windws.forEach(windw){window.open(windw)}},500)\">Play all the snapshot windows you opened</button>&nbsp;(Open them first, of course.  THIS FEATURE IS UNDER DEVELOPMENT AND NOT WORKING YET.  ALSO NOTE THESE SNAPSHOTS ARE NOT REGISTERED IN THE SEPARATED VIEWS SECTION LIKE OTHERS WHEN YOU OPEN THEM)"}print "</td></tr>";line=0}
 
 {printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} \
 else {printf $12 "\"";if (line==1){printf " id=\"latestalert\""}};printf " onclick=\"windws[windowsx++]=windows.open(href);\" target=\"_blank\">";if (substr($1,1,1) != "l"){printf $10} else {printf linkpre $12}; printf "</a></td></tr>";line=line+1} 
@@ -542,7 +531,7 @@ END {print "</table>"}')"
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH%%\?*}|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH}" '
 BEGIN {print css_style "<table class=\"elif8\">"}
-{print "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre $10 "\" onclick=\"return do_me_false(this);\" target=\"_blank\">" linkpre $10 "</a></td></tr>"} \
+{print "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre $10 " target=\"_blank\">" linkpre $10 "</a></td></tr>"} \
          END {print "</table>"}')" || fail_with 403
 #      serve_static_string "$(ls -t ${URL_PATH%%-MOTION*}|head -n1)" || fail_with 403
 #      serve_file "$(ls -t ${URL_PATH%%\?*}|head -n1)" || fail_with 403

@@ -136,7 +136,7 @@ var StartTimeOfInterestDT=new Date();
 var StartTimeOfInterestmSec;
 var StartTimeOfInterestmSecminus60=new Date();
 var windows = [];
-var windowx = 0;
+var windowsx = 0;
 var winOpen;
 var playingjpgs = [];/*the size of this array could be the number of jpg viewers on page*/
 var checkingAlerted = null;
@@ -241,39 +241,52 @@ button gets back to the listing again.
 <table><tr><td width="1535px">
 <input type="button" 
 id="alertCheck" style="width:300px;height:75px;font-size:20px;background:white;border-radius:15px;border-color:black;border-width:10px;" 
-value="Alert checking is now OFF" 
+value="Alert checking is now OFF"
 onclick="if(alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
 {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
 else {element=null;}
-if(typeof(element) != 'undefined' && element != null){ previousalert=element.innerText.trim();
-                                                     }
-else { previousalert=null;
+if(typeof(element) != 'undefined' && element != null)
+{ previousalert=element.innerText.trim();
+}
+else 
+{ previousalert=null;
+}
+if (this.value.substr(this.value.length-1,1) != 'F')
+{ this.value='Alert checking is now OFF';this.style.background='white';this.style.width='300px';clearInterval(checkingAlerted);
+} 
+else 
+{    this.value='Alert checking is ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';this.style.width='930px';
+     checkingAlerted=setInterval(function()
+     {
+         if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
+         {
+             if(typeof alertsdirectory.contentDocument.body.children[0].children[0].children[2] != 'null'){element=alertsdirectory.contentDocument.body.children[0].children[0].children[2]}else{element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
+             if(typeof(element) != 'undefined' && element != null) 
+             {
+                 if (element.innerText.trim() != previousalert)
+                 {
+                      if (element.innerText.trim() == ''){previousalert=element.innerText.trim();}else{soundalarm()}
+                 }
+             }
+             else {previousalert=null;}
+             alertsdirectory.data=alertsdirectory.data;
+         }
+     },8000);
+     if(alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
+     {   element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];
      }
-if (this.value.substr(this.value.length-1,1) != 'F'){ this.value='Alert checking is now OFF';this.style.background='white';this.style.width='300px';clearInterval(checkingAlerted);
-                                                    } 
-else { this.value='Alert checking is ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';this.style.width='930px';
-        checkingAlerted=setInterval(
-           function()
-             {if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
-                   {
-if(typeof alertsdirectory.contentDocument.body.children[0].children[0].children[2] != 'null'){element=alertsdirectory.contentDocument.body.children[0].children[0].children[2]}else{element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
-                   }
-              else {element=null;}
-                     if(typeof(element) != 'undefined' && element != null) 
-                        {if (element.innerText.trim() !== previousalert)   {if (element.innerText.trim() == ''){previousalert=element.innerText.trim();}else{{soundalarm()}
-                                                                 }
-                        }
-                     else {previousalert=null;}
-               alertsdirectory.data=alertsdirectory.data;
-             },8000);
-        if(alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
-             {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
-        else {element=null;}
-        if(typeof(element) != 'undefined' && element != null){if (element.innerText.trim() !== previousalert){if(!element.innerText.endsWith('.jpg')){previousalert=element.innerText.trim()};
-                                                                                                       }
-                                                             }
-        alertsdirectory.data=alertsdirectory.data;
-     }">
+     else
+     {   element=null;
+     }
+     if(typeof(element) != 'undefined' && element != null)
+     {
+         if (element.innerText.trim() !== previousalert)
+         {
+             if(!element.innerText.endsWith('.jpg')){previousalert=element.innerText.trim()};
+         }
+     }
+     alertsdirectory.data=alertsdirectory.data;
+}">
 <!-- </td></tr>
 <tr>
 <td><center>-->
@@ -308,6 +321,7 @@ if (alertCheck.value.substr(alertCheck.value.length-1,1) != 'F' && previousalert
                      }
                  }
              }
+alert()
              glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')
         }"
 width="1900px" height="1200px" style="font-size:15px;overflow:auto;border:3px solid black;border-width:20px 30px 3px 3px;">
@@ -887,7 +901,8 @@ onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', th
 onload="if (fpmp4.contentDocument.body.children[0] != 'undefined' && fpmp4.contentDocument.body.children[0] != null && fpmp4.contentDocument.body.children[0].localName == 'video'){}"
 onload="if (fpmp4.contentDocument.body.children[0] != 'undefined' && fpmp4.contentDocument.body.children[0] != null && fpmp4.contentDocument.body.children[0].localName == 'video'){
 var endTime = new Date(fpmp4.contentDocument.body.children[0].ownerDocument.lastModified);
-var startTime = new Date(endTime.getTime() - (fpmp4.contentDocument.body.children[0].mozFragmentEnd * 1000));alert('Last modified time is ' + fpmp4.contentDocument.body.children[0].ownerDocument.lastModified + ' (' + endTime.getTime() + ' ms) and the video segment is ' + (fpmp4.contentDocument.body.children[0].mozFragmentEnd * 1000) + ' mseconds long, so start time should be ' + startTime)}"
+var startTime = new Date(endTime.getTime() - (fpmp4.contentDocument.body.children[0].mozFragmentEnd * 1000));
+alert('Last modified time is ' + fpmp4.contentDocument.body.children[0].ownerDocument.lastModified + ' (' + endTime.getTime() + ' ms) and the video segment is ' + (fpmp4.contentDocument.body.children[0].mozFragmentEnd * 1000) + ' mseconds long, so start time should be ' + startTime)}"
 onload="if (fpmp4.contentDocument.body.children[0] != 'undefined' && fpmp4.contentDocument.body.children[0] != null && fpmp4.contentDocument.body.children[0].localName == 'video'){alert(fpmp4.contentDocument.body.children[0].ownerDocument.timeline)}"
 width="1000px" height="560px" 
  style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
@@ -950,6 +965,11 @@ height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </div>
 <div id="notes" class="tabcontent" style="display:none">
 <h3><ul>
+<li>
+Drag over jpg files and you'll notice they can lauch into new and separate viewer elements.  If that is not<br>
+what you want, for example when only to drag and drop, just move the mouse sideways while dragging so it<br>
+egresses the element then ingresses back into it.  That will disable the auto-multi-play and only highlight.
+</li>
 <li>
 "Time Of Interest" and "View Of Interest" are determined from the file last-modified (creation) time of most<br>
 recent jpg snapshot rendered, but one minute prior to that is used as the reasonable queue-to point.  Last-<br>
@@ -1061,6 +1081,8 @@ var timer;
 } -->
 <script type="text/javascript">
 //var frames=['frame1.png','frame2.png','frame3.png','frame4.png','frame5.png','frame6.png','frame7.png','frame8.png','frame9.png','frame10.png'];
+var windws = []; 
+var windwsx=0;
 var playing=true;
 var on_frame=0;
 var timer;
@@ -1295,10 +1317,10 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
     })
     elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("mouseup",function(item)
     {
-         var downrowindex=Math.trunc((mousedownedhere+2)/((elmnt.contentDocument.body.children[0].tBodies[0].clientHeight+2)/elmnt.contentDocument.body.children[0].tBodies[0].childElementCount)-.5)
-         if(elmnt.contentDocument.body.children[0].tBodies[0].rows[downrowindex].cells[1].innerText.endsWith('.jpg'))
+         var downrowindex=Math.trunc((mousedownedhere+2)/((this.clientHeight+2)/this.childElementCount)-.5)
+         if(this.rows[downrowindex].cells[1].innerText.endsWith('.jpg'))
          {
-              var uprowindex=Math.trunc((item.pageY+2)/((elmnt.contentDocument.body.children[0].tBodies[0].clientHeight+2)/elmnt.contentDocument.body.children[0].tBodies[0].childElementCount)-.5)
+              var uprowindex=Math.trunc((item.pageY+2)/((this.clientHeight+2)/this.childElementCount)-.5)
               if(downrowindex != uprowindex)
               {
 /*alert(currSrc)*/
@@ -1313,7 +1335,7 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
                  var timer;
                  let rowindex=downrowindex;do
                  {
-                     frames[rowindex]=elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].firstElementChild.href
+                     frames[rowindex]=this.rows[rowindex].cells[1].firstElementChild.href
                      windwz[rowindex] = window.open(frames[rowindex]) /* save each window handle in an array of them*/
                      if(downrowindex < uprowindex){rowindex++}else{rowindex--}
                  }while(rowindex!=uprowindex)
@@ -1324,28 +1346,28 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
     elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("click",function(item)
     {
 /*The hard-coded 2 pixel corrections below might need to be adjusted for border widths or other style settings the web server might send differently in the future:*/
-      var rowindex=Math.trunc((item.pageY+2)/((elmnt.contentDocument.body.children[0].tBodies[0].clientHeight+2)/elmnt.contentDocument.body.children[0].tBodies[0].childElementCount)-.5)
-      var filename=elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText
-      if(elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText.endsWith('.mp4'))
+      var rowindex=Math.trunc((item.pageY+2)/((this.clientHeight+2)/this.childElementCount)-.5)
+      var filename=this.rows[rowindex].cells[1].innerText
+      if(this.rows[rowindex].cells[1].innerText.endsWith('.mp4'))
       {
 /*         alert('The file chosen in this table construct is type .mp4')*/
-         var timestamp=elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[0].outerHTML.substr(18).replace(/&nbsp;/g," ").replace("nbsp;","")
+         var timestamp=this.rows[rowindex].cells[0].outerHTML.substr(18).replace(/&nbsp;/g," ").replace("nbsp;","")
          timestamp=timestamp.substring(0,timestamp.indexOf(" ]"))
          elmnt.children["timestamp"].value=timestamp
          var endTime = new Date(timestamp.substring(0,20))
          var endTimemSec=endTime.getTime()+timestamp.substr(21)/1000000
       }
-      else if(elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText.endsWith('.jpg'))
+      else if(this.rows[rowindex].cells[1].innerText.endsWith('.jpg'))
       {
 /*         alert('The link is jpg inside this construct');*/
 /*We need to always know the timestamp of the last .jpg file viewed so we can populate the .mp4 windows for that event timeframe*/
-           StartTimeOfInterest=elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[0].outerHTML.substr(18).replace(/&nbsp;/g," ").replace("nbsp;","")
+           StartTimeOfInterest=this.rows[rowindex].cells[0].outerHTML.substr(18).replace(/&nbsp;/g," ").replace("nbsp;","")
            StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
            StartTimeOfInterestDT=new Date(StartTimeOfInterest)
            StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
            StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
            StartTimeOfInterestEl.value='    ' + StartTimeOfInterest.substr(0,19)
-           StartCamOfInterestEl.value=streamListings[elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText.substr(elmnt.contentDocument.body.children[0].tBodies[0].rows[rowindex].cells[1].innerText.indexOf('192.168.0.') + 10,2)]
+           StartCamOfInterestEl.value=streamListings[this.rows[rowindex].cells[1].innerText.substr(this.rows[rowindex].cells[1].innerText.indexOf('192.168.0.') + 10,2)]
            lsbtn.name='!var!www!camera_streams!camera_*'
       }
     })
