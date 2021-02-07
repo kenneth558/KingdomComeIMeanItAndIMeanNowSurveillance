@@ -34,7 +34,6 @@ LOOK FOR IT IN MY GITHUB SPACE.
     }
     .camtitle
     {
-          border:3px ridge black;
           border-top: solid 9px black;
          td:first-child:after {content: attr(aria-label);
     }
@@ -90,6 +89,10 @@ document.links[13].href='http://' + window.location.hostname + ':14080';//set fo
 document.links[16].href='http://' + window.location.hostname + ':9080';//set for Front Parking Lot 9080
 document.links[19].href='http://' + window.location.hostname + ':15080';//set for NE Corner 15080
 tellBrowser()
+scalemaster.click()
+scalemaster.value=50
+sldrmaster.value=scalemaster.value
+textmaster.value=scalemaster.value
 document.title='Surveillance Recordings';">
 <script type="text/javascript"><!-- THIS REALLY DOESN'T WORK SO EACH ANNOUNCEMENT WILL HAVE TO HAVE ITS OWN ID AND SCRIPT TAG WITH IT -->
 function tellBrowser(){
@@ -245,48 +248,34 @@ value="Alert checking is now OFF"
 onclick="if(alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
 {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
 else {element=null;}
-if(typeof(element) != 'undefined' && element != null)
-{ previousalert=element.innerText.trim();
-}
-else 
-{ previousalert=null;
-}
-if (this.value.substr(this.value.length-1,1) != 'F')
-{ this.value='Alert checking is now OFF';this.style.background='white';this.style.width='300px';clearInterval(checkingAlerted);
-} 
-else 
-{    this.value='Alert checking is ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';this.style.width='930px';
-     checkingAlerted=setInterval(function()
-     {
-         if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
-         {
-             if(typeof alertsdirectory.contentDocument.body.children[0].children[0].children[2] != 'null'){element=alertsdirectory.contentDocument.body.children[0].children[0].children[2]}else{element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
-             if(typeof(element) != 'undefined' && element != null) 
-             {
-                 if (element.innerText.trim() != previousalert)
-                 {
-                      if (element.innerText.trim() == ''){previousalert=element.innerText.trim();}else{soundalarm()}
-                 }
-             }
-             else {previousalert=null;}
-             alertsdirectory.data=alertsdirectory.data;
-         }
-     },8000);
-     if(alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
-     {   element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];
+if(typeof(element) != 'undefined' && element != null){ previousalert=element.innerText;
+                                                     }
+else { previousalert=null;
      }
-     else
-     {   element=null;
-     }
-     if(typeof(element) != 'undefined' && element != null)
-     {
-         if (element.innerText.trim() !== previousalert)
-         {
-             if(!element.innerText.endsWith('.jpg')){previousalert=element.innerText.trim()};
-         }
-     }
-     alertsdirectory.data=alertsdirectory.data;
-}">
+if (this.value.substr(this.value.length-1,1) != 'F'){ this.value='Alert checking is now OFF';this.style.background='white';this.style.width='300px';clearInterval(checkingAlerted);
+                                                    } 
+else { this.value='Alert checking is ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';this.style.width='930px';
+        checkingAlerted=setInterval(
+           function()
+             {if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
+                   {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
+              else {element=null;}
+                     if(typeof(element) != 'undefined' && element != null) 
+                        {if (element.innerText !== previousalert)   {if (element.innerText == ''){previousalert=element.innerText;
+                                                                                                  } 
+                                                                    }
+                        }
+                     else {previousalert=null;}
+               alertsdirectory.data=alertsdirectory.data;
+             },8000);
+        if(alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
+             {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
+        else {element=null;}
+        if(typeof(element) != 'undefined' && element != null){if (element.innerText !== previousalert){if(!element.innerText.endsWith('.jpg')){previousalert=element.innerText};
+                                                                                                       }
+                                                             }
+        alertsdirectory.data=alertsdirectory.data;
+     }">
 <!-- </td></tr>
 <tr>
 <td><center>-->
@@ -297,34 +286,17 @@ else
     <object id="alertsdirectory" type="text/html" 
 data="/../../links_to_alerting_activity/mostrecent1" 
 onclick="if (this.data.includes('/mostrecent1')){this.data='/../../links_to_alerting_activity'}else{this.data='/../../links_to_alerting_activity/mostrecent1'};" 
-onload="if(this.contentWindow.readyState != 'complete' || this.contentWindow.document.body.children[0].localName != 'table'){return}
-        if(alertsdirectory.contentDocument.body.children[0].rows.length > 1)
-        { 
-            alertsdirectory.contentDocument.body.children[0].rows.length > 2 ? element=alertsdirectory.contentDocument.body.children[0].rows[2].cells[1] : element=alertsdirectory.contentDocument.body.children[0].rows[1].cells[1]
-            if(!element.innerText.endsWith('.jpg'))
-            {
-               element='';previousalert=''
-            }
-        }
-        else{element='';previousalert=''}
+onload="if(alertsdirectory.contentWindow.document.body.children[0].localName == 'img'){return}
+        if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
+          {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
+        else {element=null;}
         if(element != 'undefined' && element != null)
-        {if (element.innerText.trim() != previousalert)
-             {
-
-if (alertCheck.value.substr(alertCheck.value.length-1,1) != 'F' && previousalert != null && element.innerText.trim() != null && !element.innerText.endsWith('.jpg'))
-                 {
-                 }
-              else 
-                 {if(!element.innerText.endsWith('.jpg'))
-                     {
-                         previousalert=element.innerText.trim()
-                     }
-                 }
+          {if (element.innerText !== previousalert)
+             {if (alertCheck.value.substr(alertCheck.value.length-1,1) != 'F' && previousalert != null && element.innerText !== null && !element.innerText.endsWith('.jpg')){playalert();}else {if(!element.innerText.endsWith('.jpg')){previousalert=element.innerText};}
              }
-alert()
-             glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')
-        }"
-width="1900px" height="1200px" style="font-size:15px;overflow:auto;border:3px solid black;border-width:20px 30px 3px 3px;">
+          }
+        else {previousalert=null;}
+        glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"width="1900px" height="1200px" style="font-size:15px;overflow:auto;border:3px solid black;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
@@ -644,15 +616,8 @@ Command: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
 </div>
 
 <div id="byview" class="tabcontent" style="display:none">
-<br><b><big>Separate Camera Recordings.  Click a border to list/unlist:</big>&nbsp;Stream elements are now aligned to the middle</b>
-<input type="range" id="sldrmaster" oninput="scalemaster.value=this.value" name="" min=".1" max="6" value=".7" step=".1" list="tickmarks">
-<input type="button" value=".7" id="scalemaster" style="font-size:20px;" 
-onclick="var lmentList=document.getElementsByClassName('scaleSlider');var i;
-for(i=0;i<lmentList.length;i++)
-{lmentList[i].value=this.value;}
-         lmentList=document.getElementsByClassName('scaleBtn');
-for(i=0;i<lmentList.length;i++)
-{lmentList[i].value=this.value;lmentList[i].click()}">
+<br><b><big>Separate Camera Recordings.  Click a border to list/unlist:</big>&nbsp;Stream elements v-aligned to the middle</b>
+Master scaling now done in lower buttons
 <table style="border:1px solid black">
 <tr><td valign="top">
 <table>
@@ -663,18 +628,19 @@ for(i=0;i<lmentList.length;i++)
 <a href="" target="_blank"><h3>East Drive</h3></a>
 </td></tr>
 <tr><td class="bb" valign="top">
-<a href="/../../camera_snapshots/camera_east_driveway/" target="_blank">Event Snapshots</a>; for alt control,<br> drop into a spare viewer
-<input type="range" id="sldredjpg" class="scaleSlider" oninput="scaleedjpg.value=this.value" name="" min=".1" max="6" value=".8" step=".1" list="tickmarks">
-<input type="button" value=".8" class="scaleBtn" id="scaleedjpg" style="font-size:20px;" 
+<a href="/../../camera_snapshots/camera_east_driveway/" target="_blank">Event Snapshots</a>; for alt control, drop into<br>a spare viewer
+<input type="range" id="sldredjpg" class="scaleSlider" oninput="scaleedjpg.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
+<input type="button" value="80" class="scaleBtn" id="scaleedjpg" style="font-size:20px;" 
 onclick="var a=this.id;
 var lment=getElementById(a.substring(5));var sliderelement=getElementById('sldr' + a.substring(5))
-lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value) + 'px'"
+lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
 onclick="scaleperslider(this.id)"
 onclick="var lment=getElementById(this.id.substring(5));var sliderelement=getElementById('sldr' + this.id.substring(5))
-lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value) + 'px'"
+lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
 >
+<big><big>%</big></big>
 <br><br><br>
     <object id="edjpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -684,13 +650,14 @@ height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </object>
 </td></tr>
 <tr><td class="bb">
-<a href="/var/www/camera_streams/camera_east_driveway/" target="_blank">Streams</a> - <b>top one won't immediately be complete to play.</b> For best con-<br>trol, drop others into a spare player.
-<input type="range" id="sldredmp4" class="scaleSlider" oninput="scaleedmp4.value=this.value" name="" min=".1" max="6" value=".8" step=".1" list="tickmarks">
-<input type="button" value=".8" class="scaleBtn" id="scaleedmp4" style="font-size:20px;" 
+<a href="/var/www/camera_streams/camera_east_driveway/" target="_blank">Streams</a> - <b>top one likely unfinished</b><br>For best control, drop others into<br>a spare player
+<input type="range" id="sldredmp4" class="scaleSlider" oninput="scaleedmp4.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
+<input type="button" value="80" class="scaleBtn" id="scaleedmp4" style="font-size:20px;" 
 onclick="var a=this.id;
 var lment=getElementById(a.substring(5));var sliderelement=getElementById('sldr' + a.substring(5))
-lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value) + 'px'">
+lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'">
+<big><big>%</big></big>
 <br><br><br>
     <object id="edmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -709,19 +676,8 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px
 </td></tr>
 
 <tr><td class="camtitle">
+<br>
 <a name="sd_location_on_page"></a>
-<a href="" target="_blank"><h3>South Drive</h3></a>
-</td></tr>
-
-<tr><td class="bb">
-<a href="/var/www/camera_streams/camera_south_driveway/" target="_blank">Streams</a> - <b>top one won't immediately be complete to play.</b> For best con-<br>trol, drop others into a spare player.
-<input type="range" id="sldrsdmp4" class="scaleSlider" oninput="scalesdmp4.value=this.value" name="" min=".1" max="6" value=".8" step=".1" list="tickmarks">
-<input type="button" value=".8" class="scaleBtn" id="scalesdmp4" style="font-size:20px;" 
-onclick="var a=this.id;
-var lment=getElementById(a.substring(5));var sliderelement=getElementById('sldr' + a.substring(5))
-lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value) + 'px'">
-<br><br><br>
     <object id="sdmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
@@ -731,16 +687,31 @@ height="880px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="4" />
-</object></td></tr>
+</object>
+
+<a href="" target="_blank"><h3>South Drive</h3></a>
+</td></tr>
 
 <tr><td class="bb">
-<a href="/../../camera_snapshots/camera_south_driveway/" target="_blank">Event Snapshots</a>; for alt control,<br>drop into a spare viewer
-<input type="range" id="sldrsdjpg" class="scaleSlider" oninput="scalesdjpg.value=this.value" name="" min=".1" max="6" value=".8" step=".1" list="tickmarks">
-<input type="button" value=".8" class="scaleBtn" id="scalesdjpg" style="font-size:20px;" 
+<a href="/var/www/camera_streams/camera_south_driveway/" target="_blank">Streams</a> - <b>top one likely unfinished</b><br>For best control, drop others into<br>a spare player
+<input type="range" id="sldrsdmp4" class="scaleSlider" oninput="scalesdmp4.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
+<input type="button" value="80" class="scaleBtn" id="scalesdmp4" style="font-size:20px;" 
 onclick="var a=this.id;
 var lment=getElementById(a.substring(5));var sliderelement=getElementById('sldr' + a.substring(5))
-lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value) + 'px'">
+lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'">
+<big><big>%</big></big>
+</td></tr>
+
+<tr><td class="bb">
+<a href="/../../camera_snapshots/camera_south_driveway/" target="_blank">Event Snapshots</a>; for alt control,drop into<br>a spare viewer
+<input type="range" id="sldrsdjpg" class="scaleSlider" oninput="scalesdjpg.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
+<input type="button" value="80" class="scaleBtn" id="scalesdjpg" style="font-size:20px;" 
+onclick="var a=this.id;
+var lment=getElementById(a.substring(5));var sliderelement=getElementById('sldr' + a.substring(5))
+lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'">
+<big><big>%</big></big>
 <br><br><br>
 <object id="sdjpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -763,13 +734,14 @@ height="880px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <a href="" target="_blank"><h3>Dock</h3></a>
 </td></tr>
 <tr><td class="bb">
-<a href="/../../camera_snapshots/camera_sw_corner/" target="_blank">Event Snapshots</a>; for alt control, <br>drop into a spare viewer
-<input type="range" id="sldrswjpg" class="scaleSlider" oninput="scaleswjpg.value=this.value" name="" min=".1" max="6" value=".8" step=".1" list="tickmarks">
-<input type="button" value=".8" class="scaleBtn" id="scaleswjpg" style="font-size:20px;" 
+<a href="/../../camera_snapshots/camera_sw_corner/" target="_blank">Event Snapshots</a>; for alt control, drop into<br>a spare viewer
+<input type="range" id="sldrswjpg" class="scaleSlider" oninput="scaleswjpg.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
+<input type="button" value="80" class="scaleBtn" id="scaleswjpg" style="font-size:20px;" 
 onclick="var a=this.id
 var lment=getElementById(a.substring(5));var sliderelement=getElementById('sldr' + a.substring(5))
-lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value) + 'px'">
+lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'">
+<big><big>%</big></big>
 <br><br><br>
 <object id="swjpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -780,13 +752,14 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </td></tr>
 
 <tr><td class="bb">
-<a href="/var/www/camera_streams/camera_sw_corner/" target="_blank">Streams</a> - <b>top one won't immediately be complete to play.</b> For best con-<br>trol, drop others into a spare player.
-<input type="range" id="sldrswmp4" class="scaleSlider" oninput="scaleswmp4.value=this.value" name="" min=".1" max="6" value=".8" step=".1" list="tickmarks">
-<input type="button" value=".8" class="scaleBtn" id="scaleswmp4" style="font-size:20px;" 
+<a href="/var/www/camera_streams/camera_sw_corner/" target="_blank">Streams</a> - <b>top one likely unfinished</b><br>For best control, drop others into<br>a spare player
+<input type="range" id="sldrswmp4" class="scaleSlider" oninput="scaleswmp4.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
+<input type="button" value="80" class="scaleBtn" id="scaleswmp4" style="font-size:20px;" 
 onclick="var a=this.id;
 var lment=getElementById(a.substring(5));var sliderelement=getElementById('sldr' + a.substring(5))
-lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value) + 'px'">
+lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'">
+<big><big>%</big></big>
 <br><br><br>
     <object id="swmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -819,10 +792,6 @@ onclick="
         objectelement[i].data=streamListings[objectelement[i].id] + '*?1minutesbefore' + StartTimeOfInterest;
     }">
 <br>
-<input type="button" value="Start videos" 
-id="startbtn0" style="font-size:20px;" 
-onclick="startbtncclick();">
-<br>
 <input disabled id="StartTimeOfInterestEl" style="font-size:20px;border:1px ridge blue;background:white" value="Time Of Interest" height="100px">
 <br>
 <input disabled id="StartCamOfInterestEl" style="font-size:20px;border:1px ridge blue;background:white" value="View Of Interest" height="100px">
@@ -830,7 +799,11 @@ onclick="startbtncclick();">
 <!--<input type="button" value="Queue the playing or paused videos to queue-to time. Retry until success" id="qbtn" 
 onclick="         var videoneedsqueueing = [objectelement.length];//This var is not used yet.  Future use is to auto-queue all videos with merely a single button click instead of manually retrying
 -->
-<input type="button" value="Queue loaded videos to queue-to time." id="qbtn" 
+<input type="button" value="Start videos" 
+id="startbtn0" style="font-size:20px;" 
+onclick="startbtncclick();">
+<br>
+<input type="button" value="Queue" id="qbtn" 
 style="font-size:20px;background:#e6e6e6"
 onclick="var objectelement=document.getElementsByClassName('mp4obj');
          var videoneedsqueueing = [objectelement.length]
@@ -848,7 +821,7 @@ onclick="var objectelement=document.getElementsByClassName('mp4obj');
                          objectelement[i].contentDocument.body.children[0].currentTime=objectelement[i].children['currenttime'].value
                          if(objectelement[i].contentDocument.body.children[0].currentTime < objectelement[i].children['currenttime'].value)
                          {
-                             if(this.style.background != 'Chartreuse'){this.value='Queued best for now. Manually retry until success';this.style.background='Chartreuse'}
+                             if(this.style.background != 'Chartreuse'){this.value='Queueing. Retry until success';this.style.background='Chartreuse'}
                              videoneedsqueueing[i]=true
                              var notalldoneyet=true
                          }
@@ -862,7 +835,7 @@ onclick="var objectelement=document.getElementsByClassName('mp4obj');
                  }
              }
          }
-         if(notalldoneyet == false){this.value='Queue the playing or paused videos to queue-to time.';this.style.background='#e6e6e6'}
+         if(notalldoneyet == false){this.value='Queued';this.style.background='#e6e6e6'}
 "><br>
 <!--
          var notalldoneyet=false
@@ -885,20 +858,31 @@ objectelement[i].contentDocument.body.children[0].pause()
 <!--
  -->
 <!--               if(objectelement[i].contentDocument.body.children[0].currentTime != objectelement[i].children['currenttime'].value){objectelement[i].contentDocument.body.children[0].currentTime=objectelement[i].children['currenttime'].value}  -->
-<big>Queue-to time is one minute prior to time<br>shown in the text box above.<br>Allowing pre-loading between retries is best practice</big>
+<big>Queue-to time=minute prior to time<br>shown in the text box above.<br>Allowing pre-loading between<br>retries is best practice</big>
 <br><br>
-<input type="button" value="Pause all videos" id="pausebtn" style="font-size:20px;" 
+<input type="button" value="Start videos" 
+id="startbtn1" style="font-size:18px;" onclick="
+startbtncclick()
+">
+&nbsp;
+<input type="button" value="Pause all videos" id="pausebtn" style="font-size:18px;" 
 onclick="var objectelement=document.getElementsByClassName('mp4obj');
         for(var i=0;i<objectelement.length;i++)
         {if(objectelement[i].contentWindow != 'undefined' && objectelement[i].contentWindow != null && objectelement[i].contentWindow[0] != 'undefined' && objectelement[i].contentWindow[0] != null)
         {if(objectelement[i].contentWindow[0].body != 'undefined' && objectelement[i].contentDocument.body.children[0].localName == 'video')
         {objectelement[i].contentDocument.body.children[0].pause()}}}">
-&nbsp;&nbsp;
-<input type="button" value="Start videos" 
-id="startbtn1" style="font-size:20px;" onclick="
-startbtncclick()
-">
-<br>
+<p align="left">
+<input type="range" id="sldrmaster" oninput="scalemaster.value=this.value;textmaster.value=this.value" name="" min="1" max="10000" step=".1" value="36" list="tickmarks">
+<textarea id="textmaster" style="font-size: 10pt;resize: none;" contentEditable="true" cols="5" rows="1" value="36" onkeydown="if(event.key=='Enter'){scalemaster.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" onkeyup="sldrmaster.value=this.value;scalemaster.value=this.value;" onclick="sldrmaster.value=this.value;scalemaster.value=this.value">36</textarea>
+<big><big>%</big></big>
+<input type="button" value="36" id="scalemaster" style="font-size:12px;" 
+onclick="var lmentList=document.getElementsByClassName('scaleSlider');var i;
+for(i=0;i<lmentList.length;i++)
+{lmentList[i].value=this.value;}
+         lmentList=document.getElementsByClassName('scaleBtn');
+for(i=0;i<lmentList.length;i++)
+{lmentList[i].value=this.value;lmentList[i].click()}">
+</p>
 <input type="button" value="Close these video players" id="closebtn" style="font-size:20px;" 
 onclick="var objectelement=document.getElementsByClassName('mp4obj');
         for(var i=0;i<objectelement.length;i++)
@@ -935,13 +919,14 @@ onclick="var objectelement=document.getElementsByClassName('mp4obj');
 </tr>
 <tr>
 <td  class="bb" valign="top">
-<a href="/../../camera_snapshots/camera_front_parking/" target="_blank">Event Snapshots</a>; for alt control,<br>drop into a spare viewer
-<input type="range" id="sldrfpjpg" class="scaleSlider" oninput="scalefpjpg.value=this.value" name="" min=".1" max="6" value=".8" step=".1" list="tickmarks">
-<input type="button" value=".8" class="scaleBtn" id="scalefpjpg" style="font-size:20px;" 
+<a href="/../../camera_snapshots/camera_front_parking/" target="_blank">Event Snapshots</a>; for alt control, drop into<br>a spare viewer
+<input type="range" id="sldrfpjpg" class="scaleSlider" oninput="scalefpjpg.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
+<input type="button" value="80" class="scaleBtn" id="scalefpjpg" style="font-size:20px;" 
 onclick="var a=this.id;
 var lment=getElementById(a.substring(5));var sliderelement=getElementById('sldr' + a.substring(5))
-lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value) + 'px'">
+lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'">
+<big><big>%</big></big>
 <br><br><br>
     <object id="fpjpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -953,13 +938,14 @@ height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 
 
 <tr><td class="bb">
-<a href="/var/www/camera_streams/camera_front_parking/" target="_blank">Streams</a> - <b>top one won't immediately be complete to play.</b> For best con-<br>trol, drop others into a spare player.
-<input type="range" id="sldrfpmp4" class="scaleSlider" oninput="scalefpmp4.value=this.value" name="" min=".1" max="6" value=".8" step=".1" list="tickmarks">
-<input type="button" value=".8" class="scaleBtn" id="scalefpmp4" style="font-size:20px;" 
+<a href="/var/www/camera_streams/camera_front_parking/" target="_blank">Streams</a> - <b>top one likely unfinished</b><br>For best control, drop others into<br>a spare player
+<input type="range" id="sldrfpmp4" class="scaleSlider" oninput="scalefpmp4.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
+<input type="button" value="80" class="scaleBtn" id="scalefpmp4" style="font-size:20px;" 
 onclick="var a=this.id;
 var lment=getElementById(a.substring(5));var sliderelement=getElementById('sldr' + a.substring(5))
-lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value) + 'px'">
+lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'">
+<big><big>%</big></big>
 <br><br><br>
     <object id="fpmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
@@ -989,20 +975,8 @@ width="1000px" height="560px"
 
 <tr><td class="camtitle">
 <a name="ne_location_on_page"></a>
-<a href="" target="_blank"> <h3>Northeast corner</h3></a>
-</td></tr>
-
-
-<tr><td class="bb">
-<a href="/var/www/camera_streams/camera_ne_corner/" target="_blank">Streams</a> - <b>top one won't immediately be complete to play.</b> For best con-<br>trol, drop others into a spare player.
-<input type="range" id="sldrnemp4" class="scaleSlider" oninput="scalenemp4.value=this.value" name="" min=".1" max="6" value=".8" step=".1" list="tickmarks">
-<input type="button" value=".8" id="scalenemp4" class="scaleBtn" style="font-size:20px;" 
-onclick="var a=this.id;
-var lment=getElementById(a.substring(5));var sliderelement=getElementById('sldr' + a.substring(5))
-lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value) + 'px'">
-<br><br><br>
-    <object id="nemp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
+<br>
+<object id="nemp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="960px" 
@@ -1012,18 +986,32 @@ height="720px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="7" />
 </object>
+<a href="" target="_blank"> <h3>Northeast corner</h3></a>
+</td></tr>
+
+
+<tr><td class="bb">
+<a href="/var/www/camera_streams/camera_ne_corner/" target="_blank">Streams</a> - <b>top one likely unfinished</b><br>For best control, drop others into<br>a spare player
+<input type="range" id="sldrnemp4" class="scaleSlider" oninput="scalenemp4.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
+<input type="button" value="80" id="scalenemp4" class="scaleBtn" style="font-size:20px;" 
+onclick="var a=this.id;
+var lment=getElementById(a.substring(5));var sliderelement=getElementById('sldr' + a.substring(5))
+lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'">
+<big><big>%</big></big>
 </td></tr>
 
 
 
 <tr><td class="bb">
-<a href="/../../camera_snapshots/camera_ne_corner/"  target="_blank">Event Snapshots</a>; for alt control,<br> drop into a spare viewer
-<input type="range" id="sldrnejpg" class="scaleSlider" oninput="scalenejpg.value=this.value" name="" min=".1" max="6" value=".8" step=".1" list="tickmarks">
-<input type="button" class="scaleBtn" value=".8" id="scalenejpg" style="font-size:20px;" 
+<a href="/../../camera_snapshots/camera_ne_corner/"  target="_blank">Event Snapshots</a>; for alt control, drop into<br>a spare viewer
+<input type="range" id="sldrnejpg" class="scaleSlider" oninput="scalenejpg.value=this.value" name="" min="1" max="1000" value="80" step=".1" list="tickmarks">
+<input type="button" class="scaleBtn" value="80" id="scalenejpg" style="font-size:20px;" 
 onclick="var a=this.id;
 var lment=getElementById(a.substring(5));var sliderelement=getElementById('sldr' + a.substring(5))
-lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value) + 'px'">
+lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'">
+<big><big>%</big></big>
 <br><br><br>
     <object id="nejpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -1406,7 +1394,8 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
     if(elmnt.contentDocument.body.children[0].tBodies[0] == 'undefined' || elmnt.contentDocument.body.children[0].tBodies[0] == null)
 {alert('Too many event files to list with ' + currSrc + '.  Delete overrunning ones on server.')}
     elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("mousedown",function(item)
-    {mousedownedhere=item.pageY
+    {
+         mousedownedhere=item.pageY
     })
     elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("mouseup",function(item)
     {
@@ -1420,7 +1409,7 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
 /*if(currSrc.includes('-MOTION'))*/
 /*                 {alert('NO MOTION DETECTIONS IN THIS ELEMENT.  You\'ve selected ' + (downrowindex-uprowindex) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you want to actually select!')}*/
 /*               else */
-                 alert('You\'ve selected ' + (downrowindex-uprowindex) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you want to actually select!')
+                 alert('You\'ve selected ' + (downrowindex-uprowindex) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you actually want to select!')
                  var frames=[]
                  var windwz=[]
                  var playing=true;
@@ -1460,6 +1449,7 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
            StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
            StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
            StartTimeOfInterestEl.value='    ' + StartTimeOfInterest.substr(0,19)
+           qbtn.value="Queue";qbtn.style="font-size:20px;background:#e6e6e6"
            StartCamOfInterestEl.value=streamListings[this.rows[rowindex].cells[1].innerText.substr(this.rows[rowindex].cells[1].innerText.indexOf('192.168.0.') + 10,2)]
            lsbtn.name='!var!www!camera_streams!camera_*'
       }
