@@ -936,7 +936,7 @@ lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelem
 <br><br><br>
     <object id="fpjpg" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_front_parking/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_front_parking/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}"
 width="1000px" 
 height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object>
@@ -954,12 +954,8 @@ lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelem
 <big><big>%</big></big>
 <br><br><br>
     <object id="fpmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_front_parking/'} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', this.contentDocument.body.children[0].tagName, '', '', '')"
-onload="if (fpmp4.contentDocument.body.children[0] != 'undefined' && fpmp4.contentDocument.body.children[0] != null && fpmp4.contentDocument.body.children[0].localName == 'video'){}"
-onload="if (fpmp4.contentDocument.body.children[0] != 'undefined' && fpmp4.contentDocument.body.children[0] != null && fpmp4.contentDocument.body.children[0].localName == 'video'){
-var endTime = new Date(fpmp4.contentDocument.body.children[0].ownerDocument.lastModified);
-var startTime = new Date(endTime.getTime() - (fpmp4.contentDocument.body.children[0].mozFragmentEnd * 1000));
 width="1000px" height="560px" 
  style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
