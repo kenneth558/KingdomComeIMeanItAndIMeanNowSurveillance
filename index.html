@@ -92,7 +92,8 @@ textmaster.click()
 textmaster.value=50
 sldrmaster.value=textmaster.value
 textmaster.value=textmaster.value
-document.title='Surveillance Recordings';">
+document.title='Surveillance Recordings';
+">
 <script type="text/javascript"><!-- THIS REALLY DOESN'T WORK SO EACH ANNOUNCEMENT WILL HAVE TO HAVE ITS OWN ID AND SCRIPT TAG WITH IT -->
 function tellBrowser(){
 /* Opera 8.0+*/
@@ -185,7 +186,7 @@ streamListings["13"] = "South Driveway"
 <option value="360" label="6 hrs"></option>
 </datalist>
 <!-- Tab links change the name of tablinks so it shows, change rest to drop 1 so they don't-->
-<div>
+<div id="buttonsdiv">
   <button id="btnbyview" class="tablinks" style="font-size:12px;" 
 onclick="tabactivate(this)">
 Separated views recordings</button>
@@ -254,20 +255,32 @@ else { previousalert=null;
 if (this.value.substr(this.value.length-1,1) != 'F'){ this.value='Alert checking is now OFF';this.style.background='white';this.style.width='300px';clearInterval(checkingAlerted);
                                                     } 
 else { this.value='Alert checking is ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';this.style.width='930px';
+        sysmp4mostrecent.data="/var/www/camera_streams/*/*mp4/mostrecent10"
         checkingAlerted=setInterval(
            function()
-             {
-              if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
-                   {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
-              else {element=null;}
-                     if(typeof(element) != 'undefined' && element != null) 
-                        {if (element.innerText !== previousalert)   {if (element.innerText == ''){previousalert=element.innerText;
-                                                                                                  } 
-                                                                    }
-                        }
-                     else {previousalert=null;}
-               alertsdirectory.data=alertsdirectory.data;
-             },8000);
+           {
+                if(alertsdirectory.contentDocument.readyState=='complete')
+                {
+                    if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
+                        {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
+                    else {element=null;}
+                    if(typeof(element) != 'undefined' && element != null) 
+                    {
+                         if (element.innerText !== previousalert)
+                         {
+                              if (element.innerText == '')
+                              {
+                                   previousalert=element.innerText;
+                              }
+                              else if(!element.innerText.endsWith('.jpg'))
+                              {soundalarm()}
+                         }
+                    }
+                    else {previousalert=null;}
+                   alertsdirectory.data=alertsdirectory.data;
+                   sysmp4mostrecent.data="/var/www/camera_streams/*/*mp4/mostrecent10"
+           },8000);
+
         if(alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
              {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
         else {element=null;}
@@ -275,6 +288,7 @@ else { this.value='Alert checking is ON.  If you\'re traveling, you\'ll risk you
                                                                                                        }
                                                              }
         alertsdirectory.data=alertsdirectory.data;
+        sysmp4mostrecent.data="/var/www/camera_streams/*/*mp4/mostrecent10"
      }">
 <!-- </td></tr>
 <tr>
@@ -441,7 +455,7 @@ onclick="img_sysjpgmp4_snap.style.display='block';img_sysjpgmp4_snap.src='/../..
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="this.data=this.data;" data="/../../camera_snapshots/*/*jpg-MOTION" 
 width="1400px" 
-height="180px" 
+height="320px" 
 style="font-size:15px;overflow:auto;border:5px solid black;border-width:20px 3px 3px;">
 </object>
 <!-- <big><big>A shared video/image element is in progress here but commented out during production operation</big></big> -->
@@ -460,7 +474,8 @@ Every link in here will open in its own new window, or new tab if you have your 
 onclick=
 "this.style.display='none';if(this.style.display == 'block'){this.style.display='none'}else{this.style.display='block'}"
 id="img_sysjpgmp4_snap"
-width="2250px" height="1650px" 
+width="2250px" 
+height="750px" 
 style="display:none;"
 >
 <param name="camera_dir" value="" />
@@ -500,7 +515,7 @@ onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', ''
 onclick="this.data=this.data;" 
 data="/camera_snapshots/camera_*/*jpg /var/www/camera_streams/camera_*/*mp4-MOTION" 
 width="1400px" 
-height="650px" 
+height="800px" 
 style="font-size:15px;overflow:auto;border:5px solid black;border-width:20px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
@@ -615,7 +630,7 @@ Command: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
 </table>
 </div>
 
-<div id="byview" class="tabcontent">
+<div id="byview" class="separateviewsdiv">
 <b><big>Separate Camera Recordings.  Click a border to list/unlist:</big></b>&nbsp;Stream elements v-aligned to the middle
 Master scaling now done in lower buttons
 <br>
@@ -1217,7 +1232,7 @@ Login credentials for camera streams are username = [youngest brother first name
     <br><button onclick="launch()">Sandbox JPG player</button>Only click this after opening latest alert event into the snapshot list
 </div>
 </small></small>
-
+<div id="loadingdiv"  class="tabcontent" style="display:none">WAIT WHILE PAGE IS LOADING. PERFORM NO USER INPUT WHILE LOADING OR PAGE ELEMENTS WILL ABORT THEIR LOADING</div>
 <!-- <script>
 
 function change(){
