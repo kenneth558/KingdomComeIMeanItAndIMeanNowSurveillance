@@ -582,21 +582,21 @@ BEGIN {print css_style "<table class=\"elif8\">"}
 
   elif [[ "${URL_PATH}" =~ .*\?nextbymodifiedtime$ ]]; then
       URL_PATH=${URL_PATH%%\?*}
-      echo "${line}  ${URL_PATH}" >> /home/homeowner/bashttpd.log
+#      echo "${line}  ${URL_PATH}" >> /home/homeowner/bashttpd.log
       serve_static_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -tr "${URL_PATH%/*}"|grep -A1 "${URL_PATH##*/}"|tail -n1|awk -v filepath="${URL_PATH%/*}" '
 {printf $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;" filepath "/" $10;print ""}')"
 
   elif [[ "${URL_PATH}" =~ .*\?*[0-9.]{1,2}minutesbefore* ]]; then
 #URL_PATH =~ /var/www/camera_streams/camera_ne_corner/*?1minutesbefore2020-12-18 21:23:41.057728372
-      echo >> /home/homeowner/bashttpd.log
-      echo "${URL_PATH}" >> /home/homeowner/bashttpd.log
+#      echo >> /home/homeowner/bashttpd.log
+#      echo "${URL_PATH}" >> /home/homeowner/bashttpd.log
       minutes=${URL_PATH##*\?}
       StartTimeOfInterest="${URL_PATH##*minutesbefore}"
       URL_PATH=${URL_PATH%%\?*}
       minsbefore=${minutes%%minutesbefore*}
       StartTimeOfInterest="${StartTimeOfInterest/+/ }"
-      echo "$(date --date="$StartTimeOfInterest $minsbefore minutes ago")" >> /home/homeowner/bashttpd.log
-      echo "$(date --date="$StartTimeOfInterest $((7 - minsbefore)) minutes hence")" >> /home/homeowner/bashttpd.log
+#      echo "$(date --date="$StartTimeOfInterest $minsbefore minutes ago")" >> /home/homeowner/bashttpd.log
+#      echo "$(date --date="$StartTimeOfInterest $((7 - minsbefore)) minutes hence")" >> /home/homeowner/bashttpd.log
 #      URL_PATH=${URL_PATH//!/\/}
 #      echo "Trapped a minutesbefore put: ${StartTimeOfInterest} ${URL_PATH}" >> /home/homeowner/bashttpd.log
       findResults="$(find ${URL_PATH} -name "*.mp4" -newermt "$(date --date="$StartTimeOfInterest $minsbefore minutes ago")" ! -newermt "$(date --date="$StartTimeOfInterest $((7 - minsbefore)) minutes hence")")"

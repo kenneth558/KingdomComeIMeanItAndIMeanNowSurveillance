@@ -783,7 +783,7 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <tr><td align='middle'>
 <input type="button" value="Refresh alert page info" style="font-size:14px;" onclick="alertsdirectory.data='/../../links_to_alerting_activity/mostrecent1';btnSetForRecentAlert.value='Set these to most recent known'">
 <br>
-<input type="button" id="btnSetForRecentAlert" value="Set these to most recent known" style="font-size:14px; onclick="" onclick="if(alertsdirectory.contentDocument.readyState!='complete'){this.value='Data not yet received';this.style='background:yellow'}else{this.value='Success';this.style='background:#e6e6e6';StartTimeOfInterest=alertsdirectory.contentDocument.body.children[0].rows[1].cells[0].attributes[0].textContent.trim().substring(1,32);alert(StartTimeOfInterest.substr(13));StartTimeOfInterest=StartTimeOfInterest.substring(1,5) + month[StartTimeOfInterest.substr(6,3)] + StartTimeOfInterest.substr(10,2) + ' ' + StartTimeOfInterest.substr(13);StartTimeOfInterestEl.value='    ' + StartTimeOfInterest.substring(0,19);alert(StartTimeOfInterest)}">
+<input type="button" id="btnSetForRecentAlert" value="Set these to most recent known" style="font-size:14px; onclick="" onclick="if(alertsdirectory.contentDocument.readyState!='complete'){this.value='Data not yet received';this.style='background:yellow'}else{this.value='Success';this.style='background:#e6e6e6';StartTimeOfInterest=alertsdirectory.contentDocument.body.children[0].rows[1].cells[0].attributes[0].textContent.trim().substring(1,32);StartTimeOfInterest=StartTimeOfInterest.substring(1,5) + month[StartTimeOfInterest.substr(6,3)] + StartTimeOfInterest.substr(10,2) + ' ' + StartTimeOfInterest.substr(13);StartTimeOfInterestEl.value='    ' + StartTimeOfInterest.substring(0,19);}">
 <br>
 <input disabled id="StartTimeOfInterestEl" style="font-size:20px;border:1px ridge blue;background:white" value="Time Of Interest" height="100px">
 <br>
@@ -960,8 +960,6 @@ onload="if (fpmp4.contentDocument.body.children[0] != 'undefined' && fpmp4.conte
 onload="if (fpmp4.contentDocument.body.children[0] != 'undefined' && fpmp4.contentDocument.body.children[0] != null && fpmp4.contentDocument.body.children[0].localName == 'video'){
 var endTime = new Date(fpmp4.contentDocument.body.children[0].ownerDocument.lastModified);
 var startTime = new Date(endTime.getTime() - (fpmp4.contentDocument.body.children[0].mozFragmentEnd * 1000));
-alert('Last modified time is ' + fpmp4.contentDocument.body.children[0].ownerDocument.lastModified + ' (' + endTime.getTime() + ' ms) and the video segment is ' + (fpmp4.contentDocument.body.children[0].mozFragmentEnd * 1000) + ' mseconds long, so start time should be ' + startTime)}"
-onload="if (fpmp4.contentDocument.body.children[0] != 'undefined' && fpmp4.contentDocument.body.children[0] != null && fpmp4.contentDocument.body.children[0].localName == 'video'){alert(fpmp4.contentDocument.body.children[0].ownerDocument.timeline)}"
 width="1000px" height="560px" 
  style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
