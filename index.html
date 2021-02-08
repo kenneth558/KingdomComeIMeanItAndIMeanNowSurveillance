@@ -1334,7 +1334,7 @@ function collectthis( _href ){
 </script>
     <script type="text/javascript"> 
 function startbtncclick() 
-{
+{/*TODO: FIX:  INTOLERANT OF ABSENCE OF ANY MP4 LISTED IN OBJECT ELEMENT*/
    var objectelement=document.getElementsByClassName('mp4obj');
    for(var i=0;i<objectelement.length;i++)
    {
@@ -1342,7 +1342,9 @@ function startbtncclick()
       {
          if(objectelement[i].contentWindow[0].body != 'undefined' && objectelement[i].contentDocument.body.children[0].localName == 'video')
          {
-            objectelement[i].contentDocument.body.children[0].play()
+            if(objectelement[i].contentDocument.links[0]!=null){
+            objectelement[i].contentDocument.body.children[0].play()}
+            else{objectelement[i].click()}
          }
          else if(objectelement[i].contentDocument.body.children[0].localName == 'table' && objectelement[i].contentDocument.links[0] != 'undefined' && objectelement[i].contentWindow[0].links[0] != null)
          {
