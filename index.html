@@ -620,16 +620,18 @@ Command: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
 Master scaling now done in lower buttons
 <br>
 <br>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
 <small>Optionally force to get newest alerts
 <input type="button" value="Refresh alert list" style="font-size:14px;" onclick="alertsdirectory.data='/../../links_to_alerting_activity/mostrecent1';
 btnSetForRecentAlert.value='Topmost alert'">(Only need to if data is stale)</small>
 <br>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-Click to set time below-><input type="button" id="btnSetForRecentAlert" value="Topmost alert" style="background:#3399FF;font-size:18px;" 
+Click to set time below of topmost alert-><input type="button" id="btnSetForRecentAlert" value="Topmost alert" style="background:#3399FF;font-size:18px;" 
 onclick="if(alertsdirectory.contentDocument.readyState!='complete')
 {this.value='Data not yet received';this.style='background:yellow'}else{this.value='Success';this.style='background:#3399FF;font-size:18px;border:2px';
 StartCamOfInterestEl.value='';
@@ -639,50 +641,34 @@ StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfIntere
 StartTimeOfInterestDT=new Date(StartTimeOfInterest)
 StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
 StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
-StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)}">
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
+setTimeout(function(){btnSetForRecentAlert.value='Topmost alert'},3000)
+}">
 &nbsp;
 <input type="button" id="btnSetForRecentSmartEvent" value="Topmost complex event" style="background:#3399FF;font-size:18px;" 
 onclick="if(sysjpgmp4_motion.contentDocument.readyState!='complete')
-{this.value='Data not yet received';this.style='background:yellow'}else
-{this.value='Q\'ing not working right yet for this button';this.style='background:#3399FF;';
-var alltd=sysjpgmp4_motion.contentDocument.body.children[0].getElementsByTagName('td')
-var i=1
-for(;i<alltd.length;i=i+2){if(alltd[i].innerText.includes('INTRUSION') || alltd[i].innerText.includes('CROSSING')){break}}
-if(i<alltd.length)
+{this.value='Data not yet received';this.style='background:yellow'}
+else
 {
-alert(alltd[i-1].outerHTML)
-    StartTimeOfInterest=alltd[i-1].outerHTML.substr(18)
-alert(StartTimeOfInterest)
-    StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
-alert(StartTimeOfInterest)
-StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
-StartTimeOfInterestDT=new Date(StartTimeOfInterest)
-StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
-StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
-StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
-StartCamOfInterestEl.value=alltd[i].innerText.substring(26);
-}}">
-<-Click to set time and camera below
+    this.value='Success';this.style='background:#3399FF;font-size:18px;';
+    var alltd=sysjpgmp4_motion.contentDocument.body.children[0].getElementsByTagName('td')
+    var i=1
+    for(;i<alltd.length;i=i+2){if(alltd[i].innerText.includes('INTRUSION') || alltd[i].innerText.includes('CROSSING')){break}}
+    if(i<alltd.length)
+    {
+        StartTimeOfInterest=alltd[i-1].outerHTML.substr(18)
+        StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
+        StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
+        StartTimeOfInterestDT=new Date(StartTimeOfInterest)
+        StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
+        StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
+        StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
+        StartCamOfInterestEl.value=alltd[i].innerText.substring(26);
+        StartCamOfInterestEl.value=streamListings[alltd[i].innerText.substr(alltd[i].innerText.indexOf('192.168.0.') + 10,2)]
+    }
+    setTimeout(function(){btnSetForRecentSmartEvent.value='Topmost complex event'},3000)
+}">
+<-Click to set time and camera below of topmost complex event
 <table style="border:1px solid black">
 <tr><td valign="top">
 
