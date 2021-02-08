@@ -257,7 +257,8 @@ if (this.value.substr(this.value.length-1,1) != 'F'){ this.value='Alert checking
 else { this.value='Alert checking is ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';this.style.width='930px';
         checkingAlerted=setInterval(
            function()
-             {if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
+             {
+              if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
                    {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
               else {element=null;}
                      if(typeof(element) != 'undefined' && element != null) 
@@ -780,6 +781,18 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <table width="100%">
 
 <tr><td align='middle'>
+<input type="button" value="Refresh alert page info" style="font-size:14px;" onclick="alertsdirectory.data='/../../links_to_alerting_activity/mostrecent1';btnSetForRecentAlert.value='Set these to most recent known'">
+<br>
+<input type="button" id="btnSetForRecentAlert" value="Set these to most recent known" style="font-size:14px; onclick="" onclick="if(alertsdirectory.contentDocument.readyState!='complete'){this.value='Data not yet received';this.style='background:yellow'}else{this.value='Success';this.style='background:#e6e6e6';StartTimeOfInterest=alertsdirectory.contentDocument.body.children[0].rows[1].cells[0].attributes[0].textContent.trim().substring(1,32);alert(StartTimeOfInterest.substr(13));StartTimeOfInterest=StartTimeOfInterest.substring(1,5) + month[StartTimeOfInterest.substr(6,3)] + StartTimeOfInterest.substr(10,2) + ' ' + StartTimeOfInterest.substr(13);StartTimeOfInterestEl.value='    ' + StartTimeOfInterest.substring(0,19);alert(StartTimeOfInterest)}">
+<br>
+<input disabled id="StartTimeOfInterestEl" style="font-size:20px;border:1px ridge blue;background:white" value="Time Of Interest" height="100px">
+<br>
+<input disabled id="StartCamOfInterestEl" style="font-size:20px;border:1px ridge blue;background:white" value="View Of Interest" height="100px">
+<br>
+<!--<input type="button" value="Queue the playing or paused videos to queue-to time. Retry until success" id="qbtn" 
+onclick="         var videoneedsqueueing = [objectelement.length];//This var is not used yet.  Future use is to auto-queue all videos with merely a single button click instead of manually retrying
+StartTimeOfInterest.substring(10);
+-->
 <input type="button" value="List videos 1 minute prior" id="lsbtn" 
 style="font-size:18px;"
 onclick="
@@ -792,14 +805,7 @@ onclick="
         objectelement[i].data=streamListings[objectelement[i].id] + '*?1minutesbefore' + StartTimeOfInterest;
     }">
 <br>
-<input disabled id="StartTimeOfInterestEl" style="font-size:20px;border:1px ridge blue;background:white" value="Time Of Interest" height="100px">
-<br>
-<input disabled id="StartCamOfInterestEl" style="font-size:20px;border:1px ridge blue;background:white" value="View Of Interest" height="100px">
-<br>
-<!--<input type="button" value="Queue the playing or paused videos to queue-to time. Retry until success" id="qbtn" 
-onclick="         var videoneedsqueueing = [objectelement.length];//This var is not used yet.  Future use is to auto-queue all videos with merely a single button click instead of manually retrying
--->
-<input type="button" value="Start videos" 
+<input type="button" value="Start videos"
 id="startbtn0" style="font-size:20px;" 
 onclick="startbtncclick();">
 <br>
@@ -861,11 +867,11 @@ objectelement[i].contentDocument.body.children[0].pause()
 <big>Queue-to time=minute prior to time<br>shown in the text box above.<br>Allowing pre-loading between<br>retries is best practice</big>
 <br><br>
 <input type="button" value="Start videos" 
-id="startbtn1" style="font-size:18px;" onclick="
+id="startbtn1" style="font-size:14px;" onclick="
 startbtncclick()
 ">
 &nbsp;
-<input type="button" value="Pause all videos" id="pausebtn" style="font-size:18px;" 
+<input type="button" value="Pause all videos" id="pausebtn" style="font-size:14px;" 
 onclick="var objectelement=document.getElementsByClassName('mp4obj');
         for(var i=0;i<objectelement.length;i++)
         {if(objectelement[i].contentWindow != 'undefined' && objectelement[i].contentWindow != null && objectelement[i].contentWindow[0] != 'undefined' && objectelement[i].contentWindow[0] != null)
