@@ -51,13 +51,12 @@ LOOK FOR IT IN MY GITHUB SPACE.
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
+  padding: 1px 1px;
 }
 
     .tabcontent {
        display: none;
-       padding: 6px 12px;
+       padding: 1px 1px;
        border: 1px solid #ccc;
        border-top: none;
     }
@@ -187,25 +186,25 @@ streamListings["13"] = "South Driveway"
 </datalist>
 <!-- Tab links change the name of tablinks so it shows, change rest to drop 1 so they don't-->
 <div>
-  <button  id="btnsystem_wide" class="tablinks" style="font-size:21px;" 
-onclick="tabactivate(this)">
-Combined views recordings</button>
-  <button id="btnalertchecking" class="tablinks" style="font-size:21px;" 
-onclick="tabactivate(this)">
-Alert Checking</button>
-  <button  id="btndisablesandlivelinks" class="tablinks" style="font-size:21px;" 
-onclick="tabactivate(this)">
-Links to live streams and suspend alerts</button>
-  <button id="btnbyview" class="tablinks" style="font-size:21px;" 
+  <button id="btnbyview" class="tablinks" style="font-size:12px;" 
 onclick="tabactivate(this)">
 Separated views recordings</button>
-  <button id="btntitlediv" class="tablinks" style="font-size:21px;" 
+  <button id="btnalertchecking" class="tablinks" style="font-size:12px;" 
+onclick="tabactivate(this)">
+Alert Checking</button>
+  <button  id="btnsystem_wide" class="tablinks" style="font-size:12px;" 
+onclick="tabactivate(this)">
+Combined views recordings</button>
+  <button  id="btndisablesandlivelinks" class="tablinks" style="font-size:12px;" 
+onclick="tabactivate(this)">
+Suspend alerts, Links to live streams</button>
+  <button id="btntitlediv" class="tablinks" style="font-size:12px;" 
 onclick="tabactivate(this)">
 Help</button>
-  <button id="btnnotes" class="tablinks" style="font-size:21px;" 
+  <button id="btnnotes" class="tablinks" style="font-size:12px;" 
 onclick="tabactivate(this)">
 Notes</button>
-  <button id="btntrack_snaps" class="collectlinks" style="font-size:22px;background:white" 
+  <button id="btntrack_snaps" class="collectlinks" style="font-size:10px;background:white" 
 onclick="if(this.innerText.includes('Start track'))
 {
     this.innerText='Tracking snapshot windows being opened would now be ON except I don\'t have it working yet due to inability to get transient variables to cross to global scope';this.style.background='Chartreuse';windowx=0;
@@ -217,7 +216,7 @@ windows.forEach(function(windw){windw.open()})
 }">
 Start tracking opened snapshots for later playback</button>
 
-<button style="font-size:22px;background:white" onclick="launch()">JPG set advancing</button>
+<button style="font-size:10px;background:white" onclick="launch()">JPG set advancing</button>
 </div>
 <!--  <button class="tablinks" onclick="if(document.getElementById('byview').style.display == 'none'){document.getElementById('byview').style.display = 'block'}else{document.getElementById('byview').style.display = 'none';}">Recording by view</button> -->
 
@@ -418,7 +417,7 @@ In here could be the recipient list
 </td></tr></table>
 </div>
 
-<div id="system_wide" class="tabcontent">
+<div id="system_wide" class="tabcontent" style="display:none">
 
 
 
@@ -616,11 +615,77 @@ Command: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
 </table>
 </div>
 
-<div id="byview" class="tabcontent" style="display:none">
-<br><b><big>Separate Camera Recordings.  Click a border to list/unlist:</big>&nbsp;Stream elements v-aligned to the middle</b>
+<div id="byview" class="tabcontent">
+<b><big>Separate Camera Recordings.  Click a border to list/unlist:</big></b>&nbsp;Stream elements v-aligned to the middle
 Master scaling now done in lower buttons
+<br>
+<br>
+<small>Optionally force to get newest alerts
+<input type="button" value="Refresh alert list" style="font-size:14px;" onclick="alertsdirectory.data='/../../links_to_alerting_activity/mostrecent1';
+btnSetForRecentAlert.value='Topmost alert'">(Only need to if data is stale)</small>
+<br>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+Click to set time below-><input type="button" id="btnSetForRecentAlert" value="Topmost alert" style="background:#3399FF;font-size:18px;" 
+onclick="if(alertsdirectory.contentDocument.readyState!='complete')
+{this.value='Data not yet received';this.style='background:yellow'}else{this.value='Success';this.style='background:#3399FF;font-size:18px;border:2px';
+StartCamOfInterestEl.value='';
+StartTimeOfInterest=alertsdirectory.contentDocument.body.children[0].rows[1].cells[0].outerHTML.substr(18)
+StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
+StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
+StartTimeOfInterestDT=new Date(StartTimeOfInterest)
+StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
+StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
+StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)}">
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<input type="button" id="btnSetForRecentSmartEvent" value="Topmost complex event" style="background:#3399FF;font-size:18px;" 
+onclick="if(sysjpgmp4_motion.contentDocument.readyState!='complete')
+{this.value='Data not yet received';this.style='background:yellow'}else
+{this.value='Q\'ing not working right yet for this button';this.style='background:#3399FF;';
+var alltd=sysjpgmp4_motion.contentDocument.body.children[0].getElementsByTagName('td')
+var i=1
+for(;i<alltd.length;i=i+2){if(alltd[i].innerText.includes('INTRUSION') || alltd[i].innerText.includes('CROSSING')){break}}
+if(i<alltd.length)
+{
+alert(alltd[i-1].outerHTML)
+    StartTimeOfInterest=alltd[i-1].outerHTML.substr(18)
+alert(StartTimeOfInterest)
+    StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
+alert(StartTimeOfInterest)
+StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
+StartTimeOfInterestDT=new Date(StartTimeOfInterest)
+StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
+StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
+StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
+StartCamOfInterestEl.value=alltd[i].innerText.substring(26);
+}}">
+<-Click to set time and camera below
 <table style="border:1px solid black">
 <tr><td valign="top">
+
 <table>
 <tr><td></td></tr>
 
@@ -772,14 +837,12 @@ height="880px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <table style="border:2px ridge blue">
 <tr><td class="camtitle"><!-- FUTURE --Use a layout pattern for these that will facilitate swapping them around style="border:5px ridge fuchsia">-->
 <a name="sw_corner_location_on_page"></a>
-<a href="" target="_blank"><h3>Dock</h3></a>
+<a href="" target="_blank"><big><strong>Dock</strong></big></a>
 </td></tr>
 <tr><td class="bb">
 <a href="/../../camera_snapshots/camera_sw_corner/" target="_blank">
-Event Snapshots</a>; for alt control, drop them
-<br>into a spare viewer
-<br><input type="range" 
-
+Event Snapshots</a>; for alt control, drop<br>them into a spare viewer
+<input type="range" 
 id="sldrswjpg" class="scaleSlider" 
 oninput="textswjpg.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
 <textarea id="textswjpg" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
@@ -806,9 +869,8 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 
 <tr><td class="bb">
 <a href="/var/www/camera_streams/camera_sw_corner/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
- For
-<br>best control, drop others into a spare player
-<br><input type="range" 
+ For best control, drop<br>others into a spare player
+<input type="range" 
 id="sldrswmp4" class="scaleSlider" 
 oninput="textswmp4.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
 <textarea id="textswdmp4" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
@@ -843,17 +905,6 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <table width="100%">
 
 <tr><td align='middle'>
-<input type="button" value="Refresh alert page info" style="font-size:14px;" onclick="alertsdirectory.data='/../../links_to_alerting_activity/mostrecent1';
-btnSetForRecentAlert.value='Set time to most recent known'">
-<br>
-<input type="button" id="btnSetForRecentAlert" value="Set time to most recent known" style="background:#e6e6e6;font-size:16px;" 
-onclick="if(alertsdirectory.contentDocument.readyState!='complete')
-{this.value='Data not yet received';this.style='background:yellow'}else{this.value='Success';this.style='background:#e6e6e6;font-size:16px;';
-StartCamOfInterestEl.value='';
-StartTimeOfInterest=alertsdirectory.contentDocument.body.children[0].rows[1].cells[0].attributes[0].textContent.trim().substring(1,32);
-StartTimeOfInterest=StartTimeOfInterest.substring(1,5) + month[StartTimeOfInterest.substr(6,3)] + StartTimeOfInterest.substr(10,2) + ' ' + StartTimeOfInterest.substr(13);
-StartTimeOfInterestEl.value=StartTimeOfInterest.substring(0,19);}">
-<small><small>&nbsp;<br><br>&nbsp;</small></small>
 <input size="14" disabled id="StartTimeOfInterestEl" style="font-size:16px;border:1px ridge blue;background:white" value="Time" height="100px">
 <input size="10" disabled id="StartCamOfInterestEl" style="font-size:16px;border:1px ridge blue;background:white" value="View" height="100px">
 <br>
@@ -910,7 +961,8 @@ onclick="var objectelement=document.getElementsByClassName('mp4obj');
              }
          }
          if(notalldoneyet == false){this.value='Queued';this.style.background='#e6e6e6'}
-"><br>
+">
+<br>
 <!--
          var notalldoneyet=false
          for(var i=0;i<objectelement.length;i++)
@@ -1538,20 +1590,19 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
       {
 /*         alert('The link is jpg inside this construct');*/
 /*We need to always know the timestamp of the last .jpg file viewed so we can populate the .mp4 windows for that event timeframe*/
-           StartTimeOfInterest=this.rows[rowindex].cells[0].outerHTML.substr(18).replace(/&nbsp;/g," ").replace("nbsp;","")
+
+           StartTimeOfInterest=this.rows[rowindex].cells[0].outerHTML.substr(18)
+           StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
            StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
            StartTimeOfInterestDT=new Date(StartTimeOfInterest)
            StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
            StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
            StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
-           qbtn.value="Queue";qbtn.style="font-size:20px;background:#e6e6e6"
+           qbtn.value="Queue";qbtn.style="font-size:16px;background:#e6e6e6"
            StartCamOfInterestEl.value=streamListings[this.rows[rowindex].cells[1].innerText.substr(this.rows[rowindex].cells[1].innerText.indexOf('192.168.0.') + 10,2)]
            lsbtn.name='!var!www!camera_streams!camera_*'
       }
     })
-
-
-
 
   }
   else
