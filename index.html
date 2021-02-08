@@ -1504,7 +1504,7 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
 /*if(currSrc.includes('-MOTION'))*/
 /*                 {if(!confirm('NO MOTION DETECTIONS IN THIS ELEMENT.  You\'ve selected ' + (downrowindex-uprowindex) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you want to actually select!')}*/
 /*               else */
-                 if(!confirm('You\'ve selected ' + (Math.abs(downrowindex-uprowindex)) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you actually want to select!')){return}
+                 if(!confirm('Open ' + (Math.abs(downrowindex-uprowindex)) + ' files in separate viewers?')){return}
                  var frames=[]
                  var windwz=[]
                  var playing=true;
