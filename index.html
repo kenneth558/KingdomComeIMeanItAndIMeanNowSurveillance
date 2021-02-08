@@ -501,7 +501,7 @@ onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', ''
 onclick="this.data=this.data;" 
 data="/camera_snapshots/camera_*/*jpg /var/www/camera_streams/camera_*/*mp4-MOTION" 
 width="1400px" 
-height="180px" 
+height="650px" 
 style="font-size:15px;overflow:auto;border:5px solid black;border-width:20px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
@@ -531,7 +531,7 @@ All system streams - <b>USE THIS LIST FOR EVENT ARCHIVING STREAMS. Top file for 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.data.includes('mostrecent10')) {this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/var/www/camera_streams/*/*mp4';} else {this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='/var/www/camera_streams/*/*mp4/mostrecent10';}" 
 width="1400px" 
-height="1400px" 
+height="400px" 
 style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
@@ -844,10 +844,11 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 
 <tr><td align='middle'>
 <input type="button" value="Refresh alert page info" style="font-size:14px;" onclick="alertsdirectory.data='/../../links_to_alerting_activity/mostrecent1';
-btnSetForRecentAlert.value='Set these to most recent known'">
+btnSetForRecentAlert.value='Set time to most recent known'">
 <br>
-<input type="button" id="btnSetForRecentAlert" value="Set these to most recent known" style="background:#e6e6e6;font-size:16px;" 
-onclick="if(alertsdirectory.contentDocument.readyState!='complete'){this.value='Data not yet received';this.style='background:yellow'}else{this.value='Success';this.style='background:#e6e6e6;font-size:16px;';
+<input type="button" id="btnSetForRecentAlert" value="Set time to most recent known" style="background:#e6e6e6;font-size:16px;" 
+onclick="if(alertsdirectory.contentDocument.readyState!='complete')
+{this.value='Data not yet received';this.style='background:yellow'}else{this.value='Success';this.style='background:#e6e6e6;font-size:16px;';
 StartCamOfInterestEl.value='';
 StartTimeOfInterest=alertsdirectory.contentDocument.body.children[0].rows[1].cells[0].attributes[0].textContent.trim().substring(1,32);
 StartTimeOfInterest=StartTimeOfInterest.substring(1,5) + month[StartTimeOfInterest.substr(6,3)] + StartTimeOfInterest.substr(10,2) + ' ' + StartTimeOfInterest.substr(13);
@@ -861,7 +862,7 @@ onclick="         var videoneedsqueueing = [objectelement.length];//This var is 
 StartTimeOfInterest.substring(10);
 -->
 <input type="button" value="List videos 1 minute prior" id="lsbtn" 
-style="font-size:18px;"
+style="font-size:12px;"
 onclick="
     var objectelement=document.getElementsByClassName('mp4obj')
     for(var i=0;i<objectelement.length;i++)
@@ -873,11 +874,11 @@ onclick="
     }">
 <br>
 <input type="button" value="Start videos"
-id="startbtn0" style="font-size:20px;" 
+id="startbtn0" style="font-size:12px;" 
 onclick="startbtncclick();">
 <br>
 <input type="button" value="Queue" id="qbtn" 
-style="font-size:20px;background:#e6e6e6"
+style="font-size:12px;background:#e6e6e6"
 onclick="var objectelement=document.getElementsByClassName('mp4obj');
          var videoneedsqueueing = [objectelement.length]
          var notalldoneyet=false
@@ -959,7 +960,7 @@ for(i=0;i<lmentList.length;i++)
 {lmentList[i].value=this.value;lmentList[i].click()}">43.5</textarea>
 <big><big>%</big></big>
 </p>
-<input type="button" value="Close these video players" id="closebtn" style="font-size:20px;" 
+<input type="button" value="Close these video players" id="closebtn" style="font-size:12px;" 
 onclick="var objectelement=document.getElementsByClassName('mp4obj');
         for(var i=0;i<objectelement.length;i++)
         {
@@ -970,8 +971,8 @@ onclick="var objectelement=document.getElementsByClassName('mp4obj');
                     objectelement[i].click()}
                 }
         }">
-<br><br>
-<input type="button" value="Relax the courtesy of videos" style="font-size:18px;" id="courtesybtn" style="background:white" onclick="if(this.style.backgroundColor == 'white'){this.style.background='#d9ecd0';this.value='Enforce courtesy of videos while any other loads their next one'}else{this.style.background='white';this.value='Relax courtesy of videos while any other loads their next one'}">
+<br>
+<input type="button" value="Relax the courtesy of videos" style="font-size:8px;" id="courtesybtn" style="background:white" onclick="if(this.style.backgroundColor == 'white'){this.style.background='#d9ecd0';this.value='Enforce courtesy of videos while any other loads their next one'}else{this.style.background='white';this.value='Relax courtesy of videos while any other loads their next one'}">
 </td></tr>
 </table>
 </td></tr>
@@ -1501,9 +1502,9 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
               {
 /*alert(currSrc)*/
 /*if(currSrc.includes('-MOTION'))*/
-/*                 {alert('NO MOTION DETECTIONS IN THIS ELEMENT.  You\'ve selected ' + (downrowindex-uprowindex) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you want to actually select!')}*/
+/*                 {if(!confirm('NO MOTION DETECTIONS IN THIS ELEMENT.  You\'ve selected ' + (downrowindex-uprowindex) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you want to actually select!')}*/
 /*               else */
-                 alert('You\'ve selected ' + (downrowindex-uprowindex) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you actually want to select!')
+                 if(!confirm('You\'ve selected ' + (Math.abs(downrowindex-uprowindex)) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you actually want to select!')){return}
                  var frames=[]
                  var windwz=[]
                  var playing=true;
