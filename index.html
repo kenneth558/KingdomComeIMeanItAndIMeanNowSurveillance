@@ -31,11 +31,13 @@ LOOK FOR IT IN MY GITHUB SPACE.
         border-bottom: solid 1px black;
         border-right: solid 1px black;
         vertical-align: top;
+        padding: 0px
     }
     .camtitle
     {
           border-top: solid 9px black;
          td:first-child:after {content: attr(aria-label);
+        padding: 0px
     }
 
 .tab {
@@ -751,16 +753,16 @@ height="745px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 
 
 </td>
-<td valign="top" align="left">
-<table>
+<td valign="top" align="left" style='padding:0px'>
+<table style='padding:0px'>
 
 
-<tr><td>
-<table width="100%">
+<tr style='padding:0px'><td style='padding:0px'>
+<table width="100%" style='padding:0px'>
 
 
 
-<tr><td align='middle'>
+<tr style='padding:0px'><td align='middle' style='padding:0px'>
 <input type="button" value="Refresh alert list" style="font-size:8px;" onclick="alertsdirectory.data='/../../links_to_alerting_activity/mostrecent1';btnSetForRecentAlert.value='Last alert'">
 <small><small><small>Optional force alert list renew if data stale</small></small></small>
 <br><br>
@@ -805,7 +807,7 @@ else
         StartCamOfInterestEl.value=streamListings[alltd[i].innerText.substr(alltd[i].innerText.indexOf('192.168.0.') + 10,2)]
     }
     setTimeout(function(){btnSetForRecentSmartEvent.value='Scene change'},3000)
-    setTimeout(function(){lsbtn.click()},500)
+    setTimeout(function(){lsbtn.click()},1000)
 }">
 <br>
 <input size="14" disabled id="StartTimeOfInterestEl" style="font-size:16px;border:1px ridge blue;background:white" value="Time" height="100px">
@@ -823,7 +825,7 @@ onclick="
         objectelement[i].style.borderWidth='20px 3px 3px';
         objectelement[i].data=streamListings[objectelement[i].id] + '*?1minutesbefore' + StartTimeOfInterest;
     }
-    setTimeout(function(){startbtn0.click()},500)
+    setTimeout(function(){startbtn0.click()},1000)
 ">
 <br><br>
 <input type="button" value="Start each top video and begin queuing"
@@ -923,7 +925,28 @@ Auto synchronize like so: every 5 or 10 or 15 seconds grab all currenttime's fro
 No need to convert currenttime to absolute, just use relative.  Make this feature be able to span to subsequent mp4 files ad infinitim
 
 -->
-<input type="button" value="Start videos" 
+<br>
+<input type="button" id="btnSetForLatestViewable" value="Latest Viewable" style="background:#3399FF;font-size:18px;"
+onclick="
+afterqbtn1.innerText='Manually click on the SECOND file name'
+afterqbtn2.innerText='because the first one is still recording.'
+afterqbtn3.innerText='Don\'t touch the Queue button because'
+afterqbtn4.innerText='it only works when a time is in the box'
+var objectelement=document.getElementsByClassName('mp4obj')
+for(var i=0;i<objectelement.length;i++)
+{
+        objectelement[i].type='text/html';
+        objectelement[i].style.border='3px solid blue';
+        objectelement[i].style.borderWidth='20px 3px 3px';
+        objectelement[i].data=streamListings[objectelement[i].id];
+}
+">
+
+
+
+
+
+<br><input type="button" value="Start videos" 
 id="startbtn1" style="font-size:14px;" onclick="
 startbtncclick()
 ">
@@ -944,7 +967,7 @@ onclick="var objectelement=document.getElementsByClassName('mp4obj');
 
 
 
-<tr><td class="camtitle"><!-- FUTURE --Use a layout pattern for these that will facilitate swapping them around style="border:5px ridge fuchsia">-->
+<tr><td class="camtitle" style='padding:0px'><!-- FUTURE --Use a layout pattern for these that will facilitate swapping them around style="border:5px ridge fuchsia">-->
 <a name="sw_corner_location_on_page"></a>
 <br><object id="swmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -958,7 +981,7 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </object>
 <a href="" target="_blank"><h3>Dock</h3></a>
 </td></tr>
-<tr><td class="bb">
+<tr><td class="bb" style='padding:0px'>
 <a href="/var/www/camera_streams/camera_sw_corner/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
  For<br>best control, drop others into a spare player
 <br><input type="range" 
@@ -978,7 +1001,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 </td></tr>
 
 
-<tr><td class="bb">
+<tr><td class="bb" style='padding:0px'>
 <a href="/../../camera_snapshots/camera_sw_corner/" target="_blank">
 Event Snapshots</a>; for alt control, drop them<br>into a spare viewer
 <br><input type="range" 
@@ -1032,17 +1055,17 @@ qbtn.value='Queue';qbtn.style.background='#e6e6e6'
 <input type="button" value="Relax the courtesy of videos" style="font-size:8px;" id="courtesybtn" style="background:white" onclick="if(this.style.backgroundColor == 'white'){this.style.background='#d9ecd0';this.value='Enforce courtesy of videos while any other loads their next one'}else{this.style.background='white';this.value='Relax courtesy of videos while any other loads their next one'}">
 </p>
 </td>
-<td valign="top">
-<table style="border:2px ridge blue"><tr><td></td></tr>
+<td valign="top" style='padding:0px'>
+<table style="border:2px ridge blue" style='padding:0px'><tr><td></td></tr>
 
 
 
-<tr><td class="camtitle">
+<tr><td class="camtitle" style='padding:0px'>
 <a name="fp_location_on_page"></a>
 <a href="" target="_blank"><h3>Front lot</h3></a>
 </td></tr>
 
-<tr><td  class="bb" valign="top">
+<tr><td  class="bb" valign="top" style='padding:0px'>
 <a href="/../../camera_snapshots/camera_front_parking/" target="_blank">
 Event Snapshots</a>; for alt control, drop them
 <br>into a spare viewer
