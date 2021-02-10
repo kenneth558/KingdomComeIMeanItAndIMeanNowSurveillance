@@ -199,8 +199,8 @@ streamListings["13"] = "South Driveway"
   <button id="btnbyview" class="tablinks" style="font-size:12px;" 
 onclick="tabactivate(this)">
 Separated views recordings</button>
-  <button id="btnalertchecking" class="tablinks" style="font-size:12px;" 
-onclick="tabactivate(this)">
+  <button id="btnalertchecking" style="font-size:12px;" 
+onclick=if(alertchecking.style.display=='none'){alertchecking.style.display='inline'}else{alertchecking.style.display='none'}>
 Alert Checking</button>
   <button  id="btnsystem_wide" class="tablinks" style="font-size:12px;" 
 onclick="tabactivate(this)">
@@ -251,71 +251,19 @@ button gets back to the listing again.
 </div>
 
 
-<div id="alertchecking" class="tabcontent"  style="display:none">
-<table><tr><td width="1535px">
-<input type="button" 
-id="alertCheck" style="width:300px;height:75px;font-size:20px;background:white;border-radius:15px;border-color:black;border-width:10px;" 
-value="Alert checking is now OFF"
-onclick="if(alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
-{element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
-else {element=null;}
-if(typeof(element) != 'undefined' && element != null){ previousalert=element.innerText;
-                                                     }
-else { previousalert=null;
-     }
-if (this.value.substr(this.value.length-1,1) != 'F'){ this.value='Alert checking is now OFF';this.style.background='white';this.style.width='300px';clearInterval(checkingAlerted);
-                                                    } 
-else { this.value='Alert checking is ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';this.style.width='930px';
-        checkingAlerted=setInterval(
-           function()
-             {if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
-                   {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
-              else {element=null;}
-                     if(typeof(element) != 'undefined' && element != null) 
-                        {if (element.innerText !== previousalert)   {if (element.innerText == ''){previousalert=element.innerText;
-                                                                                                  } 
-                                                                    }
-                        }
-                     else {previousalert=null;}
-               alertsdirectory.data=alertsdirectory.data;
-             },8000);
-        if(alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
-             {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
-        else {element=null;}
-        if(typeof(element) != 'undefined' && element != null){if (element.innerText !== previousalert){if(!element.innerText.endsWith('.jpg')){previousalert=element.innerText};
-                                                                                                       }
-                                                             }
-        alertsdirectory.data=alertsdirectory.data;
-     }">
-<!-- </td></tr>
-<tr>
-<td><center>-->
-<tr height="130px"><td>
-<small>
-<!-- <a href="/../../links_to_alerting_activity/" onclick="return do_me_false(this)"><b>Recent Alerts</b></a>&nbsp;&nbsp;&nbsp;<small>Click title to see all recent alerts. Click border to toggle between listing all or just most recent 1 (traffic sparing)</small></small> -->
-<a href="/../../links_to_alerting_activity/" target="_blank"><b>Recent Alerts</b></a>&nbsp;&nbsp;&nbsp;<small>Click title to see all recent alerts. Click border to toggle between listing all or just most recent 1 (traffic sparing)</small></small>
-    <object id="alertsdirectory" type="text/html" 
-data="/../../links_to_alerting_activity/mostrecent1" 
-onclick="if (this.data.includes('/mostrecent1')){this.data='/../../links_to_alerting_activity'}else{this.data='/../../links_to_alerting_activity/mostrecent1'};" 
-onload="if(alertsdirectory.contentWindow.document.body.children[0].localName == 'img'){return}
-        if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
-          {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
-        else {element=null;}
-        if(element != 'undefined' && element != null)
-          {if (element.innerText !== previousalert)
-             {if (alertCheck.value.substr(alertCheck.value.length-1,1) != 'F' && previousalert != null && element.innerText !== null && !element.innerText.endsWith('.jpg')){soundalarm();}else {if(!element.innerText.endsWith('.jpg')){previousalert=element.innerText};}
-             }
-          }
-        else {previousalert=null;}
-        glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-width="1900px" height="1200px" style="font-size:15px;overflow:auto;border:3px solid black;border-width:20px 30px 3px 3px;">
-   <param name="timestamp" value="initial" />
-   <param name="nextfilename" value="initial" />
-   <param name="currenttime" value=0 />
-   <param name="playingjpgs_number" value="0" />
-    </object>
-</td></tr></table>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1265,8 +1213,84 @@ Login credentials for camera streams are username = [youngest brother first name
     <button onclick="checkforcache()">Check browser cache capability</button> 
     <br><button onclick="launch()">Sandbox JPG player</button>Only click this after opening latest alert event into the snapshot list
 </div>
+
+<div id="alertchecking" class="tabcontent"  style="display:none">
+<table><tr><td width="1535px">
+<input type="button" 
+id="alertCheck" style="width:300px;height:75px;font-size:20px;background:white;border-radius:15px;border-color:black;border-width:10px;" 
+value="Alert checking is now OFF"
+onclick="if(alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
+{element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
+else {element=null;}
+if(typeof(element) != 'undefined' && element != null){ previousalert=element.innerText;
+                                                     }
+else { previousalert=null;
+     }
+if (this.value.substr(this.value.length-1,1) != 'F'){ this.value='Alert checking is now OFF';this.style.background='white';this.style.width='300px';clearInterval(checkingAlerted);
+                                                    } 
+else { this.value='Alert checking is ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';this.style.width='930px';
+        checkingAlerted=setInterval(
+           function()
+             {if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
+                   {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
+              else {element=null;}
+                     if(typeof(element) != 'undefined' && element != null) 
+                        {if (element.innerText !== previousalert)   {if (element.innerText == ''){previousalert=element.innerText;
+                                                                                                  } 
+                                                                    }
+                        }
+                     else {previousalert=null;}
+               alertsdirectory.data=alertsdirectory.data;
+             },8000);
+        if(alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
+             {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
+        else {element=null;}
+        if(typeof(element) != 'undefined' && element != null){if (element.innerText !== previousalert){if(!element.innerText.endsWith('.jpg')){previousalert=element.innerText};
+                                                                                                       }
+                                                             }
+        alertsdirectory.data=alertsdirectory.data;
+     }">
+<!-- </td></tr>
+<tr>
+<td><center>-->
+<tr height="130px"><td>
+<small>
+<!-- <a href="/../../links_to_alerting_activity/" onclick="return do_me_false(this)"><b>Recent Alerts</b></a>&nbsp;&nbsp;&nbsp;<small>Click title to see all recent alerts. Click border to toggle between listing all or just most recent 1 (traffic sparing)</small></small> -->
+<a href="/../../links_to_alerting_activity/" target="_blank"><b>Recent Alerts</b></a>&nbsp;&nbsp;&nbsp;<small>Click title to see all recent alerts. Click border to toggle between listing all or just most recent 1 (traffic sparing)</small></small>
+    <object id="alertsdirectory" type="text/html" 
+data="/../../links_to_alerting_activity/mostrecent1" 
+onclick="if (this.data.includes('/mostrecent1')){this.data='/../../links_to_alerting_activity'}else{this.data='/../../links_to_alerting_activity/mostrecent1'};" 
+onload="if(alertsdirectory.contentWindow.document.body.children[0].localName == 'img'){return}
+        if(alertsdirectory.contentDocument.body.children[0].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].children[0].children[1] != null)
+          {element=alertsdirectory.contentDocument.body.children[0].children[0].children[1].children[1];}
+        else {element=null;}
+        if(element != 'undefined' && element != null)
+          {if (element.innerText !== previousalert)
+             {if (alertCheck.value.substr(alertCheck.value.length-1,1) != 'F' && previousalert != null && element.innerText !== null && !element.innerText.endsWith('.jpg')){soundalarm();}else {if(!element.innerText.endsWith('.jpg')){previousalert=element.innerText};}
+             }
+          }
+        else {previousalert=null;}
+        glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+width="1900px" height="1200px" style="font-size:15px;overflow:auto;border:3px solid black;border-width:20px 30px 3px 3px;">
+   <param name="timestamp" value="initial" />
+   <param name="nextfilename" value="initial" />
+   <param name="currenttime" value=0 />
+   <param name="playingjpgs_number" value="0" />
+    </object>
+</td></tr></table>
+</div>
+
+
+
+
+
+
+
+
 </small></small>
+
 <div id="loadingdiv"  class="tabcontent" style="display:none">WAIT WHILE PAGE IS LOADING. PERFORM NO USER INPUT WHILE LOADING OR PAGE ELEMENTS WILL ABORT THEIR LOADING</div>
+
 <!-- <script>
 
 function change(){
