@@ -1429,7 +1429,7 @@ function startbtncclick()
        else
        {   /*all get here 1st btn*/progress+=1000000;
            if(objectelement[i].contentDocument != null && objectelement[i].contentDocument.links.length==0 && objectelement[i].contentDocument.body.children[0].localName == 'table' )
-           {   oprogress+=10000000;
+           {   progress+=10000000;
                bjectelement[i].data=''
            }
            else if(objectelement[i].contentDocument != null && objectelement[i].contentDocument.body.children[0].localName == 'table')
