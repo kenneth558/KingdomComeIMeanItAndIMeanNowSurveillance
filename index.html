@@ -765,7 +765,8 @@ height="745px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <small><small><small>Optional force alert list renew if data stale</small></small></small>
 <br><br>
 <input type="button" id="btnSetForRecentAlert" value="Last alert" style="background:#3399FF;font-size:18px;" 
-onclick="if(alertsdirectory.contentDocument==null || alertsdirectory.contentDocument.readyState!='complete')
+onclick="closebtn.click()
+if(alertsdirectory.contentDocument==null || alertsdirectory.contentDocument.readyState!='complete')
 {this.value='Data not yet received';this.style='background:yellow'}else{this.value='Success';this.style='background:#3399FF;font-size:18px;border:2px';
 StartCamOfInterestEl.value='';
 StartTimeOfInterest=alertsdirectory.contentDocument.body.children[0].rows[1].cells[0].outerHTML.substr(18)
@@ -782,7 +783,8 @@ setTimeout(function(){lsbtn.click()},500)
 <small><small>&nbsp;
 
 <input type="button" id="btnSetForRecentSmartEvent" value="Scene change" style="background:#3399FF;font-size:18px;" 
-onclick="if(sysjpgmp4_motion.contentDocument == null || sysjpgmp4_motion.contentDocument.readyState!='complete')
+onclick="closebtn.click()
+if(sysjpgmp4_motion.contentDocument == null || sysjpgmp4_motion.contentDocument.readyState!='complete')
 {this.value='Data not yet received';this.style='background:yellow'}
 else
 {
@@ -894,10 +896,10 @@ if(objectelement[i].contentWindow != 'undefined' && objectelement[i].contentWind
    }
    if(notalldoneyet == false)
    {  this.value='Queued';this.style.background='#e6e6e6';
-       afterqbtn1.innerText=' ';
-       afterqbtn2.innerText=' ';
-       afterqbtn3.innerText=' ';
-       afterqbtn4.innerText=' ';
+       afterqbtn1.innerText='';
+       afterqbtn2.innerText='';
+       afterqbtn3.innerText='';
+       afterqbtn4.innerText='';
        setTimeout(function(){startbtncclick()},2500)       
        soundalarm()
    }
@@ -915,7 +917,12 @@ if(objectelement[i].contentWindow != 'undefined' && objectelement[i].contentWind
    }
 /*alert(qvalue)*/
 ">
-<small><small><br>Coming: auto-synchronizing<br></small></small>
+<small><small><br>Coming: auto-synchronizing. I've got an idea how<br></small></small>
+<!--
+Auto synchronize like so: every 5 or 10 or 15 seconds grab all currenttime's from videos then calculate which ones need to be paused and for how long.  For each of those, make an unpause setinterval for that amount of time and pause
+No need to convert currenttime to absolute, just use relative.  Make this feature be able to span to subsequent mp4 files ad infinitim
+
+-->
 <input type="button" value="Start videos" 
 id="startbtn1" style="font-size:14px;" onclick="
 startbtncclick()
@@ -1014,7 +1021,13 @@ onclick="var objectelement=document.getElementsByClassName('mp4obj');
                 {
                     objectelement[i].click()}
                 }
-        }">
+        }
+       afterqbtn1.innerText='';
+       afterqbtn2.innerText='';
+       afterqbtn3.innerText='';
+       afterqbtn4.innerText='';
+qbtn.value='Queue';qbtn.style.background='#e6e6e6'
+">
 <br>
 <input type="button" value="Relax the courtesy of videos" style="font-size:8px;" id="courtesybtn" style="background:white" onclick="if(this.style.backgroundColor == 'white'){this.style.background='#d9ecd0';this.value='Enforce courtesy of videos while any other loads their next one'}else{this.style.background='white';this.value='Relax courtesy of videos while any other loads their next one'}">
 </p>
