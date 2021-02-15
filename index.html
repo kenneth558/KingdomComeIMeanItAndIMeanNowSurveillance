@@ -996,8 +996,7 @@ StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
 StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
 setTimeout(function(){btnSetForRecentAlert.value='Last alert'},3000)
 setTimeout(function(){lsbtn.click()},500)
-StartCamOfInterestEl.value=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1].innerText.substring(26); /*MUST be last thing in function in case it doesn't exist*/
-StartCamOfInterestEl.value=streamListings[StartCamOfInterestEl.value.substr(StartCamOfInterestEl.value.indexOf('192.168.0.') + 10,2)]
+StartCamOfInterestEl.value=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1].innerText; /*MUST be last thing in function in case it doesn't exist*/
 }">
 <small><small>&nbsp;
 <input type="button" id="btnSetForRecentSmartEvent" value="All activity" style="background:#3399FF;font-size:18px;" 
@@ -1019,8 +1018,7 @@ else
         StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
         StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
         StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
-        StartCamOfInterestEl.value=alltd[i].innerText.substring(26);
-        StartCamOfInterestEl.value=streamListings[alltd[i].innerText.substr(alltd[i].innerText.indexOf('192.168.0.') + 10,2)]
+        StartCamOfInterestEl.value=alltd[i].innerText;
     }
     setTimeout(function(){btnSetForRecentSmartEvent.value='Scene change'},3000)
     setTimeout(function(){lsbtn.click()},1000)
@@ -1480,7 +1478,7 @@ function startbtncclick()
                   objectelement[i].contentDocument.links[1].click();
                }
                else
-               {alert('No files displayed?')
+               {/*alert('No files displayed?')*/
                }
             }
          }
@@ -1737,7 +1735,7 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
            StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
            StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
            qbtn.value="Queue";qbtn.style="font-size:16px;background:#e6e6e6"
-           StartCamOfInterestEl.value=streamListings[this.rows[rowindex].cells[1].innerText.substr(this.rows[rowindex].cells[1].innerText.indexOf('192.168.0.') + 10,2)]
+           StartCamOfInterestEl.value=this.rows[rowindex].cells[1].innerText
            lsbtn.name='!var!www!camera_streams!camera_*'
       }
     })
