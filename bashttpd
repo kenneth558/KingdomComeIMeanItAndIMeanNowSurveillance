@@ -432,8 +432,14 @@ function serve_dir() {
 
 function urldecode() { [ "${1%/}" = "" ] && echo "/" ||  echo -e "$(sed 's/%\([[:xdigit:]]\{2\}\)/\\\x\1/g' <<< "${1%/}")"; } 
 
+css_styling="<meta charset="UTF-8"> <style type=\"text/css\"><\!--   BODY { font-family : ariel, monospace, sans-serif; font-size: x-small;} td\:first-child\:after {content\: attr(aria-label); font-size: small;} td\:nth-child(2)\ {white-space: nowrap; font-size: small;} P { font-weight: normal; font-family : ariel, monospace, sans-serif; color: black; background-color: transparent;} B { font-weight: normal; color: black; background-color: transparent;} A:visited { font-weight : normal; text-decoration : none; background-color : transparent; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; } A:link    { font-weight : normal; text-decoration : none; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; } A:hover   { color : #000000; font-weight : normal; text-decoration : underline; background-color : yellow; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; } A:active  { color : #000000; font-weight: normal; background-color : transparent; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; } .VERSION { font-size: small; font-family : arial, sans-serif; } .NORM  { color: black;  background-color: transparent;} .FIFO  { color: purple; background-color: transparent;} .CHAR  { color: yellow; background-color: transparent;} .DIR   { color: blue;   background-color: transparent;} .BLOCK { color: yellow; background-color: transparent;} .LINK  { color: aqua;   background-color: transparent;} .SOCK  { color: fuchsia;background-color: transparent;} .EXEC  { color: green;  background-color: transparent;} --> </style>"
+streamListings["east"] = "East"
+streamListings["sw_c"] = "Dock"
+streamListings["ne_c"] = "North"
+streamListings["fron"] = "Office"
+streamListings["sout"] = "S East"
+
 function serve_dir_or_file_from() {
-  local css_styling="<meta charset="UTF-8"> <style type=\"text/css\"><\!--   BODY { font-family : ariel, monospace, sans-serif; } td\:first-child\:after {content\: attr(aria-label);} P { font-weight: normal; font-family : ariel, monospace, sans-serif; color: black; background-color: transparent;} B { font-weight: normal; color: black; background-color: transparent;} A:visited { font-weight : normal; text-decoration : none; background-color : transparent; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; } A:link    { font-weight : normal; text-decoration : none; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; } A:hover   { color : #000000; font-weight : normal; text-decoration : underline; background-color : yellow; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; } A:active  { color : #000000; font-weight: normal; background-color : transparent; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; } .VERSION { font-size: small; font-family : arial, sans-serif; } .NORM  { color: black;  background-color: transparent;} .FIFO  { color: purple; background-color: transparent;} .CHAR  { color: yellow; background-color: transparent;} .DIR   { color: blue;   background-color: transparent;} .BLOCK { color: yellow; background-color: transparent;} .LINK  { color: aqua;   background-color: transparent;} .SOCK  { color: fuchsia;background-color: transparent;} .EXEC  { color: green;  background-color: transparent;} --> </style>"
   local URL_PATH="${1}/${3}"
   shift
   URL_PATH=$(urldecode "${URL_PATH}") 
@@ -473,7 +479,15 @@ END {print "</table>"}')"
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%-MOTION*}|grep -v MOTION|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH%%-MOTION*}" '
 BEGIN {print css_style "<table class=\"elif2\" style=\"width:100%\">";lines=0}
-{print "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">" $10 "</a></td></tr>";lines=lines+1;} 
+{printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">";
+gsub(".*sw_c","Dock  ",$10)
+gsub(".*east","East  ",$10)
+gsub(".*ne_c","North  ",$10)
+gsub(".*fron","Office  ",$10)
+gsub(".*sout","S East  ",$10)
+printf substr($10,1,index($10,"\ \ "))
+gsub(".*[0-9]\_","",$10)
+print substr($10,index($10,10)) "</a></td></tr>";lines=lines+1;} 
 END {print "</table>";if(lines<1){print "Argument list too long: too many files exist in " path " to process"}}')"
 
   elif [[ "${URL_PATH}" =~ .*\*mp4$ ]] || [[ "${URL_PATH}" =~ .*\*jpg$ ]]; then
@@ -484,20 +498,26 @@ BEGIN {print css_style "<table class=\"elif3\" style=\"width:100%\">"}
 END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ .*links_to_alerting_activity/mostrecent[0-9]{1,3}$ ]]; then
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%/mostrecent*}|head -n$(( ${URL_PATH##*mostrecent} + 1 ))|awk -v linkpre="$(ip -o address | \
-         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH%%/mostrecent*}" '
-BEGIN {print css_style "<script>var month = [];month['\''Jan'\''] = '\''-01-'\'';month['\''Feb'\''] = '\''-02-'\'';month['\''Mar'\''] = '\''-03-'\'';month['\''Apr'\''] = '\''-04-'\'';month['\''May'\''] = '\''-05-'\'';month['\''Jun'\''] = '\''-06-'\'';month['\''Jul'\''] = '\''-07-'\'';month['\''Aug'\''] = '\''-08-'\'';month['\''Sep'\''] = '\''-09-'\'';month['\''Oct'\''] = '\''-10-'\'';month['\''Nov'\''] = '\''-11-'\'';month['\''Dec'\''] = '\''-12-'\'';var mousedownedhere;var StartTimeOfInterest='\'''\'';function mdown(e){mousedownedhere=e.pageY};function giveRowIndicesSpanData(e,me){var downrowindex=Math.trunc((mousedownedhere+2)/((me.parentNode.clientHeight+2)/me.parentNode.childElementCount)-.5);StartTimeOfInterest=me.parentNode.parentNode.cells[0].attributes[0].textContent.trim().substring(1,32);StartTimeOfInterest=StartTimeOfInterest.substring(1,5) + month[StartTimeOfInterest.substr(6,3)] + StartTimeOfInterest.substring(10);window.top.StartTimeOfInterestEl.value=StartTimeOfInterest.substring(0,19);var uprowindex=Math.trunc((e.pageY+2)/((me.parentNode.clientHeight+2)/me.parentNode.childElementCount)-.5)}</script><table class=\"elif4\" style=\"width:100%\">"}
-{printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} \
+#only the main directory is being called for, not subsequent files.  This modifies to skip one level of directory
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t "${URL_PATH%%mostrecent*}"/*|head -n$(( ${URL_PATH##*mostrecent} + 1 ))|awk -v linkpre="$(ip -o address | \
+         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH%%mostrecent*}\*" '
+BEGIN {print css_style "<script>var month = [];month['\''Jan'\''] = '\''-01-'\'';month['\''Feb'\''] = '\''-02-'\'';month['\''Mar'\''] = '\''-03-'\'';month['\''Apr'\''] = '\''-04-'\'';month['\''May'\''] = '\''-05-'\'';month['\''Jun'\''] = '\''-06-'\'';month['\''Jul'\''] = '\''-07-'\'';month['\''Aug'\''] = '\''-08-'\'';month['\''Sep'\''] = '\''-09-'\'';month['\''Oct'\''] = '\''-10-'\'';month['\''Nov'\''] = '\''-11-'\'';month['\''Dec'\''] = '\''-12-'\'';var mousedownedhere;var StartTimeOfInterest='\'''\'';function mdown(e){mousedownedhere=e.pageY};function giveRowIndicesSpanData(e,me){var downrowindex=Math.trunc((mousedownedhere+2)/((me.parentNode.clientHeight+2)/me.parentNode.childElementCount)-.5);StartTimeOfInterest=me.parentNode.parentNode.cells[0].attributes[0].textContent.trim().substring(1,32);StartTimeOfInterest=StartTimeOfInterest.substring(1,5) + month[StartTimeOfInterest.substr(6,3)] + StartTimeOfInterest.substring(10);window.top.StartTimeOfInterestEl.value=StartTimeOfInterest.substring(0,19);var uprowindex=Math.trunc((e.pageY+2)/((me.parentNode.clientHeight+2)/me.parentNode.childElementCount)-.5)}</script><table class=\"elif4\" style=\"width:100%\">";line=1}
+{if(NF>9){printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} \
 else {printf $12 "\"";if (line==1){printf " id=\"latestalert\""}};printf " \
 onmousedown=\"document.domain=window.location.hostname;mdown(event)\" \
-onmouseup=\"window.top.StartCamOfInterestEl.value='\'''\'';giveRowIndicesSpanData(event,this)\">";if (substr($1,1,1) != "l"){printf $10} else {printf linkpre $12}; printf "</a></td></tr>";line=line+1} 
+onmouseup=\"window.top.StartCamOfInterestEl.value='\'''\'';giveRowIndicesSpanData(event,this)\">";if (substr($1,1,1) != "l"){printf $10} else {printf linkpre $12}; printf "</a></td></tr>";line=line+1}}
 END {print "</table>"}')"
+
+#else {printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" substr($0,28,3) "&nbsp;" substr($0,32,2) "&nbsp;" substr($0,35,8) "&nbsp;]&nbsp;&nbsp;\"></td><td></td></tr>"}}
+#else{print "<tr><td></td><td>spacer</td></tr>"}
+#else {printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" substr($1,28,3) "&nbsp;" substr($1,32,2) "&nbsp;" substr($1,35,8) "&nbsp;]&nbsp;&nbsp;\"></td><td></td></tr>"}
+# width=\"108px\" aria-label=\"[&nbsp;" substr($1,28,3) "&nbsp;" substr($1,32,2) "&nbsp;" substr($1,35,8) "&nbsp;]&nbsp;&nbsp;\"></td><td></td></tr>"}
+
 #THE BUTTON ONCLICK PROGRAMMING BELOW NEEDS WORK.  THE INTENT IS THAT AN ARRAY CALLED GETS FILLED WITH WINDOW HANDLES THAT GET OPENED BY ONCLICK OF THEIR ANCHOR TAGS.  THAT ARRAY IS CYCLED THROUGH IN 500MS STEPS OPENING EACH WINDOW
   elif [[ "${URL_PATH}" =~ .*links_to_alerting_activity ]]; then
-      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v linkpre="$(ip -o address | \
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t "${URL_PATH}"|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH}" -v subpath="${URL_PATH##*/links_to_alerting_activity}" '
 BEGIN {printf css_style "<table class=\"elif5\" style=\"width:100%\"><tr><td></td><td>";if(subpath!=""){printf "<button style=\"font-size\:22px;background\:white\" onclick=\"setInterval(function(){windws.forEach(windw){window.open(windw)}},500)\">Play all the snapshot windows you opened</button>&nbsp;(Open them first, of course.  THIS FEATURE IS UNDER DEVELOPMENT AND NOT WORKING YET.  ALSO NOTE THESE SNAPSHOTS ARE NOT REGISTERED IN THE SEPARATED VIEWS SECTION LIKE OTHERS WHEN YOU OPEN THEM)"}print "</td></tr>";line=0}
-
 {printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} \
 else {printf $12 "\"";if (line==1){printf " id=\"latestalert\""}};printf " onclick=\"windws[windowsx++]=windows.open(href);\" target=\"_blank\">";if (substr($1,1,1) != "l"){printf $10} else {printf linkpre $12}; printf "</a></td></tr>";line=line+1} 
 END {print "</table>"}')"
