@@ -208,7 +208,7 @@ streamListings["13"] = "S East"
 <!-- Tab links change the name of tablinks so it shows, change rest to drop 1 so they don't-->
 <div id="buttonsdiv">
   <button id="btnalertchecking" style="font-size:12px;" 
-onclick=if(alertchecking.style.display=='none'){alertchecking.style.display='inline'}else{alertchecking.style.display='none'}>
+onclick=if(alertchecking.style.display=='none'){alertchecking.style.display='inline';}else{alertchecking.style.display='none';}>
 Alert Checking</button>
   <button id="btnbyview" class="tablinks" style="font-size:12px;" 
 onclick="tabactivate(this)">
@@ -1237,29 +1237,45 @@ value="Alert checking now OFF"
 onclick="if(alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != null)
 {element=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1];}
 else {element=null;}
-if(typeof(element) != 'undefined' && element != null){ previousalert=element.innerText;
-                                                     }
+if(typeof(element) != 'undefined' && element != null)
+   {
+       if(element.innerText.endsWith('.jpg')){alertsdirectory.click();return}
+       previousalert=element.innerText;
+   }
 else { previousalert=null;
      }
-if (this.value.substr(this.value.length-1,1) != 'F'){alertkeepalive.data='';this.value='Alert checking now OFF';this.style.background='#e6e6e6';btnalertchecking.style.background='#e6e6e6';this.style.width='300px';clearInterval(checkingAlerted);
+if (this.value.substr(this.value.length-1,1) != 'F'){alertkeepalive.data='';this.value='Alert checking now OFF';this.style.background='#e6e6e6';btnalertchecking.style.color='black';this.style.width='300px';clearInterval(checkingAlerted);
                                                     } 
-else { this.value='Alert checking now ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';btnalertchecking.style.background='Chartreuse';this.style.width='930px';
+else { this.value='Alert checking now ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';btnalertchecking.style.color='forest green';this.style.width='930px';
         alertkeepalive.data='/var/www/html/silence.mp3';
         setTimeout(function(){alertkeepalive.contentDocument.body.children[0].muted=true;
         alertkeepalive.contentDocument.body.children[0].loop=true
         alertkeepalive.contentDocument.body.children[0].play()},4000)
         checkingAlerted=setInterval(
            function()
-             {if(alertsdirectory.contentDocument.body.children[0].tBodies[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != null)
-                   {element=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1];}
-              else {element=null;}
-                     if(typeof(element) != 'undefined' && element != null) 
-                        {if (element.innerText !== previousalert)   {if (element.innerText == ''){previousalert=element.innerText;
-                                                                                                  } 
-                                                                    }
-                        }
-                     else {previousalert=null;}
-               alertsdirectory.data=alertsdirectory.data;
+             {
+                if(alertsdirectory.contentDocument.body.children[0].tBodies[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != null)
+                 {
+                    element=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1];
+                 }
+                 else {element=null;}
+                 if(typeof(element) != 'undefined' && element != null) 
+                 {
+                    if (element.innerText !== previousalert)
+                    {
+                       if (element.innerText == '')
+                       {
+                          previousalert=element.innerText;
+                       }
+                       else if(element.document.body.children[0].tBodies[0].rows[0] != 'undefined' && element.document.body.children[0].tBodies[0].rows[0] != null)
+                       {
+                          playalert(false)
+                       }
+                    }
+                                                               
+                 }
+                 else {previousalert=null;}
+                 alertsdirectory.data=alertsdirectory.data;
              },8000);
         if(alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != null)
              {element=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1];}
@@ -1275,12 +1291,13 @@ else { this.value='Alert checking now ON.  If you\'re traveling, you\'ll risk yo
 <tr height="130px"><td>
 <small>
 <!-- <a href="/../../links_to_alerting_activity/" onclick="return do_me_false(this)"><b>Recent Alerts</b></a>&nbsp;&nbsp;&nbsp;<small>Click title to see all recent alerts. Click border to toggle between listing all or just most recent 1 (traffic sparing)</small></small> -->
-<a href="/../../links_to_alerting_activity/" target="_blank"><b>Recent Alerts</b></a>&nbsp;&nbsp;&nbsp;<small>Click title to see all recent alerts. Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=</small><input type="button" value="Most recent alert event" onclick="this.value=previousalert.substring(36)">
+<a href="/../../links_to_alerting_activity/" target="_blank"><b>Recent Alerts</b></a>&nbsp;&nbsp;&nbsp;<small>Click title to see all recent alerts. Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=</small>
+<input type="button" value="Most recent alert event" onclick="this.value=previousalert">
 <!-- top.document-->
 <br>
 <object id="alertsdirectory" type="text/html" 
-data="/../../links_to_alerting_activity/mostrecent14" 
-onclick="if (this.data.includes('/mostrecent1')){this.data='/../../links_to_alerting_activity'}else{this.data='/../../links_to_alerting_activity/mostrecent14'};" 
+data="/../../links_to_alerting_activity/mostrecent64" 
+onclick="if (this.data.includes('/mostrecent')){this.data='/../../links_to_alerting_activity'}else{this.data='/../../links_to_alerting_activity/mostrecent64'};" 
 onload="if(alertsdirectory.contentDocument.body.children[0].tBodies[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0] != null && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != null)
           {element=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1];}
         else {element=null;}
@@ -2025,25 +2042,13 @@ function slideres(a) {
    if (a !== undefined) {essliderbarinput.value = a;}
    this.essubmit.value = "Set to " + essliderbarinput.value + " minutes";
 }
-</script>
-<script type="text/javascript"> 
-var playerstyle
-var audioplayer
 
-function playalert(start) { 
-playerstyle = new AudioContext()
-audioplayer = playerstyle.createOscillator()
-audioplayer.type = "sine"
-audioplayer.connect(context.destination)
-if(start){
-audioplayer.start()
-}
-else
-{
-audioplayer.stop()
-}} 
-</script>
-    <script type="text/javascript"> 
+function playalert(start) 
+{ 
+   var audio = new Audio('https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3'); 
+   audio.play(); 
+} 
+
 function checkforcache() { 
    if ('caches' in window){ alert('This browser supports cache, FUTURE Considering to use it for sounds, pictures, videos, etc.')} 
    else {alert('This browser cannot cache');}
