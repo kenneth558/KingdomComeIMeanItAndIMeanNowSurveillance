@@ -4,7 +4,7 @@ I had to develop this - a web page and some server-side web server scripting for
 
 NOTE: My cameras stream files are segmented to 6 minute segments by ffmpeg whose command line is in eno1tasks.sh startup script.  They are recorded at all times continuously regardless of whether events occur or not.
 NOTE: Alerting of events is configured via emails sent out.  For this functionality you'll need to hard code some email account name with password in this scripting in eno1tasks.sh.  Please create a dedicated email account for this.
-NOTE: Most features require server-side customizations to the http server script (included), similar to PHP.  Most functionality will be lost if this page is served without using the tricked out bashttpd script serving this page to do it.
+NOTE: Most features require server-side customizations to the http server script (included), a functionality similar to PHP or server-side Javascript.  Most functionality will be lost if this page is served without using the tricked out bashttpd script serving this page to do it.
 
 Please don't expect this page to radiate impressive beauty, but it does do me a world of good in functionality such as -
   - configure week long predictable "don't wake me up" time windows as files both per camera and system-wide.  Events in the form of .jpg files will continue to be recorded as .jpgs when they happen so you can research later if you missed anything, they just won't produce alerts.
