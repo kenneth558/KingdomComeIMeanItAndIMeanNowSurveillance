@@ -84,20 +84,23 @@ slidersw(10);
 sliderfp(10);
 sliderne(10);
 slideres(45);
-document.links[ 7].href='http://' + window.location.hostname + ':6080';//set for East Driveway 6080
-document.links[10].href='http://' + window.location.hostname + ':10080';//set for South Driveway 10080
-document.links[13].href='http://' + window.location.hostname + ':14080';//set for Dock 14080
-document.links[16].href='http://' + window.location.hostname + ':9080';//set for Front Parking Lot 9080
-document.links[19].href='http://' + window.location.hostname + ':15080';//set for NE Corner 15080
 tellBrowser()
 textmaster.click()
-textmaster.value=50 
+textmaster.value=43.5
 sldrmaster.value=textmaster.value
 textmaster.value=textmaster.value
 if(isAndroid==true){androidconnection.style='display:inline'}
 document.title='Surveillance Recordings';
 ">
-<script type="text/javascript"><!-- THIS REALLY DOESN'T WORK SO EACH ANNOUNCEMENT WILL HAVE TO HAVE ITS OWN ID AND SCRIPT TAG WITH IT -->
+<!--<script type="text/javascript"><!-- THIS REALLY DOESN'T WORK SO EACH ANNOUNCEMENT WILL HAVE TO HAVE ITS OWN ID AND SCRIPT TAG WITH IT -->
+<!--
+document.links[ 7].href='http://' + window.location.hostname + ':6080';//set for East Driveway 6080
+document.links[10].href='http://' + window.location.hostname + ':10080';//set for South Driveway 10080
+document.links[13].href='http://' + window.location.hostname + ':14080';//set for Dock 14080
+document.links[16].href='http://' + window.location.hostname + ':9080';//set for Front Parking Lot 9080
+document.links[19].href='http://' + window.location.hostname + ':15080';//set for NE Corner 15080
+-->
+<script type="text/javascript">
 var adaptivetimemaster=15000;
 var adaptivetime;
 var notalldoneyet=false
@@ -574,10 +577,10 @@ for(i=0;i<lmentList.length;i++)
 <tr><td class="camtitle">
 <a href="" target="_blank"><h3>East</h3></a>
 </td></tr>
-<tr><td class="bb" valign="top">
-<a href="/../../camera_snapshots/camera_east_driveway/" target="_blank">
 
-Event Snapshots</a>; for alt control, drop them
+<!--
+<tr><td class="bb" valign="top">
+<a href="/../../camera_snapshots/camera_east_driveway/" target="_blank">Event Snapshots</a>; for alt control, drop them
 <br>into a spare viewer
 <br><input type="range" 
 
@@ -594,7 +597,6 @@ lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement
 lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
-
 <big><big>%</big></big>
 <br><br>
     <object id="edjpg" type="text/plain" value="Click here to collect these snapshots" class="jpgobjmainpg"
@@ -604,6 +606,8 @@ width="1000px"
 height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object>
 </td></tr>
+-->
+
 <tr><td class="bb">
 <a href="/var/www/camera_streams/camera_east_driveway/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
 
@@ -679,6 +683,8 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 <big><big>%</big></big>
 </td></tr>
 
+
+<!--
 <tr><td class="bb">
 <a href="/../../camera_snapshots/camera_south_driveway/" target="_blank">
 Event Snapshots</a>; for alt control, drop them
@@ -707,6 +713,8 @@ onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border
 width="594px" 
 height="745px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object></td></tr>
+-->
+
 </table>
 </td>
 <td valign="top" align="left" style='padding:0px'>
@@ -717,15 +725,9 @@ height="745px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </td></tr>
 </table>
 </td></tr>
-<tr valign="top"><td valign="top">
-    <object id="sysjpg_motion" type="text/html" 
-onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="this.data=this.data;" data="/../../camera_snapshots/*/*jpg-MOTION" 
-width="409px" 
-height="300px" 
-style="font-size:15px;overflow-y:scroll;overflow-x:scroll;border:5px solid black;border-width:20px 3px 3px;">
-</object>
-</td></tr>
+
+
+
 
 <tr><td class="camtitle" style='padding:0px'><!-- FUTURE --Use a layout pattern for these that will facilitate swapping them around style="border:5px ridge fuchsia">
 
@@ -737,16 +739,6 @@ Add ip address to snaps for group drag-dropping into browser window (Now functio
 
 -->
 <a name="sw_corner_location_on_page"></a>
-<br><object id="swmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
-onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
-width="945px" 
-height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
-   <param name="timestamp" value="initial" />
-   <param name="nextfilename" value="initial" />
-   <param name="currenttime" value=0 />
-   <param name="playingjpgs_number" value="5" />
-</object>
 <a href="" target="_blank"><h3>Dock</h3></a>
 </td></tr>
 <tr><td class="bb" style='padding:0px'>
@@ -766,9 +758,44 @@ lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelem
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 <big><big>%</big></big>
+<br>
+<br>
+<object id="swmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
+onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+width="945px" 
+height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+   <param name="timestamp" value="initial" />
+   <param name="nextfilename" value="initial" />
+   <param name="currenttime" value=0 />
+   <param name="playingjpgs_number" value="5" />
+</object>
+</td></tr>
+<tr valign="top"><td valign="top">
+<object id="alertsdirectory" type="text/html" 
+data="/../../links_to_alerting_activity/mostrecent400"
+onclick="if (this.data.includes('/mostrecent')){this.data='/../../links_to_alerting_activity'}else{this.data='/../../links_to_alerting_activity/mostrecent400'};" 
+onload="if(alertsdirectory.contentDocument.body.children[0].tBodies[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0] != null && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != null)
+          {element=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1];}
+        else {element=null;}
+        if(element != 'undefined' && element != null)
+          {if (element.innerText !== previousalert)
+             {if (alertCheck.value.substr(alertCheck.value.length-1,1) != 'F' && previousalert != null && element.innerText !== null){soundalarm();}else {previousalert=element.innerText}
+             }
+          }
+        else {previousalert=null;}
+        glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+width="419px" height="245px" 
+style="font-size:15px;overflow:auto;border:3px solid black;border-width:3px 3px 3px 3px;
+">
+   <param name="timestamp" value="initial" />
+   <param name="nextfilename" value="initial" />
+   <param name="currenttime" value=0 />
+   <param name="playingjpgs_number" value="0" />
+    </object>
 </td></tr>
 
-
+<!--
 <tr><td class="bb" style='padding:0px'>
 <a href="/../../camera_snapshots/camera_sw_corner/" target="_blank">
 Event Snapshots</a>; for alt control, drop them<br>into a spare viewer
@@ -794,6 +821,9 @@ width="945px"
 height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object>
 </td></tr>
+-->
+
+
 </table>
 </td>
 <td valign="top" style='padding:0px'>
@@ -802,6 +832,8 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <a name="fp_location_on_page"></a>
 <a href="" target="_blank"><h3>Office</h3></a>
 </td></tr>
+
+<!--
 <tr><td  class="bb" valign="top" style='padding:0px'>
 <a href="/../../camera_snapshots/camera_front_parking/" target="_blank">
 Event Snapshots</a>; for alt control, drop them
@@ -831,7 +863,7 @@ width="1000px"
 height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object>
 </td></tr>
-
+-->
 
 <tr><td class="bb">
 <a href="/var/www/camera_streams/camera_front_parking/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
@@ -895,7 +927,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 <big><big>%</big></big>
 </td></tr>
 
-
+<!--
 <tr><td class="bb">
 <a href="/../../camera_snapshots/camera_ne_corner/"  target="_blank">
 Event Snapshots</a>; for alt control, drop them
@@ -922,14 +954,19 @@ width="960px"
 height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object>
 </td></tr>
-
+-->
 
 
 </td></tr>
 </table>
-
 </td></tr>
 </table>
+<table><tr><td align="center" width="1000px">
+<object id="mainjpgviewer" type="text/html" value="Main jpg viewer" width="500" height="500"
+style="font-size:15px;overflow:auto;border:3px solid black;border-width:3px 3px 3px 3px;"
+></object>
+</td></tr></table>
+
 <input type="button" value="List videos of 1 minute prior and a snapshot from alert time" id="lsbtn" 
 style="font-size:12px;"
 onclick="
@@ -942,6 +979,8 @@ onclick="
         objectelement[i].data=streamListings[objectelement[i].id] + '*?1minutesbefore' + StartTimeOfInterest;
     }
     setTimeout(function(){startbtn0.click()},1000)
+">
+<!--
     switch(alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1].innerText.substr(alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1].innerText.indexOf('192.168.0.')+10,2))
     {
        case '11':
@@ -966,7 +1005,8 @@ onclick="
           break;
        default:;
     }
-">
+
+"> -->
 <input type="button" value="Start each top video and begin queuing"
 id="startbtn0" style="font-size:12px;" 
 onclick="startbtncclick();
@@ -977,11 +1017,12 @@ afterqbtn3.innerText=manualqmsg3
 afterqbtn4.innerText='Queue-to time=1 minute prior to ' + StartTimeOfInterestEl.value.substr(StartTimeOfInterestEl.value.length-8)
 notalldoneyet=true
 setTimeout(function(){qbtn.click()},5000)
-/* edmp4.scrollIntoView() */
+edmp4.scrollIntoView()
 ">
-<br>
 <input type="button" value="Refresh alert list" style="font-size:8px;" onclick="alertsdirectory.data='/../../links_to_alerting_activity/mostrecent1';btnSetForRecentAlert.value='Last alert'">
 <small><small><small>Optional force alert list renew if data stale</small></small></small>
+
+
 <input type="button" id="btnSetForRecentAlert" value="Last alert" style="background:#3399FF;font-size:18px;" 
 onclick="closebtn.click()
 if(alertsdirectory.contentDocument==null || alertsdirectory.contentDocument.readyState!='complete')
@@ -998,8 +1039,8 @@ setTimeout(function(){btnSetForRecentAlert.value='Last alert'},3000)
 setTimeout(function(){lsbtn.click()},500)
 StartCamOfInterestEl.value=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1].innerText; /*MUST be last thing in function in case it doesn't exist*/
 }">
-<small><small>&nbsp;
-<input type="button" id="btnSetForRecentSmartEvent" value="All activity" style="background:#3399FF;font-size:18px;" 
+<small><small>
+<input type="button" id="btnSetForRecentSmartEvent" value="Last activity" style="background:#3399FF;font-size:18px;" 
 onclick="closebtn.click()
 if(sysjpgmp4_motion.contentDocument == null || sysjpgmp4_motion.contentDocument.readyState!='complete')
 {this.value='Data not yet received';this.style='background:yellow'}
@@ -1020,18 +1061,13 @@ else
         StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
         StartCamOfInterestEl.value=alltd[i].innerText;
     }
-    setTimeout(function(){btnSetForRecentSmartEvent.value='Scene change'},3000)
+    setTimeout(function(){btnSetForRecentSmartEvent.value='Last activity'},3000)
     setTimeout(function(){lsbtn.click()},1000)
 }">
+<br>
 <input size="14" disabled id="StartTimeOfInterestEl" style="font-size:16px;border:1px ridge blue;background:white" value="Time" height="100px">
 <input size="10" disabled id="StartCamOfInterestEl" style="font-size:16px;border:1px ridge blue;background:white" value="View" height="100px">
 </small></small>
-<br>
-<p id="afterqbtn1"></p>
-<p id="afterqbtn2"></p>
-<p id="afterqbtn3"></p>
-<p id="afterqbtn4"></p>
-
 <input type="button" value="Queue" id="qbtn" 
 style="font-size:14px;background:#e6e6e6"
 onclick="
@@ -1169,6 +1205,10 @@ var objectelement
 qbtn.value='Queue';qbtn.style.background='#e6e6e6'"
 >
 <input type="button" value="Relax the courtesy of videos" style="font-size:8px;" id="courtesybtn" style="background:white" onclick="if(this.style.backgroundColor == 'white'){this.style.background='#d9ecd0';this.value='Enforce courtesy of videos while any other loads their next one'}else{this.style.background='white';this.value='Relax courtesy of videos while any other loads their next one'}">
+<p id="afterqbtn1"></p>
+<p id="afterqbtn2"></p>
+<p id="afterqbtn3"></p>
+<p id="afterqbtn4"></p>
 </td>
 
 
@@ -1239,7 +1279,6 @@ onclick="if(alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[1] 
 else {element=null;}
 if(typeof(element) != 'undefined' && element != null)
    {
-       if(element.innerText.endsWith('.jpg')){alertsdirectory.click();return}
        previousalert=element.innerText;
    }
 else { previousalert=null;
@@ -1295,25 +1334,15 @@ else { this.value='Alert checking now ON.  If you\'re traveling, you\'ll risk yo
 <input type="button" value="Most recent alert event" onclick="this.value=previousalert">
 <!-- top.document-->
 <br>
-<object id="alertsdirectory" type="text/html" 
-data="/../../links_to_alerting_activity/mostrecent64" 
-onclick="if (this.data.includes('/mostrecent')){this.data='/../../links_to_alerting_activity'}else{this.data='/../../links_to_alerting_activity/mostrecent64'};" 
-onload="if(alertsdirectory.contentDocument.body.children[0].tBodies[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0] != null && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != null)
-          {element=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1];}
-        else {element=null;}
-        if(element != 'undefined' && element != null)
-          {if (element.innerText !== previousalert)
-             {if (alertCheck.value.substr(alertCheck.value.length-1,1) != 'F' && previousalert != null && element.innerText !== null){soundalarm();}else {previousalert=element.innerText}
-             }
-          }
-        else {previousalert=null;}
-        glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-width="1500px" height="2100px" style="font-size:15px;overflow:auto;border:3px solid black;border-width:20px 30px 3px 3px;">
-   <param name="timestamp" value="initial" />
-   <param name="nextfilename" value="initial" />
-   <param name="currenttime" value=0 />
-   <param name="playingjpgs_number" value="0" />
-    </object>
+
+
+    <object id="sysjpg_motion" type="text/html" 
+onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+onclick="this.data=this.data;" data="/../../camera_snapshots/*/*jpg-MOTION" 
+width="409px" 
+height="300px" 
+style="font-size:15px;overflow-y:scroll;overflow-x:scroll;border:5px solid black;border-width:20px 3px 3px;">
+</object>
 <div id="androidconnection" style="display:inline">
 <br><object id="alertkeepalive" type="audio/mpeg" data="" height="20px" width="200px"></object>This silent audio loop is used to maintain Android connections
 </div>
@@ -1477,7 +1506,9 @@ function startbtncclick()
    var objectelement=document.getElementsByClassName('mp4obj');
    var jpgobjectelement=document.getElementsByClassName('jpgobjmainpg');
    if(objectelement.length!=jpgobjectelement.length)
-   {alert('This feature requires the quantity of snapshot objects to equal the quantity of video objects, but that requirement doesn\'t seem to be met')}
+   {;
+/* alert('This feature requires the quantity of snapshot objects to equal the quantity of video objects, but that requirement doesn\'t seem to be met')*/
+}
    for(var i=0;i<2;i++)
    {
       for(var i=0;i<objectelement.length;i++)
@@ -1494,14 +1525,19 @@ function startbtncclick()
                {
                   objectelement[i].contentDocument.links[1].click();
                }
+               else if(objectelement[i].contentDocument.links[0] != null && objectelement[i].contentDocument.links[0].innerText.endsWith('.mp4'))
+               {
+                  objectelement[i].contentDocument.links[0].click();
+               }
                else
-               {/*alert('No files displayed?')*/
+               {alert(streamListings[objectelement[i].id] + '  has no footage of that time period');objectelement[i].click()
                }
             }
          }
          else /*videos auto play by default, so no more looking needed*/
-         {
-            setTimeout(function(){startbtncclick()},1300)
+         {;
+            /* alert(objectelement[i].id + ' not rendered as expected');
+            if(objectelement[i].contentDocument.links[0] != null){setTimeout(function(){startbtncclick()},1300)} */
          }
       }
       objectelement=document.getElementsByClassName('jpgobjmainpg');
