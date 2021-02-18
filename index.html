@@ -553,7 +553,34 @@ Command: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
 
 <div id="byview" class="separateviewsdiv">
 <b><big>Separate Camera Recordings.  Click a blue border to list/unlist </big></b>
-&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp; &nbsp;
+<button  onclick="if(camsmp4col1mainpg.style.display==''){camsmp4col1mainpg.style.display='none';
+camsmp4col2mainpg.style.display='none';
+camsmp4col3mainpg.style.display='none'
+alertsdirectory.height='550px'
+mainjpgviewer0.style.position='absolute'
+mainjpgviewer0.height='558px'
+mainjpgviewer0.width='875px'
+mainjpgviewer0.style.top='77px'
+mainjpgviewer0.style.left='435px'
+mainjpgviewer0.style.display=''
+setTimeout(function(){alertsdirectory.scrollIntoView()},100)
+spacerforjpgviewer0.innerText=''
+spacerforjpgviewer1.innerText=''
+spacerforjpgviewer2.innerText=''
+}else{camsmp4col1mainpg.style.display='';
+spacerforjpgviewer0.innerText='.'
+spacerforjpgviewer1.innerText='.'
+spacerforjpgviewer2.innerText='.'
+camsmp4col2mainpg.style.display=''
+camsmp4col3mainpg.style.display=''
+alertsdirectory.height='245px'
+mainjpgviewer0.height='100px'
+mainjpgviewer0.width='550px'
+mainjpgviewer0.style.top='505px'
+mainjpgviewer0.style.left='235px'
+mainjpgviewer0.style.display=''}">Alternate arrangement</button>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
 <input type="range" id="sldrmaster" oninput="textmaster.value=this.value" name="" min="1" max="10000" step=".1" value="43.5" list="tickmarks">
 
 <textarea id="textmaster" style="font-size: 10pt;resize: none;" contentEditable="true" cols="5" rows="1" value="43.5" 
@@ -571,10 +598,10 @@ for(i=0;i<lmentList.length;i++)
 <table style="border:1px solid black">
 <tr><td valign="top">
 
-<table style="border:2px ridge blue">
+<table id="camsmp4col1mainpg" style="border:2px ridge blue;">
 <tr><td></td></tr>
 
-<tr><td class="camtitle">
+<tr><td class="camtitle"}" >
 <a href="" target="_blank"><h3>East</h3></a>
 </td></tr>
 
@@ -636,7 +663,7 @@ onclick="if (this.type == 'text/plain')
 else 
 {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="1000px" 
-height="560px" 
+height="565px" 
 style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
@@ -651,7 +678,7 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="594px" 
-height="745px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+height="792px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
@@ -718,17 +745,7 @@ height="745px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </table>
 </td>
 <td valign="top" align="left" style='padding:0px'>
-<table style='padding:0px'>
-<tr style='padding:0px'><td style='padding:0px'>
-<table width="100%" style='padding:0px'>
-<tr style='padding:0px'><td align='middle' style='padding:0px'>
-</td></tr>
-</table>
-</td></tr>
-
-
-
-
+<table id="camsmp4col2mainpg" style='padding:0px' width="428px">
 <tr><td class="camtitle" style='padding:0px'><!-- FUTURE --Use a layout pattern for these that will facilitate swapping them around style="border:5px ridge fuchsia">
 
 
@@ -770,12 +787,17 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="5" />
 </object>
-</td></tr>
-<tr valign="top"><td valign="top">
+</td></tr></table>
+
+<table><tr valign="top"><td valign="top">
 <object id="alertsdirectory" type="text/html" 
 data="/../../links_to_alerting_activity/mostrecent400"
-onclick="if (this.data.includes('/mostrecent')){this.data='/../../links_to_alerting_activity'}else{this.data='/../../links_to_alerting_activity/mostrecent400'};" 
-onload="if(alertsdirectory.contentDocument.body.children[0].tBodies[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0] != null && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != null)
+onclick="this.data=this.data;if(camsmp4col1mainpg.style.display==''){mainjpgviewer0.style.position='absolute'
+mainjpgviewer0.height='100px'
+mainjpgviewer0.width='550px'
+mainjpgviewer0.style.top='505px'
+mainjpgviewer0.style.left='235px'}"
+onload="if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0] != null && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != null)
           {element=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1];}
         else {element=null;}
         if(element != 'undefined' && element != null)
@@ -786,13 +808,17 @@ onload="if(alertsdirectory.contentDocument.body.children[0].tBodies[0] != 'undef
         else {previousalert=null;}
         glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 width="419px" height="245px" 
-style="font-size:15px;overflow:auto;border:3px solid black;border-width:3px 3px 3px 3px;
+style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 3px 3px;
 ">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="0" />
-    </object>
+    </object></td>
+
+<td>
+
+
 </td></tr>
 
 <!--
@@ -827,7 +853,7 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </table>
 </td>
 <td valign="top" style='padding:0px'>
-<table style="border:2px ridge blue" style='padding:0px'><tr><td></td></tr>
+<table style="border:2px ridge blue" style='padding:0px' id="camsmp4col3mainpg"><tr><td></td></tr>
 <tr><td class="camtitle" style='padding:0px'>
 <a name="fp_location_on_page"></a>
 <a href="" target="_blank"><h3>Office</h3></a>
@@ -887,7 +913,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 <object id="fpmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', this.contentDocument.body.children[0].tagName, '', '', '')"
-width="1000px" height="560px" 
+width="960px" height="538px" 
  style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
@@ -959,17 +985,29 @@ height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 
 </td></tr>
 </table>
-</td></tr>
-</table>
-<table><tr><td align="center" width="1000px">
-<object id="mainjpgviewer" type="text/html" value="Main jpg viewer" width="500" height="500"
-style="font-size:15px;overflow:auto;border:3px solid black;border-width:3px 3px 3px 3px;"
-></object>
-</td></tr></table>
 
+</td>
+</tr></table>
+</tr>
+</table>
+</td></tr></table>
+<p id="spacerforjpgviewer0"></p>
+<p id="spacerforjpgviewer1"></p>
+<p id="spacerforjpgviewer2"></p>
+<p id="spacerforjpgviewer3"></p>
+<p id="spacerforjpgviewer4"></p>
+<p id="spacerforjpgviewer5"></p>
 <input type="button" value="List videos of 1 minute prior and a snapshot from alert time" id="lsbtn" 
 style="font-size:12px;"
-onclick="
+onclick="camsmp4col1mainpg.style.display = '';
+    camsmp4col2mainpg.style.display = ''
+    camsmp4col3mainpg.style.display = ''
+    alertsdirectory.height = '245px'
+    mainjpgviewer0.height = '100px'
+    mainjpgviewer0.width = '550px'
+    mainjpgviewer0.style.left = '235px'
+    mainjpgviewer0.style.display = ''
+
     var objectelement=document.getElementsByClassName('mp4obj')
     for(var i=0;i<objectelement.length;i++)
     {
@@ -1016,8 +1054,13 @@ afterqbtn2.innerText=manualqmsg2
 afterqbtn3.innerText=manualqmsg3 
 afterqbtn4.innerText='Queue-to time=1 minute prior to ' + StartTimeOfInterestEl.value.substr(StartTimeOfInterestEl.value.length-8)
 notalldoneyet=true
+mainjpgviewer0.style.top = '865px'
+mainjpgviewer0.style.left = '305px'
 setTimeout(function(){qbtn.click()},5000)
 edmp4.scrollIntoView()
+spacerforjpgviewer0.innerText='.'
+spacerforjpgviewer1.innerText='.'
+spacerforjpgviewer2.innerText='.'
 ">
 <input type="button" value="Refresh alert list" style="font-size:8px;" onclick="alertsdirectory.data='/../../links_to_alerting_activity/mostrecent1';btnSetForRecentAlert.value='Last alert'">
 <small><small><small>Optional force alert list renew if data stale</small></small></small>
@@ -1126,8 +1169,8 @@ if(objectelement[i].contentDocument != 'undefined' && objectelement[i].contentDo
        afterqbtn2.innerText='.';
        afterqbtn3.innerText='.';
        afterqbtn4.innerText='.'; */
-       setTimeout(function(){startbtncclick()},2500)       
        soundalarm()
+       setTimeout(function(){startbtncclick()},500)       
    }
    else
    {
@@ -1180,6 +1223,9 @@ var objectelement=document.getElementsByClassName('mp4obj');
 
 <input type="button" value="Close these viewers" id="closebtn" style="font-size:12px;" 
 onclick="
+spacerforjpgviewer0.innerText=''
+spacerforjpgviewer1.innerText=''
+spacerforjpgviewer2.innerText=''
 var objectelement
         var classname='mp4obj'
         for (var j=0;j<2;j++) 
@@ -1210,7 +1256,39 @@ qbtn.value='Queue';qbtn.style.background='#e6e6e6'"
 <p id="afterqbtn3"></p>
 <p id="afterqbtn4"></p>
 </td>
-
+<table id="mainjpgviewer0table"><tr><td align="center" width="1000px">
+<object id="mainjpgviewer0" type="text/html" value="Main jpg viewer" width="500" height="100"
+style="display:none;font-size:15px;overflow:auto;border:3px solid black;border-width:3px 3px 3px 3px;"
+onload="
+spacerforjpgviewer0.innerText='.'
+spacerforjpgviewer1.innerText='.'
+spacerforjpgviewer2.innerText='.'
+if(camsmp4col1mainpg.style.display!=''){
+this.height='558px'
+this.width='875px'
+this.style.top='77px'
+this.style.left='435px'
+this.style.display=''
+setTimeout(function(){alertsdirectory.scrollIntoView()},100)
+}
+else
+{
+this.style.position='absolute'
+this.height='100px'
+this.width='550px'
+if( edmp4.contentDocument == 'undefined'){this.style.top='505px';this.style.left='235px'}
+else{this.style.top='865px';this.style.left='305px'}
+this.style.display=''}"
+onclick="if(this.style.display==''){this.style.display='none';
+spacerforjpgviewer0.innerText=''
+spacerforjpgviewer1.innerText=''
+spacerforjpgviewer2.innerText=''
+}else{this.style.display=''
+spacerforjpgviewer0.innerText='.'
+spacerforjpgviewer1.innerText='.'
+spacerforjpgviewer2.innerText='.'
+}"
+></object>
 
 </div>
 <div id="notes" class="tabcontent" style="display:none">

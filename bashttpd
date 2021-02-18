@@ -558,10 +558,11 @@ onmousedown=\"mdown(event)\" \
 onmouseup=\"window.top.StartCamOfInterestEl.value='\'''\'';giveRowIndicesSpanData(event,this)\" \
 \
 onclick=\" \
-if(window.top.mainjpgviewer.data!= \
+if(window.top.mainjpgviewer0.data!= \
 this.parentNode.parentNode.parentNode.rows[Math.trunc((event.pageY+2)/((this.parentNode.parentNode.parentNode.clientHeight+2)/this.parentNode.parentNode.parentNode.childElementCount)-.5)].cells[1].children[0].href) \
-{window.top.mainjpgviewer.data= \
-this.parentNode.parentNode.parentNode.rows[Math.trunc((event.pageY+2)/((this.parentNode.parentNode.parentNode.clientHeight+2)/this.parentNode.parentNode.parentNode.childElementCount)-.5)].cells[1].children[0].href;} \
+{window.top.mainjpgviewer0.data= \
+this.parentNode.parentNode.parentNode.rows[Math.trunc((event.pageY+2)/((this.parentNode.parentNode.parentNode.clientHeight+2)/this.parentNode.parentNode.parentNode.childElementCount)-.5)].cells[1].children[0].href; \
+window.top.mainjpgviewer0.style.display='\'''\''} \
 return false;\" \
 \
 ondblclick=\"window.top.lsbtn.click();\" \
