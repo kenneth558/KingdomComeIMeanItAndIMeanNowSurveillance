@@ -1048,14 +1048,14 @@ onclick="camsmp4col1mainpg.style.display = '';
 <input type="button" value="Start each top video and begin queuing"
 id="startbtn0" style="font-size:12px;" 
 onclick="startbtncclick();
+mainjpgviewer0.style.top = '845px'
+mainjpgviewer0.style.left = '305px'
 qbtn.value=qmodemsg;qbtn.style.background='Chartreuse'
 afterqbtn1.innerText=manualqmsg1
 afterqbtn2.innerText=manualqmsg2 
 afterqbtn3.innerText=manualqmsg3 
 afterqbtn4.innerText='Queue-to time=1 minute prior to ' + StartTimeOfInterestEl.value.substr(StartTimeOfInterestEl.value.length-8)
 notalldoneyet=true
-mainjpgviewer0.style.top = '865px'
-mainjpgviewer0.style.left = '305px'
 setTimeout(function(){qbtn.click()},5000)
 edmp4.scrollIntoView()
 spacerforjpgviewer0.innerText='.'
@@ -1597,7 +1597,7 @@ function startbtncclick()
             {   progress+=100000;
                if(objectelement[i].contentDocument.links[0] != null && objectelement[i].contentDocument.links[0].innerText.endsWith('.jpg'))
                {
-                   objectelement[i].contentDocument.links[0].click();
+                   objectelement[i].contentDocument.links[0].click();alert('')
                }
                else if(objectelement[i].contentDocument.links[1] != null && objectelement[i].contentDocument.links[1].innerText.endsWith('.mp4'))
                {
@@ -1609,6 +1609,21 @@ function startbtncclick()
                }
                else
                {alert(streamListings[objectelement[i].id] + '  has no footage of that time period');objectelement[i].click()
+               }
+            }
+            else
+            {
+               try
+               {
+                  objectelement[i].contentDocument.body.children[0].play()
+               }
+               catch(err)
+               {/*If no video is rendered, the play command above will error.  Without this try/catch/finally construct, that error would abort this whole function block instantly*/
+                  ;
+               }
+               finally
+               {
+                  ;
                }
             }
          }
