@@ -553,7 +553,7 @@ Command: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
 </table>
 </div>
 
-<div id="byview" class="separateviewsdiv">
+<div id="byview" class="separateviewsdiv" style="zIndex:1">
 <b><big>Separate Camera Recordings.  Click a blue border to list/unlist </big></b>
 &nbsp;&nbsp; &nbsp; &nbsp;
 <!--
@@ -800,7 +800,7 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </object>
 </td></tr></table>
 
-<div id="mainalerts_viewer_buttonsdiv" style="position:absolute;">
+<div id="mainalerts_viewer_buttonsdiv" style="position:absolute;zIndex:-1">
 <object id="alertsdirectory" type="text/html" 
 data="/../../links_to_alerting_activity/mostrecent400"
 onclick="this.data=this.data;"
@@ -826,7 +826,7 @@ onload="if(camsmp4col1mainpg.style.display=='')
         else {previousalert=null;}
         glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 width="419px" height="245px" 
-style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 3px 3px;position:relative;
+style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 3px 3px;position:relative;zIndex:-1
 ">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
@@ -836,7 +836,7 @@ style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px
 <div id="mainjpgviewer_buttonsdiv" style="position:relative;left:-230px">
 <object id="mainjpgviewer0" type="text/html" value="Main jpg viewer" width="550" height="200"
 draggable="true"
-style="font-size:15px;overflow:auto;border:0px;position:relative;left:100px;display:none"
+style="font-size:15px;overflow:auto;border:0px;position:relative;left:100px;display:none;zIndex:-1"
 onload="
 forbuttons.style.top='0px'
 if(camsmp4col1mainpg.style.display!='')
@@ -887,7 +887,7 @@ if (el.offsetParent) {
 
 
 
-<div id="forbuttons" style="position:relative;left:-62px">
+<div id="forbuttons" style="position:relative;left:-62px;zIndex:-1">
 <input type="button" value="List videos of 1 minute prior and a snapshot from alert time" id="lsbtn" 
 style="font-size:12px;"
 onclick="camsmp4col1mainpg.style.display = '';
@@ -1177,7 +1177,7 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 
 </td>
 <td valign="top" style='padding:0px'>
-<table style="border:2px ridge blue" style='padding:0px' id="camsmp4col3mainpg"><tr><td></td></tr>
+<table style="border:2px ridge blue" style='padding:0px' id="camsmp4col3mainpg" ><tr><td></td></tr>
 <tr><td class="camtitle" style='padding:0px'>
 <a name="fp_location_on_page"></a>
 <a href="" target="_blank"><h3>Office</h3></a>
@@ -1215,7 +1215,7 @@ height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </td></tr>
 -->
 
-<tr><td class="bb">
+<tr><td class="bb" style="position:relative;">
 <a href="/var/www/camera_streams/camera_front_parking/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
  For
 <br>best control, drop others into a spare player
@@ -1238,19 +1238,19 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', this.contentDocument.body.children[0].tagName, '', '', '')"
 width="960px" height="538px" 
- style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="6" />
 </object></td></tr>
-<tr><td class="camtitle">
+<tr><td class="camtitle" style="position:relative;">
 <a name="ne_location_on_page"></a>
 <br><object id="nemp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="960px" 
-height="720px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+height="720px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;zIndex:1">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
@@ -1258,7 +1258,7 @@ height="720px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </object>
 <a href="" target="_blank"><h3>North</h3></a>
 </td></tr>
-<tr><td class="bb">
+<tr><td class="bb" style="position:relative;">
 <a href="/var/www/camera_streams/camera_ne_corner/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
  For
 <br>best control, drop others into a spare player
