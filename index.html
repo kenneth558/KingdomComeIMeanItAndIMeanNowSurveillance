@@ -1185,7 +1185,7 @@ height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <div id="mainalerts_viewer_buttonsdiv" style="position:relative;zIndex:-1;top:-10px">
 <script type="text/javascript">
 var alertsdirectoryheightmode0 =245+'px'
-var alertsdirectoryheightmode1 =622+'px'
+var alertsdirectoryheightmode1 =545+'px'
 var alertsdirectorywidthmode0 =419+'px'
 var alertsdirectorywidthmode1 =""
 var alertsdirectorytopmode0 =""
@@ -1253,6 +1253,7 @@ mainjpgviewer0.height=parseInt(alertsdirectoryheightmode0)+15+'px'
 mainjpgviewer0.width=mainjpgviewer0widthmode0
 mainjpgviewer_buttonsdiv.style.left='0px'
 forbuttons.style.left='0px'
+setTimeout(function(){scrollmarker.scrollIntoView()},10)
 }
 "
 style="position:relative;top:-28px;left:355px;zIndex:3"
@@ -1269,8 +1270,8 @@ if(camsmp4col1mainpg.style.display!='')
 setTimeout(function(){scrollmarker.scrollIntoView({behavior: 'smooth'})},10)
 }
 else
-{
-setTimeout(function(){edmp4.scrollIntoView({behavior: 'smooth'});},10)
+{;
+/*setTimeout(function(){edmp4.scrollIntoView({behavior: 'smooth'});},10)*/
 }
 "
 
