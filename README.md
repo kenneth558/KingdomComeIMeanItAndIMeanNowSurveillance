@@ -4,7 +4,7 @@ I had to develop this - a web page and some server-side web server scripting - f
 
 NOTE: My cameras stream files are segmented to 6 minute segments by ffmpeg whose command line is in a startup script (not included).  They are recorded at all times continuously regardless of whether events occur or not.
 NOTE: Alerting of events was configured via emails sent out.  For this functionality you'll need to hard code some email account name with password in this scripting, so I removed mine from this public repository.  Please create a dedicated email account for this.  I found the email provider (gmail) not reliable, perhaps due to their rules getting violated when the system alerted continuously for way too many weather events.
-NOTE: Most features require server-side customizations to the http server script (included), a functionality similar to PHP or server-side Javascript, so most functionality will be lost if this page is served without using the tricked out bashttpd script serving this page to do it.
+NOTE: Most features require server-side customizations to the http server script (included), a functionality similar to PHP or server-side Javascript, so most functionality will be lost if this page is served without using the tricked out bashttpd script for that purpose.
 
 Please don't expect this page to radiate impressive beauty, but it does do me a world of good in functionality such as -
   - configure week long predictable "don't wake me up" time windows as files both per camera and system-wide.  Events in the form of .jpg files will continue to be recorded as .jpgs when they happen so you can research later if you missed anything, they just won't produce alerts.
