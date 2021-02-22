@@ -10,9 +10,7 @@ ON MY SERVER,  MY ONLY WEB SERVER IS bashttp BASH SCRIPT WEB SERVER FOUNDATION, 
 LOOK FOR IT IN MY GITHUB SPACE.
 
 
-TODO: Perfect the page view during alert checking &
-TODO: When alert checks positive place that jpg in mainjpgviewer0 and ensure is open &
-TODO: In bashttpd make alert jpg files more unique
+TODO: Perfect the page view during alert checking
 -->
 <style type="text/css">
     body 
@@ -1440,7 +1438,7 @@ else { this.value='Alert checking now ON.  If you\'re traveling, you\'ll risk yo
                        }
                        else if(element.document.body.children[0].tBodies[0].rows[0] != 'undefined' && element.document.body.children[0].tBodies[0].rows[0] != null)
                        {
-                          playalert(false)
+                          playalert(false);mainjpgviewer0.data=element.innerHTML
                        }
                     }
                                                                
