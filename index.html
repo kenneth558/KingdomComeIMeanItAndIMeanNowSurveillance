@@ -897,7 +897,7 @@ for(var i=0;i<objectelement.length;i++)
 setTimeout(function(){startbtncclick()},1000)
 ">
 <br>
-<input type="button" value="Investigate starting 1 minute prior" id="lsbtn" 
+<input type="button" value="     Investigate starting 1 minute prior     " id="lsbtn" 
 style="font-size:12px;"
 onclick="camsmp4col1mainpg.style.display = '';
     textmaster.style.display='';
@@ -934,7 +934,7 @@ notalldoneyet=true
 setTimeout(function(){qbtn.click()},5000)
 setTimeout(function(){edmp4.scrollIntoView({behavior: 'smooth'})},1500)
 ">
-<br><input type="button" value="Queue" id="qbtn" 
+<br><input type="button" value="                              Queue                          " id="qbtn" 
 style="font-size:14px;background:#e6e6e6"
 onclick="
    if(notalldoneyet==false){return}
@@ -1018,6 +1018,7 @@ No need to convert currenttime to absolute, just use relative.  Make this featur
 id="startbtn1" style="font-size:14px;" onclick="
 startbtncclick()
 ">
+&nbsp;
 <input type="button" value="Pause videos" id="pausebtn" style="font-size:14px;" 
 onclick="
 var objectelement=document.getElementsByClassName('mp4obj');
@@ -1338,12 +1339,13 @@ if (el.offsetParent) {
 <p id="afterqbtn4"></p>
 </div>
 </div>
-<table><tr><td class="bb" valign="top">
+Snapshots separated by camera:
+<table style="border:1px solid black"><tr><td class="bb" valign="top">
 East
-<br><a href="/../../camera_snapshots/camera_east_driveway/" target="_blank">Event Snapshots</a>; for alt control, drop them
+<br><br><a href="/../../camera_snapshots/camera_east_driveway/" target="_blank">Event Snapshots</a>; for alt control, drop them
 <br>into a spare viewer
-<br><input type="range" 
-
+<div id="edjpgscalediv" style="position:relative;top:-65px;left:44px">
+<input type="range" 
 id="sldredjpg" class="scaleSlider" 
 oninput="textedjpg.value=this.value" name="" min="1" max="10000" value="43.5" step=".1" list="tickmarks">
 <textarea id="textedjpg" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
@@ -1358,8 +1360,8 @@ lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelem
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 <big><big>%</big></big>
-<br><br>
-    <object id="edjpg" type="text/plain" value="Click here to collect these snapshots" class="jpgobjmainpg"
+</div>
+<object id="edjpg" type="text/plain" value="Click here to collect these snapshots" class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_east_driveway';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="1000px" 
@@ -1369,11 +1371,11 @@ height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 
 </td><td class="bb">
 SEast
-<br><a href="/../../camera_snapshots/camera_south_driveway/" target="_blank">
+<br><br><a href="/../../camera_snapshots/camera_south_driveway/" target="_blank">
 Event Snapshots</a>; for alt control, drop them
 <br>into a spare viewer
-<br><input type="range" 
-
+<div id="sdjpgscalediv" style="position:relative;top:-65px;left:44px">
+<input type="range" 
 id="sldrsdjpg" class="scaleSlider" 
 oninput="textsdjpg.value=this.value" name="" min="1" max="10000" value="43.5" step=".1" list="tickmarks">
 <textarea id="textsdjpg" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
@@ -1389,7 +1391,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 >43.5</textarea>
 
 <big><big>%</big></big>
-<br><br>
+</div>
 <object id="sdjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_south_driveway/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
@@ -1401,10 +1403,11 @@ height="745px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </td>
 <td  class="bb" valign="top" style='padding:0px'>
 Office
-<br><a href="/../../camera_snapshots/camera_front_parking/" target="_blank">
+<br><br><a href="/../../camera_snapshots/camera_front_parking/" target="_blank">
 Event Snapshots</a>; for alt control, drop them
 <br>into a spare viewer
-<br><input type="range" 
+<div id="fpjpgscalediv" style="position:relative;top:-65px;left:44px">
+<input type="range" 
 
 id="sldrfpjpg" class="scaleSlider" 
 oninput="textfpjpg.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
@@ -1421,15 +1424,23 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 >43.5</textarea>
 
 <big><big>%</big></big>
-<br><br>
-    <object id="fpjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
+</div>
+<object id="fpjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_front_parking/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}"
 width="1000px" 
 height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object></td>
 </tr>
-<tr><td class="bb" style='padding:0px'>
+<tr><td class="bb" style="padding:0px;border-top: solid 1px black;">
+<br><br>
+<object id="swjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
+onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_sw_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+width="945px" 
+height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+</object>
+<br><br>
 Dock
 <br><a href="/../../camera_snapshots/camera_sw_corner/" target="_blank">
 Event Snapshots</a>; for alt control, drop them<br>into a spare viewer
@@ -1447,16 +1458,17 @@ lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelem
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 <big><big>%</big></big>
-<br><br>
-<object id="swjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
-onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_sw_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
-width="945px" 
-height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
-</object>
 </td><td></td>
 
-<td  class="bb" valign="top" style='padding:0px'>
+<td  class="bb" valign="top" style="padding:0px;border-top: solid 1px black;">
+<br><br>
+    <object id="nejpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
+onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_ne_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+width="960px" 
+height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+</object>
+<br><br>
 North
 <br><a href="/../../camera_snapshots/camera_ne_corner/"  target="_blank">
 Event Snapshots</a>; for alt control, drop them
@@ -1475,13 +1487,6 @@ lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelem
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 <big><big>%</big></big>
-<br><br>
-    <object id="nejpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
-onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_ne_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
-width="960px" 
-height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
-</object>
 </div>
 </td></tr>
 </table>
