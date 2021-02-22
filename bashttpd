@@ -482,7 +482,8 @@ END {if(headlines == 2*cams_needed){for (element in uniques){activecams++};if(ac
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" '
 BEGIN {print css_style "<table class=\"elif1\" style=\"width:100%\">"}
 {print "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre "/" substr($10,3,length($10)-2) "\" target=\"_blank\">";
-if(substr($10,length($10)-3)=="\.mp4"){gsub(".*sw_c","Dock  ",$10)
+if(substr($10,length($10)-3)=="\.mp4"){
+gsub(".*sw_c","Dock  ",$10)
 gsub(".*east","East  ",$10)
 gsub(".*ne_c","North  ",$10)
 gsub(".*fron","Office  ",$10)
@@ -498,7 +499,8 @@ END {print "</table>"}')"
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH%%-MOTION*}" '
 BEGIN {print css_style "<table class=\"elif2\" style=\"width:100%\">";lines=0}
 {printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">";
-if(substr($10,length($10)-3)=="\.jpg"){gsub(".*192\.168\.0\.14_","Dock  ",$10)
+if(substr($10,length($10)-3)=="\.jpg"){
+gsub(".*192\.168\.0\.14_","Dock  ",$10)
 gsub(".*192\.168\.0\.11","East  ",$10)
 gsub(".*192\.168\.0\.15","North  ",$10)
 gsub(".*192\.168\.0\.12","Office  ",$10)
@@ -506,7 +508,8 @@ gsub(".*192\.168\.0\.13","S East  ",$10)
 printf substr($10,1,index($10,"\ \ "))
 gsub(".*[0-9]\_","",$10)
 printf substr($10,index($10,10))}
-else if(substr($10,length($10)-3)=="\.mp4"){gsub(".*sw_c","Dock  ",$10)
+else if(substr($10,length($10)-3)=="\.mp4"){
+gsub(".*sw_c","Dock  ",$10)
 gsub(".*east","East  ",$10)
 gsub(".*ne_c","North  ",$10)
 gsub(".*fron","Office  ",$10)
@@ -522,14 +525,16 @@ END {print "</table>";if(lines<1){print "Argument list too long: too many files 
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" '
 BEGIN {print css_style "<table class=\"elif3\" style=\"width:100%\">"}
 {print "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">";
-if(substr($10,length($10)-3)=="\.jpg"){gsub(".*192\.168\.0\.14_","Dock  ",$10)
+if(substr($10,length($10)-3)=="\.jpg"){
+gsub(".*192\.168\.0\.14_","Dock  ",$10)
 gsub(".*192\.168\.0\.11","East  ",$10)
 gsub(".*192\.168\.0\.15","North  ",$10)
 gsub(".*192\.168\.0\.12","Office  ",$10)
 gsub(".*192\.168\.0\.13","S East  ",$10)
 printf substr($10,1,index($10,"\ \ "))
 gsub(".*[0-9]\_","",$10)
-print substr($10,index($10,10))}else if(substr($10,length($10)-3)=="\.mp4"){gsub(".*sw_c","Dock  ",$10)
+print substr($10,index($10,10))}else if(substr($10,length($10)-3)=="\.mp4"){
+gsub(".*sw_c","Dock  ",$10)
 gsub(".*east","East  ",$10)
 gsub(".*ne_c","North  ",$10)
 gsub(".*fron","Office  ",$10)
@@ -569,7 +574,8 @@ ondblclick=\"window.top.lsbtn.click();\" \
 >"; \
 if (substr($1,1,1) != "l"){
 printf $10}else{
-if(substr($12,length($12)-3)=="\.jpg"){gsub(".*192\.168\.0\.14_","Dock  ",$12)
+if(substr($12,length($12)-3)=="\.jpg"){
+gsub(".*192\.168\.0\.14","Dock  ",$12)
 gsub(".*192\.168\.0\.11","East  ",$12)
 gsub(".*192\.168\.0\.15","North  ",$12)
 gsub(".*192\.168\.0\.12","Office  ",$12)
@@ -601,7 +607,7 @@ onmouseup=\"window.top.StartCamOfInterestEl.value='\'''\'';giveRowIndicesSpanDat
 if (substr($1,1,1) != "l"){
 printf $10}else{
 if(substr($12,length($12)-3)=="\.jpg"){
-gsub(".*192\.168\.0\.14_","Dock  ",$12)
+gsub(".*192\.168\.0\.14","Dock  ",$12)
 gsub(".*192\.168\.0\.11","East  ",$12)
 gsub(".*192\.168\.0\.15","North  ",$12)
 gsub(".*192\.168\.0\.12","Office  ",$12)
@@ -619,7 +625,8 @@ END {print "</table>"}')"
 BEGIN {print css_style "<table class=\"elif6\">"}
 {print "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10} \
 else {printf $12} printf "\" target=\"_blank\">";if (substr($1,1,1)!="l"){
-if(substr($10,length($10)-3)=="\.jpg"){gsub(".*192\.168\.0\.14_","Dock  ",$10)
+if(substr($10,length($10)-3)=="\.jpg"){
+gsub(".*192\.168\.0\.14","Dock  ",$10)
 gsub(".*192\.168\.0\.11","East  ",$10)
 gsub(".*192\.168\.0\.15","North  ",$10)
 gsub(".*192\.168\.0\.12","Office  ",$10)
@@ -627,7 +634,8 @@ gsub(".*192\.168\.0\.13","S East  ",$10)
 printf substr($10,1,index($10,"\ \ "))
 gsub(".*[0-9]\_","",$10)
 printf substr($10,index($10,10))}
-else if(substr($10,length($10)-3)=="\.mp4"){gsub(".*sw_c","Dock  ",$10)
+else if(substr($10,length($10)-3)=="\.mp4"){
+gsub(".*sw_c","Dock  ",$10)
 gsub(".*east","East  ",$10)
 gsub(".*ne_c","North  ",$10)
 gsub(".*fron","Office  ",$10)
@@ -643,7 +651,8 @@ END {print "</table>"}')"
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH}" '
 BEGIN {print css_style "<table class=\"elif7\">"}
 {print "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre $10 "\" target=\"_blank\">";
-if(substr($10,length($10)-3)=="\.jpg"){gsub(".*192\.168\.0\.14_","Dock  ",$10)
+if(substr($10,length($10)-3)=="\.jpg"){
+gsub(".*192\.168\.0\.14","Dock  ",$10)
 gsub(".*192\.168\.0\.11","East  ",$10)
 gsub(".*192\.168\.0\.15","North  ",$10)
 gsub(".*192\.168\.0\.12","Office  ",$10)
@@ -651,7 +660,8 @@ gsub(".*192\.168\.0\.13","S East  ",$10)
 printf substr($10,1,index($10,"\ \ "))
 gsub(".*[0-9]\_","",$10)
 printf substr($10,index($10,10))}
-else if(substr($10,length($10)-3)=="\.mp4"){gsub(".*sw_c","Dock  ",$10)
+else if(substr($10,length($10)-3)=="\.mp4"){
+gsub(".*sw_c","Dock  ",$10)
 gsub(".*east","East  ",$10)
 gsub(".*ne_c","North  ",$10)
 gsub(".*fron","Office  ",$10)
@@ -673,14 +683,16 @@ END {print "</table>"}')"
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH}" '
 BEGIN {print css_style "<table class=\"elif8\">"}
 {print "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre $10 " target=\"_blank\">";
-if(substr($10,length($10)-3)=="\.jpg"){gsub(".*192\.168\.0\.14_","Dock  ",$10)
+if(substr($10,length($10)-3)=="\.jpg"){
+gsub(".*192\.168\.0\.14","Dock  ",$10)
 gsub(".*192\.168\.0\.11","East  ",$10)
 gsub(".*192\.168\.0\.15","North  ",$10)
 gsub(".*192\.168\.0\.12","Office  ",$10)
 gsub(".*192\.168\.0\.13","S East  ",$10)
 printf substr($10,1,index($10,"\ \ "))
 gsub(".*[0-9]\_","",$10)
-printf substr($10,index($10,10))} else if(substr($10,length($10)-3)=="\.mp4"){gsub(".*sw_c","Dock  ",$10)
+printf substr($10,index($10,10))} else if(substr($10,length($10)-3)=="\.mp4"){
+gsub(".*sw_c","Dock  ",$10)
 gsub(".*east","East  ",$10)
 gsub(".*ne_c","North  ",$10)
 gsub(".*fron","Office  ",$10)
@@ -772,14 +784,16 @@ BEGIN {print css_style "<table class=\"elif10\" style=\"width:100%\">"}
 if(substr(path,i+1,7)=="camera_") {printf substr(path,i+1+7)} else {printf substr(path,i+1)} printf " ]\"></td><td> </td></tr>"} \
 else{printf $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]&nbsp;&nbsp;\"></td><td align=\"left\"> <a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10} \
 else {printf $12} printf "\">";if (substr($1,1,1)!="l"){
-if(substr($10,length($10)-3)=="\.jpg"){gsub(".*192\.168\.0\.14_","Dock  ",$10)
+if(substr($10,length($10)-3)=="\.jpg"){
+gsub(".*192\.168\.0\.14","Dock  ",$10)
 gsub(".*192\.168\.0\.11","East  ",$10)
 gsub(".*192\.168\.0\.15","North  ",$10)
 gsub(".*192\.168\.0\.12","Office  ",$10)
 gsub(".*192\.168\.0\.13","S East  ",$10)
 printf substr($10,1,index($10,"\ \ "))
 gsub(".*[0-9]\_","",$10)
-printf substr($10,index($10,10))} else if(substr($10,length($10)-3)=="\.mp4"){gsub(".*sw_c","Dock  ",$10)
+printf substr($10,index($10,10))} else if(substr($10,length($10)-3)=="\.mp4"){
+gsub(".*sw_c","Dock  ",$10)
 gsub(".*east","East  ",$10)
 gsub(".*ne_c","North  ",$10)
 gsub(".*fron","Office  ",$10)
