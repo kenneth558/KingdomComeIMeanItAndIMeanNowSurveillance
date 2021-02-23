@@ -198,6 +198,11 @@ streamListings["fpmp4"] = "/var/www/camera_streams/camera_front_parking/";
 streamListings["nemp4"] = "/var/www/camera_streams/camera_ne_corner/";
 streamListings["edmp4"] = "/var/www/camera_streams/camera_east_driveway/";
 streamListings["sdmp4"] = "/var/www/camera_streams/camera_south_driveway/";
+streamListings["swjpg"] = "/../../camera_snapshots/camera_sw_corner/";
+streamListings["fpjpg"] = "/../../camera_snapshots/camera_front_parking/";
+streamListings["nejpg"] = "/../../camera_snapshots/camera_ne_corner/";
+streamListings["edjpg"] = "/../../camera_snapshots/camera_east_driveway/";
+streamListings["sdjpg"] = "/../../camera_snapshots/camera_south_driveway/";
 streamListings["11"] = "East" ;/*These correspond to 192.168.0.nn or 192.168.0.n_ since they are 2 characters long extracted from the file name*/
 streamListings["14"] = "Dock"
 streamListings["15"] = "North"
@@ -850,8 +855,8 @@ else
     setTimeout(function(){btnSetForRecentSmartEvent.value='Last activity'},3000)
     setTimeout(function(){lsbtn.click()},1000)
 }"><br>
-<input size="14" disabled id="StartTimeOfInterestEl" style="font-size:16px;border:1px ridge blue;background:white" value="Time" height="100px">
-<input size="10" disabled id="StartCamOfInterestEl" style="font-size:16px;border:1px ridge blue;background:white" value="View" height="100px">
+<input size="14" disabled id="StartTimeOfInterestEl" style="font-size:16px;border:1px ridge blue;background:white" value="Now" height="100px">
+<input size="10" disabled id="StartCamOfInterestEl" style="font-size:16px;border:1px ridge blue;background:white" value="All Views" height="100px">
 <!--
     switch(alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1].innerText.substr(alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1].innerText.indexOf('192.168.0.')+10,2))
     {
@@ -879,27 +884,25 @@ else
     }
 
 "> -->
-<br><input type="button" id="btnSetForLatestViewable" value="Latest videos and snapshots" style="background:#3399FF;font-size:18px;"
-onclick="
-var objectelementi
-var jpgobjectelementi
-var objectelement=document.getElementsByClassName('mp4obj')
-var jpgobjectelement=document.getElementsByClassName('jpgobjmainpg')
-for(var i=0;i<objectelement.length;i++)
-{
-    objectelement[i].type='text/html';
-    objectelement[i].style.border='3px solid blue';
-    objectelement[i].style.borderWidth='20px 3px 3px';
-    objectelement[i].data=streamListings[objectelement[i].id]; /*results in same outcome as a click() on closed object element*/
-    if(jpgobjectelement[i].contentDocument == 'undefined' || jpgobjectelement[i].contentDocument == null)
-    {jpgobjectelement[i].click()}
-}
-setTimeout(function(){startbtncclick()},1000)
+<br><input type="button" id="btnRecentSnapshots" value="Snapshots of last 7 minutes" style="background:#3399FF;font-size:18px;"
+onclick="StartTimeOfInterestEl.value='Now'
+StartCamOfInterestEl='All Views'
+let currentDate = new Date();
+StartTimeOfInterest = currentDate.getFullYear() + '-' + (currentDate.getMonth()>8 ? '' : '0' ) + 
+       (currentDate.getMonth() + 1) + '-' + (currentDate.getDate()>9 ? '' : '0' ) + currentDate.getDate() + 
+       ' ' + (currentDate.getHours()>9 ? '' : '0') + currentDate.getHours() + ':' + (currentDate.getMinutes()>9 ? '' : '0') + 
+       currentDate.getMinutes() + ':' + (currentDate.getSeconds()>9 ? '' : '0') + currentDate.getSeconds()
+    var objectelement=document.getElementsByClassName('jpgobjmainpg')
+    for(var i=0;i<objectelement.length;i++)
+    {
+        objectelement[i].data=streamListings[objectelement[i].id] + '*?1minutesbefore' + StartTimeOfInterest;
+    }
 ">
 <br>
-<input type="button" value="     Investigate starting 1 minute prior     " id="lsbtn" 
+<input type="button" value="      Investigate starting 1 minute prior     " id="lsbtn" 
 style="font-size:12px;"
-onclick="camsmp4col1mainpg.style.display = '';
+onclick="
+    camsmp4col1mainpg.style.display = '';
     textmaster.style.display='';
     sldrmaster.style.display='';
     alertsdirectory.height = '245px'
@@ -917,7 +920,7 @@ onclick="camsmp4col1mainpg.style.display = '';
     }
     mainjpgviewer_buttonsdiv.style.top=0+'px'
     mainjpgviewer_buttonsdiv.style.left=-110+'px'
-    forbuttons.style.top=parseInt(alertsdirectory.height)+parseInt(mainjpgviewer0.height)+'px';
+/*    forbuttons.style.top=parseInt(alertsdirectory.height)+parseInt(mainjpgviewer0.height)+'px'; */
     setTimeout(function(){startbtn0.click()},1000)
 ">
 <br><input type="button" value="Start each top video and begin queuing"
@@ -1599,7 +1602,7 @@ else { this.value='Alert checking now ON.  If you\'re traveling, you\'ll risk yo
                        }
                        else if(element.document.body.children[0].tBodies[0].rows[0] != 'undefined' && element.document.body.children[0].tBodies[0].rows[0] != null)
                        {
-                          playalert(false);mainjpgviewer0.data=element.innerHTML
+                          playalert(false);mainjpgviewer0.data=element.innerHTML;mainjpgviewer0.style.display=''
                        }
                     }
                                                                
