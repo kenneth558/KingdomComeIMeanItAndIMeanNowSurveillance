@@ -167,7 +167,7 @@ var windowsx = 0;
 var winOpen;
 var playingjpgs = [];/*the size of this array could be the number of jpg viewers on page*/
 var checkingAlerted = null;
-var previousalert = null; 
+var previousalert = 'waiting'; 
 let requestAlerted = new XMLHttpRequest();
 requestAlerted.open('GET', '/../../camera_snapshots/*/*jpg-MOTION/mostrecent1')
 var lastcomplexevent = 'something';
@@ -1243,16 +1243,29 @@ onclick="if(this.data.endsWith('mostrecent2')){this.data='/../../links_to_alerti
 onload="/*
         mainjpgviewer0.height=parseInt(this.height)+18+'px'
         mainjpgviewer0.width=parseInt(this.width)+'px'*/
-        if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0] != null && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != null)
-          {element=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1];}
-        else {element=null;}
-        if(element != 'undefined' && element != null)
-          {if (element.innerText !== previousalert)
-             {if (alertCheck.value.substr(alertCheck.value.length-1,1) != 'F' && previousalert != null && element.innerText !== null){soundalarm();}else {previousalert=element.innerText}
+     if (!alertCheck.value.endsWith(' OFF'))
+     {   if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
+           alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
+           alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
+         {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
+             {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
+                 {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
+                     {
+                         if(previousalert!='waiting')
+                         {   soundalarm();
+                             if(mainjpgviewer0.data!=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
+                             {   mainjpgviewer0.data=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href}
+                         }
+                         else
+                         {   previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
+                         }
+                     }
+                 }
+                 else {previousalert='waiting';}
              }
-          }
-        else {previousalert=null;}
-        glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+         }
+     }
+     glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 width="419px" height="245px"
 style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 3px 3px;
 ">
@@ -1504,14 +1517,6 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 </div>
 </td></tr>
 </table>
-
-
-
-
-
-
-
-
 </td>
 </tr>
 </table>
@@ -1579,56 +1584,63 @@ Login credentials for camera streams are username = [youngest brother first name
 <input type="button" 
 id="alertCheck" style="width:300px;height:75px;font-size:20px;background:#e6e6e6;border-radius:15px;border-color:black;border-width:10px;" 
 value="Alert checking now OFF"
-onclick="if(alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != null)
-{element=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1];}
-else {element=null;}
-if(typeof(element) != 'undefined' && element != null)
-   {
-       previousalert=element.innerText;
-   }
-else { previousalert=null;
-     }
-if (this.value.substr(this.value.length-1,1) != 'F'){alertkeepalive.data='';this.value='Alert checking now OFF';this.style.background='#e6e6e6';btnalertchecking.style.color='black';this.style.width='300px';clearInterval(checkingAlerted);
-                                                    } 
-else { this.value='Alert checking now ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';btnalertchecking.style.color='forest green';this.style.width='930px';
-        alertkeepalive.data='/var/www/html/silence.mp3';
-        setTimeout(function(){alertkeepalive.contentDocument.body.children[0].muted=true;
-        alertkeepalive.contentDocument.body.children[0].loop=true
-        alertkeepalive.contentDocument.body.children[0].play()},4000)
-        checkingAlerted=setInterval(
-           function()
-             {
-                if(alertsdirectory.contentDocument.body.children[0].tBodies[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != null)
-                 {
-                    element=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1];
+onclick="
+if (!this.value.endsWith(' OFF'))
+{   alertkeepalive.data='';this.value='Alert checking now OFF';this.style.background='#e6e6e6';btnalertchecking.style.color='black';this.style.width='300px';clearInterval(checkingAlerted);
+    previousalert='waiting';
+         if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
+           alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
+           alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
+         {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
+             {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
+                 {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
+                     {
+                         previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
+                     }
                  }
-                 else {element=null;}
-                 if(typeof(element) != 'undefined' && element != null) 
-                 {
-                    if (element.innerText !== previousalert)
-                    {
-                       if (element.innerText == '')
-                       {
-                          previousalert=element.innerText;
-                       }
-                       else if(element.document.body.children[0].tBodies[0].rows[0] != 'undefined' && element.document.body.children[0].tBodies[0].rows[0] != null)
-                       {
-                          playalert(false);mainjpgviewer0.data=element.innerHTML;mainjpgviewer0.style.display=''
-                       }
+             }
+         }
+} 
+
+else 
+{   this.value='Alert checking now ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';btnalertchecking.style.color='forest green';this.style.width='930px';
+    previousalert='waiting';
+        if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
+          alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
+          alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
+        {   ;
+            if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
+            {;
+                if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
+                {;
+                    if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
+                    {;
+                        if(previousalert!='waiting')
+                        {   soundalarm();
+                            if(mainjpgviewer0.data!=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
+                            {   mainjpgviewer0.data=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href}
+                        }
+                        else
+                        {   previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
+                        }
                     }
-                                                               
-                 }
-                 else {previousalert=null;}
-                 alertsdirectory.data=alertsdirectory.data;
-             },8000);
-        if(alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0] != null)
-             {element=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1];}
-        else {element=null;}
-        if(typeof(element) != 'undefined' && element != null){if (element.innerText !== previousalert){previousalert=element.innerText;
-                                                                                                       }
-                                                             }
-        alertsdirectory.data=alertsdirectory.data;
-     }">
+                }
+                else {previousalert='waiting';}
+             }
+         }
+    alertsdirectory.data=alertsdirectory.data
+    alertkeepalive.data='/var/www/html/silence.mp3';
+    setTimeout(function()
+       {   alertkeepalive.contentDocument.body.children[0].muted=true;
+           alertkeepalive.contentDocument.body.children[0].loop=true
+           alertkeepalive.contentDocument.body.children[0].play()
+       },4000
+    )
+    checkingAlerted=setInterval(function()
+       {   alertsdirectory.data=alertsdirectory.data},8000
+    )
+}
+">
 <tr><td>
 
 <div id="androidconnection" style="display:inline">
@@ -1636,37 +1648,6 @@ else { this.value='Alert checking now ON.  If you\'re traveling, you\'ll risk yo
 </div>
 </td></tr></table>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </small></small>
 
 <div id="loadingdiv"  class="tabcontent" style="display:none">WAIT WHILE PAGE IS LOADING. PERFORM NO USER INPUT WHILE LOADING OR PAGE ELEMENTS WILL ABORT THEIR LOADING</div>
