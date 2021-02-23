@@ -583,7 +583,7 @@ gsub(".*192\.168\.0\.13","S East  ",$12)
 sub("\_","",$12)
 sub("\_","",$12)
 printf substr($12,1,index($12,"\ \ "))
-tmpstr=substr($12,index($12,"\_")-4,4)
+tmpstr=substr($12,index($12,"\_")-15,15)
 gsub(".*[0-9]\_","",$12)
 printf substr($12,1,index($12,"\.")-1) tmpstr ".jpg"}else{printf $10}
 }}; printf "</a></td></tr>";line=line+1}
