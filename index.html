@@ -828,6 +828,11 @@ StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
 StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
 StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
 setTimeout(function(){btnSetForRecentAlert.value='Last alert'},3000)
+    var objectelement=document.getElementsByClassName('jpgobjmainpg')
+    for(var i=0;i<objectelement.length;i++)
+    {
+        objectelement[i].data=streamListings[objectelement[i].id] + '*?1minutesbefore' + StartTimeOfInterest;
+    }
 setTimeout(function(){lsbtn.click()},500)
 StartCamOfInterestEl.value=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1].innerText; /*MUST be last thing in function in case it doesn't exist*/
 }">
@@ -853,6 +858,11 @@ else
         StartCamOfInterestEl.value=alltd[i].innerText;
     }
     setTimeout(function(){btnSetForRecentSmartEvent.value='Last activity'},3000)
+    var objectelement=document.getElementsByClassName('jpgobjmainpg')
+    for(var i=0;i<objectelement.length;i++)
+    {
+        objectelement[i].data=streamListings[objectelement[i].id] + '*?1minutesbefore' + StartTimeOfInterest;
+    }
     setTimeout(function(){lsbtn.click()},1000)
 }"><br>
 <input size="14" disabled id="StartTimeOfInterestEl" style="font-size:16px;border:1px ridge blue;background:white" value="Now" height="100px">
@@ -897,6 +907,7 @@ StartTimeOfInterest = currentDate.getFullYear() + '-' + (currentDate.getMonth()>
     {
         objectelement[i].data=streamListings[objectelement[i].id] + '*?1minutesbefore' + StartTimeOfInterest;
     }
+   setTimeout(function(){edjpgscalediv.scrollIntoView({behavior: 'smooth'})},10)
 ">
 <br>
 <input type="button" value="      Investigate starting 1 minute prior     " id="lsbtn" 
@@ -1055,7 +1066,7 @@ var objectelement
         afterqbtn2.innerText='';
         afterqbtn3.innerText='';
         afterqbtn4.innerText='';
-    qbtn.value='Queue';qbtn.style.background='#e6e6e6'
+    qbtn.value='                              Queue                          ';qbtn.style.background='#e6e6e6'
     mainjpgviewer0.style.display='none'"
 >
 <input type="button" value="Relax the courtesy of videos" style="font-size:8px;" id="courtesybtn" style="background:white" onclick="if(this.style.backgroundColor == 'white'){this.style.background='#d9ecd0';this.value='Enforce courtesy of videos while any other loads their next one'}else{this.style.background='white';this.value='Relax courtesy of videos while any other loads their next one'}">
