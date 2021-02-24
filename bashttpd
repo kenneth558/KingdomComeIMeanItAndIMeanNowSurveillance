@@ -570,8 +570,7 @@ this.parentNode.parentNode.parentNode.rows[Math.trunc((event.pageY+2)/((this.par
 window.top.mainjpgviewer0.style.display='\'''\''} \
 return false;\" \
 \
-ondblclick=\"window.top.lsbtn.click();\" \
->"; \
+ondblclick=\"window.top.lsbtn.click();\" \" target=\"_blank\">"; \
 if (substr($1,1,1) != "l"){
 printf $10}else{
 if(substr($12,length($12)-3)=="\.jpg"){
@@ -770,7 +769,7 @@ print "</a></td></tr>"} \
 #      echo -e "1. findResults=${findResults}"  >> /home/homeowner/bashttpd.log
       findResults="$(while read filename;do ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N "$filename";done <<< "$findResults"|awk -v linkpre="$(ip -o address | grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH}" -v findResults="${findResults}" '
 BEGIN {printf css_style "<table class=\"elif9\">";line=0}
-{line++;printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10 "\">"
+{line++;printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10  "\" target=\"_blank\">"
 if(substr($10,length($10)-3)=="\.jpg"){
 gsub(".*192\.168\.0\.14","Dock  ",$10)
 gsub(".*192\.168\.0\.11","East  ",$10)
@@ -801,7 +800,7 @@ BEGIN {print css_style "<table class=\"elif10\" style=\"width:100%\">"}
 {printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;"}{if($6==""){i=length(path);for (;i>0;i--){if (substr(path,i,1)=="/") break} \
 if(substr(path,i+1,7)=="camera_") {printf substr(path,i+1+7)} else {printf substr(path,i+1)} printf " ]\"></td><td> </td></tr>"} \
 else{printf $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10} \
-else {printf $12} printf "\">";
+else {printf $12} printf  "\" target=\"_blank\">";
 if (substr($1,1,1)!="l"){
 if(substr($10,length($10)-3)=="\.jpg"){
 gsub(".*192\.168\.0\.14","Dock  ",$10)
