@@ -207,7 +207,121 @@ streamListings["14"] = "Dock"
 streamListings["15"] = "North"
 streamListings["12"] = "Office"
 streamListings["13"] = "S East"
+var mousedownedhere;
+function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) 
+{
+  if (elmnt.contentDocument.body.children[0] != 'undefined' && elmnt.contentDocument.body.children[0] != null && elmnt.contentDocument.body.children[0].localName == 'table' && elmnt.contentDocument.body.children[0].tBodies[0] != 'undefined' && elmnt.contentDocument.body.children[0].tBodies[0] != null && elmnt.contentDocument.body.children[0].tBodies[0].rows[0].cells[1] != 'undefined' && elmnt.contentDocument.body.children[0].tBodies[0].rows[0].cells[1] != null)
+  {
+    if(elmnt.contentDocument.body.children[0].tBodies[0] == 'undefined' || elmnt.contentDocument.body.children[0].tBodies[0] == null)
+{alert('Too many event files to list with ' + currSrc + '.  Delete overrunning ones on server.')}
+    elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("mousedown",function(item)
+    {
+         mousedownedhere=item.pageY
+    })
+    elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("mouseup",function(item)
+    {
+         var downrowindex=Math.trunc((mousedownedhere+2)/((this.clientHeight+2)/this.childElementCount)-.5)
+         if(this.rows[downrowindex].cells[1].children[0].href.endsWith('.jpg'))
+         {
+              var uprowindex=Math.trunc((item.pageY+2)/((this.clientHeight+2)/this.childElementCount)-.5)
+              if(downrowindex != uprowindex)
+              {
+/*alert(currSrc)*/
+/*if(currSrc.includes('-MOTION'))*/
+/*                 {if(!confirm('NO MOTION DETECTIONS IN THIS ELEMENT.  You\'ve selected ' + (downrowindex-uprowindex) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you actually want to select!')}*/
+/*               else */
+                 if(!confirm('Open ' + (Math.abs(downrowindex-uprowindex)) + ' files in separate viewers?')){return}
+                 var frames=[]
+                 var windwz=[]
+                 var playing=true;
+                 var on_frame=0;
+                 var timer;
+                 let rowindex=downrowindex;do
+                 {
+                     frames[rowindex]=this.rows[rowindex].cells[1].firstElementChild.href
+                     windwz[rowindex] = window.open(frames[rowindex]) /* save each window handle in an array of them*/
+                     if(downrowindex < uprowindex){rowindex++}else{rowindex--}
+                 }while(rowindex!=uprowindex)
+              }
+         }
+    })
 
+    elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("click",function(item)
+    {
+/*The hard-coded 2 pixel corrections below might need to be adjusted for border widths or other style settings the web server might send differently in the future:*/
+      var rowindex=Math.trunc((item.pageY+2)/((this.clientHeight+2)/this.childElementCount)-.5)
+      var filename=this.rows[rowindex].cells[1].innerText
+      if(this.rows[rowindex].cells[1].children[0].href.endsWith('.mp4'))
+      {
+/*         alert('The file chosen in this table construct is type .mp4')*/
+         var timestamp=this.rows[rowindex].cells[0].outerHTML.substr(18).replace(/&nbsp;/g," ").replace("nbsp;","")
+         timestamp=timestamp.substring(0,timestamp.indexOf(" ]"))
+         elmnt.children["timestamp"].value=timestamp
+         var endTime = new Date(timestamp.substring(0,20))
+         var endTimemSec=endTime.getTime()+timestamp.substr(21)/1000000
+      }
+      else if(this.rows[rowindex].cells[1].children[0].href.endsWith('.jpg'))
+      {
+/*         alert('The link is jpg inside this construct');*/
+/*We need to always know the timestamp of the last .jpg file viewed so we can populate the .mp4 windows for that event timeframe*/
+
+           StartTimeOfInterest=this.rows[rowindex].cells[0].outerHTML.substr(18)
+           StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
+           StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
+           StartTimeOfInterestDT=new Date(StartTimeOfInterest)
+           StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
+           StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
+           StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
+           qbtn.value="Queue";qbtn.style="font-size:16px;background:#e6e6e6"
+           StartCamOfInterestEl.value=this.rows[rowindex].cells[1].innerText.trim()
+           lsbtn.name='!var!www!camera_streams!camera_*'
+      }
+    })
+
+  }
+  else
+  {
+/*is now a loaded or loading jpg or mp4 viewer with the [first] image already appearing in the window. */
+      elmnt.parentElement.clientHeight=elmnt.contentDocument.body.children[0].videoHeight
+      elmnt.Height=elmnt.contentDocument.body.children[0].videoHeight
+      elmnt.clientHeight=elmnt.contentDocument.body.children[0].videoHeight
+      elmnt.contentDocument.body.children[0].scrollHeight=elmnt.contentDocument.body.children[0].videoHeight
+      elmnt.contentDocument.body.clientHeight=elmnt.contentDocument.body.children[0].videoHeight
+      elmnt.contentDocument.body.clientWidth=elmnt.contentDocument.body.children[0].videoWidth
+      if(elmnt.contentDocument.body.children[0].localName == 'video')
+      {
+           elmnt.contentDocument.body.children[0].playbackRate=2
+           if (elmnt.contentDocument.body.children[1] == 'undefined' || elmnt.contentDocument.body.children[1] == null)
+           {
+                   var mbed = document.createElement("EMBED");
+                   var attsrc = document.createAttribute("src")
+                   mbed.setAttributeNode(attsrc);
+                   var atttyp = document.createAttribute("type")
+                   mbed.setAttributeNode(atttyp);
+                   var attwid = document.createAttribute("width")
+                   mbed.setAttributeNode(attwid);
+                   var atthei = document.createAttribute("height")
+                   mbed.setAttributeNode(atthei);
+                   elmnt.contentDocument.body.appendChild(mbed);
+           }
+           elmnt.contentDocument.body.children[1].type='text/plain'
+           elmnt.contentDocument.body.children[1].hidden=true;/*doesn't really work without going through the contenWindow[0] that won't exist yet*/
+           elmnt.contentDocument.body.children[1].width="1"
+           elmnt.contentDocument.body.children[1].height="1"
+           elmnt.contentDocument.body.children[0].addEventListener("ended",function(item)
+           {glonended( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')});/*always comes in tandem with and after a pause*/
+           var timestamp=elmnt.children["timestamp"].value
+           elmnt.contentDocument.body.children[1].src=elmnt.contentDocument.body.children[0].currentSrc + '\?nextbymodifiedtime'
+           var endTime=new Date(timestamp.substring(0,20))
+           var endTimemSec=endTime.getTime()+(timestamp.substr(21)/1000000)
+           var startTimemSec=endTimemSec-(elmnt.contentDocument.body.children[0].mozFragmentEnd * 1000)
+           var startTimeReadable=new Date()
+           startTimeReadable.setTime(startTimemSec)
+           elmnt.children['currenttime'].value=((StartTimeOfInterestmSecminus60-startTimemSec)/1000)
+           elmnt.children['currenttime'].value=parseFloat(elmnt.children['currenttime'].value).toFixed(6)
+      }
+  }
+}
 </script>
 <datalist id="tickmarks">
 <option value="2" label="2 min"></option>
@@ -826,6 +940,7 @@ StartTimeOfInterestDT=new Date(StartTimeOfInterest)
 StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
 StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
 StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
+
 setTimeout(function(){btnSetForRecentAlert.value='Last alert'},3000)
     var objectelement=document.getElementsByClassName('jpgobjmainpg')
     for(var i=0;i<objectelement.length;i++)
@@ -833,7 +948,7 @@ setTimeout(function(){btnSetForRecentAlert.value='Last alert'},3000)
         objectelement[i].data=streamListings[objectelement[i].id] + '*?1minutesbefore' + StartTimeOfInterest;
     }
 setTimeout(function(){lsbtn.click()},500)
-StartCamOfInterestEl.value=alertsdirectory.contentDocument.body.children[0].tBodies[0].rows[0].cells[1].innerText; /*MUST be last thing in function in case it doesn't exist*/
+StartCamOfInterestEl.value=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].innerText.trim(); /*MUST be last thing in function in case it doesn't exist*/
 }">
 &nbsp;<input type="button" id="btnSetForRecentSmartEvent" value="Last activity" style="background:#3399FF;font-size:18px;" 
 onclick="closebtn.click()
@@ -844,7 +959,7 @@ else
     this.value='Success';this.style='background:#3399FF;font-size:18px;';
     var alltd=sysjpgmp4_motion.contentDocument.body.children[0].getElementsByTagName('td')
     var i=1
-    for(;i<alltd.length;i=i+2){if(alltd[i].innerText.includes('INTRUSION') || alltd[i].innerText.includes('CROSSING')){break}}
+    for(;i<alltd.length;i=i+2){if(alltd[i].children[0].href.includes('INTRUSION') || alltd[i].children[0].href.includes('CROSSING')){break}}
     if(i<alltd.length)
     {
         StartTimeOfInterest=alltd[i-1].outerHTML.substr(18)
@@ -854,7 +969,7 @@ else
         StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
         StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
         StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
-        StartCamOfInterestEl.value=alltd[i].innerText;
+        StartCamOfInterestEl.value=alltd[i].innerText.trim();
     }
     setTimeout(function(){btnSetForRecentSmartEvent.value='Last activity'},3000)
     var objectelement=document.getElementsByClassName('jpgobjmainpg')
@@ -895,7 +1010,7 @@ else
 "> -->
 <br><input type="button" id="btnRecentSnapshots" value="Snapshots of last 7 minutes" style="background:#3399FF;font-size:18px;"
 onclick="StartTimeOfInterestEl.value='Now'
-StartCamOfInterestEl='All Views'
+StartCamOfInterestEl.value='All Views'
 let currentDate = new Date();
 StartTimeOfInterest = currentDate.getFullYear() + '-' + (currentDate.getMonth()>8 ? '' : '0' ) + 
        (currentDate.getMonth() + 1) + '-' + (currentDate.getDate()>9 ? '' : '0' ) + currentDate.getDate() + 
@@ -1809,15 +1924,15 @@ function startbtncclick()
          {   progress+=10/*all get here 2nd btn*/
             if(objectelement[i].contentDocument != null && objectelement[i].contentDocument.body.children[0].localName == 'table')
             {   progress+=100000;
-               if(objectelement[i].contentDocument.links[0] != null && objectelement[i].contentDocument.links[0].innerText.endsWith('.jpg'))
+               if(objectelement[i].contentDocument.links[0] != null && objectelement[i].contentDocument.links[0].href.endsWith('.jpg'))
                {
                    objectelement[i].contentDocument.links[0].click();
                }
-               else if(objectelement[i].contentDocument.links[1] != null && objectelement[i].contentDocument.links[1].innerText.endsWith('.mp4'))
+               else if(objectelement[i].contentDocument.links[1] != null && objectelement[i].contentDocument.links[1].href.endsWith('.mp4'))
                {
                   objectelement[i].contentDocument.links[1].click();
                }
-               else if(objectelement[i].contentDocument.links[0] != null && objectelement[i].contentDocument.links[0].innerText.endsWith('.mp4'))
+               else if(objectelement[i].contentDocument.links[0] != null && objectelement[i].contentDocument.links[0].href.endsWith('.mp4'))
                {
                   objectelement[i].contentDocument.links[0].click();
                }
@@ -2029,121 +2144,20 @@ function glonkeyup( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 }
 </script>
     <script type="text/javascript"> 
-var mousedownedhere;
-function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) 
-{
-  if (elmnt.contentDocument.body.children[0] != 'undefined' && elmnt.contentDocument.body.children[0] != null && elmnt.contentDocument.body.children[0].localName == 'table' && elmnt.contentDocument.body.children[0].tBodies[0] != 'undefined' && elmnt.contentDocument.body.children[0].tBodies[0] != null && elmnt.contentDocument.body.children[0].tBodies[0].rows[0].cells[1] != 'undefined' && elmnt.contentDocument.body.children[0].tBodies[0].rows[0].cells[1] != null)
-  {
-    if(elmnt.contentDocument.body.children[0].tBodies[0] == 'undefined' || elmnt.contentDocument.body.children[0].tBodies[0] == null)
-{alert('Too many event files to list with ' + currSrc + '.  Delete overrunning ones on server.')}
-    elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("mousedown",function(item)
-    {
-         mousedownedhere=item.pageY
-    })
-    elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("mouseup",function(item)
-    {
-         var downrowindex=Math.trunc((mousedownedhere+2)/((this.clientHeight+2)/this.childElementCount)-.5)
-         if(this.rows[downrowindex].cells[1].innerText.endsWith('.jpg'))
-         {
-              var uprowindex=Math.trunc((item.pageY+2)/((this.clientHeight+2)/this.childElementCount)-.5)
-              if(downrowindex != uprowindex)
-              {
-/*alert(currSrc)*/
-/*if(currSrc.includes('-MOTION'))*/
-/*                 {if(!confirm('NO MOTION DETECTIONS IN THIS ELEMENT.  You\'ve selected ' + (downrowindex-uprowindex) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you actually want to select!')}*/
-/*               else */
-                 if(!confirm('Open ' + (Math.abs(downrowindex-uprowindex)) + ' files in separate viewers?')){return}
-                 var frames=[]
-                 var windwz=[]
-                 var playing=true;
-                 var on_frame=0;
-                 var timer;
-                 let rowindex=downrowindex;do
-                 {
-                     frames[rowindex]=this.rows[rowindex].cells[1].firstElementChild.href
-                     windwz[rowindex] = window.open(frames[rowindex]) /* save each window handle in an array of them*/
-                     if(downrowindex < uprowindex){rowindex++}else{rowindex--}
-                 }while(rowindex!=uprowindex)
-              }
-         }
-    })
 
-    elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("click",function(item)
-    {
-/*The hard-coded 2 pixel corrections below might need to be adjusted for border widths or other style settings the web server might send differently in the future:*/
-      var rowindex=Math.trunc((item.pageY+2)/((this.clientHeight+2)/this.childElementCount)-.5)
-      var filename=this.rows[rowindex].cells[1].innerText
-      if(this.rows[rowindex].cells[1].innerText.endsWith('.mp4'))
-      {
-/*         alert('The file chosen in this table construct is type .mp4')*/
-         var timestamp=this.rows[rowindex].cells[0].outerHTML.substr(18).replace(/&nbsp;/g," ").replace("nbsp;","")
-         timestamp=timestamp.substring(0,timestamp.indexOf(" ]"))
-         elmnt.children["timestamp"].value=timestamp
-         var endTime = new Date(timestamp.substring(0,20))
-         var endTimemSec=endTime.getTime()+timestamp.substr(21)/1000000
-      }
-      else if(this.rows[rowindex].cells[1].innerText.endsWith('.jpg'))
-      {
-/*         alert('The link is jpg inside this construct');*/
-/*We need to always know the timestamp of the last .jpg file viewed so we can populate the .mp4 windows for that event timeframe*/
 
-           StartTimeOfInterest=this.rows[rowindex].cells[0].outerHTML.substr(18)
-           StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
-           StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
-           StartTimeOfInterestDT=new Date(StartTimeOfInterest)
-           StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
-           StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
-           StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
-           qbtn.value="Queue";qbtn.style="font-size:16px;background:#e6e6e6"
-           StartCamOfInterestEl.value=this.rows[rowindex].cells[1].innerText
-           lsbtn.name='!var!www!camera_streams!camera_*'
-      }
-    })
 
-  }
-  else
-  {
-/*is now a loaded or loading jpg or mp4 viewer with the [first] image already appearing in the window. */
-      elmnt.parentElement.clientHeight=elmnt.contentDocument.body.children[0].videoHeight
-      elmnt.Height=elmnt.contentDocument.body.children[0].videoHeight
-      elmnt.clientHeight=elmnt.contentDocument.body.children[0].videoHeight
-      elmnt.contentDocument.body.children[0].scrollHeight=elmnt.contentDocument.body.children[0].videoHeight
-      elmnt.contentDocument.body.clientHeight=elmnt.contentDocument.body.children[0].videoHeight
-      elmnt.contentDocument.body.clientWidth=elmnt.contentDocument.body.children[0].videoWidth
-      if(elmnt.contentDocument.body.children[0].localName == 'video')
-      {
-           elmnt.contentDocument.body.children[0].playbackRate=2
-           if (elmnt.contentDocument.body.children[1] == 'undefined' || elmnt.contentDocument.body.children[1] == null)
-           {
-                   var mbed = document.createElement("EMBED");
-                   var attsrc = document.createAttribute("src")
-                   mbed.setAttributeNode(attsrc);
-                   var atttyp = document.createAttribute("type")
-                   mbed.setAttributeNode(atttyp);
-                   var attwid = document.createAttribute("width")
-                   mbed.setAttributeNode(attwid);
-                   var atthei = document.createAttribute("height")
-                   mbed.setAttributeNode(atthei);
-                   elmnt.contentDocument.body.appendChild(mbed);
-           }
-           elmnt.contentDocument.body.children[1].type='text/plain'
-           elmnt.contentDocument.body.children[1].hidden=true;/*doesn't really work without going through the contenWindow[0] that won't exist yet*/
-           elmnt.contentDocument.body.children[1].width="1"
-           elmnt.contentDocument.body.children[1].height="1"
-           elmnt.contentDocument.body.children[0].addEventListener("ended",function(item)
-           {glonended( elmnt.contentDocument.body.children[0].currentSrc, elmnt, '', '', '', '', '')});/*always comes in tandem with and after a pause*/
-           var timestamp=elmnt.children["timestamp"].value
-           elmnt.contentDocument.body.children[1].src=elmnt.contentDocument.body.children[0].currentSrc + '\?nextbymodifiedtime'
-           var endTime=new Date(timestamp.substring(0,20))
-           var endTimemSec=endTime.getTime()+(timestamp.substr(21)/1000000)
-           var startTimemSec=endTimemSec-(elmnt.contentDocument.body.children[0].mozFragmentEnd * 1000)
-           var startTimeReadable=new Date()
-           startTimeReadable.setTime(startTimemSec)
-           elmnt.children['currenttime'].value=((StartTimeOfInterestmSecminus60-startTimemSec)/1000)
-           elmnt.children['currenttime'].value=parseFloat(elmnt.children['currenttime'].value).toFixed(6)
-      }
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
 </script>
     <script type="text/javascript"> 
 function glonloadeddata( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
