@@ -18,6 +18,9 @@ LOOK FOR IT IN MY GITHUB SPACE.
         font-family: Tahoma, Verdana, Arial, sans-serif;
         font-size:30px;
     }
+    .jpganmimator img
+    {position: relative;
+    }
     .column 
     {
          vertical-align: top;
@@ -51,7 +54,6 @@ LOOK FOR IT IN MY GITHUB SPACE.
   float: left;
   border: none;
   outline: none;
-  margin: 0px
   cursor: pointer;
   padding: 0px 0px;
 }
@@ -59,7 +61,6 @@ LOOK FOR IT IN MY GITHUB SPACE.
     .tabcontent {
        display: none;
        padding: 0px 0px;
-       margin: 0px
        border: 0px solid #ccc;
        border-top: none;
     }
@@ -234,28 +235,36 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
 /*                 {if(!confirm('NO MOTION DETECTIONS IN THIS ELEMENT.  You\'ve selected ' + (downrowindex-uprowindex) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you actually want to select!')}*/
 /*               else */
                  if(!confirm('Open ' + (Math.abs(downrowindex-uprowindex)) + ' files in separate viewers?')){return}
-/*
-var anmimationdiv = document.createElement("div");
-anmimationdiv.id = 'anmimationdiv'
 
-for( ;rowindex!=uprowindex;)
+var animationdiv = document.createElement('div');
+animationdiv.id = 'animatordiv'
+animationdiv.className = 'jpganimator'
+for( var rowindex=downrowindex;rowindex!=uprowindex;)
 {
-   anmimationdiv.innerHTML = '<img src=\''+ this.rows[rowindex].cells[1].children[0].href+'\' />' 
-   if(downrowindex < uprowindex){rowindex++}else{rowindex--}
+   if(this.rows[rowindex].cells[1].firstElementChild!='undefined' && this.rows[rowindex].cells[1].firstElementChild!=null)
+   {
+      animationdiv.innerHTML += '<img src=\''+ this.rows[rowindex].cells[1].children[0].href+'\' />' 
+      if(downrowindex < uprowindex){rowindex++}else{rowindex--}
+   }
 }
-document.body.appendChild(anmimationdiv)
-*/
+this.appendChild('animatordiv')
+document.getElementById('animatordiv')
+        .getElementsByTagName('img'[0].style='left:0px;top:0px;width:'+this.width+';height:'+this.height) 
+
+/*
                  var frames=[]
                  var windwz=[]
                  var playing=true;
                  var on_frame=0;
                  var timer;
                  let rowindex=downrowindex;do
-                 {
+                 {   if(this.rows[rowindex].cells[1].firstElementChild!='undefined' && this.rows[rowindex].cells[1].firstElementChild!=null){
                      frames[rowindex]=this.rows[rowindex].cells[1].firstElementChild.href
-                     windwz[rowindex] = window.open(frames[rowindex]) /* save each window handle in an array of them*/
-                     if(downrowindex < uprowindex){rowindex++}else{rowindex--}
-                 }while(rowindex!=uprowindex)
+                     windwz[rowindex] = window.open(frames[rowindex]) /* save each window handle in an array of them
+                     if(downrowindex < uprowindex){rowindex++}else{rowindex--}}
+                 }while(rowindex!=uprowindex) 
+*/
+
               }
          }
     })
@@ -345,7 +354,7 @@ document.body.appendChild(anmimationdiv)
 <!-- Tab links change the name of tablinks so it shows, change rest to drop 1 so they don't-->
 <div id="buttonsdiv" style="position:sticky;top:0px;z-index:4;background:rgb(215,215,245);padding: 0px 0px 10px 0px;border:0px solid black;border-width:0px 0px 0px 0px">
   <button id="btnalertchecking" style="font-size:12px;border:0px solid black;border-width:3px 3px 3px 3px;border-radius:3px;background:rgb(215,215,245);" 
-onclick="if(alertchecking.style.display=='none'){alertchecking.style.display='inline';this.style.backgroundColor='rgb('+255+','+255+','+255+')'}else{alertchecking.style.display='none';this.style.backgroundColor='rgb('+215+','+215+','+245+')'}">
+onclick="if(alertchecking.style.display=='none'){alertchecking.style.display='inline';if(this.style.backgroundColor=='rgb(215, 215, 245)'){this.style.backgroundColor='rgb('+255+','+255+','+255+')'}}else{alertchecking.style.display='none';if(this.style.backgroundColor=='rgb(255, 255, 255)'){this.style.backgroundColor='rgb('+215+','+215+','+245+')'}}">
 Alert Checking</button>
   <button id="btnbyview" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
 onclick="tabactivate(this)">
@@ -592,7 +601,7 @@ style="font-size:15px;overflow:auto;border:5px solid black;border-width:20px 3px
 <textarea cols="35" style="font-size: 12pt">SAMPLE TEXTAREA</textarea>
 -->
 
-<table style="border:3px solid black" style="border:3px solid black"><tr><td>
+<table style="border:3px solid black" ><tr><td>
 
 <table><tr><td>
 <table width="1450px"><tr><td width="83%">
@@ -873,7 +882,7 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </table>
 </td>
 <td valign="top" align="left" style='padding:0px'>
-<table style='border:2px 2px ridge blue;padding:0px'>
+<table style='border:2px ridge blue;padding:0px'>
 <tr><td class="camtitle">
 <a name="sd_location_on_page"></a>
 
@@ -1722,7 +1731,7 @@ id="alertCheck" style="width:300px;height:75px;font-size:20px;background:#e6e6e6
 value="Alert checking now OFF"
 onclick="
 if (!this.value.endsWith(' OFF'))
-{   alertkeepalive.data='';androidconnection.style.display='none';this.value='Alert checking now OFF';this.style.background='#e6e6e6';btnalertchecking.style.color='black';this.style.width='300px';clearInterval(checkingAlerted);
+{   alertkeepalive.data='';androidconnection.style.display='none';this.value='Alert checking now OFF';this.style.background='#e6e6e6';btnalertchecking.style.backgroundColor='rgb('+255+','+255+','+255+')';this.style.width='300px';clearInterval(checkingAlerted);
     previousalert='waiting';
          if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
            alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
@@ -1739,7 +1748,7 @@ if (!this.value.endsWith(' OFF'))
 } 
 
 else 
-{   this.value='Alert checking now ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';btnalertchecking.style.color='forest green';this.style.width='930px';if(isAndroid){androidconnection.style.display='inline'}
+{   this.value='Alert checking now ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';btnalertchecking.style.backgroundColor='Chartreuse';this.style.width='930px';if(isAndroid){androidconnection.style.display='inline'}
     previousalert='waiting';
         if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
           alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
