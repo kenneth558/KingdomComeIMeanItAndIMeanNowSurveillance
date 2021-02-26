@@ -51,14 +51,16 @@ LOOK FOR IT IN MY GITHUB SPACE.
   float: left;
   border: none;
   outline: none;
+  margin: 0px
   cursor: pointer;
-  padding: 1px 1px;
+  padding: 0px 0px;
 }
 
     .tabcontent {
        display: none;
-       padding: 1px 1px;
-       border: 1px solid #ccc;
+       padding: 0px 0px;
+       margin: 0px
+       border: 0px solid #ccc;
        border-top: none;
     }
 </style>
@@ -88,9 +90,10 @@ textmaster.click()
 textmaster.value=43.5
 sldrmaster.value=textmaster.value
 textmaster.value=textmaster.value
-if(isAndroid==true){androidconnection.style='display:inline'}
+if(isAndroid){androidconnection.style='display:inline'}else{androidconnection.style='display:none'}
 setTimeout(function(){scrollmarker.scrollIntoView({behavior: 'smooth'})},10)
 document.title='Surveillance Recordings';
+entiredocument.style='pointer-events:auto;'
 ">
 <!--<script type="text/javascript"><!-- THIS REALLY DOESN'T WORK SO EACH ANNOUNCEMENT WILL HAVE TO HAVE ITS OWN ID AND SCRIPT TAG WITH IT -->
 <!--
@@ -116,7 +119,7 @@ var isIE;
 var isEdge;
 var isChrome;
 var isBlink;
-var isAndroid=true;
+var isAndroid=/(android)/i.test(navigator.userAgent);
 function tellBrowser(){
 /* Opera 8.0+*/
 var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
@@ -231,6 +234,17 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
 /*                 {if(!confirm('NO MOTION DETECTIONS IN THIS ELEMENT.  You\'ve selected ' + (downrowindex-uprowindex) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you actually want to select!')}*/
 /*               else */
                  if(!confirm('Open ' + (Math.abs(downrowindex-uprowindex)) + ' files in separate viewers?')){return}
+/*
+var anmimationdiv = document.createElement("div");
+anmimationdiv.id = 'anmimationdiv'
+
+for( ;rowindex!=uprowindex;)
+{
+   anmimationdiv.innerHTML = '<img src=\''+ this.rows[rowindex].cells[1].children[0].href+'\' />' 
+   if(downrowindex < uprowindex){rowindex++}else{rowindex--}
+}
+document.body.appendChild(anmimationdiv)
+*/
                  var frames=[]
                  var windwz=[]
                  var playing=true;
@@ -272,7 +286,7 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
            StartTimeOfInterestmSec=StartTimeOfInterestDT.getTime()
            StartTimeOfInterestmSecminus60.setTime(StartTimeOfInterestmSec-60000)
            StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
-           qbtn.value="Queue";qbtn.style="font-size:16px;background:#e6e6e6"
+           qbtn.value="                             Queue                         ";qbtn.style="font-size:16px;background:#e6e6e6"
            StartCamOfInterestEl.value=this.rows[rowindex].cells[1].innerText.trim()
            lsbtn.name='!var!www!camera_streams!camera_*'
       }
@@ -327,27 +341,29 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
 <option value="2" label="2 min"></option>
 <option value="360" label="6 hrs"></option>
 </datalist>
-<div id="entiredocument">
+<div id="entiredocument" style="z-Index:5;pointer-events:none;" onclick="return false">
 <!-- Tab links change the name of tablinks so it shows, change rest to drop 1 so they don't-->
-<div id="buttonsdiv" style="position:sticky;top:0px">
-  <button id="btnalertchecking" style="font-size:12px;" 
-onclick="if(alertchecking.style.display=='none'){alertchecking.style.display='inline';}else{alertchecking.style.display='none';}">
+<div id="buttonsdiv" style="position:sticky;top:0px;z-index:4;background:rgb(215,215,245);padding: 0px 0px 10px 0px;border:0px solid black;border-width:0px 0px 0px 0px">
+  <button id="btnalertchecking" style="font-size:12px;border:0px solid black;border-width:3px 3px 3px 3px;border-radius:3px;background:rgb(215,215,245);" 
+onclick="if(alertchecking.style.display=='none'){alertchecking.style.display='inline';this.style.backgroundColor='rgb('+255+','+255+','+255+')'}else{alertchecking.style.display='none';this.style.backgroundColor='rgb('+215+','+215+','+245+')'}">
 Alert Checking</button>
-  <button id="btnbyview" class="tablinks" style="font-size:12px;" 
+  <button id="btnbyview" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
 onclick="tabactivate(this)">
 Home page (separated views recordings)</button>
-  <button  id="btnsystem_wide" class="tablinks" style="font-size:12px;" 
+  <button  id="btnsystem_wide" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px" 
+ 
 onclick="tabactivate(this)">
 Combined views recordings</button>
-  <button  id="btndisablesandlivelinks" class="tablinks" style="font-size:12px;" 
+  <button  id="btndisablesandlivelinks" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px;" 
 onclick="tabactivate(this)">
 Suspend alerts, Links to live streams</button>
-  <button id="btntitlediv" class="tablinks" style="font-size:12px;" 
+  <button id="btntitlediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px;" 
 onclick="tabactivate(this)">
 Help</button>
-  <button id="btnnotes" class="tablinks" style="font-size:12px;" 
+  <button id="btnnotesdiv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
 onclick="tabactivate(this)">
 Notes</button>
+
 <!--
   <button id="btntrack_snaps" class="collectlinks" style="font-size:10px;background:white" 
 onclick="if(this.innerText.includes('Start track'))
@@ -508,20 +524,20 @@ In here could be the recipient list
 <tr><td style="border:1px solid black" align="left">
 Every link in here will open in its own new window, or new tab if you have your browser set for tabs <big><big><big><bold> Topmost six motion detections per camera are subject to deletion at any time</bold></big></big></big>
 <!-- needs to have setInterval, clearInterval with a static var.  Note that a camera of interest might only have motion detects but we still may want to traverse those snaps -->
-
-<object
-onclick=
-"this.style.display='none';if(this.style.display == 'block'){this.style.display='none'}else{this.style.display='block'}"
+<div id="overlayimg_sysjpgmp4_snap" onclick="this.style.display='none';return;if(this.style.display == 'block'){this.style.display='none'}else{this.style.display='block'}">
+<object data="/../../camera_snapshots/*/*jpg"
+onclick="this.style.display='none';if(this.style.display == 'block'){this.style.display='none'}else{this.style.display='block'}"
 id="img_sysjpgmp4_snap"
-width="2250px" 
+width="1750px" 
 height="750px" 
-style="display:none;"
+style="font-size:15px;overflow-y:scroll;overflow-x:scroll;border:5px solid black;border-width:20px 3px 3px;"
+onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 >
 <param name="camera_dir" value="" />
 <param name="next_snap" value="0" />
 <param name="spare" value="" />
 </object>
-<br>
+</div>
 <!--
 <source src="" type="">
 Selected snapshot list
@@ -557,7 +573,7 @@ All system recordings mingled together except MOTION_DETECTIONs, then time-arran
 </td></tr>
 
 <tr><td>
-    <object id="sysjpgmp4_motion" type="text/html" 
+<object id="sysjpgmp4_motion" type="text/html" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="this.data=this.data;" 
 data="/camera_snapshots/camera_*/*jpg /var/www/camera_streams/camera_*/*mp4-MOTION" 
@@ -588,7 +604,7 @@ All system streams - <b>USE THIS LIST FOR EVENT ARCHIVING STREAMS. Top file for 
 </tr>
 <tr>
 <td>
-    <object id="sysmp4mostrecent" type="text/html" data="/var/www/camera_streams/*/*mp4/mostrecent10" 
+<object id="sysmp4mostrecent" type="text/html" data="/var/www/camera_streams/*/*mp4/mostrecent10" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.data.includes('mostrecent10')) {this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/var/www/camera_streams/*/*mp4';} else {this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='/var/www/camera_streams/*/*mp4/mostrecent10';}" 
 width="1400px" 
@@ -609,7 +625,7 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px
 </tr>
 <tr>
 <td>
-    <object id="sysjpgs" type="text/plain" value="Click here to collect these snapshots" 
+<object id="sysjpgs" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/*/*jpg';"
 width="1400px" 
@@ -736,7 +752,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 >43.5</textarea>
 <big><big>%</big></big>
 <br><br>
-    <object id="edjpg" type="text/plain" value="Click here to collect these snapshots" class="jpgobjmainpg"
+<object id="edjpg" type="text/plain" value="Click here to collect these snapshots" class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_east_driveway';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="1000px" 
@@ -763,7 +779,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 <big><big>%</big></big>
 </div>
 <a name="#ed_location_on_page"></a>
-    <object id="edmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
+<object id="edmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') 
 {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} 
@@ -950,14 +966,17 @@ setTimeout(function(){btnSetForRecentAlert.value='Last alert'},3000)
 setTimeout(function(){lsbtn.click()},500)
 StartCamOfInterestEl.value=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].innerText.trim(); /*MUST be last thing in function in case it doesn't exist*/
 }">
-&nbsp;<input type="button" id="btnSetForRecentSmartEvent" value="Last activity" style="background:#3399FF;font-size:18px;" 
+&nbsp;<input type="button" id="btnSetForRecentSmartEvent" value="Last [minor] activity" style="background:#3399FF;font-size:18px;" 
 onclick="closebtn.click()
-if(sysjpgmp4_motion.contentDocument == null || sysjpgmp4_motion.contentDocument.readyState!='complete')
-{this.value='Data not yet received';this.style='background:yellow'}
+if(document.getElementById('sysjpgmp4_motion').contentDocument == null || document.getElementById('sysjpgmp4_motion').contentDocument.readyState!='complete')
+{
+   this.value='Data not yet received';this.style='background:yellow'
+
+}
 else
 {
-    this.value='Success';this.style='background:#3399FF;font-size:18px;';
-    var alltd=sysjpgmp4_motion.contentDocument.body.children[0].getElementsByTagName('td')
+    this.value='Success';this.style='background:#3399FF;font-size:18px;border:2px';
+    var alltd=document.getElementById('sysjpgmp4_motion').contentDocument.body.children[0].getElementsByTagName('td')
     var i=1
     for(;i<alltd.length;i=i+2){if(alltd[i].children[0].href.includes('INTRUSION') || alltd[i].children[0].href.includes('CROSSING')){break}}
     if(i<alltd.length)
@@ -971,7 +990,7 @@ else
         StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
         StartCamOfInterestEl.value=alltd[i].innerText.trim();
     }
-    setTimeout(function(){btnSetForRecentSmartEvent.value='Last activity'},3000)
+    setTimeout(function(){btnSetForRecentSmartEvent.value='Last [minor] activity'},3000)
     var objectelement=document.getElementsByClassName('jpgobjmainpg')
     for(var i=0;i<objectelement.length;i++)
     {
@@ -1062,7 +1081,7 @@ notalldoneyet=true
 setTimeout(function(){qbtn.click()},5000)
 setTimeout(function(){edmp4.scrollIntoView({behavior: 'smooth'})},1500)
 ">
-<br><input type="button" value="                              Queue                          " id="qbtn" 
+<br><input type="button" value="                             Queue                         " id="qbtn" 
 style="font-size:14px;background:#e6e6e6"
 onclick="
    if(notalldoneyet==false){return}
@@ -1170,7 +1189,9 @@ var objectelement
                {
                   if(objectelement[i].contentDocument.body != 'undefined' )
                   {
-                     objectelement[i].click()
+                     try{
+                        objectelement[i].click()}
+                     catch(e){;/*alert('Fail response from close '+objectelement[i].id)*/}
                   }
                }
            }
@@ -1180,7 +1201,7 @@ var objectelement
         afterqbtn2.innerText='';
         afterqbtn3.innerText='';
         afterqbtn4.innerText='';
-    qbtn.value='                              Queue                          ';qbtn.style.background='#e6e6e6'
+    qbtn.value='                             Queue                         ';qbtn.style.background='#e6e6e6'
     mainjpgviewer0.style.display='none'"
 >
 <input type="button" value="Relax the courtesy of videos" style="font-size:8px;" id="courtesybtn" style="background:white" onclick="if(this.style.backgroundColor == 'white'){this.style.background='#d9ecd0';this.value='Enforce courtesy of videos while any other loads their next one'}else{this.style.background='white';this.value='Relax courtesy of videos while any other loads their next one'}">
@@ -1217,7 +1238,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 
 <big><big>%</big></big>
 <br><br>
-    <object id="fpjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
+<object id="fpjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_front_parking/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}"
 width="1000px" 
@@ -1308,7 +1329,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 >43.5</textarea>
 <big><big>%</big></big>
 <br><br>
-    <object id="nejpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
+<object id="nejpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_ne_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="960px" 
@@ -1411,8 +1432,8 @@ forbuttons.style.left='0px'
 setTimeout(function(){scrollmarker.scrollIntoView()},10)
 }
 "
-style="position:relative;top:-28px;left:355px;z-Index:3"
->Toggle sizes</button>
+style="position:relative;top:-20px;left:355px;z-Index:3;opacity:.85;height:40px;width:160px;color:red;font-size:18px"
+>Toggle sizing</button>
 </td></tr></table>
 </td><td valign="top">
 <div id="mainjpgviewer_buttonsdiv">
@@ -1603,7 +1624,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 
 <td  class="bb" valign="top" style="padding:0px;border-top: solid 1px black;">
 <br><br>
-    <object id="nejpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
+<object id="nejpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_ne_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="960px" 
@@ -1636,7 +1657,8 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 </table>
 </td></tr></table>
 </td>
-<div id="notes" class="tabcontent" style="display:none">
+</div>
+<div id="notesdiv" class="tabcontent" style="display:none">
 <h3><ul>
 <li>
 Drag over jpg files and you'll notice they can launch into new and separate viewer elements.  If that is not<br>
@@ -1682,7 +1704,7 @@ My research is indicating that push notifications to Android devices might not b
 servers and some registration key they generate being required.  I feel there should be some other way (like<br>
 HTML5 push) that the shop server can directly trigger an Android notification.  Hopefully I'll find it soon.
 </li>
-</h3>
+</ul></h3>
 Camera login credentials are no longer embedded in the URLs so that the five minute stream time limit can be defeated<br>
 Login credentials for camera streams are username = [youngest brother first name in reverse case]123<br>
              password is the same as the username but in proper case<br>
@@ -1700,7 +1722,7 @@ id="alertCheck" style="width:300px;height:75px;font-size:20px;background:#e6e6e6
 value="Alert checking now OFF"
 onclick="
 if (!this.value.endsWith(' OFF'))
-{   alertkeepalive.data='';this.value='Alert checking now OFF';this.style.background='#e6e6e6';btnalertchecking.style.color='black';this.style.width='300px';clearInterval(checkingAlerted);
+{   alertkeepalive.data='';androidconnection.style.display='none';this.value='Alert checking now OFF';this.style.background='#e6e6e6';btnalertchecking.style.color='black';this.style.width='300px';clearInterval(checkingAlerted);
     previousalert='waiting';
          if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
            alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
@@ -1717,7 +1739,7 @@ if (!this.value.endsWith(' OFF'))
 } 
 
 else 
-{   this.value='Alert checking now ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';btnalertchecking.style.color='forest green';this.style.width='930px';
+{   this.value='Alert checking now ON.  If you\'re traveling, you\'ll risk your phone getting blacklisted';alertCheck.style.background='Chartreuse';btnalertchecking.style.color='forest green';this.style.width='930px';if(isAndroid){androidconnection.style.display='inline'}
     previousalert='waiting';
         if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
           alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
@@ -1743,13 +1765,15 @@ else
              }
          }
     alertsdirectory.data=alertsdirectory.data
-    alertkeepalive.data='/var/www/html/silence.mp3';
-    setTimeout(function()
-       {   alertkeepalive.contentDocument.body.children[0].muted=true;
-           alertkeepalive.contentDocument.body.children[0].loop=true
-           alertkeepalive.contentDocument.body.children[0].play()
-       },4000
-    )
+    if(isAndroid)
+    {   alertkeepalive.data='/var/www/html/silence.mp3';
+        setTimeout(function()
+           {   alertkeepalive.contentDocument.body.children[0].muted=true;
+               alertkeepalive.contentDocument.body.children[0].loop=true
+               alertkeepalive.contentDocument.body.children[0].play()
+           },4000
+        )
+    }
     checkingAlerted=setInterval(function()
        {   alertsdirectory.data=alertsdirectory.data},8000
     )
@@ -1757,8 +1781,9 @@ else
 ">
 <tr><td>
 
-<div id="androidconnection" style="display:inline">
-<br><object id="alertkeepalive" type="audio/mpeg" data="" height="20px" width="200px"></object>This silent audio loop is used to maintain Android connections
+<div id="androidconnection" style="display:none">
+<br>This silent audio loop is used to maintain Android connections
+<object id="alertkeepalive" type="audio/mpeg" data="" height="20px" width="200px"></object>
 </div>
 </td></tr></table>
 </div>
@@ -1967,15 +1992,26 @@ function startbtncclick()
 }
 </script>
     <script type="text/javascript"> 
+
 function tabactivate( btn ) {
 var btnset = document.getElementsByClassName('tablinks');
 for(var i=0;i<btnset.length;i++)
-{if(btnset[i].id != btn.id){document.getElementById(btnset[i].id.substring(3)).style.display = 'none';
+{
+var selection=btnset[i]
+if(btnset[i].id != btn.id){
+document.getElementById(btnset[i].id).style.borderWidth = '0px 0px 3px 0px';
+document.getElementById(btnset[i].id).style.background='rgb('+215+','+215+','+245+')'
+document.getElementById(btnset[i].id.substring(3)).style.display = 'none';
 <!-- document.getElementById(btn.id).style.background='#CCCCCC' -->
 }else
-{document.getElementById(btnset[i].id.substring(3)).style.display = 'block';
+{
+document.getElementById(btnset[i].id).style.borderWidth = '3px 3px 0px 3px'
+document.getElementById(btnset[i].id).style.background='rgb('+255+','+255+','+255+')'
+if(btnset[i].id!='btnsystem_wide'){document.getElementById(selection.id.substring(3)).style.display = 'block';}
+else{setTimeout(function(){document.getElementById('system_wide').style.display = 'block';},50)}
 <!-- document.getElementById(btn.id).style.background='#FFFFFF' -->
 }}
+
 setTimeout(function(){entiredocument.scrollIntoView(false,{behavior: 'smooth'})},10)
 }
 </script>

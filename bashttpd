@@ -466,7 +466,9 @@ function serve_dir_or_file_from() {
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%?mostrecent*}|head -n${URL_PATH##*mostrecent}|awk -v headlines=${URL_PATH##*mostrecent} -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v cams_needed=$cams_active '
 BEGIN {toptencounter=0;print css_style "<table class=\"elif0\" style=\"width:100%\">"}
-{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre "/" substr($10,2,length($10)-1) "\" target=\"_blank\">";
+{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre "/" substr($10,2,length($10)-1) 
+if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+printf "\">"
 gsub(".*sw_c","Dock  ",$10)
 gsub(".*east","East  ",$10)
 gsub(".*ne_c","North  ",$10)
@@ -474,15 +476,17 @@ gsub(".*fron","Office  ",$10)
 gsub(".*sout","S East  ",$10)
 printf substr($10,1,index($10,"\ \ "))
 gsub(".*[0-9]\_","",$10)
-print substr($10,index($10,"\/")+1)
-" &nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;</a></td></tr>";toptencounter++;if (toptencounter <= 2*cams_needed) {topten[toptencounter]=substr($10,1,length($10)-length(array[split($10,array,"/")]));uniques[topten[toptencounter]]++}} 
+print substr($10,index($10,"\/")+1) \
+"&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;</a></td></tr>";toptencounter++;if (toptencounter <= 2*cams_needed) {topten[toptencounter]=substr($10,1,length($10)-length(array[split($10,array,"/")]));uniques[topten[toptencounter]]++}} 
 END {if(headlines == 2*cams_needed){for (element in uniques){activecams++};if(activecams<cams_needed){print "<tr><big><big><big><big><div id=\"announcement\">ALERT - ONLY " activecams " OUT OF " cams_needed " CAMERAS ARE BEING RECORDED. IMMEDIATE ATTENTION ADVISED</div></big></big></big></big><script type=\"text/javascript\">alert(\"ALERT - ONLY " activecams " OUT OF " cams_needed " CAMERAS ARE BEING RECORDED. IMMEDIATE ATTENTION ADVISED\");setInterval(function(){announcement.style.visibility=(announcement.style.visibility==\"hidden\" ? \"\" \: \"hidden\");},750);window.top.playalert();</script></tr>"}} print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ .*\*jpg-MOTION/mostrecent[0-9]{1,3}$ ]]; then
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -t ${URL_PATH%%-MOTION*}|grep -v MOTION|head -n${URL_PATH##*mostrecent}|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" '
 BEGIN {print css_style "<table class=\"elif1\" style=\"width:100%\">"}
-{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre "/" substr($10,3,length($10)-2) "\" target=\"_blank\">";
+{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre "/" substr($10,3,length($10)-2) 
+if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+printf "\">"
 if(substr($10,length($10)-3)=="\.mp4"){
 gsub(".*sw_c","Dock  ",$10)
 gsub(".*east","East  ",$10)
@@ -499,7 +503,9 @@ END {print "</table>"}')"
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%-MOTION*}|grep -v MOTION|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH%%-MOTION*}" '
 BEGIN {print css_style "<table class=\"elif2\" style=\"width:100%\">";lines=0}
-{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10 "\" target=\"_blank\">";
+{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10
+if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+printf "\">"
 if(substr($10,length($10)-3)=="\.jpg"){
 gsub(".*192\.168\.0\.14_","Dock  ",$10)
 gsub(".*192\.168\.0\.11","East  ",$10)
@@ -525,7 +531,9 @@ END {print "</table>";if(lines<1){print "Argument list too long: too many files 
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" '
 BEGIN {print css_style "<table class=\"elif3\" style=\"width:100%\">"}
-{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10 "\" target=\"_blank\">";
+{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10
+if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+printf "\">"
 if(substr($10,length($10)-3)=="\.jpg"){
 gsub(".*192\.168\.0\.14_","Dock  ",$10)
 gsub(".*192\.168\.0\.11","East  ",$10)
@@ -534,7 +542,7 @@ gsub(".*192\.168\.0\.12","Office  ",$10)
 gsub(".*192\.168\.0\.13","S East  ",$10)
 printf substr($10,1,index($10,"\ \ "))
 gsub(".*[0-9]\_","",$10)
-print substr($10,index($10,10))}else if(substr($10,length($10)-3)=="\.mp4"){
+printf substr($10,index($10,10))}else if(substr($10,length($10)-3)=="\.mp4"){
 gsub(".*sw_c","Dock  ",$10)
 gsub(".*east","East  ",$10)
 gsub(".*ne_c","North  ",$10)
@@ -558,11 +566,13 @@ StartTimeOfInterest=StartTimeOfInterest.substring(1,5) + month[StartTimeOfIntere
 window.top.StartTimeOfInterestEl.value=StartTimeOfInterest.substring(0,19); \
 var uprowindex=Math.trunc((e.pageY+2)/((me.parentNode.clientHeight+2)/me.parentNode.childElementCount)-.5)}</script> \
 <table class=\"elif4\" style=\"width:100%\">";line=1}
-{if(NF>9){printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} \
+{if(NF>9){printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 
+if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+printf "\" "
+if (line==1){printf " id=\"latestalert\""}} \
 else {printf $12 "\"";if (line==1){printf " id=\"latestalert\""}};printf " \
 onmousedown=\"mdown(event)\" \
 onmouseup=\"window.top.StartCamOfInterestEl.value='\'''\'';giveRowIndicesSpanData(event,this)\" \
-\
 onclick=\" \
 if(window.top.mainjpgviewer0.data!= \
 this.parentNode.parentNode.parentNode.rows[Math.trunc((event.pageY+2)/((this.parentNode.parentNode.parentNode.clientHeight+2)/this.parentNode.parentNode.parentNode.childElementCount)-.5)].cells[1].children[0].href) \
@@ -571,7 +581,7 @@ this.parentNode.parentNode.parentNode.rows[Math.trunc((event.pageY+2)/((this.par
 window.top.mainjpgviewer0.style.display='\'''\''} \
 return false;\" \
 \
-ondblclick=\"window.top.lsbtn.click();\" \" target=\"_blank\">"; \
+ondblclick=\"window.top.lsbtn.click();\" >"; \
 if (substr($1,1,1) != "l"){
 printf $10}else{
 if(substr($12,length($12)-3)=="\.jpg"){
@@ -586,7 +596,7 @@ printf substr($12,1,index($12,"\ \ "))
 tmpstr=substr($12,index($12,"\_")-15,15)
 gsub(".*[0-9]\_","",$12)
 printf substr($12,1,index($12,"\.")-1) tmpstr ".jpg&nbsp;" $6 "\&nbsp\;" $7 "\&nbsp\;" $8 "\&nbsp\;" $9 }else{printf $10}
-}}; printf "</a></td></tr>";line=line+1}
+}}; print "</a></td></tr>";line=line+1}
 END {print "</table>"}')"
 
 #else {printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" substr($0,28,3) "&nbsp;" substr($0,32,2) "&nbsp;" substr($0,35,8) "&nbsp;]&nbsp;&nbsp;\"></td><td></td></tr>"}}
@@ -600,10 +610,12 @@ END {print "</table>"}')"
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH}" -v subpath="${URL_PATH##*/links_to_alerting_activity}" '
 BEGIN {printf css_style "<script>var month = [];month['\''Jan'\''] = '\''-01-'\'';month['\''Feb'\''] = '\''-02-'\'';month['\''Mar'\''] = '\''-03-'\'';month['\''Apr'\''] = '\''-04-'\'';month['\''May'\''] = '\''-05-'\'';month['\''Jun'\''] = '\''-06-'\'';month['\''Jul'\''] = '\''-07-'\'';month['\''Aug'\''] = '\''-08-'\'';month['\''Sep'\''] = '\''-09-'\'';month['\''Oct'\''] = '\''-10-'\'';month['\''Nov'\''] = '\''-11-'\'';month['\''Dec'\''] = '\''-12-'\'';var mousedownedhere;var StartTimeOfInterest='\'''\'';function mdown(e){mousedownedhere=e.pageY};function giveRowIndicesSpanData(e,me){var downrowindex=Math.trunc((mousedownedhere+2)/((me.parentNode.clientHeight+2)/me.parentNode.childElementCount)-.5);StartTimeOfInterest=me.parentNode.parentNode.cells[0].attributes[0].textContent.trim().substring(1,32);StartTimeOfInterest=StartTimeOfInterest.substring(1,5) + month[StartTimeOfInterest.substr(6,3)] + StartTimeOfInterest.substring(10);window.top.StartTimeOfInterestEl.value=StartTimeOfInterest.substring(0,19);var uprowindex=Math.trunc((e.pageY+2)/((me.parentNode.clientHeight+2)/me.parentNode.childElementCount)-.5)}</script> \
 <table class=\"elif5\" style=\"width:100%\">";line=1}
-{if(NF>9){printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 "\"";if (line==1){printf " id=\"latestalert\""}} \
+{if(NF>9){printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10
+if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+printf "\" "
 else {printf $12 "\"";if (line==1){printf " id=\"latestalert\""}};printf " \
 onmousedown=\"mdown(event)\" \
-onmouseup=\"window.top.StartCamOfInterestEl.value='\'''\'';giveRowIndicesSpanData(event,this)\" target=\"_blank\">";
+onmouseup=\"window.top.StartCamOfInterestEl.value='\'''\'';giveRowIndicesSpanData(event,this)\">";
 if (substr($1,1,1) != "l"){
 printf $10}else{
 if(substr($12,length($12)-3)=="\.jpg"){
@@ -616,15 +628,18 @@ printf substr($12,1,index($12,"\ \ "))
 gsub(".*[0-9]\_","",$12)
 printf substr($12,index($12,10)) "&nbsp;" $6 "\&nbsp\;" $7 "\&nbsp\;" $8 "\&nbsp\;" $9 }else{printf $10}
 }};
-printf "</a></td></tr>";line=line+1}
+print "</a></td></tr>";line=line+1}
 END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ .*/mostrecent[0-9]{1,3}$ ]]; then
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%/mostrecent*}|head -n$(( ${URL_PATH##*mostrecent} + 1 ))|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH%%/mostrecent*}" '
 BEGIN {print css_style "<table class=\"elif6\">"}
-{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10} \
-else {printf $12} printf "\" target=\"_blank\">";if (substr($1,1,1)!="l"){
+{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10}
+else {printf $12} 
+if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+printf "\">"
+if (substr($1,1,1)!="l"){
 if(substr($10,length($10)-3)=="\.jpg"){
 gsub(".*192\.168\.0\.14","Dock  ",$10)
 gsub(".*192\.168\.0\.11","East  ",$10)
@@ -643,14 +658,16 @@ gsub(".*sout","S East  ",$10)
 printf substr($10,1,index($10,"\ \ "))
 gsub(".*[0-9]\_","",$10)
 printf substr($10,index($10,"\/")+1)}else {printf $10 "&nbsp;" $6 "\&nbsp\;" $7 "\&nbsp\;" $8 "\&nbsp\;" $9 }
-} else {printf $12} printf "</a></td></tr>"} 
+} else {printf $12} print "</a></td></tr>"} 
 END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ important* ]]; then
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH}|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling"  -v path="${URL_PATH}" '
 BEGIN {print css_style "<table class=\"elif7\">"}
-{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10 "\" target=\"_blank\">";
+{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10 
+if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+printf "\">"
 if(substr($10,length($10)-3)=="\.jpg"){
 gsub(".*192\.168\.0\.14","Dock  ",$10)
 gsub(".*192\.168\.0\.11","East  ",$10)
@@ -682,7 +699,9 @@ END {print "</table>"}')"
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH%%\?*}|awk -v linkpre="$(ip -o address | \
          grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH}" '
 BEGIN {print css_style "<table class=\"elif8\">"}
-{print "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10 " target=\"_blank\">";
+{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10 
+if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+printf "\">"
 if(substr($10,length($10)-3)=="\.jpg"){
 gsub(".*192\.168\.0\.14","Dock  ",$10)
 gsub(".*192\.168\.0\.11","East  ",$10)
@@ -770,7 +789,9 @@ print "</a></td></tr>"} \
 #      echo -e "1. findResults=${findResults}"  >> /home/homeowner/bashttpd.log
       findResults="$(while read filename;do ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N "$filename";done <<< "$findResults"|awk -v linkpre="$(ip -o address | grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" -v path="${URL_PATH}" -v findResults="${findResults}" '
 BEGIN {printf css_style "<table class=\"elif9\">";line=0}
-{line++;printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10  "\" target=\"_blank\">"
+{line++;printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10
+if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+printf "\">"
 if(substr($10,length($10)-3)=="\.jpg"){
 gsub(".*192\.168\.0\.14","Dock  ",$10)
 gsub(".*192\.168\.0\.11","East  ",$10)
@@ -788,7 +809,7 @@ gsub(".*sout","S East  ",$10)
 printf substr($10,1,index($10,"\ \ ")) "&nbsp;" $6 "\&nbsp\;" $7 "\&nbsp\;" $8 "\&nbsp\;" $9 
 gsub(".*[0-9]\_","",$10)
 printf substr($10,index($10,"\/")+1)}else {printf $10}
-printf "</a></td></tr>"} 
+print "</a></td></tr>"} 
 END {if (line==0){print "<tr><td aria-label=\"" findResults  "\"></td><td></td></tr>"}print "</table>"}')"
 #      echo -e "2. findResults=${findResults}"  >> /home/homeowner/bashttpd.log
       serve_html_string "${findResults}"
@@ -801,7 +822,9 @@ BEGIN {print css_style "<table class=\"elif10\" style=\"width:100%\">"}
 {printf "<tr><td aria-label=\"[&nbsp;"}{if($6==""){i=length(path);for (;i>0;i--){if (substr(path,i,1)=="/") break} \
 if(substr(path,i+1,7)=="camera_") {printf substr(path,i+1+7)} else {printf substr(path,i+1)} printf " ]\"></td><td> </td></tr>"} \
 else{printf $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10} \
-else {printf $12} printf  "\" target=\"_blank\">";
+else {printf $12}
+if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+printf "\">"
 if (substr($1,1,1)!="l"){
 if(substr($10,length($10)-3)=="\.jpg"){
 gsub(".*192\.168\.0\.14","Dock  ",$10)
