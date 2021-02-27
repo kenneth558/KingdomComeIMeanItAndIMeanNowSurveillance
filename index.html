@@ -16,7 +16,7 @@ LOOK FOR IT IN MY GITHUB SPACE.
         margin: 1em;
         background: rgb(215,215,245);
         font-family: Tahoma, Verdana, Arial, sans-serif;
-        font-size:30px;
+        font-size:14px;
     }
     .jpganmimator img
     {position: relative;
@@ -64,6 +64,7 @@ LOOK FOR IT IN MY GITHUB SPACE.
        border: 0px solid #ccc;
        border-top: none;
     }
+
 </style>
     </head>
     <body  style="margin:0;padding:0"
@@ -216,8 +217,8 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
 {
   if (elmnt.contentDocument.body.children[0] != 'undefined' && elmnt.contentDocument.body.children[0] != null && elmnt.contentDocument.body.children[0].localName == 'table' && elmnt.contentDocument.body.children[0].tBodies[0] != 'undefined' && elmnt.contentDocument.body.children[0].tBodies[0] != null && elmnt.contentDocument.body.children[0].tBodies[0].rows[0].cells[1] != 'undefined' && elmnt.contentDocument.body.children[0].tBodies[0].rows[0].cells[1] != null)
   {
-    if(elmnt.contentDocument.body.children[0].tBodies[0] == 'undefined' || elmnt.contentDocument.body.children[0].tBodies[0] == null)
-{alert('Too many event files to list with ' + currSrc + '.  Delete overrunning ones on server.')}
+    if(elmnt.contentDocument.body.children[0].tBodies[0] == 'undefined' || elmnt.contentDocument.body.children[0].tBodies[0] == null){alert('Too many event files to list with ' + currSrc + '.  Delete overrunning ones on server.')}
+/*    else{if(elmnt.id=='alertsdirectory'){document.getElementById('show_events').min=0-elmnt.contentDocument.body.children[0].rows.length;document.getElementById('submit-value').click()}}*/
     elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("mousedown",function(item)
     {
          mousedownedhere=item.pageY
@@ -235,23 +236,24 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
 /*                 {if(!confirm('NO MOTION DETECTIONS IN THIS ELEMENT.  You\'ve selected ' + (downrowindex-uprowindex) + ' files. You\'re using a feature still under development and incomplete.  The visual indication of selected files is very loosely related to the file you actually have selected, so don\'t make it real hard on yourself to force the visual selects to include that topmost (first) file you actually want to select!')}*/
 /*               else */
                  if(!confirm('Open ' + (Math.abs(downrowindex-uprowindex)) + ' files in separate viewers?')){return}
-
-var animationdiv = document.createElement('div');
+/*
+var animationdiv = document.createElement('div'); /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory or otherwise have a way of limiting memory useage
 animationdiv.id = 'animatordiv'
 animationdiv.className = 'jpganimator'
 for( var rowindex=downrowindex;rowindex!=uprowindex;)
 {
    if(this.rows[rowindex].cells[1].firstElementChild!='undefined' && this.rows[rowindex].cells[1].firstElementChild!=null)
    {
-      animationdiv.innerHTML += '<img src=\''+ this.rows[rowindex].cells[1].children[0].href+'\' />' 
+      animationdiv.innerHTML += '<img src=\''+ this.rows[rowindex].cells[1].children[0].href+'\' width=\'550px\' height=\'260px\' style=\'position:absolute;left:0px;top:0px;\' />' 
       if(downrowindex < uprowindex){rowindex++}else{rowindex--}
    }
 }
-this.appendChild('animatordiv')
-document.getElementById('animatordiv')
-        .getElementsByTagName('img'[0].style='left:0px;top:0px;width:'+this.width+';height:'+this.height) 
-
-/*
+document.body.appendChild(animationdiv) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory 
+animationdiv.style='position:absolute;top:428px;left:434px'
+alert('This feature not finished.  When finished it will cycle through the snapshots that are piled on top of each other right now.  A slider bar may end up included like the weather web page uses')
+var animatetimer=setInterval(function(){;},700)
+setTimeout(function(){if(!confirm('Allow more time for snapshot animation element? Cancel will close the animation element to save memory')){animationdiv.replaceChildren();animationdiv.remove();clearInterval(animatetimer)}},300000)
+*/
                  var frames=[]
                  var windwz=[]
                  var playing=true;
@@ -260,10 +262,10 @@ document.getElementById('animatordiv')
                  let rowindex=downrowindex;do
                  {   if(this.rows[rowindex].cells[1].firstElementChild!='undefined' && this.rows[rowindex].cells[1].firstElementChild!=null){
                      frames[rowindex]=this.rows[rowindex].cells[1].firstElementChild.href
-                     windwz[rowindex] = window.open(frames[rowindex]) /* save each window handle in an array of them
+                     windwz[rowindex] = window.open(frames[rowindex]) /* save each window handle in an array of them*/
                      if(downrowindex < uprowindex){rowindex++}else{rowindex--}}
                  }while(rowindex!=uprowindex) 
-*/
+
 
               }
          }
@@ -350,9 +352,7 @@ document.getElementById('animatordiv')
 <option value="2" label="2 min"></option>
 <option value="360" label="6 hrs"></option>
 </datalist>
-<div id="entiredocument" style="z-Index:5;pointer-events:none;" onclick="return false">
-<!-- Tab links change the name of tablinks so it shows, change rest to drop 1 so they don't-->
-<div id="buttonsdiv" style="position:sticky;top:0px;z-index:4;background:rgb(215,215,245);padding: 0px 0px 10px 0px;border:0px solid black;border-width:0px 0px 0px 0px">
+<div id="entiredocument" style="z-Index:5;pointer-events:none;" onclick="return false"><div id="buttonsdiv" style="position:sticky;top:0px;z-index:4;background:rgb(215,215,245);padding: 0px 0px 10px 0px;border:0px solid black;border-width:0px 0px 0px 0px">
   <button id="btnalertchecking" style="font-size:12px;border:0px solid black;border-width:3px 3px 3px 3px;border-radius:3px;background:rgb(215,215,245);" 
 onclick="if(alertchecking.style.display=='none'){alertchecking.style.display='inline';if(this.style.backgroundColor=='rgb(215, 215, 245)'){this.style.backgroundColor='rgb('+255+','+255+','+255+')'}}else{alertchecking.style.display='none';if(this.style.backgroundColor=='rgb(255, 255, 255)'){this.style.backgroundColor='rgb('+215+','+215+','+245+')'}}">
 Alert Checking</button>
@@ -388,31 +388,25 @@ Start tracking opened snapshots for later playback</button>
 
 <button style="font-size:10px;background:white" onclick="launch()">JPG set advancing</button>
 -->
-</div>
 <!--  <button class="tablinks" onclick="if(document.getElementById('byview').style.display == 'none'){document.getElementById('byview').style.display = 'block'}else{document.getElementById('byview').style.display = 'none';}">Recording by view</button> -->
-
-<small><small>
-<div id="titlediv" class="tabcontent" style="display:none">
-<table width="1535px" style="border:3px solid black"><tr><td><center>
-<b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center><small>
-<label></label>
+</div><div id="titlediv" class="tabcontent" style="display:none">
+<table width="858px" style="border:3px solid black"><tr><td><center>
+<b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
 </td></tr><tr><td>
-<small><small><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><u>Live</u></i> camera feeds can't be played in the common web browsers but only in independent video player instances easily by
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><u>Live</u></i> camera feeds can't be played in the common web browsers but only in independent video player instances easily by
 dragging and dropping the strings provided.  However, the <i><u>recorded</u></i> material <i>will</i> play in 
 this web page's file listing areas below just by clicking on one, and the browser's "back" 
 button gets back to the listing again.
 </td></tr><tr><td>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><small><small>More detailed instructions, a list of features being developed, feature wish list, and known incapabilites are at the bottom of this page.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;More detailed instructions, a list of features being developed, feature wish list, and known incapabilites are at the bottom of this page.
 </td></tr>
 <tr><td>
-<small><small><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Drag/droppable, cut/pasteable low-res (.../102) and high-res (.../101) camera stream addresses, layed out the way I arrange the players on my screen:</label><br>
 </td></tr></table>
-</div>
-<div id="disablesandlivelinks" class="tabcontent"  style="display:none">
-<small><small>
-<table width="1450px"  style="border:3px solid black"><tr><td>
-<table style="border:1px solid black" width="1150px"><tr><td>
-<table><tr><td width="625px">
+</div><div id="disablesandlivelinks" class="tabcontent"  style="display:none">
+<table style="border:3px solid black"><tr><td>
+<table style="border:1px solid black"><tr><td>
+<table><tr><td>
+<label>Drag/droppable, cut/pasteable low-res (.../102) and high-res (.../101) camera stream addresses, layed out the way I arrange the players on my screen:</label><br>
 <center>
 <table><tr><td style="border:1px ridge black">
 <center>
@@ -491,8 +485,8 @@ button gets back to the listing again.
 
 <table width="100%"><tr><td>
 <br>
-  <center><label><big><b>Entire system short term alerts disable</b></big></label>
-<small><small><br>This disable operates independent of the others while overscoping them
+  <center><label><b>Entire system short term alerts disable</b></label>
+<br>This disable operates independent of the others while overscoping them
 </center><br>
   <center><form  method="put">
   </center><center><input type="range" id="entire_system" oninput="slideres()" name="!home!homeowner!camera_snapshots!settimeout"
@@ -513,16 +507,12 @@ In here could be the recipient list
 <textarea cols="35" style="font-size: 12pt" >FUTURE Ability to send notices to others on a notification list</textarea>
 </td></tr></table>
 </td></tr></table>
-</div>
-
-<div id="system_wide" class="tabcontent" style="display:none">
+</div><div id="system_wide" class="tabcontent" style="display:none">
 
 
 
-</small>
 <b>
 <br>System-wide:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None of these this page (combined views page) span months correctly right now<br>
-<small>
 <table width="2250px">
 <tr><td>
 <table width="1450px">
@@ -531,7 +521,7 @@ In here could be the recipient list
 
 
 <tr><td style="border:1px solid black" align="left">
-Every link in here will open in its own new window, or new tab if you have your browser set for tabs <big><big><big><bold> Topmost six motion detections per camera are subject to deletion at any time</bold></big></big></big>
+Every link in here will open in its own new window, or new tab if you have your browser set for tabs <bold> Topmost six motion detections per camera are subject to deletion at any time</bold>
 <!-- needs to have setInterval, clearInterval with a static var.  Note that a camera of interest might only have motion detects but we still may want to traverse those snaps -->
 <div id="overlayimg_sysjpgmp4_snap" onclick="this.style.display='none';return;if(this.style.display == 'block'){this.style.display='none'}else{this.style.display='block'}">
 <object data="/../../camera_snapshots/*/*jpg"
@@ -561,9 +551,9 @@ alt="Most recent event jpg">
 <!-- src="/../../camera_snapshots/*/*jpg-MOTION/\?*[0-9.]{1,2}minutesbefore*"
  =~ /../../camera_snapshots/*/*jpg?1minutesbefore2020-12-18 21:23:41.057728372
  -->
-<small>
-<a href="/../../links_to_alerting_activity/" target="_blank"><b>Recent Alerts</b></a>&nbsp;&nbsp;&nbsp;<small>Click title to see all recent alerts.
-<br></small>
+
+<a href="/../../links_to_alerting_activity/" target="_blank"><b>Recent Alerts</b></a>&nbsp;&nbsp;&nbsp;Click title to see all recent alerts.
+<br>
 <object id="sysjpg_motion" type="text/html" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="this.data=this.data;" data="/../../camera_snapshots/*/*jpg-MOTION" 
@@ -700,10 +690,8 @@ Command: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
 </td>
 </tr>
 </table>
-</div>
-
-<div id="byview" class="separateviewsdiv">
-<b><big>Separate Camera Recordings.  Click a blue border to list/unlist </big></b>
+</div><div id="byview" class="separateviewsdiv">
+<b>Separate Camera Recordings.  Click a blue border to list/unlist </b>
 &nbsp;&nbsp; &nbsp; &nbsp;
 <!--
 
@@ -723,7 +711,7 @@ for(i=0;i<lmentList.length;i++)
 lmentList=document.getElementsByClassName('scaletext');
 for(i=0;i<lmentList.length;i++)
 {lmentList[i].value=this.value;lmentList[i].click()}">43.5</textarea>
-<big><big>%</big></big>
+<big>%</big>
 
 <table style="border:1px solid black;border-collapse:collapse" id="camsmp4col1mainpg">
 <tr><td valign="top">
@@ -785,7 +773,7 @@ lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement
 lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
-<big><big>%</big></big>
+<big>%</big>
 </div>
 <a name="#ed_location_on_page"></a>
 <object id="edmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
@@ -840,7 +828,7 @@ lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement
 lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
-<big><big>%</big></big>
+<big>%</big>
 </div>
 </td></tr>
 <!--
@@ -906,7 +894,7 @@ lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement
 lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
-<big><big>%</big></big>
+<big>%</big>
 </div>
 <object id="sdmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -1183,7 +1171,7 @@ var objectelement=document.getElementsByClassName('mp4obj');
         {if(objectelement[i].contentDocument.body != 'undefined' && objectelement[i].contentDocument.body.children[0].localName == 'video')
         {objectelement[i].contentDocument.body.children[0].pause()}}}">
 
-<br><input type="button" value="Close these viewers" id="closebtn" style="font-size:12px;" 
+<br><input type="button" value="Close viewers" id="closebtn" style="font-size:12px;" 
 onclick="
 /*alert('alertsdirectory.top='+alertsdirectory.top)*/
 var objectelement
@@ -1213,7 +1201,7 @@ var objectelement
     qbtn.value='                             Queue                         ';qbtn.style.background='#e6e6e6'
     mainjpgviewer0.style.display='none'"
 >
-<input type="button" value="Relax the courtesy of videos" style="font-size:8px;" id="courtesybtn" style="background:white" onclick="if(this.style.backgroundColor == 'white'){this.style.background='#d9ecd0';this.value='Enforce courtesy of videos while any other loads their next one'}else{this.style.background='white';this.value='Relax courtesy of videos while any other loads their next one'}">
+<input type="button" value="Relax courtesy of videos" style="font-size:7px;" id="courtesybtn" style="background:white;" onclick="if(this.style.backgroundColor == 'white'){this.style.background='#d9ecd0';this.value='Enforce courtesy of videos'}else{this.style.background='white';this.value='Relax courtesy of videos'}">
 </td></tr></table>
 </td>
 <td valign="top" style='padding:0px' >
@@ -1272,7 +1260,7 @@ lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement
 lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
-<big><big>%</big></big>
+<big>%</big>
 </div>
 <object id="fpmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
 onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
@@ -1314,7 +1302,7 @@ lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement
 lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
-<big><big>%</big></big>
+<big>%</big>
 </div>
 </td></tr>
 
@@ -1356,7 +1344,7 @@ height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <script type="text/javascript">
 var alertsdirectoryheightmode0 =245+'px'
 var alertsdirectoryheightmode1 =623+'px'
-var alertsdirectorywidthmode0 =419+'px'
+var alertsdirectorywidthmode0 =379+'px'
 var alertsdirectorywidthmode1 =""
 var alertsdirectorytopmode0 =""
 var alertsdirectorytopmode1 =""
@@ -1368,7 +1356,7 @@ var mainjpgviewer0topmode1 =""
 var mainjpgviewer0leftmode0 =""
 var mainjpgviewer0leftmode1 =""
 var mainjpgviewer0widthmode0 =550+'px'
-var mainjpgviewer0widthmode1 =875+'px'
+var mainjpgviewer0widthmode1 =1000+'px'
 
 var forbuttonstopmode0 =""
 var forbuttonstopmode1 =0+'px'
@@ -1410,7 +1398,7 @@ onload="/*
          }
      }
      glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-width="419px" height="245px"
+width="379px" height="245px"
 style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 3px 3px;
 ">
    <param name="timestamp" value="initial" />
@@ -1418,16 +1406,28 @@ style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="0" />
     </object>
+<input type="range" id="show_events" 
+oninput="this.value=(alertsdirectory.contentDocument!='undefined' && alertsdirectory.contentDocument!=null && alertsdirectory.contentDocument.body.children[0] !='undefined' && alertsdirectory.contentDocument.body.children[0] != null && alertsdirectory.contentDocument.body.children[0].rows!='undefined' && alertsdirectory.contentDocument.body.children[0].rows!=null && alertsdirectory.contentDocument.body.children[0].rows.length!='undefined' && alertsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-alertsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
+if(this.value<1){
+mainjpgviewer0.data=alertsdirectory.contentDocument.body.children[0].rows[1-this.value].cells[1].children[0].href
+mainjpgviewer0.style.display=''
+/*animatealertsdirectorytomainjpgviewer0(0-this.value,alertsdirectory.contentDocument.body.children[0]);*/
+/*mainjpgviewer0.data=animatordivalertsdirectorytomainjpgviewer0.children['img['+0-this.value+']']*/
+}else{mainjpgviewer0.style.display='none'}
+"  
+name="show_events"
+min="-12" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" style="position:absolute;z-order:5;height:262px" orient="vertical">
 </td></tr><tr><td>
-<button  onclick="if(camsmp4col1mainpg.style.display=='')
+<button  onclick="
+if(camsmp4col1mainpg.style.display=='')
 {  camsmp4col1mainpg.style.display='none';
    textmaster.style.display='none'
    sldrmaster.style.display='none'
    alertsdirectory.height=alertsdirectoryheightmode1
    mainjpgviewer0.height=parseInt(alertsdirectoryheightmode1)+15+'px'
    mainjpgviewer0.width=mainjpgviewer0widthmode1
-mainjpgviewer_buttonsdiv.style.left='0px'
-forbuttons.style.left=forbuttonstopmode2
+   mainjpgviewer_buttonsdiv.style.left='0px'
+setTimeout(function(){alertsdirectory.scrollIntoView(false);},1)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things.  Not ideal for when button is above bottom*/
 }
 else{
 camsmp4col1mainpg.style.display='';
@@ -1437,11 +1437,10 @@ alertsdirectory.height=alertsdirectoryheightmode0
 mainjpgviewer0.height=parseInt(alertsdirectoryheightmode0)+15+'px'
 mainjpgviewer0.width=mainjpgviewer0widthmode0
 mainjpgviewer_buttonsdiv.style.left='0px'
-forbuttons.style.left='0px'
-setTimeout(function(){scrollmarker.scrollIntoView()},10)
+setTimeout(function(){window.scrollBy(0,alertsdirectory.getBoundingClientRect().bottom-window.innerHeight)},1)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things*/
 }
 "
-style="position:relative;top:-20px;left:355px;z-Index:3;opacity:.85;height:40px;width:160px;color:red;font-size:18px"
+style="position:relative;top:-50px;left:335px;z-Index:3;opacity:.85;height:40px;width:160px;color:red;font-size:18px"
 >Toggle sizing</button>
 </td></tr></table>
 </td><td valign="top">
@@ -1449,8 +1448,7 @@ style="position:relative;top:-20px;left:355px;z-Index:3;opacity:.85;height:40px;
 <object id="mainjpgviewer0" type="text/html" value="Main jpg viewer" width="550px" height="260px"
 draggable="true"
 style="font-size:15px;overflow:auto;border:0px;"
-onload="
-if(camsmp4col1mainpg.style.display!='')
+onload="if(camsmp4col1mainpg.style.display!='')
 {
 setTimeout(function(){scrollmarker.scrollIntoView({behavior: 'smooth'})},10)
 }
@@ -1459,7 +1457,6 @@ else
 /*setTimeout(function(){edmp4.scrollIntoView({behavior: 'smooth'});},10)*/
 }
 "
-
 onclick="this.style.display='none';
 if(camsmp4col1mainpg.style.display=='none')
 {
@@ -1479,7 +1476,30 @@ ondragend="/*Now simply catch the very next mouse event to locate mouse*/
 ;
 "
 ></object>
+
 <script type="text/javascript">
+var animationdivalertsdirectorytomainjpgviewer0=null
+var animatetimeralertsdirectorytomainjpgviewer0=null
+function animatealertsdirectorytomainjpgviewer0(rowindex,thisel)
+{
+   if(animationdivalertsdirectorytomainjpgviewer0==null)
+   {
+      animationdivalertsdirectorytomainjpgviewer0 = document.createElement('div'); /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory or otherwise have a way of limiting memory useage */
+      animationdivalertsdirectorytomainjpgviewer0.id = 'animatordivalertsdirectorytomainjpgviewer0'
+      animationdivalertsdirectorytomainjpgviewer0.className = 'jpganimator'
+      document.body.appendChild(animationdiv) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
+      animationdivalertsdirectorytomainjpgviewer0.style='position:absolute;top:428px;left:434px'
+      setTimeout(function()
+      {   if(animationdivalertsdirectorytomainjpgviewer0!=null)
+          {   if(!confirm('Allow more time for snapshot animation element? Cancel will close the animation element to save memory'))
+              {   animationdivalertsdirectorytomainjpgviewer0.replaceChildren();animationdivalertsdirectorytomainjpgviewer0.remove();
+                  clearInterval(animatetimeralertsdirectorytomainjpgviewer0)
+              }
+          }
+       },300000)
+   }
+   animationdivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\''+ thisel.rows[rowindex].cells[1].children[0].href+'\' width=\'550px\' height=\'260px\' style=\'position:absolute;left:0px;top:0px;\' />' 
+}
 var mousestartXmainjpgviewer0=''
 var mousestartYmainjpgviewer0=''
 var mouseendXmainjpgviewer0=''
@@ -1503,13 +1523,8 @@ if (el.offsetParent) {
 </script>
 </td></tr>
 </table>
-<div id="forbuttons" style="position:relative;left:0px;top:-35px;z-Index:-1">
-<p id="afterqbtn1"></p>
-<p id="afterqbtn2"></p>
-<p id="afterqbtn3"></p>
-<p id="afterqbtn4"></p>
 </div>
-</div>
+
 Snapshots separated by camera:
 <table style="border:1px solid black"><tr><td class="bb" valign="top">
 East
@@ -1530,7 +1545,7 @@ lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement
 lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
-<big><big>%</big></big>
+<big>%</big>
 </div>
 <object id="edjpg" type="text/plain" value="Click here to collect these snapshots" class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -1561,7 +1576,7 @@ lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelem
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 
-<big><big>%</big></big>
+<big>%</big>
 </div>
 <object id="sdjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -1594,7 +1609,7 @@ lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelem
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 
-<big><big>%</big></big>
+<big>%</big>
 </div>
 <object id="fpjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
@@ -1628,7 +1643,7 @@ lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement
 lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
-<big><big>%</big></big>
+<big>%</big>
 </td><td></td>
 
 <td  class="bb" valign="top" style="padding:0px;border-top: solid 1px black;">
@@ -1657,7 +1672,7 @@ lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement
 lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
-<big><big>%</big></big>
+<big>%</big>
 </div>
 </td></tr>
 </table>
@@ -1666,8 +1681,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 </table>
 </td></tr></table>
 </td>
-</div>
-<div id="notesdiv" class="tabcontent" style="display:none">
+</div><div id="notesdiv" class="tabcontent" style="display:none">
 <h3><ul>
 <li>
 Drag over jpg files and you'll notice they can launch into new and separate viewer elements.  If that is not<br>
@@ -1722,9 +1736,9 @@ Login credentials for camera streams are username = [youngest brother first name
     <button onclick="checkforcache()">Check browser cache capability</button> 
     <br><button onclick="launch()">Sandbox JPG player</button>Only click this after opening latest alert event into the snapshot list
     <input type="button" id="btnposition" style="height:600px;width:600px;font-size:30px;" onmousemove="this.value=event.clientX+':'+event.clientY+', '+event.screenX+':'+event.screenY" value="....................Mouse over me..........................">
-</div>
+<br>
 
-<div id="alertchecking" class="tabcontent"  style="display:none">
+</div><div id="alertchecking" class="tabcontent"  style="display:none">
 <table><tr><td width="1535px">
 <input type="button" 
 id="alertCheck" style="width:300px;height:75px;font-size:20px;background:#e6e6e6;border-radius:15px;border-color:black;border-width:10px;" 
@@ -1795,11 +1809,8 @@ else
 <object id="alertkeepalive" type="audio/mpeg" data="" height="20px" width="200px"></object>
 </div>
 </td></tr></table>
-</div>
-</small></small>
-
-<div id="loadingdiv"  class="tabcontent" style="display:none">WAIT WHILE PAGE IS LOADING. PERFORM NO USER INPUT WHILE LOADING OR PAGE ELEMENTS WILL ABORT THEIR LOADING</div>
-</div>
+</div><div id="loadingdiv"  class="tabcontent" style="display:none">WAIT WHILE PAGE IS LOADING. PERFORM NO USER INPUT WHILE LOADING OR PAGE ELEMENTS WILL ABORT THEIR LOADING</div>
+</div></div>
 <!-- <script>
 
 
@@ -2455,7 +2466,6 @@ function checkforcache() {
    if ('caches' in window){ alert('This browser supports cache, FUTURE Considering to use it for sounds, pictures, videos, etc.')} 
    else {alert('This browser cannot cache');}
 }
-
     </script> 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
