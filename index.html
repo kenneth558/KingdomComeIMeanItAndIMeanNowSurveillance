@@ -94,6 +94,7 @@ sldrmaster.value=textmaster.value
 textmaster.value=textmaster.value
 if(isAndroid){androidconnection.style='display:inline'}else{androidconnection.style='display:none'}
 setTimeout(function(){scrollmarker.scrollIntoView({behavior: 'smooth'})},10)
+show_eventsmainjpgviewer0.style.left=parseFloat(show_eventsmainjpgviewer0.style.left)-((show_eventsmainjpgviewer0.getBoundingClientRect().right-287)/2.2)+'px'
 document.title='Surveillance Recordings';
 entiredocument.style='pointer-events:auto;'
 ">
@@ -218,7 +219,7 @@ function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
   if (elmnt.contentDocument.body.children[0] != 'undefined' && elmnt.contentDocument.body.children[0] != null && elmnt.contentDocument.body.children[0].localName == 'table' && elmnt.contentDocument.body.children[0].tBodies[0] != 'undefined' && elmnt.contentDocument.body.children[0].tBodies[0] != null && elmnt.contentDocument.body.children[0].tBodies[0].rows[0].cells[1] != 'undefined' && elmnt.contentDocument.body.children[0].tBodies[0].rows[0].cells[1] != null)
   {
     if(elmnt.contentDocument.body.children[0].tBodies[0] == 'undefined' || elmnt.contentDocument.body.children[0].tBodies[0] == null){alert('Too many event files to list with ' + currSrc + '.  Delete overrunning ones on server.')}
-/*    else{if(elmnt.id=='alertsdirectory'){document.getElementById('show_events').min=0-elmnt.contentDocument.body.children[0].rows.length;document.getElementById('submit-value').click()}}*/
+/*    else{if(elmnt.id=='alertsdirectory'){document.getElementById('show_eventsmainjpgviewer0').min=0-elmnt.contentDocument.body.children[0].rows.length;document.getElementById('submit-value').click()}}*/
     elmnt.contentDocument.body.children[0].tBodies[0].addEventListener("mousedown",function(item)
     {
          mousedownedhere=item.pageY
@@ -252,7 +253,7 @@ document.body.appendChild(animationdiv) /* use animationdiv.replaceChildren() an
 animationdiv.style='position:absolute;top:428px;left:434px'
 alert('This feature not finished.  When finished it will cycle through the snapshots that are piled on top of each other right now.  A slider bar may end up included like the weather web page uses')
 var animatetimer=setInterval(function(){;},700)
-setTimeout(function(){if(!confirm('Allow more time for snapshot animation element? Cancel will close the animation element to save memory')){animationdiv.replaceChildren();animationdiv.remove();clearInterval(animatetimer)}},300000)
+setTimeout(function(){if(!confirm('Allow more time for snapshot animation element? Cancel will close the animation element to save memory')){animatordiv.replaceChildren();animatordiv.remove();clearInterval(animatetimer)}},300000)
 */
                  var frames=[]
                  var windwz=[]
@@ -1406,41 +1407,69 @@ style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="0" />
     </object>
-<input type="range" id="show_events" 
-oninput="this.value=(alertsdirectory.contentDocument!='undefined' && alertsdirectory.contentDocument!=null && alertsdirectory.contentDocument.body.children[0] !='undefined' && alertsdirectory.contentDocument.body.children[0] != null && alertsdirectory.contentDocument.body.children[0].rows!='undefined' && alertsdirectory.contentDocument.body.children[0].rows!=null && alertsdirectory.contentDocument.body.children[0].rows.length!='undefined' && alertsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-alertsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
+<input type="range" id="show_eventsmainjpgviewer0" 
+oninput="
+/*alert(this.style.left+', '+this.clientLeft+', '+this.getBoundingClientRect().right+', '+alertsdirectory.style.left+', '+alertsdirectory.clientLeft+', '+alertsdirectory.offsetLeft+', '+alertsdirectory.getBoundingClientRect().left)*/
+/*alert(this.style.top+', '+this.clientTop+', '+this.getBoundingClientRect().top+', '+alertsdirectory.style.top+', '+alertsdirectory.clientTop+', '+alertsdirectory.offsetTop+', '+alertsdirectory.getBoundingClientRect().top)*/
+/*if(this.style.height!=alertsdirectory.style.height){this.style.height=parseFloat(alertsdirectory.offsetHeight)-9+'px';this.style.top=parseFloat(alertsdirectory.clientTop)+'px'}*/
+this.value=(alertsdirectory.contentDocument!='undefined' && alertsdirectory.contentDocument!=null && alertsdirectory.contentDocument.body.children[0] !='undefined' && alertsdirectory.contentDocument.body.children[0] != null && alertsdirectory.contentDocument.body.children[0].rows!='undefined' && alertsdirectory.contentDocument.body.children[0].rows!=null && alertsdirectory.contentDocument.body.children[0].rows.length!='undefined' && alertsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-alertsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
 if(this.value<1){
-mainjpgviewer0.data=alertsdirectory.contentDocument.body.children[0].rows[1-this.value].cells[1].children[0].href
-mainjpgviewer0.style.display=''
-/*animatealertsdirectorytomainjpgviewer0(0-this.value,alertsdirectory.contentDocument.body.children[0]);*/
-/*mainjpgviewer0.data=animatordivalertsdirectorytomainjpgviewer0.children['img['+0-this.value+']']*/
-}else{mainjpgviewer0.style.display='none'}
+
+/*mainjpgviewer0.data=alertsdirectory.contentDocument.body.children[0].rows[0-this.value].cells[1].children[0].href
+mainjpgviewer0.style.display=''*/
+/*animatealertsdirectorytomainjpgviewer0(rowindex,table_el) is the function to return the desired index within animationdivalertsdirectorytomainjpgviewer0
+animatealertsdirectorytomainjpgviewer0.getElementsByTagName('img')[alertsdirectory.contentDocument.body.children[0].rows[1-this.value].cells[1].children[0].href]*/
+animatealertsdirectorytomainjpgviewer0(0-this.value,alertsdirectory.contentDocument.body.children[0]);
+}else{animatordivalertsdirectorytomainjpgviewer0.style.display='none'}
 "  
-name="show_events"
-min="-12" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" style="position:absolute;z-order:5;height:262px" orient="vertical">
+name="show_eventsmainjpgviewer0"
+min="-31" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
+style="position:absolute;z-index:5;top:10px;left:270px;height:400px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+" 
+orient="vertical">
+<!--
+-webkit-appearance: none;background-image: url('/var/www/html/arrow_4_SE.png')
+-->
 </td></tr><tr><td>
 <button  onclick="
+var oldheight=alertsdirectory.height
 if(camsmp4col1mainpg.style.display=='')
 {  camsmp4col1mainpg.style.display='none';
    textmaster.style.display='none'
    sldrmaster.style.display='none'
    alertsdirectory.height=alertsdirectoryheightmode1
    mainjpgviewer0.height=parseInt(alertsdirectoryheightmode1)+15+'px'
+   show_eventsmainjpgviewer0.min='-61'
+   show_eventsmainjpgviewer0.style.height=parseInt(alertsdirectoryheightmode1)+135+'px'
    mainjpgviewer0.width=mainjpgviewer0widthmode1
    mainjpgviewer_buttonsdiv.style.left='0px'
-setTimeout(function(){alertsdirectory.scrollIntoView(false);},1)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things.  Not ideal for when button is above bottom*/
+   setTimeout(function(){alertsdirectory.scrollIntoView(false);},1)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things.  Not ideal for when button is above bottom*/
 }
 else{
-camsmp4col1mainpg.style.display='';
-textmaster.style.display=''
-sldrmaster.style.display=''
-alertsdirectory.height=alertsdirectoryheightmode0
-mainjpgviewer0.height=parseInt(alertsdirectoryheightmode0)+15+'px'
-mainjpgviewer0.width=mainjpgviewer0widthmode0
-mainjpgviewer_buttonsdiv.style.left='0px'
-setTimeout(function(){window.scrollBy(0,alertsdirectory.getBoundingClientRect().bottom-window.innerHeight)},1)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things*/
+   camsmp4col1mainpg.style.display='';
+   textmaster.style.display=''
+   sldrmaster.style.display=''
+   alertsdirectory.height=alertsdirectoryheightmode0
+   mainjpgviewer0.height=parseInt(alertsdirectoryheightmode0)+15+'px'
+   show_eventsmainjpgviewer0.style.height=parseInt(alertsdirectoryheightmode0)+155+'px'
+   show_eventsmainjpgviewer0.min='-31'
+   mainjpgviewer0.width=mainjpgviewer0widthmode0
+   mainjpgviewer_buttonsdiv.style.left='0px'
+   setTimeout(function(){window.scrollBy(0,alertsdirectory.getBoundingClientRect().bottom-window.innerHeight)},1)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things*/
+}
+if( animationdivalertsdirectorytomainjpgviewer0 != 'undefined' && animationdivalertsdirectorytomainjpgviewer0 != null)
+{
+   animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.height
+   animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
+   animatordivalertsdirectorytomainjpgviewer0.style.top=parseInt(animatordivalertsdirectorytomainjpgviewer0.style.top)+(parseInt(oldheight)-parseInt(alertsdirectory.height))+'px'
+   for(var i=0;i<animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
+   {
+      animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['width'].value=mainjpgviewer0.width
+      animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['height'].value=alertsdirectory.height
+   }
 }
 "
-style="position:relative;top:-50px;left:335px;z-Index:3;opacity:.85;height:40px;width:160px;color:red;font-size:18px"
+style="position:relative;top:-50px;left:335px;z-index:3;opacity:.85;height:40px;width:160px;color:red;font-size:18px"
 >Toggle sizing</button>
 </td></tr></table>
 </td><td valign="top">
@@ -1480,26 +1509,56 @@ ondragend="/*Now simply catch the very next mouse event to locate mouse*/
 <script type="text/javascript">
 var animationdivalertsdirectorytomainjpgviewer0=null
 var animatetimeralertsdirectorytomainjpgviewer0=null
-function animatealertsdirectorytomainjpgviewer0(rowindex,thisel)
+function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
 {
    if(animationdivalertsdirectorytomainjpgviewer0==null)
    {
       animationdivalertsdirectorytomainjpgviewer0 = document.createElement('div'); /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory or otherwise have a way of limiting memory useage */
       animationdivalertsdirectorytomainjpgviewer0.id = 'animatordivalertsdirectorytomainjpgviewer0'
       animationdivalertsdirectorytomainjpgviewer0.className = 'jpganimator'
-      document.body.appendChild(animationdiv) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
-      animationdivalertsdirectorytomainjpgviewer0.style='position:absolute;top:428px;left:434px'
+      document.body.appendChild(animationdivalertsdirectorytomainjpgviewer0) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
+      animatordivalertsdirectorytomainjpgviewer0.style='position:absolute;top:420px;left:390px'
+      animatordivalertsdirectorytomainjpgviewer0.addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'
+          animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0='';
+         clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=''
+      })
       setTimeout(function()
-      {   if(animationdivalertsdirectorytomainjpgviewer0!=null)
-          {   if(!confirm('Allow more time for snapshot animation element? Cancel will close the animation element to save memory'))
-              {   animationdivalertsdirectorytomainjpgviewer0.replaceChildren();animationdivalertsdirectorytomainjpgviewer0.remove();
-                  clearInterval(animatetimeralertsdirectorytomainjpgviewer0)
+      {   if(animatordivalertsdirectorytomainjpgviewer0!='undefined' && animatordivalertsdirectorytomainjpgviewer0 != null)
+          {   if(!confirm('Allow more time for snapshot animation element? Cancel will close the animation element to save memory or click on viewing element to clear later'))
+              {
+                  animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0='';
+                  clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=''
               }
           }
        },300000)
+      animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.height
+      animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
+      animatordivalertsdirectorytomainjpgviewer0.style.top=(parseInt(alertsdirectory.height)>350?'42px':'420px')
+   }/*Next lines need to return the same or possibly changed index like if the jpg is already here somewhere*/
+   var firstmatch=animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
+   if(firstmatch==null)
+   {
+      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" width=\''+mainjpgviewer0.width+'\' height=\''+(parseInt(alertsdirectory.height)+parseInt(15))+'px\' style=\'position:absolute;left:0px;top:0px;\' />';
+      animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'})
    }
-   animationdivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\''+ thisel.rows[rowindex].cells[1].children[0].href+'\' width=\'550px\' height=\'260px\' style=\'position:absolute;left:0px;top:0px;\' />' 
+   else
+   {
+      animatordivalertsdirectorytomainjpgviewer0.appendChild(firstmatch)
+   }
+   if(animatordivalertsdirectorytomainjpgviewer0.style.display=='none')
+   {
+      animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.height
+      animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
+
+      for(var i=0;i<animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
+      {
+         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['width'].value=mainjpgviewer0.width
+         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['height'].value=alertsdirectory.height
+      }
+      animatordivalertsdirectorytomainjpgviewer0.style.display=''
+   }
 }
+
 var mousestartXmainjpgviewer0=''
 var mousestartYmainjpgviewer0=''
 var mouseendXmainjpgviewer0=''
@@ -1521,6 +1580,24 @@ if (el.offsetParent) {
 }
 }}
 </script>
+<!--
+      animatordivalertsdirectorytomainjpgviewer0.removeChild(animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')) -->
+<!--      for(var i;animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
+      {
+         if(animatordivalertsdirectorytomainjpgviewer0.childNodes[i].style.zIndex!='0'){animatordivalertsdirectorytomainjpgviewer0.childNodes[i].style.zIndex='0'}
+      } -->
+<!--      for(var i;animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
+      {
+         if(firstmatch==animatordivalertsdirectorytomainjpgviewer0.childNodes[i])
+         {
+            firstmatch.style.zIndex='1'
+         }
+         else
+         {
+            firstmatch.style.zIndex='0'
+         }
+      }-->
+<!--      animatordivalertsdirectorytomainjpgviewer0.removeChild(firstmatch) -->
 </td></tr>
 </table>
 </div>
