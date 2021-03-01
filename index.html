@@ -1533,12 +1533,17 @@ function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
    var firstmatch=animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
    if(firstmatch==null)
    {
-      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" width=\''+mainjpgviewer0.width+'\' height=\''+(parseInt(alertsdirectory.height)+parseInt(15))+'px\' style=\'position:absolute;left:0px;top:0px;\' />';
+      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" width=\''+mainjpgviewer0.width+'\' height=\''+(parseInt(alertsdirectory.height)+parseInt(15))+'px\' style=\'position:absolute;left:0px;top:0px;z-index:0\' />';
       animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'})
    }
    else
    {
-      animatordivalertsdirectorytomainjpgviewer0.appendChild(firstmatch)
+      for(var i=0;i<animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
+      {
+         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].style.zIndex='0'
+      }
+      firstmatch.style.zIndex='1'
+      /*animatordivalertsdirectorytomainjpgviewer0.appendChild(firstmatch)*/
    }
    if(animatordivalertsdirectorytomainjpgviewer0.style.display=='none')
    {
