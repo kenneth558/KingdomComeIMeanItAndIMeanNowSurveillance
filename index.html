@@ -1414,7 +1414,10 @@ oninput="
 /*if(this.style.height!=alertsdirectory.style.height){this.style.height=parseFloat(alertsdirectory.offsetHeight)-9+'px';this.style.top=parseFloat(alertsdirectory.clientTop)+'px'}*/
 this.value=(alertsdirectory.contentDocument!='undefined' && alertsdirectory.contentDocument!=null && alertsdirectory.contentDocument.body.children[0] !='undefined' && alertsdirectory.contentDocument.body.children[0] != null && alertsdirectory.contentDocument.body.children[0].rows!='undefined' && alertsdirectory.contentDocument.body.children[0].rows!=null && alertsdirectory.contentDocument.body.children[0].rows.length!='undefined' && alertsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-alertsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
 if(this.value<1){
-animatealertsdirectorytomainjpgviewer0(0-this.value,alertsdirectory.contentDocument.body.children[0]);
+   if(alertsdirectory.contentDocument.body.children[0].rows[0-this.value].cells[1].children[0].href.endsWith('.jpg'))
+   {
+      animatealertsdirectorytomainjpgviewer0(0-this.value,alertsdirectory.contentDocument.body.children[0]);
+   }
 }else{animatordivalertsdirectorytomainjpgviewer0.style.display='none'}
 "  
 name="show_eventsmainjpgviewer0"
@@ -1466,6 +1469,7 @@ if( animationdivalertsdirectorytomainjpgviewer0 != 'undefined' && animationdival
 "
 style="position:relative;top:-50px;left:335px;z-index:3;opacity:.85;height:40px;width:160px;color:red;font-size:18px"
 >Toggle sizing</button>
+<!-- animatealertsdirectorytomainjpgviewer0(0-this.value,alertsdirectory.contentDocument.body.children[0].rows[0-this.value].cells[1].children[0].href);-->
 </td></tr></table>
 </td><td valign="top">
 <div id="mainjpgviewer_buttonsdiv">
@@ -1513,13 +1517,9 @@ function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
       animationdivalertsdirectorytomainjpgviewer0.className = 'jpganimator'
       document.body.appendChild(animationdivalertsdirectorytomainjpgviewer0) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
       animatordivalertsdirectorytomainjpgviewer0.style='position:absolute;top:420px;left:390px'
-      animatordivalertsdirectorytomainjpgviewer0.addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'
-          animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
-         clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0='';animationdivalertsdirectorytomainjpgviewer0=null
-      })
       setTimeout(function()
       {   if(animatordivalertsdirectorytomainjpgviewer0!='undefined' && animatordivalertsdirectorytomainjpgviewer0 != null)
-          {   if(!confirm('Allow more time for snapshot animation element? Cancel will close the animation element to save memory or click on viewing element to clear later'))
+          {   if(!confirm('Allow more time for '+animationdivalertsdirectorytomainjpgviewer0.id+' snapshot animation element? Cancel will close the animation element to save memory or click on viewing element to clear later'))
               {
                   animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
                   clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=''
