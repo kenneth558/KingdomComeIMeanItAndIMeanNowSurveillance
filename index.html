@@ -250,7 +250,6 @@ for( var rowindex=downrowindex;rowindex!=uprowindex;)
 }
 document.body.appendChild(animationdiv) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory 
 animationdiv.style='position:absolute;top:428px;left:434px'
-alert('This feature not finished.  When finished it will cycle through the snapshots that are piled on top of each other right now.  A slider bar may end up included like the weather web page uses')
 var animatetimer=setInterval(function(){;},700)
 setTimeout(function(){if(!confirm('Allow more time for snapshot animation element? Cancel will close the animation element to save memory')){animatordiv.replaceChildren();animatordiv.remove();clearInterval(animatetimer)}},300000)
 */
@@ -354,7 +353,23 @@ setTimeout(function(){if(!confirm('Allow more time for snapshot animation elemen
 </datalist>
 <div id="entiredocument" style="z-Index:5;pointer-events:none;" onclick="return false"><div id="buttonsdiv" style="position:sticky;top:0px;z-index:4;background:rgb(215,215,245);padding: 0px 0px 10px 0px;border:0px solid black;border-width:0px 0px 0px 0px;width:860px">
   <button id="btnalertchecking" style="font-size:12px;border:0px solid black;border-width:3px 3px 3px 3px;border-radius:3px;background:rgb(215,215,245);" 
-onclick="if(alertchecking.style.display=='none'){alertchecking.style.display='inline';if(this.style.backgroundColor=='rgb(215, 215, 245)'){this.style.backgroundColor='rgb('+255+','+255+','+255+')'}}else{alertchecking.style.display='none';if(this.style.backgroundColor=='rgb(255, 255, 255)'){this.style.backgroundColor='rgb('+215+','+215+','+245+')'}}">
+onclick="
+if(alertchecking.style.display=='none')
+{
+   alertchecking.style.display='inline';
+   if(this.style.backgroundColor=='rgb(215, 215, 245)')
+   {
+      this.style.backgroundColor='rgb('+255+','+255+','+255+')'
+   }
+}
+else
+{
+   alertchecking.style.display='none';
+   if(this.style.backgroundColor=='rgb(255, 255, 255)')
+   {
+      this.style.backgroundColor='rgb('+215+','+215+','+245+')'
+   }
+}">
 Alert Checking</button>
   <button id="btnbyview" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
 onclick="tabactivate(this)">
@@ -604,10 +619,10 @@ All system streams - <b>USE THIS LIST FOR EVENT ARCHIVING STREAMS. Top file for 
 <td>
 <object id="sysmp4mostrecent" type="text/html" data="/var/www/camera_streams/*/*mp4/mostrecent10" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.data.includes('mostrecent10')) {this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/var/www/camera_streams/*/*mp4';} else {this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='/var/www/camera_streams/*/*mp4/mostrecent10';}" 
+onclick="if(this.data.includes('mostrecent10')){this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/var/www/camera_streams/*/*mp4';} else {this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px 3px';this.data='/var/www/camera_streams/*/*mp4/mostrecent10';}" 
 width="750px" 
 height="200px" 
-style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
+style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 3px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
@@ -625,7 +640,7 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px
 <td>
 <object id="sysjpgs" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/*/*jpg';"
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px 3px';this.data='/../../camera_snapshots/*/*jpg'}else{this.type='text/plain';this.style='border:3px solid blue;border-width:20px 30px 3px 3px;'; this.data=''};"
 width="750px" 
 height="200px" 
 style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
@@ -640,7 +655,7 @@ onclick="if (this.type == 'text/plain') {
 <td>
 <table><tr><td valign="middle">
   <form  method="put">
-<textarea cols="131" rows="32" style="font-size: 12pt" name="files_to_archive">
+<textarea cols="131" rows="32" style="font-size: 9pt" name="files_to_archive">
 Replace all this text in following 
 these instructions:
 
@@ -669,7 +684,7 @@ instructions in this process.
 NO SANITY CHECKING YET, SO FOLLOW 
 THESE RULES PERFECTLY.</textarea>
 <br>
-<textarea cols="131" rows="5" style="font-size: 12pt" name="name_for_archive">
+<textarea cols="131" rows="5" style="font-size: 9pt" name="name_for_archive">
 Replace this text with a no-space
 descriptive event name to include 
 license plate and colors but not 
@@ -777,10 +792,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 <a name="#ed_location_on_page"></a>
 <object id="edmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') 
-{this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} 
-else 
-{this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];}else{this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}"
 width="1000px" 
 height="565px" 
 style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
@@ -800,7 +812,7 @@ Add ip address to snaps for group drag-dropping into browser window (Now functio
 <a name="sw_corner_location_on_page"></a>
 <br><object id="swmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="945px" 
 height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
@@ -897,7 +909,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 </div>
 <object id="sdmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="594px" 
 height="792px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
@@ -1262,10 +1274,10 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 <big>%</big>
 </div>
 <object id="fpmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', this.contentDocument.body.children[0].tagName, '', '', '')"
 width="960px" height="538px" 
- style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px">
+style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
@@ -1275,7 +1287,7 @@ width="960px" height="538px"
 <a name="ne_location_on_page"></a>
 <br><object id="nemp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="960px" 
 height="720px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;z-Index:1">
    <param name="timestamp" value="initial" />
@@ -1411,16 +1423,35 @@ oninput="
 /*alert(this.style.top+', '+this.clientTop+', '+this.getBoundingClientRect().top+', '+alertsdirectory.style.top+', '+alertsdirectory.clientTop+', '+alertsdirectory.offsetTop+', '+alertsdirectory.getBoundingClientRect().top)*/
 /*if(this.style.height!=alertsdirectory.style.height){this.style.height=parseFloat(alertsdirectory.offsetHeight)-9+'px';this.style.top=parseFloat(alertsdirectory.clientTop)+'px'}*/
 this.value=(alertsdirectory.contentDocument!='undefined' && alertsdirectory.contentDocument!=null && alertsdirectory.contentDocument.body.children[0] !='undefined' && alertsdirectory.contentDocument.body.children[0] != null && alertsdirectory.contentDocument.body.children[0].rows!='undefined' && alertsdirectory.contentDocument.body.children[0].rows!=null && alertsdirectory.contentDocument.body.children[0].rows.length!='undefined' && alertsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-alertsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
-if(this.value<1){
-   if(alertsdirectory.contentDocument.body.children[0].rows[0-this.value].cells[1].children[0].href.endsWith('.jpg'))
+if(this.value<1)
+{/*alert(parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.0089)*/
+   var rowselected=Math.round(alertsdirectory.contentDocument.body.children[0].rows.length*(alertsdirectory.contentDocument.body.scrollTop/((parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.9911)))-this.value)
+   if(rowselected<alertsdirectory.contentDocument.body.children[0].rows.length)
    {
-      animatealertsdirectorytomainjpgviewer0(0-this.value,alertsdirectory.contentDocument.body.children[0]);
+      if(alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg'))
+      {
+         animatealertsdirectorytomainjpgviewer0(rowselected,alertsdirectory.contentDocument.body.children[0]);
+      }
    }
-}else{animatordivalertsdirectorytomainjpgviewer0.style.display='none'}
+   else
+   {
+      this.value=(parseInt(this.value)-(alertsdirectory.contentDocument.body.children[0].rows.length-1-rowselected))
+   }
+}else
+{
+   animatordivalertsdirectorytomainjpgviewer0.style.display='none';
+   if(animatordivalertsdirectorytomainjpgviewer0!='undefined' && animatordivalertsdirectorytomainjpgviewer0 != null)
+   {   if(!confirm('Allow more time for '+animationdivalertsdirectorytomainjpgviewer0.id+' snapshot animation element? Cancel will close the animation element to save memory or click on viewing element to clear later'))
+       {
+           animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
+           clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=null
+       }
+   }
+}
 "  
 name="show_eventsmainjpgviewer0"
-min="-31" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;z-index:5;top:10px;left:270px;height:400px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+min="-48" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
+style="position:absolute;z-index:5;top:14px;left:270px;height:404px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 " 
 orient="vertical">
 <!--
@@ -1435,8 +1466,8 @@ if(camsmp4col1mainpg.style.display=='')
    sldrmaster.style.display='none'
    alertsdirectory.height=alertsdirectoryheightmode1
    mainjpgviewer0.height=parseInt(alertsdirectoryheightmode1)+15+'px'
-   show_eventsmainjpgviewer0.min='-61'
-   show_eventsmainjpgviewer0.style.height=parseInt(alertsdirectoryheightmode1)+135+'px'
+   show_eventsmainjpgviewer0.min='-92'
+   show_eventsmainjpgviewer0.style.height=parseInt(alertsdirectoryheightmode1)+134+'px'
    mainjpgviewer0.width=mainjpgviewer0widthmode1
    mainjpgviewer_buttonsdiv.style.left='0px'
    setTimeout(function(){alertsdirectory.scrollIntoView(false);},1)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things.  Not ideal for when button is above bottom*/
@@ -1447,8 +1478,8 @@ else{
    sldrmaster.style.display=''
    alertsdirectory.height=alertsdirectoryheightmode0
    mainjpgviewer0.height=parseInt(alertsdirectoryheightmode0)+15+'px'
-   show_eventsmainjpgviewer0.style.height=parseInt(alertsdirectoryheightmode0)+155+'px'
-   show_eventsmainjpgviewer0.min='-31'
+   show_eventsmainjpgviewer0.style.height=parseInt(alertsdirectoryheightmode0)+159+'px'
+   show_eventsmainjpgviewer0.min='-48'
    mainjpgviewer0.width=mainjpgviewer0widthmode0
    mainjpgviewer_buttonsdiv.style.left='0px'
    setTimeout(function(){window.scrollBy(0,alertsdirectory.getBoundingClientRect().bottom-window.innerHeight)},1)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things*/
@@ -1467,6 +1498,10 @@ if( animationdivalertsdirectorytomainjpgviewer0 != 'undefined' && animationdival
 "
 style="position:relative;top:-50px;left:335px;z-index:3;opacity:.85;height:40px;width:160px;color:red;font-size:18px"
 >Toggle sizing</button>
+<!--
+min="-48" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
+style="position:absolute;z-index:5;top:14px;left:270px;height:404px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+-->
 <!-- animatealertsdirectorytomainjpgviewer0(0-this.value,alertsdirectory.contentDocument.body.children[0].rows[0-this.value].cells[1].children[0].href);-->
 </td></tr></table>
 </td><td valign="top">
@@ -1521,7 +1556,7 @@ function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
           {   if(!confirm('Allow more time for '+animationdivalertsdirectorytomainjpgviewer0.id+' snapshot animation element? Cancel will close the animation element to save memory or click on viewing element to clear later'))
               {
                   animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
-                  clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=''
+                  clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=null
               }
           }
        },300000)
@@ -1532,7 +1567,7 @@ function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
    var firstmatch=animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
    if(firstmatch==null)
    {
-      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" width=\''+mainjpgviewer0.width+'\' height=\''+(parseInt(alertsdirectory.height)+parseInt(15))+'px\' style=\'position:absolute;left:0px;top:0px;z-index:0\' />';
+      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" width=\''+mainjpgviewer0.width+'\' height=\''+(parseInt(alertsdirectory.height)+parseInt(15))+'px\' style=\'position:absolute;left:0px;top:0px;z-index:1\' />';
       animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'})
    }
    else
@@ -1625,7 +1660,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 </div>
 <object id="edjpg" type="text/plain" value="Click here to collect these snapshots" class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_east_driveway';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_east_driveway';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="1000px" 
 height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object>
@@ -1656,7 +1691,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 </div>
 <object id="sdjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_south_driveway/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_south_driveway/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="594px" 
 height="745px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object>
@@ -1689,7 +1724,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 </div>
 <object id="fpjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_front_parking/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}"
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_front_parking/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}"
 width="1000px" 
 height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object></td>
@@ -1698,7 +1733,7 @@ height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <br><br>
 <object id="swjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_sw_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_sw_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="945px" 
 height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object>
@@ -1726,7 +1761,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 <br><br>
 <object id="nejpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if (this.type == 'text/plain') {this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_ne_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_ne_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="960px" 
 height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object>
@@ -1851,9 +1886,7 @@ else
                     if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
                     {;
                         if(previousalert!='waiting')
-                        {   soundalarm();
-                            if(mainjpgviewer0.data!=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
-                            {   mainjpgviewer0.data=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href}
+                        {   soundalarm();show_eventsmainjpgviewer0.value='0';show_eventsmainjpgviewer0.input()
                         }
                         else
                         {   previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
@@ -1878,6 +1911,8 @@ else
     )
 }
 ">
+<!--                            if(mainjpgviewer0.data!=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
+                            {   mainjpgviewer0.data=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href}-->
 <tr><td>
 
 <div id="androidconnection" class="androidconnection" style="display:none">

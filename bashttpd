@@ -433,9 +433,9 @@ function serve_dir() {
 function urldecode() { [ "${1%/}" = "" ] && echo "/" ||  echo -e "$(sed 's/%\([[:xdigit:]]\{2\}\)/\\\x\1/g' <<< "${1%/}")"; } 
 
 css_styling="<meta charset="UTF-8"> <style type=\"text/css\"><\!--   
-BODY { font-family : ariel, monospace, sans-serif;line-height:8px}
- td\:first-child\:after {content\: attr(aria-label);line-height:8px}
- td\:nth-child(2)\ {white-space: nowrap;line-height:8px} 
+BODY { font-family : ariel, monospace, sans-serif;line-height:4px}
+ td\:first-child\:after {content\: attr(aria-label);line-height:4px}
+ td\:nth-child(2)\ {white-space: nowrap;line-height:4px} 
 P { font-weight: normal; font-family : ariel, monospace, sans-serif; color: black; background-color: transparent;} 
 B { font-weight: normal; color: black; background-color: transparent;} 
 A:visited { font-weight : normal; text-decoration : none; background-color : transparent; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; } 
@@ -558,8 +558,8 @@ StartTimeOfInterest=me.parentNode.parentNode.cells[0].attributes[0].textContent.
 StartTimeOfInterest=StartTimeOfInterest.substring(1,5) + month[StartTimeOfInterest.substr(6,3)] + StartTimeOfInterest.substring(10); \
 window.top.StartTimeOfInterestEl.value=StartTimeOfInterest.substring(0,19); \
 var uprowindex=Math.trunc((e.pageY+2)/((me.parentNode.clientHeight+2)/me.parentNode.childElementCount)-.5)}</script> \
-<table class=\"elif4\" style=\"width:100%;font-size:6px;line-height:5px\">";line=1}
-{if(NF>9){printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\" style=\"font-size:6px;line-height:5px;\"></td><td align=\"left\" style=\"font-size:6px;line-height:5px\">&nbsp;&nbsp;<a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 
+<table class=\"elif4\" style=\"width:100%;font-size:6px;\">";line=1}
+{if(NF>9){printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\" style=\"font-size:6px;\"></td><td align=\"left\" style=\"font-size:6px;\">&nbsp;&nbsp;<a href=\"http\://" linkpre;if (substr($1,1,1)!="l"){printf path "/" $10 
 if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
 printf "\" "
 if (line==1){printf " id=\"latestalert\""}} \
