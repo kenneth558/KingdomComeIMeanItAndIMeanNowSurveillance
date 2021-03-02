@@ -12,7 +12,6 @@ LOOK FOR IT IN MY GITHUB SPACE.
 <style type="text/css">
     body 
     {
-        width: 75em;
         margin: 1em;
         background: rgb(215,215,245);
         font-family: Tahoma, Verdana, Arial, sans-serif;
@@ -353,7 +352,7 @@ setTimeout(function(){if(!confirm('Allow more time for snapshot animation elemen
 <option value="2" label="2 min"></option>
 <option value="360" label="6 hrs"></option>
 </datalist>
-<div id="entiredocument" style="z-Index:5;pointer-events:none;" onclick="return false"><div id="buttonsdiv" style="position:sticky;top:0px;z-index:4;background:rgb(215,215,245);padding: 0px 0px 10px 0px;border:0px solid black;border-width:0px 0px 0px 0px">
+<div id="entiredocument" style="z-Index:5;pointer-events:none;" onclick="return false"><div id="buttonsdiv" style="position:sticky;top:0px;z-index:4;background:rgb(215,215,245);padding: 0px 0px 10px 0px;border:0px solid black;border-width:0px 0px 0px 0px;width:860px">
   <button id="btnalertchecking" style="font-size:12px;border:0px solid black;border-width:3px 3px 3px 3px;border-radius:3px;background:rgb(215,215,245);" 
 onclick="if(alertchecking.style.display=='none'){alertchecking.style.display='inline';if(this.style.backgroundColor=='rgb(215, 215, 245)'){this.style.backgroundColor='rgb('+255+','+255+','+255+')'}}else{alertchecking.style.display='none';if(this.style.backgroundColor=='rgb(255, 255, 255)'){this.style.backgroundColor='rgb('+215+','+215+','+245+')'}}">
 Alert Checking</button>
@@ -361,7 +360,6 @@ Alert Checking</button>
 onclick="tabactivate(this)">
 Home page (separated views recordings)</button>
   <button  id="btnsystem_wide" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px" 
- 
 onclick="tabactivate(this)">
 Combined views recordings</button>
   <button  id="btndisablesandlivelinks" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px;" 
@@ -390,7 +388,7 @@ Start tracking opened snapshots for later playback</button>
 <button style="font-size:10px;background:white" onclick="launch()">JPG set advancing</button>
 -->
 <!--  <button class="tablinks" onclick="if(document.getElementById('byview').style.display == 'none'){document.getElementById('byview').style.display = 'block'}else{document.getElementById('byview').style.display = 'none';}">Recording by view</button> -->
-</div><div id="titlediv" class="tabcontent" style="display:none">
+</div><div id="titlediv" class="titlediv" class="tabcontent" style="display:none">
 <table width="858px" style="border:3px solid black"><tr><td><center>
 <b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
 </td></tr><tr><td>
@@ -403,7 +401,7 @@ button gets back to the listing again.
 </td></tr>
 <tr><td>
 </td></tr></table>
-</div><div id="disablesandlivelinks" class="tabcontent"  style="display:none">
+</div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
 <table style="border:3px solid black"><tr><td>
 <table style="border:1px solid black"><tr><td>
 <table><tr><td>
@@ -508,7 +506,7 @@ In here could be the recipient list
 <textarea cols="35" style="font-size: 12pt" >FUTURE Ability to send notices to others on a notification list</textarea>
 </td></tr></table>
 </td></tr></table>
-</div><div id="system_wide" class="tabcontent" style="display:none">
+</div><div id="system_wide" class="system_wide" class="tabcontent" style="display:none">
 
 
 
@@ -524,12 +522,12 @@ In here could be the recipient list
 <tr><td style="border:1px solid black" align="left">
 Every link in here will open in its own new window, or new tab if you have your browser set for tabs <bold> Topmost six motion detections per camera are subject to deletion at any time</bold>
 <!-- needs to have setInterval, clearInterval with a static var.  Note that a camera of interest might only have motion detects but we still may want to traverse those snaps -->
-<div id="overlayimg_sysjpgmp4_snap" onclick="this.style.display='none';return;if(this.style.display == 'block'){this.style.display='none'}else{this.style.display='block'}">
+<div id="overlayimg_sysjpgmp4_snap" class="overlayimg_sysjpgmp4_snap" onclick="this.style.display='none';return;if(this.style.display == 'block'){this.style.display='none'}else{this.style.display='block'}">
 <object data="/../../camera_snapshots/*/*jpg"
 onclick="this.style.display='none';if(this.style.display == 'block'){this.style.display='none'}else{this.style.display='block'}"
 id="img_sysjpgmp4_snap"
-width="1750px" 
-height="750px" 
+width="750px" 
+height="200px" 
 style="font-size:15px;overflow-y:scroll;overflow-x:scroll;border:5px solid black;border-width:20px 3px 3px;"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 >
@@ -558,8 +556,8 @@ alt="Most recent event jpg">
 <object id="sysjpg_motion" type="text/html" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="this.data=this.data;" data="/../../camera_snapshots/*/*jpg-MOTION" 
-width="2250px" 
-height="300px" 
+width="750px" 
+height="200px" 
 style="font-size:15px;overflow-y:scroll;overflow-x:scroll;border:5px solid black;border-width:20px 3px 3px;">
 </object>
 
@@ -577,8 +575,8 @@ All system recordings mingled together except MOTION_DETECTIONs, then time-arran
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="this.data=this.data;" 
 data="/camera_snapshots/camera_*/*jpg /var/www/camera_streams/camera_*/*mp4-MOTION" 
-width="1400px" 
-height="800px" 
+width="750px" 
+height="200px" 
 style="font-size:15px;overflow:auto;border:5px solid black;border-width:20px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
@@ -595,7 +593,7 @@ style="font-size:15px;overflow:auto;border:5px solid black;border-width:20px 3px
 <table style="border:3px solid black" ><tr><td>
 
 <table><tr><td>
-<table width="1450px"><tr><td width="83%">
+<table width="800px"><tr><td width="83%">
 All system streams - <b>USE THIS LIST FOR EVENT ARCHIVING STREAMS. Top file for each camera won't immediately be complete to play.</b> For best control, drop others into a spare player.  Click border to list/unlist them:
 </td><td width="17%">
 </td></tr></table>
@@ -607,8 +605,8 @@ All system streams - <b>USE THIS LIST FOR EVENT ARCHIVING STREAMS. Top file for 
 <object id="sysmp4mostrecent" type="text/html" data="/var/www/camera_streams/*/*mp4/mostrecent10" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if (this.data.includes('mostrecent10')) {this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/var/www/camera_streams/*/*mp4';} else {this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='/var/www/camera_streams/*/*mp4/mostrecent10';}" 
-width="1400px" 
-height="400px" 
+width="750px" 
+height="200px" 
 style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
@@ -628,8 +626,8 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px
 <object id="sysjpgs" type="text/plain" value="Click here to collect these snapshots" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/*/*jpg';"
-width="1400px" 
-height="1400px" 
+width="750px" 
+height="200px" 
 style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object>
 <!--
@@ -691,7 +689,7 @@ Command: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
 </td>
 </tr>
 </table>
-</div><div id="byview" class="separateviewsdiv">
+</div><div id="byview" class="byview" class="separateviewsdiv">
 <b>Separate Camera Recordings.  Click a blue border to list/unlist </b>
 &nbsp;&nbsp; &nbsp; &nbsp;
 <!--
@@ -762,7 +760,7 @@ height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <tr><td class="bb">
 <a href="/var/www/camera_streams/camera_east_driveway/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
 For<br>best control, drop others into a spare player
-<div id="edmp4scalediv" style="position:relative;top:-65px;left:49px">
+<div id="edmp4scalediv" class="edmp4scalediv" style="position:relative;top:-65px;left:49px">
 <input type="range" id="sldredmp4" class="scaleSlider" oninput="textedmp4.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
 <textarea id="textedmp4" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
 onkeyup="sldredmp4.value=this.value;" 
@@ -815,7 +813,7 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <tr><td class="bb" style='padding:0px'>
 <a href="/var/www/camera_streams/camera_sw_corner/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
  For<br>best control, drop others into a spare player
-<div id="swmp4scalediv" style="position:relative;top:-65px;left:49px">
+<div id="swmp4scalediv" class="swmp4scalediv" style="position:relative;top:-65px;left:49px">
 <input type="range" 
 id="sldrswmp4" class="scaleSlider"
 oninput="textswmp4.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
@@ -881,7 +879,7 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <tr><td class="bb">
 <a href="/var/www/camera_streams/camera_south_driveway/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
 For<br>best control, drop others into a spare player
-<div id="sdmp4scalediv" style="position:relative;top:-65px;left:49px">
+<div id="sdmp4scalediv" class="sdmp4scalediv" style="position:relative;top:-65px;left:49px">
 <input type="range" id="sldrsdmp4" class="scaleSlider" 
 oninput="textsdmp4.value=this.value" name="" min="1" max="10000" value="43.5" step=".1" list="tickmarks">
 <textarea id="textsdmp4" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
@@ -1248,7 +1246,7 @@ height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <tr><td class="bb" style="position:relative;">
 <a href="/var/www/camera_streams/camera_front_parking/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
 For<br>best control, drop others into a spare player
-<div id="fpmp4scalediv" style="position:relative;top:-65px;left:49px">
+<div id="fpmp4scalediv" class="fpmp4scalediv" style="position:relative;top:-65px;left:49px">
 <input type="range" id="sldrfpmp4" class="scaleSlider" 
 oninput="textfpmp4.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
 <textarea id="textfpmp4" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
@@ -1290,7 +1288,7 @@ height="720px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <tr><td class="bb" style="position:relative;">
 <a href="/var/www/camera_streams/camera_ne_corner/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
 For<br>best control, drop others into a spare player
-<div id="nemp4scalediv" style="position:relative;top:-65px;left:49px">
+<div id="nemp4scalediv" class="nemp4scalediv" style="position:relative;top:-65px;left:49px">
 <input type="range" id="sldrnemp4" class="scaleSlider" 
 oninput="textnemp4.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
 <textarea id="textnemp4" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
@@ -1341,7 +1339,7 @@ height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </table>
 </td>
 </tr></table>
-<div id="mainalerts_viewer_buttonsdiv" style="position:relative;z-Index:2;top:-10px">
+<div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-Index:2;top:-10px">
 <script type="text/javascript">
 var alertsdirectoryheightmode0 =245+'px'
 var alertsdirectoryheightmode1 =623+'px'
@@ -1472,7 +1470,7 @@ style="position:relative;top:-50px;left:335px;z-index:3;opacity:.85;height:40px;
 <!-- animatealertsdirectorytomainjpgviewer0(0-this.value,alertsdirectory.contentDocument.body.children[0].rows[0-this.value].cells[1].children[0].href);-->
 </td></tr></table>
 </td><td valign="top">
-<div id="mainjpgviewer_buttonsdiv">
+<div id="mainjpgviewer_buttonsdiv" class="mainjpgviewer_buttonsdiv" >
 <object id="mainjpgviewer0" type="text/html" value="Main jpg viewer" width="550px" height="260px"
 draggable="true"
 style="font-size:15px;overflow:auto;border:0px;"
@@ -1515,6 +1513,7 @@ function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
       animationdivalertsdirectorytomainjpgviewer0 = document.createElement('div'); /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory or otherwise have a way of limiting memory useage */
       animationdivalertsdirectorytomainjpgviewer0.id = 'animatordivalertsdirectorytomainjpgviewer0'
       animationdivalertsdirectorytomainjpgviewer0.className = 'jpganimator'
+      animationdivalertsdirectorytomainjpgviewer0.className = 'byview'
       document.body.appendChild(animationdivalertsdirectorytomainjpgviewer0) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
       animatordivalertsdirectorytomainjpgviewer0.style='position:absolute;top:420px;left:390px'
       setTimeout(function()
@@ -1607,7 +1606,7 @@ Snapshots separated by camera:
 East
 <br><br><a href="/../../camera_snapshots/camera_east_driveway/" target="_blank">Event Snapshots</a>; for alt control, drop them
 <br>into a spare viewer
-<div id="edjpgscalediv" style="position:relative;top:-65px;left:44px">
+<div id="edjpgscalediv" class="edjpgscalediv" style="position:relative;top:-65px;left:44px">
 <input type="range" 
 id="sldredjpg" class="scaleSlider" 
 oninput="textedjpg.value=this.value" name="" min="1" max="10000" value="43.5" step=".1" list="tickmarks">
@@ -1637,7 +1636,7 @@ SEast
 <br><br><a href="/../../camera_snapshots/camera_south_driveway/" target="_blank">
 Event Snapshots</a>; for alt control, drop them
 <br>into a spare viewer
-<div id="sdjpgscalediv" style="position:relative;top:-65px;left:44px">
+<div id="sdjpgscalediv" class="sdjpgscalediv" style="position:relative;top:-65px;left:44px">
 <input type="range" 
 id="sldrsdjpg" class="scaleSlider" 
 oninput="textsdjpg.value=this.value" name="" min="1" max="10000" value="43.5" step=".1" list="tickmarks">
@@ -1669,7 +1668,7 @@ Office
 <br><br><a href="/../../camera_snapshots/camera_front_parking/" target="_blank">
 Event Snapshots</a>; for alt control, drop them
 <br>into a spare viewer
-<div id="fpjpgscalediv" style="position:relative;top:-65px;left:44px">
+<div id="fpjpgscalediv" class="fpjpgscalediv" style="position:relative;top:-65px;left:44px">
 <input type="range" 
 
 id="sldrfpjpg" class="scaleSlider" 
@@ -1758,7 +1757,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 </table>
 </td></tr></table>
 </td>
-</div><div id="notesdiv" class="tabcontent" style="display:none">
+</div><div id="notesdiv" class="notesdiv" class="tabcontent" style="display:none">
 <h3><ul>
 <li>
 Drag over jpg files and you'll notice they can launch into new and separate viewer elements.  If that is not<br>
@@ -1815,7 +1814,7 @@ Login credentials for camera streams are username = [youngest brother first name
     <input type="button" id="btnposition" style="height:600px;width:600px;font-size:30px;" onmousemove="this.value=event.clientX+':'+event.clientY+', '+event.screenX+':'+event.screenY" value="....................Mouse over me..........................">
 <br>
 
-</div><div id="alertchecking" class="tabcontent"  style="display:none">
+</div><div id="alertchecking" class="alertchecking" class="tabcontent"  style="display:none">
 <table><tr><td width="1535px">
 <input type="button" 
 id="alertCheck" style="width:300px;height:75px;font-size:20px;background:#e6e6e6;border-radius:15px;border-color:black;border-width:10px;" 
@@ -1881,12 +1880,12 @@ else
 ">
 <tr><td>
 
-<div id="androidconnection" style="display:none">
+<div id="androidconnection" class="androidconnection" style="display:none">
 <br>This silent audio loop is used to maintain Android connections
 <object id="alertkeepalive" type="audio/mpeg" data="" height="20px" width="200px"></object>
 </div>
 </td></tr></table>
-</div><div id="loadingdiv"  class="tabcontent" style="display:none">WAIT WHILE PAGE IS LOADING. PERFORM NO USER INPUT WHILE LOADING OR PAGE ELEMENTS WILL ABORT THEIR LOADING</div>
+</div><div id="loadingdiv" class="loadingdiv" class="tabcontent" style="display:none">WAIT WHILE PAGE IS LOADING. PERFORM NO USER INPUT WHILE LOADING OR PAGE ELEMENTS WILL ABORT THEIR LOADING</div>
 </div></div>
 <!-- <script>
 
@@ -2088,28 +2087,46 @@ function startbtncclick()
    }
 }
 </script>
-    <script type="text/javascript"> 
-
-function tabactivate( btn ) {
-var btnset = document.getElementsByClassName('tablinks');
-for(var i=0;i<btnset.length;i++)
-{
-var selection=btnset[i]
-if(btnset[i].id != btn.id){
-document.getElementById(btnset[i].id).style.borderWidth = '0px 0px 3px 0px';
-document.getElementById(btnset[i].id).style.background='rgb('+215+','+215+','+245+')'
-document.getElementById(btnset[i].id.substring(3)).style.display = 'none';
 <!-- document.getElementById(btn.id).style.background='#CCCCCC' -->
-}else
-{
-document.getElementById(btnset[i].id).style.borderWidth = '3px 3px 0px 3px'
-document.getElementById(btnset[i].id).style.background='rgb('+255+','+255+','+255+')'
-if(btnset[i].id!='btnsystem_wide'){document.getElementById(selection.id.substring(3)).style.display = 'block';}
-else{setTimeout(function(){document.getElementById('system_wide').style.display = 'block';},50)}
 <!-- document.getElementById(btn.id).style.background='#FFFFFF' -->
-}}
+<script type="text/javascript"> 
 
-setTimeout(function(){entiredocument.scrollIntoView(false,{behavior: 'smooth'})},10)
+function tabactivate( btn )
+{
+   var btnset = document.getElementsByClassName('tablinks');
+   for(var i=0;i<btnset.length;i++)
+   {
+      var selection=btnset[i]
+      if(btnset[i].id != btn.id)
+      {
+         document.getElementById(btnset[i].id).style.borderWidth = '0px 0px 3px 0px';
+         document.getElementById(btnset[i].id).style.background='rgb('+215+','+215+','+245+')'
+         var toHide=document.getElementsByClassName(btnset[i].id.substring(3))
+         for(var j=0;j<toHide.length;j++)
+         {
+            toHide[j].style.display = 'none';
+         }
+      }
+      else
+      {
+         document.getElementById(btnset[i].id).style.borderWidth = '3px 3px 0px 3px'
+         document.getElementById(btnset[i].id).style.background='rgb('+255+','+255+','+255+')'
+         var toBlock=document.getElementsByClassName(btnset[i].id.substring(3))
+         for(var j=0;j<toBlock.length;j++)
+         {
+            toBlock[j].style.display = 'block';
+            if(btnset[i].id!='btnsystem_wide')
+            {
+               toBlock[j].style.display = 'block';
+            }
+            else
+            {
+               setTimeout(function(){document.getElementById('system_wide').style.display = 'block';},10)
+            }
+         }
+      }
+   }
+   setTimeout(function(){entiredocument.scrollIntoView(false,{behavior: 'smooth'})},10)
 }
 </script>
     <script type="text/javascript"> 
