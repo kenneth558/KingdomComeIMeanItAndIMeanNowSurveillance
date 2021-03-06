@@ -1398,6 +1398,10 @@ var alertsdirectorysources = []
 alertsdirectorysources[0] = '/../../links_to_alerting_activity/mostrecent400'
 alertsdirectorysources[1] = '/../../links_to_alerting_activity/mostrecent2'
 alertsdirectorysources[2] = '/../../camera_snapshots/*/*jpg'
+var alertsdirectoryaliases = []
+alertsdirectoryaliases[0] = 'All alert-related snapshots'
+alertsdirectoryaliases[1] = 'Topmost alert-related snapshot'
+alertsdirectoryaliases[2] = 'All snapshots, including motion detects which may no longer exist'
 </script>
 <table><tr><td>
 <table style="border-collapse:collapse"><tr><td>
@@ -1409,8 +1413,8 @@ alertsdirectorysources[2] = '/../../camera_snapshots/*/*jpg'
 data='/../../links_to_alerting_activity/mostrecent400'
 onclick="
 this.children['marker'].value=(this.children['marker'].value==alertsdirectorysources.length-1?0:parseInt(this.children['marker'].value)+1)
-alert(alertsdirectorysources[this.children['marker'].value])
-this.data=alertsdirectorysources[this.children['marker'].value]
+if(confirm(alertsdirectoryaliases[this.children['marker'].value]))
+{this.data=alertsdirectorysources[this.children['marker'].value]}
 "
 onload="/*
         mainjpgviewer0.height=parseInt(this.height)+18+'px'
