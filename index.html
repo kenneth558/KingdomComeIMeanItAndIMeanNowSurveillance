@@ -1394,6 +1394,10 @@ var forbuttonstopmode1 =0+'px'
 var forbuttonstopmode2 =0+'px'
 var forbuttonsleftmode0 =""
 var forbuttonsleftmode1 =""
+var alertsdirectorysources = []
+alertsdirectorysources[0] = '/../../links_to_alerting_activity/mostrecent400'
+alertsdirectorysources[1] = '/../../links_to_alerting_activity/mostrecent2'
+alertsdirectorysources[2] = '/../../camera_snapshots/*/*jpg'
 </script>
 <table><tr><td>
 <table style="border-collapse:collapse"><tr><td>
@@ -1401,9 +1405,13 @@ var forbuttonsleftmode1 =""
 <input type="button" value="Most recent alert event" onclick="this.value=previousalert">
 <br> -->
 <table width="1px" height="265px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholder1" width="1px" height="100%">
-<object id="alertsdirectory" type="text/html" 
-data="/../../links_to_alerting_activity/mostrecent400"
-onclick="if(this.data.endsWith('mostrecent2')){this.data='/../../links_to_alerting_activity/mostrecent400'}else{this.data='/../../links_to_alerting_activity/mostrecent2'}"
+<object id="alertsdirectory" type="text/html"
+data='/../../links_to_alerting_activity/mostrecent400'
+onclick="
+this.children['marker'].value=(this.children['marker'].value==alertsdirectorysources.length-1?0:parseInt(this.children['marker'].value)+1)
+alert(alertsdirectorysources[this.children['marker'].value])
+this.data=alertsdirectorysources[this.children['marker'].value]
+"
 onload="/*
         mainjpgviewer0.height=parseInt(this.height)+18+'px'
         mainjpgviewer0.width=parseInt(this.width)+'px'*/
@@ -1437,6 +1445,7 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:15px 3px 
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="0" />
+   <param name="marker" value=0 />
     </object></td></tr></table><input type="range" id="show_eventsmainjpgviewer0" 
 oninput="
 /*alert(this.style.left+', '+this.clientLeft+', '+this.getBoundingClientRect().right+', '+alertsdirectory.style.left+', '+alertsdirectory.clientLeft+', '+alertsdirectory.offsetLeft+', '+alertsdirectory.getBoundingClientRect().left)*/
@@ -1491,7 +1500,7 @@ if(camsmp4col1mainpg.style.display=='')
    textmaster.style.display='none'
    sldrmaster.style.display='none'
    alertsdirectory.height=alertsdirectoryheightmode1
-   mainjpgviewer0.height=parseInt(alertsdirectoryheightmode1)+15+'px'
+   mainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
    show_eventsmainjpgviewer0.min='-66'
    show_eventsmainjpgviewer0.style.height=parseInt(alertsdirectoryheightmode1)+126+'px'
    mainjpgviewer0.width=mainjpgviewer0widthmode1
@@ -1503,7 +1512,7 @@ else{
    textmaster.style.display=''
    sldrmaster.style.display=''
    alertsdirectory.height=alertsdirectoryheightmode0
-   mainjpgviewer0.height=parseInt(alertsdirectoryheightmode0)+15+'px'
+   mainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
    show_eventsmainjpgviewer0.style.height=parseInt(alertsdirectoryheightmode0)+159+'px'
    show_eventsmainjpgviewer0.min='-34'
    mainjpgviewer0.width=mainjpgviewer0widthmode0
@@ -1512,16 +1521,15 @@ else{
 }
 if( animationdivalertsdirectorytomainjpgviewer0 != 'undefined' && animationdivalertsdirectorytomainjpgviewer0 != null)
 {
-   animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.height
+   animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
    animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
    animatordivalertsdirectorytomainjpgviewer0.style.top=parseInt(animatordivalertsdirectorytomainjpgviewer0.style.top)+(parseInt(oldheight)-parseInt(alertsdirectory.height))+'px'
    for(var i=0;i<animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
    {
       animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['width'].value=mainjpgviewer0.width
-      animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['height'].value=alertsdirectory.height
+      animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['height'].value=alertsdirectory.parentElement.clientHeight
    }
 }
-spaceholder1.height=(parseInt(alertsdirectory.height)+19)+'px'
 "
 style="position:relative;top:-50px;left:383px;z-index:3;opacity:.85;height:40px;width:160px;color:red;font-size:18px"
 >Toggle sizing</button>
@@ -1576,8 +1584,13 @@ function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
       animationdivalertsdirectorytomainjpgviewer0.id = 'animatordivalertsdirectorytomainjpgviewer0'
       animationdivalertsdirectorytomainjpgviewer0.className = 'jpganimator'
       animationdivalertsdirectorytomainjpgviewer0.className = 'byview'
-      document.body.appendChild(animationdivalertsdirectorytomainjpgviewer0) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
-      animatordivalertsdirectorytomainjpgviewer0.style='position:absolute;top:420px;left:390px'
+
+
+      document.getElementById('spaceholder1').appendChild(animationdivalertsdirectorytomainjpgviewer0) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
+
+
+
+      animatordivalertsdirectorytomainjpgviewer0.style='position:relative;top:-'+parseInt(alertsdirectory.parentElement.clientHeight)+'px;left:'+parseInt(alertsdirectory.parentElement.clientWidth)+'px'
       setTimeout(function()
       {   if(animatordivalertsdirectorytomainjpgviewer0!='undefined' && animatordivalertsdirectorytomainjpgviewer0 != null)
           {   if(confirm(animationdivalertsdirectorytomainjpgviewer0.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory'))
@@ -1587,14 +1600,15 @@ function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
               }
           }
        },300000)
-      animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.height
+      animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
       animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
-      animatordivalertsdirectorytomainjpgviewer0.style.top=(parseInt(alertsdirectory.height)>350?'42px':'420px')
+/*      animatordivalertsdirectorytomainjpgviewer0.style.top='0px'*/
+/*      animatordivalertsdirectorytomainjpgviewer0.style.top=(parseInt(alertsdirectory.height)>350?'42px':'420px')*/
    }/*Next lines need to return the same or possibly changed index like if the jpg is already here somewhere*/
    var firstmatch=animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
    if(firstmatch==null)
    {
-      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" width=\''+mainjpgviewer0.width+'\' height=\''+(parseInt(alertsdirectory.height)+parseInt(15))+'px\' style=\'position:absolute;left:0px;top:0px;z-index:1\' />';
+      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" width=\''+mainjpgviewer0.width+'\' height=\''+alertsdirectory.parentElement.clientHeight+'\' style=\'position:absolute;left:0px;top:0px;z-index:1\' />';
       animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'})
    }
    else
@@ -1608,13 +1622,13 @@ function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
    }
    if(animatordivalertsdirectorytomainjpgviewer0.style.display=='none')
    {
-      animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.height
+      animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
       animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
 
       for(var i=0;i<animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
       {
          animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['width'].value=mainjpgviewer0.width
-         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['height'].value=alertsdirectory.height
+         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['height'].value=alertsdirectory.parentElement.clientHeight
       }
       animatordivalertsdirectorytomainjpgviewer0.style.display=''
    }
