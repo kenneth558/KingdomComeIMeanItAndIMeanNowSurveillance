@@ -1397,7 +1397,7 @@ var forbuttonsleftmode1 =""
 var alertsdirectorysources = []
 alertsdirectorysources[0] = '/../../links_to_alerting_activity/mostrecent400'
 alertsdirectorysources[1] = '/../../links_to_alerting_activity/mostrecent2'
-alertsdirectorysources[2] = '/../../camera_snapshots/*/*jpg'
+alertsdirectorysources[2] = '/../../camera_snapshots/*/*jpgaliased'
 var alertsdirectoryaliases = []
 alertsdirectoryaliases[0] = 'All alert-related snapshots'
 alertsdirectoryaliases[1] = 'Topmost alert-related snapshot'
@@ -1450,7 +1450,8 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:15px 3px 
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="0" />
    <param name="marker" value=0 />
-    </object></td></tr></table><input type="range" id="show_eventsmainjpgviewer0" 
+    </object>
+</td></tr></table><input type="range" id="show_eventsmainjpgviewer0" notes="11px per line, 25 lines in mode0=275"
 oninput="
 /*alert(this.style.left+', '+this.clientLeft+', '+this.getBoundingClientRect().right+', '+alertsdirectory.style.left+', '+alertsdirectory.clientLeft+', '+alertsdirectory.offsetLeft+', '+alertsdirectory.getBoundingClientRect().left)*/
 /*alert(this.style.top+', '+this.clientTop+', '+this.getBoundingClientRect().top+', '+alertsdirectory.style.top+', '+alertsdirectory.clientTop+', '+alertsdirectory.offsetTop+', '+alertsdirectory.getBoundingClientRect().top)*/
@@ -1488,8 +1489,8 @@ if(this.value<1)
 }
 "  
 name="show_eventsmainjpgviewer0"
-min="-34" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;z-index:5;top:14px;left:434px;height:395px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+min="-24" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
+style="position:absolute;z-index:5;top:14px;left:434px;height:286px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 " 
 note="1+395/36=11,159+245=1+747/68=11"
 orient="vertical">
@@ -1505,23 +1506,24 @@ if(camsmp4col1mainpg.style.display=='')
    sldrmaster.style.display='none'
    alertsdirectory.height=alertsdirectoryheightmode1
    mainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
-   show_eventsmainjpgviewer0.min='-66'
-   show_eventsmainjpgviewer0.style.height=parseInt(alertsdirectoryheightmode1)+126+'px'
+   show_eventsmainjpgviewer0.min='-58'
+   show_eventsmainjpgviewer0.style.height='660px'
    mainjpgviewer0.width=mainjpgviewer0widthmode1
    mainjpgviewer_buttonsdiv.style.left='0px'
-   setTimeout(function(){alertsdirectory.scrollIntoView(false);},1)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things.  Not ideal for when button is above bottom*/
+/*   setTimeout(function(){alertsdirectory.scrollIntoView(false);},1)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things.  Not ideal for when button is above bottom*/
 }
 else{
    camsmp4col1mainpg.style.display='';
    textmaster.style.display=''
    sldrmaster.style.display=''
+   setTimeout(function(){window.scrollBy(0,466)},6)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things*/
+/*   setTimeout(function(){window.scrollBy(0,alertsdirectory.getBoundingClientRect().bottom-window.innerHeight)},6)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things*/
    alertsdirectory.height=alertsdirectoryheightmode0
    mainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
-   show_eventsmainjpgviewer0.style.height=parseInt(alertsdirectoryheightmode0)+159+'px'
-   show_eventsmainjpgviewer0.min='-34'
+   show_eventsmainjpgviewer0.style.height='286px'
+   show_eventsmainjpgviewer0.min='-24'
    mainjpgviewer0.width=mainjpgviewer0widthmode0
    mainjpgviewer_buttonsdiv.style.left='0px'
-   setTimeout(function(){window.scrollBy(0,alertsdirectory.getBoundingClientRect().bottom-window.innerHeight)},1)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things*/
 }
 if( animationdivalertsdirectorytomainjpgviewer0 != 'undefined' && animationdivalertsdirectorytomainjpgviewer0 != null)
 {
@@ -1537,6 +1539,12 @@ if( animationdivalertsdirectorytomainjpgviewer0 != 'undefined' && animationdival
 "
 style="position:relative;top:-50px;left:383px;z-index:3;opacity:.85;height:40px;width:160px;color:red;font-size:18px"
 >Toggle sizing</button>
+<div style="position:relative;top:-40px">
+Clicking on blue title bar on top toggles this list between:<br>
+- All alert-related snapshots<br>
+- Only the one topmost alert-related snapshot<br>
+- All cameras, all snapshots, including motion detects which may no longer exist<br>
+</div>
 <!--
 min="-48" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
 style="position:absolute;z-index:5;top:14px;left:270px;height:404px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
@@ -1549,8 +1557,8 @@ style="position:absolute;z-index:5;top:14px;left:270px;height:404px;-webkit-appe
 draggable="true"
 style="font-size:15px;overflow:auto;border:0px;"
 onload="if(camsmp4col1mainpg.style.display!='')
-{
-setTimeout(function(){scrollmarker.scrollIntoView({behavior: 'smooth'})},10)
+{;
+/*setTimeout(function(){scrollmarker.scrollIntoView({behavior: 'smooth'})},10)*/
 }
 else
 {;
@@ -1561,7 +1569,7 @@ onclick="this.style.display='none';
 if(camsmp4col1mainpg.style.display=='none')
 {
    forbuttons.style.top=parseInt(alertsdirectory.height)+15+'px';
-   setTimeout(function(){scrollmarker.scrollIntoView({behavior: 'smooth'})},10);
+/*   setTimeout(function(){scrollmarker.scrollIntoView({behavior: 'smooth'})},10);*/
 }
 "
 /*

@@ -547,6 +547,42 @@ printf "\">" $10
 print "</a></td></tr>"} 
 END {print "</table>"}')"
 
+  elif [[ "${URL_PATH}" =~ .*\*mp4$ ]] || [[ "${URL_PATH}" =~ .*\*jpgaliased$ ]]; then
+      serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%aliased}|awk -v linkpre="$(ip -o address | \
+         grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080" -v css_style="$css_styling" '
+BEGIN {print css_style "<table class=\"elif3.5\" style=\"width:100%;\">"}
+{printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10
+if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+printf "\" "
+if (line==1){printf " id=\"latestalert\""};printf " \
+onmousedown=\"mdown(event)\" \
+onmouseup=\"giveRowIndicesSpanData(event,this)\"  \
+onclick=\"window.top.animatealertsdirectorytomainjpgviewer0(Math.trunc((event.pageY+2)/((this.parentNode.parentNode.parentNode.clientHeight+2)/this.parentNode.parentNode.parentNode.childElementCount)-.5),this.parentNode.parentNode.parentNode); \
+return false;\" \
+ondblclick=\"window.top.lsbtn.click();\">"
+if (substr($1,1,1)!="l"){
+if(substr($10,length($10)-3)=="\.jpg"){
+gsub(".*192\.168\.0\.14","Dock  ",$10)
+gsub(".*192\.168\.0\.11","East  ",$10)
+gsub(".*192\.168\.0\.15","North  ",$10)
+gsub(".*192\.168\.0\.12","Office  ",$10)
+gsub(".*192\.168\.0\.13","S East  ",$10)
+printf substr($10,1,index($10,"\ \ "))
+gsub(".*[0-9]\_","",$10)
+printf substr($10,index($10,10)) "&nbsp;" $6 "\&nbsp\;" $7 "\&nbsp\;" $8 "\&nbsp\;" $9 }
+else if(substr($10,length($10)-3)=="\.mp4"){
+gsub(".*sw_c","Dock  ",$10)
+gsub(".*east","East  ",$10)
+gsub(".*ne_c","North  ",$10)
+gsub(".*fron","Office  ",$10)
+gsub(".*sout","S East  ",$10)
+printf substr($10,1,index($10,"\ \ "))
+gsub(".*[0-9]\_","",$10)
+printf substr($10,index($10,"\/")+1)}else {printf $10 "&nbsp;" $6 "\&nbsp\;" $7 "\&nbsp\;" $8 "\&nbsp\;" $9 }
+} else {printf $12} 
+print "</a></td></tr>"}
+END {print "</table>"}')"
+
   elif [[ "${URL_PATH}" =~ .*links_to_alerting_activity/mostrecent[0-9]{1,3}$ ]]; then
 #only the main directory is being called for, not subsequent files.  This modifies to skip one level of directory
       serve_html_string "$(ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t "${URL_PATH%%mostrecent*}"/*|head -n$(( ${URL_PATH##*mostrecent} + 1 ))|awk -v linkpre="$(ip -o address | \
@@ -583,7 +619,8 @@ printf substr($12,1,index($12,"\ \ "))
 tmpstr=substr($12,index($12,"\_")-15,15)
 gsub(".*[0-9]\_","",$12)
 printf substr($12,1,index($12,"\.")-1) tmpstr ".jpg&nbsp;" $6 "\&nbsp\;" $7 "\&nbsp\;" $8 "\&nbsp\;" $9 }else{printf $10}
-}}; print "</a></td></tr>";line=line+1}
+}}; 
+print "</a></td></tr>";line=line+1}
 END {print "</table>"}')"
 
 #else {printf "<tr><td width=\"108px\" aria-label=\"[&nbsp;" substr($0,28,3) "&nbsp;" substr($0,32,2) "&nbsp;" substr($0,35,8) "&nbsp;]&nbsp;&nbsp;\"></td><td></td></tr>"}}
@@ -645,7 +682,8 @@ gsub(".*sout","S East  ",$10)
 printf substr($10,1,index($10,"\ \ "))
 gsub(".*[0-9]\_","",$10)
 printf substr($10,index($10,"\/")+1)}else {printf $10 "&nbsp;" $6 "\&nbsp\;" $7 "\&nbsp\;" $8 "\&nbsp\;" $9 }
-} else {printf $12} print "</a></td></tr>"} 
+} else {printf $12} 
+print "</a></td></tr>"} 
 END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ important* ]]; then
