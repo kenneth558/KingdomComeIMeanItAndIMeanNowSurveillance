@@ -791,12 +791,15 @@ var sliderelement=getElementById('sldr' + a );
 sliderelement.value=this.value;
 var lment=getElementById(a)
 lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'
+getElementById('spaceholder' + a ).height=lment.style.height
+"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 <big>%</big>
 </div>
 <a name="#ed_location_on_page"></a>
+<table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholderedmp4" width="1px" height="100%">
 <object id="edmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];}else{this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}"
@@ -807,7 +810,7 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="3" />
-</object>
+</object></td></tr></table>
 </td></tr>
 <tr><td class="camtitle" style='padding:0px'><!-- FUTURE --Use a layout pattern for these that will facilitate swapping them around style="border:5px ridge fuchsia">
 <br>
@@ -817,7 +820,8 @@ Add ip address to snaps for group drag-dropping into browser window (Now functio
 
 -->
 <a name="sw_corner_location_on_page"></a>
-<br><object id="swmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
+<br><table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholderswmp4" width="1px" height="100%">
+<object id="swmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="945px" 
@@ -826,7 +830,7 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="5" />
-</object>
+</object></td></tr></table>
 <a href="" target="_blank"><h3>Dock</h3></a>
 </td></tr>
 <tr><td class="bb" style='padding:0px'>
@@ -843,7 +847,8 @@ var sliderelement=getElementById('sldr' + a );
 sliderelement.value=this.value;
 var lment=getElementById(a)
 lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'
+getElementById('spaceholder' + a ).height=lment.style.height"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 <big>%</big>
@@ -909,11 +914,13 @@ var sliderelement=getElementById('sldr' + a );
 sliderelement.value=this.value;
 var lment=getElementById(a)
 lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'
+getElementById('spaceholder' + a ).height=lment.style.height"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 <big>%</big>
 </div>
+<table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholdersdmp4" width="1px" height="100%">
 <object id="sdmp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
@@ -923,7 +930,7 @@ height="792px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="4" />
-</object>
+</object></td></tr></table>
 </td></tr>
 <!--
 <tr>
@@ -1275,11 +1282,13 @@ var sliderelement=getElementById('sldr' + a );
 sliderelement.value=this.value;
 var lment=getElementById(a)
 lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'
+getElementById('spaceholder' + a ).height=lment.style.height"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 <big>%</big>
 </div>
+<table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholderfpmp4" width="1px" height="100%">
 <object id="fpmp4" type="text/plain" value="Click here to collect these streams" class="mp4obj"
 onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', this.contentDocument.body.children[0].tagName, '', '', '')"
@@ -1289,10 +1298,13 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="6" />
-</object></td></tr>
+</object></td></tr></table>
+</td></tr>
 <tr><td class="camtitle" style="position:relative;">
 <a name="ne_location_on_page"></a>
-<br><object id="nemp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
+<br>
+<table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholdernemp4" width="1px" height="100%">
+<object id="nemp4" type="text/plain" value="Click here to collect these videos" class="mp4obj"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="960px" 
@@ -1301,7 +1313,7 @@ height="720px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="7" />
-</object>
+</object></td></tr></table>
 <a href="" target="_blank"><h3>North</h3></a>
 </td></tr>
 <tr><td class="bb" style="position:relative;">
@@ -1317,7 +1329,8 @@ var sliderelement=getElementById('sldr' + a );
 sliderelement.value=this.value;
 var lment=getElementById(a)
 lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'
+getElementById('spaceholder' + a ).height=lment.style.height"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 <big>%</big>
@@ -1387,6 +1400,7 @@ var forbuttonsleftmode1 =""
 <!-- Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=
 <input type="button" value="Most recent alert event" onclick="this.value=previousalert">
 <br> -->
+<table width="1px" height="265px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholder1" width="1px" height="100%">
 <object id="alertsdirectory" type="text/html" 
 data="/../../links_to_alerting_activity/mostrecent400"
 onclick="if(this.data.endsWith('mostrecent2')){this.data='/../../links_to_alerting_activity/mostrecent400'}else{this.data='/../../links_to_alerting_activity/mostrecent2'}"
@@ -1423,8 +1437,7 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:15px 3px 
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="0" />
-    </object>
-<input type="range" id="show_eventsmainjpgviewer0" 
+    </object></td></tr></table><input type="range" id="show_eventsmainjpgviewer0" 
 oninput="
 /*alert(this.style.left+', '+this.clientLeft+', '+this.getBoundingClientRect().right+', '+alertsdirectory.style.left+', '+alertsdirectory.clientLeft+', '+alertsdirectory.offsetLeft+', '+alertsdirectory.getBoundingClientRect().left)*/
 /*alert(this.style.top+', '+this.clientTop+', '+this.getBoundingClientRect().top+', '+alertsdirectory.style.top+', '+alertsdirectory.clientTop+', '+alertsdirectory.offsetTop+', '+alertsdirectory.getBoundingClientRect().top)*/
@@ -1465,6 +1478,7 @@ name="show_eventsmainjpgviewer0"
 min="-34" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
 style="position:absolute;z-index:5;top:14px;left:434px;height:395px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 " 
+note="1+395/36=11,159+245=1+747/68=11"
 orient="vertical">
 <!--
 -webkit-appearance: none;background-image: url('/var/www/html/arrow_4_SE.png')
@@ -1507,6 +1521,7 @@ if( animationdivalertsdirectorytomainjpgviewer0 != 'undefined' && animationdival
       animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['height'].value=alertsdirectory.height
    }
 }
+spaceholder1.height=(parseInt(alertsdirectory.height)+19)+'px'
 "
 style="position:relative;top:-50px;left:383px;z-index:3;opacity:.85;height:40px;width:160px;color:red;font-size:18px"
 >Toggle sizing</button>
@@ -1517,7 +1532,7 @@ style="position:absolute;z-index:5;top:14px;left:270px;height:404px;-webkit-appe
 <!-- animatealertsdirectorytomainjpgviewer0(0-this.value,alertsdirectory.contentDocument.body.children[0].rows[0-this.value].cells[1].children[0].href);-->
 </td></tr></table>
 </td><td valign="top">
-<div id="mainjpgviewer_buttonsdiv" class="mainjpgviewer_buttonsdiv" >
+<div id="mainjpgviewer_buttonsdiv" class="mainjpgviewer_buttonsdiv">
 <object id="mainjpgviewer0" type="text/html" value="Main jpg viewer" width="550px" height="260px"
 draggable="true"
 style="font-size:15px;overflow:auto;border:0px;"
@@ -1665,19 +1680,19 @@ var sliderelement=getElementById('sldr' + a );
 sliderelement.value=this.value;
 var lment=getElementById(a)
 lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'
+getElementById('spaceholder' + a ).height=lment.style.height"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 <big>%</big>
 </div>
+<table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholderedjpg" width="1px" height="100%">
 <object id="edjpg" type="text/plain" value="Click here to collect these snapshots" class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_east_driveway';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="1000px" 
 height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
-</object>
-
-
+</object></td></tr></table>
 </td><td class="bb">
 SEast
 <br><br><a href="/../../camera_snapshots/camera_south_driveway/" target="_blank">
@@ -1695,20 +1710,20 @@ var sliderelement=getElementById('sldr' + a );
 sliderelement.value=this.value;
 var lment=getElementById(a)
 lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'
+getElementById('spaceholder' + a ).height=lment.style.height"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 
 <big>%</big>
 </div>
+<table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholdersdjpg" width="1px" height="100%">
 <object id="sdjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_south_driveway/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="594px" 
 height="745px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
-</object>
-
-
+</object></td></tr></table>
 </td>
 <td  class="bb" valign="top" style='padding:0px'>
 Office
@@ -1717,7 +1732,6 @@ Event Snapshots</a>; for alt control, drop them
 <br>into a spare viewer
 <div id="fpjpgscalediv" class="fpjpgscalediv" style="position:relative;top:-65px;left:44px">
 <input type="range" 
-
 id="sldrfpjpg" class="scaleSlider" 
 oninput="textfpjpg.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
 <textarea id="textfpjpg" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
@@ -1728,27 +1742,30 @@ var sliderelement=getElementById('sldr' + a );
 sliderelement.value=this.value;
 var lment=getElementById(a)
 lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'
+getElementById('spaceholder' + a ).height=lment.style.height"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 
 <big>%</big>
 </div>
+<table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholderfpjpg" width="1px" height="100%">
 <object id="fpjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_front_parking/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}"
 width="1000px" 
 height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
-</object></td>
-</tr>
+</object></td></tr></table>
+</td></tr>
 <tr><td class="bb" style="padding:0px;border-top: solid 1px black;">
 <br><br>
+<table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholderswjpg" width="1px" height="100%">
 <object id="swjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_sw_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="945px" 
 height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
-</object>
+</object></td></tr></table>
 <br><br>
 Dock
 <br><a href="/../../camera_snapshots/camera_sw_corner/" target="_blank">
@@ -1763,21 +1780,21 @@ var sliderelement=getElementById('sldr' + a );
 sliderelement.value=this.value;
 var lment=getElementById(a)
 lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'
+getElementById('spaceholder' + a ).height=lment.style.height"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 <big>%</big>
 </td><td></td>
 
 <td  class="bb" valign="top" style="padding:0px;border-top: solid 1px black;">
-<br><br>
+<table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholdernejpg" width="1px" height="100%">
 <object id="nejpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_ne_corner/';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="960px" 
 height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
-</object>
-<br><br>
+</object></td></tr></table>
 North
 <br><a href="/../../camera_snapshots/camera_ne_corner/"  target="_blank">
 Event Snapshots</a>; for alt control, drop them
@@ -1792,7 +1809,8 @@ var sliderelement=getElementById('sldr' + a );
 sliderelement.value=this.value;
 var lment=getElementById(a)
 lment.style.width=(lment.width.substring(0,lment.width.length-2) * sliderelement.value / 100) + 'px';
-lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'"
+lment.style.height=(lment.height.substring(0,lment.height.length-2) * sliderelement.value / 100) + 'px'
+getElementById('spaceholder' + a ).height=lment.style.height"
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
 >43.5</textarea>
 <big>%</big>
@@ -1917,7 +1935,7 @@ oninput="/*place red line*/;"
       pxFromMaxAge=850-(((timenow.getTime()-localStartTimeOfInterestDT.getTime())*850)/259200000)
 }*/
 </script>-->
-<!--<script type="text/javascript">
+<script type="text/javascript">
 const timespan = (() => {
     let rtf, tokensRtf;
     const
@@ -1979,24 +1997,7 @@ const timespan = (() => {
     locale('en');
     return {format, locale};
 })();
-const cfg = {
-  locale: 'en,de,nl,fr,it,es,pt,ro,ru,ja,kor,zh,th,hi',  style: 'long,narrow'
-},el = id => document.getElementById('timelapsed'),locale = el('locale'), loc = el('loc'), style = el('style'),fd = new Date(), td = el('td'), fmt = el('fmt'),run = el('run'), out = el('out'),test = () => {
-  try {
-      const tv = new Date(td.value);
-      if (isNaN(tv)) throw Error('invalid "datetime2" value');
-      timespan.locale(loc.value || locale.value, style.value);
-      const delta = fd.getTime() - tv.getTime();
-      out.innerHTML = timespan.format(fmt.value, delta);
-  } catch (e) { out.innerHTML = e.message; }
-};
-el('fd').innerText = el('td').value = fd.toISOString();
-el('fmt').value = 'D~ h~ m~ s~ f~ "ms"';
-for (const [id, value] of Object.entries(cfg)) {
-  const elm = el(id);
-  value.split(',').forEach(i => elm.innerHTML += `<option>${i}</option>`);
-}
-</script>-->
+</script>
 To be vertical lines dropping in distances related to their event (not to be confused with "alert") priority
 <br>
 <br>
