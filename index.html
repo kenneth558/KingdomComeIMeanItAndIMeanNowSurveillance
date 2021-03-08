@@ -92,8 +92,19 @@ textmaster.value=43.5
 sldrmaster.value=textmaster.value
 textmaster.value=textmaster.value
 if(isAndroid){androidconnection.style='display:inline'}else{androidconnection.style='display:none'}
-setTimeout(function(){scrollmarker.scrollIntoView({behavior: 'smooth'})},10)
+/*
 show_eventsmainjpgviewer0.style.left=parseFloat(show_eventsmainjpgviewer0.style.left)-((show_eventsmainjpgviewer0.getBoundingClientRect().right-287)/2.2)+'px'
+var delayedDisplayElements=document.querySelectorAll('.slidersNeedingDelayedDisplay')
+for(var i=0;i<delayedDisplayElements.length;i++)
+{
+   delayedDisplayElements[i].style.display='';
+   switch (i){
+      case 0:
+           delayedDisplayElements[i].style.left='360px'
+           break;
+   }
+}
+*/
 document.title='Surveillance Recordings';
 entiredocument.style='pointer-events:auto;'
 ">
@@ -351,7 +362,7 @@ setTimeout(function(){if(!confirm('Allow more time for snapshot animation elemen
 <option value="2" label="2 min"></option>
 <option value="360" label="6 hrs"></option>
 </datalist>
-<div id="entiredocument" style="z-Index:5;pointer-events:none;" onclick="return false"><div id="buttonsdiv" style="position:sticky;top:0px;z-index:4;background:rgb(215,215,245);padding: 0px 0px 10px 0px;border:0px solid black;border-width:0px 0px 0px 0px;width:915px">
+<div id="entiredocument" style="z-Index:5;pointer-events:none;" onclick="return false"><div id="buttonsdiv" style="position:sticky;top:0px;z-index:4;background:rgb(215,215,245,0.4);padding: 0px 0px 10px 0px;border:0px solid black;border-width:0px 0px 0px 0px;width:915px">
   <button id="btnalertchecking" style="font-size:12px;border:0px solid black;border-width:3px 3px 3px 3px;border-radius:3px;background:rgb(215,215,245);" 
 onclick="
 if(alertchecking.style.display=='none')
@@ -712,6 +723,360 @@ Script on server: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nb
 </tr>
 </table>
 </div><div id="byview" class="byview" class="separateviewsdiv">
+<div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-Index:2;top:-10px">
+<script type="text/javascript">
+var alertsdirectoryheightmode0 =245+'px'
+var alertsdirectoryheightmode1 =612+'px'
+var alertsdirectorywidthmode0 =379+'px'
+var alertsdirectorywidthmode1 =""
+var alertsdirectorytopmode0 =""
+var alertsdirectorytopmode1 =""
+var alertsdirectoryleftmode0 =""
+var alertsdirectoryleftmode1 =""
+
+var mainjpgviewer0topmode0 =""
+var mainjpgviewer0topmode1 =""
+var mainjpgviewer0leftmode0 =""
+var mainjpgviewer0leftmode1 =""
+var mainjpgviewer0widthmode0 =550+'px'
+var mainjpgviewer0widthmode1 =950+'px'
+
+var forbuttonstopmode0 =""
+var forbuttonstopmode1 =0+'px'
+var forbuttonstopmode2 =0+'px'
+var forbuttonsleftmode0 =""
+var forbuttonsleftmode1 =""
+var alertsdirectorysources = []
+alertsdirectorysources[0] = '/../../camera_snapshots/*/*jpgaliased'
+alertsdirectorysources[1] = '/../../links_to_alerting_activity/mostrecent400'
+alertsdirectorysources[2] = '/../../links_to_alerting_activity/mostrecent2'
+var alertsdirectoryaliases = []
+alertsdirectoryaliases[0] = 'All snapshots, including motion detects which may no longer exist'
+alertsdirectoryaliases[1] = 'All alert-related snapshots'
+alertsdirectoryaliases[2] = 'Topmost alert-related snapshot'
+delayedDisplayElements[0].styleleft='379px'
+</script>
+<table><tr><td>
+<table style="border-collapse:collapse"><tr><td>
+<!-- Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=
+<input type="button" value="Most recent alert event" onclick="this.value=previousalert">
+<br> -->
+<table width="1px" height="265px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholder1" width="1px" height="100%">
+<object id="alertsdirectory" type="text/html"
+data='/../../camera_snapshots/*/*jpgaliased'
+onclick="
+this.children['marker'].value=(this.children['marker'].value==alertsdirectorysources.length-1?0:parseInt(this.children['marker'].value)+1)
+if(confirm(alertsdirectoryaliases[this.children['marker'].value]))
+{this.data=alertsdirectorysources[this.children['marker'].value]}
+"
+onload="/*
+        mainjpgviewer0.height=parseInt(this.height)+18+'px'
+        mainjpgviewer0.width=parseInt(this.width)+'px'*/
+     if (!alertCheck.value.endsWith(' OFF'))
+     {   if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
+           alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
+           alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
+         {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
+             {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
+                 {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
+                     {
+                         if(previousalert!='waiting')
+                         {   soundalarm();show_eventsmainjpgviewer0.value=0;show_eventsmainjpgviewer0.input()
+/* obsolete for now                            if(mainjpgviewer0.data!=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
+                             {   mainjpgviewer0.data=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href}*/
+                         }
+                         else
+                         {   previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
+                         }
+                     }
+                 }
+                 else {previousalert='waiting';}
+             }
+         }
+     }
+     setTimeout(function()
+{
+show_eventsmainjpgviewer0.value='0'
+show_eventsmainjpgviewer0.value=(alertsdirectory.contentDocument!='undefined' && alertsdirectory.contentDocument!=null && alertsdirectory.contentDocument.body.children[0] !='undefined' && alertsdirectory.contentDocument.body.children[0] != null && alertsdirectory.contentDocument.body.children[0].rows!='undefined' && alertsdirectory.contentDocument.body.children[0].rows!=null && alertsdirectory.contentDocument.body.children[0].rows.length!='undefined' && alertsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-alertsdirectory.contentDocument.body.children[0].rows.length,show_eventsmainjpgviewer0.value):1;
+if(show_eventsmainjpgviewer0.value<1)
+{/*alert(parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.0089)*/
+   var rowselected=Math.round(alertsdirectory.contentDocument.body.children[0].rows.length*(alertsdirectory.contentDocument.body.scrollTop/((parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.9943)))-show_eventsmainjpgviewer0.value)
+   if(rowselected<alertsdirectory.contentDocument.body.children[0].rows.length)
+   {
+      if(alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg'))
+      {
+         animatealertsdirectorytomainjpgviewer0(rowselected,alertsdirectory.contentDocument.body.children[0]);
+         StartTimeOfInterest=alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[0].outerHTML.substr(18)
+         StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
+         StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
+         StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
+         StartCamOfInterestEl.value=alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].innerText.trim()
+      }
+   }
+   else
+   {
+      show_eventsmainjpgviewer0.value=(parseInt(show_eventsmainjpgviewer0.value)-(alertsdirectory.contentDocument.body.children[0].rows.length-1-rowselected))
+   }
+}else
+{
+   animatordivalertsdirectorytomainjpgviewer0.style.display='none';
+   if(animatordivalertsdirectorytomainjpgviewer0!='undefined' && animatordivalertsdirectorytomainjpgviewer0 != null)
+   {   if(confirm(animationdivalertsdirectorytomainjpgviewer0.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory'))
+       {
+           animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
+           clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=null
+       }
+   }
+}
+},100)
+     glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+width="379px" height="245px"
+style="font-size:15px;overflow:auto;border:3px solid blue;border-width:15px 3px 3px 3px;
+">
+   <param name="timestamp" value="initial" />
+   <param name="nextfilename" value="initial" />
+   <param name="currenttime" value=0 />
+   <param name="playingjpgs_number" value="0" />
+   <param name="marker" value=0 />
+    </object>
+</td></tr></table><input type="range" id="show_eventsmainjpgviewer0" notes="11px per line, 25 lines in mode0=275"
+oninput="
+this.value=(alertsdirectory.contentDocument!='undefined' && alertsdirectory.contentDocument!=null && alertsdirectory.contentDocument.body.children[0] !='undefined' && alertsdirectory.contentDocument.body.children[0] != null && alertsdirectory.contentDocument.body.children[0].rows!='undefined' && alertsdirectory.contentDocument.body.children[0].rows!=null && alertsdirectory.contentDocument.body.children[0].rows.length!='undefined' && alertsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-alertsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
+if(this.value<1)
+{/*alert(parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.0089)*/
+   var rowselected=Math.round(alertsdirectory.contentDocument.body.children[0].rows.length*(alertsdirectory.contentDocument.body.scrollTop/((parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.9943)))-this.value)
+   if(rowselected<alertsdirectory.contentDocument.body.children[0].rows.length)
+   {
+      if(alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg'))
+      {
+         animatealertsdirectorytomainjpgviewer0(rowselected,alertsdirectory.contentDocument.body.children[0]);
+         StartTimeOfInterest=alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[0].outerHTML.substr(18)
+         StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
+         StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
+         StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
+         StartCamOfInterestEl.value=alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].innerText.trim()
+      }
+   }
+   else
+   {
+      this.value=(parseInt(this.value)-(alertsdirectory.contentDocument.body.children[0].rows.length-1-rowselected))
+   }
+}else
+{
+   animatordivalertsdirectorytomainjpgviewer0.style.display='none';
+   if(animatordivalertsdirectorytomainjpgviewer0!='undefined' && animatordivalertsdirectorytomainjpgviewer0 != null)
+   {   if(confirm(animationdivalertsdirectorytomainjpgviewer0.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory'))
+       {
+           animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
+           clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=null
+       }
+   }
+}
+"  
+name="show_eventsmainjpgviewer0" class="slidersNeedingDelayedDisplay"
+min="-24" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
+style="position:relative;z-index:5;top:-257px;left:246px;height:288px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+" 
+note="1+395/36=11,159+245=1+747/68=11"
+orient="vertical">
+<input type="range" id="show_eventsmainjpgviewer1" name="show_eventsmainjpgviewer1" min="-24" max="-2" value="-24" step="1" list="tickmarks" class="vertical-slider"
+style="position:relative;z-index:5;top:-279px;left:-12px;height:255px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+"
+orient="vertical"
+onchange="
+alert('Just retrieve '+ (-this.value-1))
+">
+<!--
+-webkit-appearance: none;background-image: url('/var/www/html/arrow_4_SE.png')
+-->
+</td></tr><tr><td>
+<button  onclick="
+var oldheight=alertsdirectory.height
+if(alertsdirectory.height==alertsdirectoryheightmode0)
+{
+   alertsdirectory.height=alertsdirectoryheightmode1
+   mainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
+   show_eventsmainjpgviewer0.min='-57'
+   show_eventsmainjpgviewer0.style.height='651px'
+   show_eventsmainjpgviewer1.style.height='622px'
+   mainjpgviewer0.width=mainjpgviewer0widthmode1
+   mainjpgviewer_buttonsdiv.style.left='0px'
+   show_eventsmainjpgviewer0.style.top='-624px'
+   show_eventsmainjpgviewer1.style.top='-642px'
+   this.style.top='-'+(parseInt(alertsdirectory.parentElement.clientHeight)+655)+'px'
+/*   setTimeout(function(){alertsdirectory.scrollIntoView(false);},1)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things.  Not ideal for when button is above bottom*/
+}
+else{
+/*   setTimeout(function(){window.scrollBy(0,466)},6)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things*/
+/*   setTimeout(function(){window.scrollBy(0,alertsdirectory.getBoundingClientRect().bottom-window.innerHeight)},6)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things*/
+   alertsdirectory.height=alertsdirectoryheightmode0
+   mainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
+   show_eventsmainjpgviewer0.style.height='288px'
+   show_eventsmainjpgviewer1.style.height='255px'
+   show_eventsmainjpgviewer0.min='-24'
+   mainjpgviewer0.width=mainjpgviewer0widthmode0
+   mainjpgviewer_buttonsdiv.style.left='0px'
+   show_eventsmainjpgviewer0.style.top='-257px'
+   show_eventsmainjpgviewer1.style.top='-279px'
+   this.style.top='-557px'
+}
+clicktogleinstructions.style.top='-'+(parseInt(alertsdirectory.height)+84)+'px'
+divbottommainpage.style.top='-'+(parseInt(alertsdirectory.height)+100)+'px'
+if( animationdivalertsdirectorytomainjpgviewer0 != 'undefined' && animationdivalertsdirectorytomainjpgviewer0 != null)
+{
+   animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
+   animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
+   animatordivalertsdirectorytomainjpgviewer0.style.top=parseInt(animatordivalertsdirectorytomainjpgviewer0.style.top)+(parseInt(oldheight)-parseInt(alertsdirectory.height))+'px'
+   for(var i=0;i<animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
+   {
+      animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['width'].value=mainjpgviewer0.width
+      animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['height'].value=alertsdirectory.parentElement.clientHeight
+   }
+}
+"
+style="position:relative;top:-557px;left:383px;z-index:3;opacity:.45;height:40px;width:160px;color:red;font-size:18px"
+>Toggle sizing</button>
+<div style="position:relative;top:-330px" id="clicktogleinstructions">
+Clicking on the top blue title bar toggles this list between:<br>
+- All alert-related snapshots<br>
+- Only the one topmost alert-related snapshot. (Use: traffic sparing for alert checking)<br>
+- All cameras, all snapshots, including motion detects which may no longer exist<br>
+</div>
+<!--
+min="-48" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
+style="position:absolute;z-index:5;top:14px;left:270px;height:404px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+-->
+<!-- animatealertsdirectorytomainjpgviewer0(0-this.value,alertsdirectory.contentDocument.body.children[0].rows[0-this.value].cells[1].children[0].href);-->
+</td></tr></table>
+</td><td valign="top">
+<div id="mainjpgviewer_buttonsdiv" class="mainjpgviewer_buttonsdiv">
+<object id="mainjpgviewer0" type="text/html" value="Main jpg viewer" width="550px" height="260px"
+draggable="true"
+style="font-size:15px;overflow:auto;border:0px;"
+onload="if(camsmp4col1mainpg.style.display!='')
+{;
+/*setTimeout(function(){scrollmarker.scrollIntoView({behavior: 'smooth'})},10)*/
+}
+else
+{;
+/*setTimeout(function(){edmp4.scrollIntoView({behavior: 'smooth'});},10)*/
+}
+"
+onclick="this.style.display='none';
+if(camsmp4col1mainpg.style.display=='none')
+{
+   forbuttons.style.top=parseInt(alertsdirectory.height)+15+'px';
+/*   setTimeout(function(){scrollmarker.scrollIntoView({behavior: 'smooth'})},10);*/
+}
+"
+/*
+onmousedown="mousestartXmainjpgviewer0=btnpositionshow.value.substr(1,btnpositionshow.value.indexOf(',')-1);mousestartYmainjpgviewer0=btnpositionshow.value.substr(1,btnpositionshow.value.indexOf(',')+1)
+btnpositionshow.value
+mouseendXmainjpgviewer0='';mouseendYmainjpgviewer0='';this.addEventListener('mousemove',foo)"
+
+onmouseup="console.log('ending the drag');this.removeEventListener('mousemove',foo)"
+*/
+ondragend="/*Now simply catch the very next mouse event to locate mouse*/
+/*alert(mousestartXmainjpgviewer0 + '>' + mouseendXmainjpgviewer0 + ', ' + mousestartYmainjpgviewer0 + '>' + mouseendYmainjpgviewer0)*/
+;
+"
+></object>
+
+<script type="text/javascript">
+var animationdivalertsdirectorytomainjpgviewer0=null
+var animatetimeralertsdirectorytomainjpgviewer0=null
+function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
+{
+   if(animationdivalertsdirectorytomainjpgviewer0==null)
+   {
+      animationdivalertsdirectorytomainjpgviewer0 = document.createElement('div'); /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory or otherwise have a way of limiting memory useage */
+      animationdivalertsdirectorytomainjpgviewer0.id = 'animatordivalertsdirectorytomainjpgviewer0'
+      animationdivalertsdirectorytomainjpgviewer0.className = 'jpganimator'
+      animationdivalertsdirectorytomainjpgviewer0.className = 'byview'
+
+
+      document.getElementById('spaceholder1').appendChild(animationdivalertsdirectorytomainjpgviewer0) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
+
+
+
+      animatordivalertsdirectorytomainjpgviewer0.style='position:relative;top:-'+parseInt(alertsdirectory.parentElement.clientHeight)+'px;left:'+parseInt(alertsdirectory.parentElement.clientWidth)+'px'
+      animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
+      animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
+/*      animatordivalertsdirectorytomainjpgviewer0.style.top='0px'*/
+/*      animatordivalertsdirectorytomainjpgviewer0.style.top=(parseInt(alertsdirectory.height)>350?'42px':'420px')*/
+   }/*Next lines need to return the same or possibly changed index like if the jpg is already here somewhere*/
+   var firstmatch=animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
+   if(firstmatch==null)
+   {
+      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" width=\''+mainjpgviewer0.width+'\' height=\''+alertsdirectory.parentElement.clientHeight+'\' style=\'position:absolute;left:0px;top:0px;z-index:1\' />';
+      animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'})
+   }
+   else
+   {
+      for(var i=0;i<animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
+      {
+         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].style.zIndex='0'
+      }
+      firstmatch.style.zIndex='1'
+      /*animatordivalertsdirectorytomainjpgviewer0.appendChild(firstmatch)*/
+   }
+   if(animatordivalertsdirectorytomainjpgviewer0.style.display=='none')
+   {
+      animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
+      animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
+
+      for(var i=0;i<animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
+      {
+         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['width'].value=mainjpgviewer0.width
+         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['height'].value=alertsdirectory.parentElement.clientHeight
+      }
+      animatordivalertsdirectorytomainjpgviewer0.style.display=''
+   }
+}
+
+var mousestartXmainjpgviewer0=''
+var mousestartYmainjpgviewer0=''
+var mouseendXmainjpgviewer0=''
+var mouseendYmainjpgviewer0=''
+function foo(event){
+if(mousestartXmainjpgviewer0==''){
+mousestartXmainjpgviewer0=event.screenX;
+mousestartYmainjpgviewer0=event.screenY;console.log('first move')
+}else
+{
+mouseendXmainjpgviewer0=event.screenX;
+mouseendYmainjpgviewer0=event.screenY;console.log('not first move')
+}
+function getParentOffsets(el) {
+if (el.offsetParent) {
+    return el.offsetParent.offsetTop + getParentOffsets(el.offsetParent);
+} else {
+    return 0;
+}
+}}
+</script>
+<!--
+      animatordivalertsdirectorytomainjpgviewer0.removeChild(animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')) -->
+<!--      for(var i;animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
+      {
+         if(animatordivalertsdirectorytomainjpgviewer0.childNodes[i].style.zIndex!='0'){animatordivalertsdirectorytomainjpgviewer0.childNodes[i].style.zIndex='0'}
+      } -->
+<!--      for(var i;animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
+      {
+         if(firstmatch==animatordivalertsdirectorytomainjpgviewer0.childNodes[i])
+         {
+            firstmatch.style.zIndex='1'
+         }
+         else
+         {
+            firstmatch.style.zIndex='0'
+         }
+      }-->
+<!--      animatordivalertsdirectorytomainjpgviewer0.removeChild(firstmatch) -->
+</td></tr>
+</table>
+</div>
+</td></tr><tr><td><div id="divbottommainpage" style="position:relative;top:-340px;">
 <b>Separate Camera Recordings.  Click a blue border to list/unlist </b>
 &nbsp;&nbsp; &nbsp; &nbsp;
 <!--
@@ -1365,330 +1730,10 @@ height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 </object>
 </td></tr>
 -->
-
-
 </td></tr>
 </table>
 </td>
 </tr></table>
-<div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-Index:2;top:-10px">
-<script type="text/javascript">
-var alertsdirectoryheightmode0 =245+'px'
-var alertsdirectoryheightmode1 =623+'px'
-var alertsdirectorywidthmode0 =379+'px'
-var alertsdirectorywidthmode1 =""
-var alertsdirectorytopmode0 =""
-var alertsdirectorytopmode1 =""
-var alertsdirectoryleftmode0 =""
-var alertsdirectoryleftmode1 =""
-
-var mainjpgviewer0topmode0 =""
-var mainjpgviewer0topmode1 =""
-var mainjpgviewer0leftmode0 =""
-var mainjpgviewer0leftmode1 =""
-var mainjpgviewer0widthmode0 =550+'px'
-var mainjpgviewer0widthmode1 =1000+'px'
-
-var forbuttonstopmode0 =""
-var forbuttonstopmode1 =0+'px'
-var forbuttonstopmode2 =0+'px'
-var forbuttonsleftmode0 =""
-var forbuttonsleftmode1 =""
-var alertsdirectorysources = []
-alertsdirectorysources[0] = '/../../links_to_alerting_activity/mostrecent400'
-alertsdirectorysources[1] = '/../../links_to_alerting_activity/mostrecent2'
-alertsdirectorysources[2] = '/../../camera_snapshots/*/*jpgaliased'
-var alertsdirectoryaliases = []
-alertsdirectoryaliases[0] = 'All alert-related snapshots'
-alertsdirectoryaliases[1] = 'Topmost alert-related snapshot'
-alertsdirectoryaliases[2] = 'All snapshots, including motion detects which may no longer exist'
-</script>
-<table><tr><td>
-<table style="border-collapse:collapse"><tr><td>
-<!-- Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=
-<input type="button" value="Most recent alert event" onclick="this.value=previousalert">
-<br> -->
-<table width="1px" height="265px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholder1" width="1px" height="100%">
-<object id="alertsdirectory" type="text/html"
-data='/../../links_to_alerting_activity/mostrecent400'
-onclick="
-this.children['marker'].value=(this.children['marker'].value==alertsdirectorysources.length-1?0:parseInt(this.children['marker'].value)+1)
-if(confirm(alertsdirectoryaliases[this.children['marker'].value]))
-{this.data=alertsdirectorysources[this.children['marker'].value]}
-"
-onload="/*
-        mainjpgviewer0.height=parseInt(this.height)+18+'px'
-        mainjpgviewer0.width=parseInt(this.width)+'px'*/
-     if (!alertCheck.value.endsWith(' OFF'))
-     {   if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
-           alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
-           alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
-         {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
-             {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
-                 {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
-                     {
-                         if(previousalert!='waiting')
-                         {   soundalarm();show_eventsmainjpgviewer0.value=0;show_eventsmainjpgviewer0.input()
-/* obsolete for now                            if(mainjpgviewer0.data!=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
-                             {   mainjpgviewer0.data=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href}*/
-                         }
-                         else
-                         {   previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
-                         }
-                     }
-                 }
-                 else {previousalert='waiting';}
-             }
-         }
-     }
-     glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-width="379px" height="245px"
-style="font-size:15px;overflow:auto;border:3px solid blue;border-width:15px 3px 3px 3px;
-">
-   <param name="timestamp" value="initial" />
-   <param name="nextfilename" value="initial" />
-   <param name="currenttime" value=0 />
-   <param name="playingjpgs_number" value="0" />
-   <param name="marker" value=0 />
-    </object>
-</td></tr></table><input type="range" id="show_eventsmainjpgviewer0" notes="11px per line, 25 lines in mode0=275"
-oninput="
-/*alert(this.style.left+', '+this.clientLeft+', '+this.getBoundingClientRect().right+', '+alertsdirectory.style.left+', '+alertsdirectory.clientLeft+', '+alertsdirectory.offsetLeft+', '+alertsdirectory.getBoundingClientRect().left)*/
-/*alert(this.style.top+', '+this.clientTop+', '+this.getBoundingClientRect().top+', '+alertsdirectory.style.top+', '+alertsdirectory.clientTop+', '+alertsdirectory.offsetTop+', '+alertsdirectory.getBoundingClientRect().top)*/
-/*if(this.style.height!=alertsdirectory.style.height){this.style.height=parseFloat(alertsdirectory.offsetHeight)-9+'px';this.style.top=parseFloat(alertsdirectory.clientTop)+'px'}*/
-this.value=(alertsdirectory.contentDocument!='undefined' && alertsdirectory.contentDocument!=null && alertsdirectory.contentDocument.body.children[0] !='undefined' && alertsdirectory.contentDocument.body.children[0] != null && alertsdirectory.contentDocument.body.children[0].rows!='undefined' && alertsdirectory.contentDocument.body.children[0].rows!=null && alertsdirectory.contentDocument.body.children[0].rows.length!='undefined' && alertsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-alertsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
-if(this.value<1)
-{/*alert(parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.0089)*/
-   var rowselected=Math.round(alertsdirectory.contentDocument.body.children[0].rows.length*(alertsdirectory.contentDocument.body.scrollTop/((parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.9943)))-this.value)
-   if(rowselected<alertsdirectory.contentDocument.body.children[0].rows.length)
-   {
-      if(alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg'))
-      {
-         animatealertsdirectorytomainjpgviewer0(rowselected,alertsdirectory.contentDocument.body.children[0]);
-         StartTimeOfInterest=alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[0].outerHTML.substr(18)
-         StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
-         StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
-         StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
-         StartCamOfInterestEl.value=alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].innerText.trim()
-      }
-   }
-   else
-   {
-      this.value=(parseInt(this.value)-(alertsdirectory.contentDocument.body.children[0].rows.length-1-rowselected))
-   }
-}else
-{
-   animatordivalertsdirectorytomainjpgviewer0.style.display='none';
-   if(animatordivalertsdirectorytomainjpgviewer0!='undefined' && animatordivalertsdirectorytomainjpgviewer0 != null)
-   {   if(confirm(animationdivalertsdirectorytomainjpgviewer0.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory'))
-       {
-           animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
-           clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=null
-       }
-   }
-}
-"  
-name="show_eventsmainjpgviewer0"
-min="-24" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;z-index:5;top:14px;left:434px;height:286px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
-" 
-note="1+395/36=11,159+245=1+747/68=11"
-orient="vertical">
-<!--
--webkit-appearance: none;background-image: url('/var/www/html/arrow_4_SE.png')
--->
-</td></tr><tr><td>
-<button  onclick="
-var oldheight=alertsdirectory.height
-if(camsmp4col1mainpg.style.display=='')
-{  camsmp4col1mainpg.style.display='none';
-   textmaster.style.display='none'
-   sldrmaster.style.display='none'
-   alertsdirectory.height=alertsdirectoryheightmode1
-   mainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
-   show_eventsmainjpgviewer0.min='-58'
-   show_eventsmainjpgviewer0.style.height='660px'
-   mainjpgviewer0.width=mainjpgviewer0widthmode1
-   mainjpgviewer_buttonsdiv.style.left='0px'
-/*   setTimeout(function(){alertsdirectory.scrollIntoView(false);},1)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things.  Not ideal for when button is above bottom*/
-}
-else{
-   camsmp4col1mainpg.style.display='';
-   textmaster.style.display=''
-   sldrmaster.style.display=''
-   setTimeout(function(){window.scrollBy(0,466)},6)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things*/
-/*   setTimeout(function(){window.scrollBy(0,alertsdirectory.getBoundingClientRect().bottom-window.innerHeight)},6)/*This is needed for Chrome to keep the document high enough to show the resize button when shrinking things*/
-   alertsdirectory.height=alertsdirectoryheightmode0
-   mainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
-   show_eventsmainjpgviewer0.style.height='286px'
-   show_eventsmainjpgviewer0.min='-24'
-   mainjpgviewer0.width=mainjpgviewer0widthmode0
-   mainjpgviewer_buttonsdiv.style.left='0px'
-}
-if( animationdivalertsdirectorytomainjpgviewer0 != 'undefined' && animationdivalertsdirectorytomainjpgviewer0 != null)
-{
-   animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
-   animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
-   animatordivalertsdirectorytomainjpgviewer0.style.top=parseInt(animatordivalertsdirectorytomainjpgviewer0.style.top)+(parseInt(oldheight)-parseInt(alertsdirectory.height))+'px'
-   for(var i=0;i<animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
-   {
-      animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['width'].value=mainjpgviewer0.width
-      animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['height'].value=alertsdirectory.parentElement.clientHeight
-   }
-}
-"
-style="position:relative;top:-50px;left:383px;z-index:3;opacity:.85;height:40px;width:160px;color:red;font-size:18px"
->Toggle sizing</button>
-<div style="position:relative;top:-40px">
-Clicking on blue title bar on top toggles this list between:<br>
-- All alert-related snapshots<br>
-- Only the one topmost alert-related snapshot<br>
-- All cameras, all snapshots, including motion detects which may no longer exist<br>
-</div>
-<!--
-min="-48" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;z-index:5;top:14px;left:270px;height:404px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
--->
-<!-- animatealertsdirectorytomainjpgviewer0(0-this.value,alertsdirectory.contentDocument.body.children[0].rows[0-this.value].cells[1].children[0].href);-->
-</td></tr></table>
-</td><td valign="top">
-<div id="mainjpgviewer_buttonsdiv" class="mainjpgviewer_buttonsdiv">
-<object id="mainjpgviewer0" type="text/html" value="Main jpg viewer" width="550px" height="260px"
-draggable="true"
-style="font-size:15px;overflow:auto;border:0px;"
-onload="if(camsmp4col1mainpg.style.display!='')
-{;
-/*setTimeout(function(){scrollmarker.scrollIntoView({behavior: 'smooth'})},10)*/
-}
-else
-{;
-/*setTimeout(function(){edmp4.scrollIntoView({behavior: 'smooth'});},10)*/
-}
-"
-onclick="this.style.display='none';
-if(camsmp4col1mainpg.style.display=='none')
-{
-   forbuttons.style.top=parseInt(alertsdirectory.height)+15+'px';
-/*   setTimeout(function(){scrollmarker.scrollIntoView({behavior: 'smooth'})},10);*/
-}
-"
-/*
-onmousedown="mousestartXmainjpgviewer0=btnpositionshow.value.substr(1,btnpositionshow.value.indexOf(',')-1);mousestartYmainjpgviewer0=btnpositionshow.value.substr(1,btnpositionshow.value.indexOf(',')+1)
-btnpositionshow.value
-mouseendXmainjpgviewer0='';mouseendYmainjpgviewer0='';this.addEventListener('mousemove',foo)"
-
-onmouseup="console.log('ending the drag');this.removeEventListener('mousemove',foo)"
-*/
-ondragend="/*Now simply catch the very next mouse event to locate mouse*/
-/*alert(mousestartXmainjpgviewer0 + '>' + mouseendXmainjpgviewer0 + ', ' + mousestartYmainjpgviewer0 + '>' + mouseendYmainjpgviewer0)*/
-;
-"
-></object>
-
-<script type="text/javascript">
-var animationdivalertsdirectorytomainjpgviewer0=null
-var animatetimeralertsdirectorytomainjpgviewer0=null
-function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
-{
-   if(animationdivalertsdirectorytomainjpgviewer0==null)
-   {
-      animationdivalertsdirectorytomainjpgviewer0 = document.createElement('div'); /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory or otherwise have a way of limiting memory useage */
-      animationdivalertsdirectorytomainjpgviewer0.id = 'animatordivalertsdirectorytomainjpgviewer0'
-      animationdivalertsdirectorytomainjpgviewer0.className = 'jpganimator'
-      animationdivalertsdirectorytomainjpgviewer0.className = 'byview'
-
-
-      document.getElementById('spaceholder1').appendChild(animationdivalertsdirectorytomainjpgviewer0) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
-
-
-
-      animatordivalertsdirectorytomainjpgviewer0.style='position:relative;top:-'+parseInt(alertsdirectory.parentElement.clientHeight)+'px;left:'+parseInt(alertsdirectory.parentElement.clientWidth)+'px'
-      setTimeout(function()
-      {   if(animatordivalertsdirectorytomainjpgviewer0!='undefined' && animatordivalertsdirectorytomainjpgviewer0 != null)
-          {   if(confirm(animationdivalertsdirectorytomainjpgviewer0.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory'))
-              {
-                  animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
-                  clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=null
-              }
-          }
-       },300000)
-      animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
-      animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
-/*      animatordivalertsdirectorytomainjpgviewer0.style.top='0px'*/
-/*      animatordivalertsdirectorytomainjpgviewer0.style.top=(parseInt(alertsdirectory.height)>350?'42px':'420px')*/
-   }/*Next lines need to return the same or possibly changed index like if the jpg is already here somewhere*/
-   var firstmatch=animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
-   if(firstmatch==null)
-   {
-      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" width=\''+mainjpgviewer0.width+'\' height=\''+alertsdirectory.parentElement.clientHeight+'\' style=\'position:absolute;left:0px;top:0px;z-index:1\' />';
-      animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'})
-   }
-   else
-   {
-      for(var i=0;i<animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
-      {
-         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].style.zIndex='0'
-      }
-      firstmatch.style.zIndex='1'
-      /*animatordivalertsdirectorytomainjpgviewer0.appendChild(firstmatch)*/
-   }
-   if(animatordivalertsdirectorytomainjpgviewer0.style.display=='none')
-   {
-      animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
-      animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
-
-      for(var i=0;i<animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
-      {
-         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['width'].value=mainjpgviewer0.width
-         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['height'].value=alertsdirectory.parentElement.clientHeight
-      }
-      animatordivalertsdirectorytomainjpgviewer0.style.display=''
-   }
-}
-
-var mousestartXmainjpgviewer0=''
-var mousestartYmainjpgviewer0=''
-var mouseendXmainjpgviewer0=''
-var mouseendYmainjpgviewer0=''
-function foo(event){
-if(mousestartXmainjpgviewer0==''){
-mousestartXmainjpgviewer0=event.screenX;
-mousestartYmainjpgviewer0=event.screenY;console.log('first move')
-}else
-{
-mouseendXmainjpgviewer0=event.screenX;
-mouseendYmainjpgviewer0=event.screenY;console.log('not first move')
-}
-function getParentOffsets(el) {
-if (el.offsetParent) {
-    return el.offsetParent.offsetTop + getParentOffsets(el.offsetParent);
-} else {
-    return 0;
-}
-}}
-</script>
-<!--
-      animatordivalertsdirectorytomainjpgviewer0.removeChild(animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')) -->
-<!--      for(var i;animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
-      {
-         if(animatordivalertsdirectorytomainjpgviewer0.childNodes[i].style.zIndex!='0'){animatordivalertsdirectorytomainjpgviewer0.childNodes[i].style.zIndex='0'}
-      } -->
-<!--      for(var i;animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
-      {
-         if(firstmatch==animatordivalertsdirectorytomainjpgviewer0.childNodes[i])
-         {
-            firstmatch.style.zIndex='1'
-         }
-         else
-         {
-            firstmatch.style.zIndex='0'
-         }
-      }-->
-<!--      animatordivalertsdirectorytomainjpgviewer0.removeChild(firstmatch) -->
-</td></tr>
-</table>
-</div>
-
 Snapshots separated by camera:
 <table style="border:1px solid black"><tr><td class="bb" valign="top">
 East
@@ -1848,7 +1893,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 </table>
 </td></tr></table>
 </td>
-</div><div id="notesdiv" class="notesdiv" class="tabcontent" style="display:none;border:1px dashed red;border-width:0px 1px 1px 0px;width:1340px;height:608px">
+</div></div><div id="notesdiv" class="notesdiv" class="tabcontent" style="display:none;border:1px dashed red;border-width:0px 1px 1px 0px;width:1340px;height:608px">
 <h3><ul>
 <li>
 Drag over jpg files and you'll notice they can launch into new and separate viewer elements.  If that is not<br>
