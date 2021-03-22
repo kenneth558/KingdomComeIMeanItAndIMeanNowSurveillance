@@ -71,15 +71,15 @@ onload = "
 url0='rtsp://';
 url1='kERRY123:Kerry123@';
 url2=':9';url3='554/Streaming/Channels/10';url4='2';  camapp_ul.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;
-                                           url4='1'; camapp_ul1.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;
+                                           url4='1'; camapp_ul1.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;camapp_ul1dup.value=camapp_ul1.value
 url2=':6';                                 url4='2';  camapp_ur.value= url0        + window.location.hostname + url2 + url3 + url4;
-                                           url4='1'; camapp_ur1.value= url0        + window.location.hostname + url2 + url3 + url4;
+                                           url4='1'; camapp_ur1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_ur1dup.value=camapp_ur1.value
 url2=':10';                                url4='2';  camapp_ll.value= url0        + window.location.hostname + url2 + url3 + url4;
-                                           url4='1'; camapp_ll1.value= url0        + window.location.hostname + url2 + url3 + url4;
+                                           url4='1'; camapp_ll1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_ll1dup.value=camapp_ll1.value
 url2=':14';                                url4='2';  camapp_lr.value= url0        + window.location.hostname + url2 + url3 + url4;
-                                           url4='1'; camapp_lr1.value= url0        + window.location.hostname + url2 + url3 + url4;
+                                           url4='1'; camapp_lr1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_lr1dup.value=camapp_lr1.value
 url2=':15';                                url4='2'; camapp_lst.value= url0        + window.location.hostname + url2 + url3 + url4;
-                                           url4='1';camapp_lst1.value= url0        + window.location.hostname + url2 + url3 + url4;
+                                           url4='1';camapp_lst1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_lst1dup.value=camapp_lst1.value
 slidersd(10);
 slidered(10);
 slidersw(10);
@@ -727,11 +727,17 @@ Script on server: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nb
 </table>
 </div><div id="divmain" class="divmain" class="tablinks" style="position:relative;top:0px">
 <div  width="440px" height="290px" style="display: inline-block;"><object id="dedicatedjpgviewer0" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer" onload="this.style.border='3px dashed red';setTimeout(function(){var myiframe=document.getElementById('filenametool0');myiframe.src=sourcesdedicatedjpgviewer[0]},5000)"></object></div>
-<div  width="440px" height="290px" style="display: inline-block;"><object onclick="btndockjpgs.onmousedown()"   id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer"></object></div>
-<div  width="440px" height="290px" style="display: inline-block;"><object onclick="btneastjpgs.onmousedown()"   id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer"></object></div>
-<div  width="440px" height="290px" style="display: inline-block;"><object onclick="btnseastjpgs.onmousedown()"  id="dedicatedjpgviewer3" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer"></object></div>
-<div  width="440px" height="290px" style="display: inline-block;"><object onclick="btnofficejpgs.onmousedown()" id="dedicatedjpgviewer4" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer"></object></div>
-<div  width="440px" height="290px" style="display: inline-block;"><object onclick="btnnorthjpgs.onmousedown()"  id="dedicatedjpgviewer5" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer"></object></div>
+<div  width="440px" height="290px" style="display: inline-block;"><object onclick="btndockjpgs.onmousedown()"   id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer"></object>
+<br><input disabled id="camapp_lr1dup" size="58" style="border:1px ridge blue;" value="working..."></div>
+<div  width="440px" height="290px" style="display: inline-block;"><object onclick="btneastjpgs.onmousedown()"   id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer"></object>
+<br><input disabled id="camapp_ur1dup" size="58" style="border:1px ridge blue;" value="working..."></div>
+<div  width="440px" height="290px" style="display: inline-block;"><object onclick="btnseastjpgs.onmousedown()"  id="dedicatedjpgviewer3" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer"></object>
+<br><input disabled id="camapp_ll1dup" size="58" style="border:1px ridge blue;" value="working..."></div>
+<div  width="440px" height="290px" style="display: inline-block;"><object onclick="btnofficejpgs.onmousedown()" id="dedicatedjpgviewer4" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer"></object>
+<br><input disabled id="camapp_ul1dup" size="58" style="border:1px ridge blue;" value="working..."></div>
+<div  width="440px" height="290px" style="display: inline-block;"><object onclick="btnnorthjpgs.onmousedown()"  id="dedicatedjpgviewer5" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer"></object>
+<br><input disabled id="camapp_lst1dup" size="58" style="border:1px ridge blue;" value="working..."></div>
+</div>
 <script type="text/javascript">
 var animationdivalertsdirectorytomainjpgviewer0=null
 function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
@@ -3321,7 +3327,6 @@ function checkforcache() {
    else {alert('This browser cannot cache');}
 }
     </script> 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
 </body>
 </html>
