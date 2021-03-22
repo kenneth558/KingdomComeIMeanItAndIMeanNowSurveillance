@@ -721,13 +721,13 @@ Script on server: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nb
 </tr>
 </table>
 </div><div id="divmain" class="divmain" class="tablinks" style="position:relative;top:0px">
-<div  width="440px" height="282px" style="display: inline-block;border:3px dashed red"><object id="dedicatedjpgviewer0" type="text/html" style="border:0px" value="Alt jpg viewer" width="440px" height="282px" data="" class="dedicatedjpgviewer" onload="this.style.border='0px';
+<div  width="440px" height="282px" style="display: inline-block;border:3px dashed red"><object id="dedicatedjpgviewer0" type="text/html" style="border:0px" value="Alt jpg viewer" width="440px" height="282px" data="" class="dedicatedjpgviewer" onload="setTimeout(function(){
 filenametool1.src=sourcesdedicatedjpgviewer[1];if(filenametool0.contentDocument.body.innerText.includes(filenametool1.src.substr(filenametool1.src.indexOf('camera_')+24,7))){filenametool1.parentElement.parentElement.style.border='4px solid red';}else{filenametool1.parentElement.parentElement.style.border='0px';}
 filenametool2.src=sourcesdedicatedjpgviewer[2];if(filenametool0.contentDocument.body.innerText.includes(filenametool2.src.substr(filenametool2.src.indexOf('camera_')+24,7))){filenametool2.parentElement.parentElement.style.border='4px solid red';}else{filenametool2.parentElement.parentElement.style.border='4px solid transparent';}
 filenametool3.src=sourcesdedicatedjpgviewer[3];if(filenametool0.contentDocument.body.innerText.includes(filenametool3.src.substr(filenametool3.src.indexOf('camera_')+24,7))){filenametool3.parentElement.parentElement.style.border='4px solid red';}else{filenametool3.parentElement.parentElement.style.border='4px solid transparent';}
 filenametool4.src=sourcesdedicatedjpgviewer[4];if(filenametool0.contentDocument.body.innerText.includes(filenametool4.src.substr(filenametool4.src.indexOf('camera_')+24,7))){filenametool4.parentElement.parentElement.style.border='4px solid red';}else{filenametool4.parentElement.parentElement.style.border='4px solid transparent';}
 filenametool5.src=sourcesdedicatedjpgviewer[5];if(filenametool0.contentDocument.body.innerText.includes(filenametool5.src.substr(filenametool5.src.indexOf('camera_')+24,7))){filenametool5.parentElement.parentElement.style.border='4px solid red';}else{filenametool5.parentElement.parentElement.style.border='4px solid transparent';}
-"></object></div>
+},100)"></object></div>
 <div  width="440px" height="262px" style="display: inline-block;border:4px solid transparent"><object onclick="btndockjpgs.onmousedown()" style="border:0px" id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="440px" height="262px" data="" class="dedicatedjpgviewer"></object>
 <br><input disabled id="camapp_lr1dup" size="58" value="working..."></div>
 <div  width="440px" height="262px" style="display: inline-block;border:4px solid transparent"><object onclick="btneastjpgs.onmousedown()" style="border:0px" id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="440px" height="262px" data="" class="dedicatedjpgviewer"></object>
@@ -1121,7 +1121,7 @@ border-bottom-right-radius:10px;
 id="alertrelated"
 onclick="
 if(alertsdirectory.data.includes(alertsdirectorysources[1].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
-   alertCheck.value.endsWith(' OFF') || 
+   alertCheck.value.endsWith(' OFF') || btnaudibleonalert.value=='Make new alerts audible' ||
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:'))
 {
    alertsdirectory.children['marker'].value=1
@@ -1144,7 +1144,7 @@ border-bottom-right-radius:10px;
 id="btnalljpgs"
 onmousedown="
 if(alertsdirectory.data.includes(alertsdirectorysources[0].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
-   alertCheck.value.endsWith(' OFF') || 
+   alertCheck.value.endsWith(' OFF') || btnaudibleonalert.value=='Make new alerts audible' ||
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
   )
 {
@@ -1168,7 +1168,7 @@ border-bottom-right-radius:10px;
 id="btneastjpgs"
 onmousedown="
 if(alertsdirectory.data.includes(alertsdirectorysources[2].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
-   alertCheck.value.endsWith(' OFF') || 
+   alertCheck.value.endsWith(' OFF') || btnaudibleonalert.value=='Make new alerts audible' ||
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
   )
 {
@@ -1192,7 +1192,7 @@ border-bottom-right-radius:10px;
 id="btndockjpgs"
 onmousedown="
 if(alertsdirectory.data.includes(alertsdirectorysources[3].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
-   alertCheck.value.endsWith(' OFF') || 
+   alertCheck.value.endsWith(' OFF') || btnaudibleonalert.value=='Make new alerts audible' ||
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
   )
 {
@@ -1216,7 +1216,7 @@ border-bottom-right-radius:10px;
 id="btnofficejpgs"
 onmousedown="
 if(alertsdirectory.data.includes(alertsdirectorysources[4].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
-   alertCheck.value.endsWith(' OFF') || 
+   alertCheck.value.endsWith(' OFF') || btnaudibleonalert.value=='Make new alerts audible' ||
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
   )
 {
@@ -1240,7 +1240,7 @@ border-bottom-right-radius:10px;
 id="btnseastjpgs"
 onmousedown="
 if(alertsdirectory.data.includes(alertsdirectorysources[5].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
-   alertCheck.value.endsWith(' OFF') || 
+   alertCheck.value.endsWith(' OFF') || btnaudibleonalert.value=='Make new alerts audible' ||
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
   )
 {
@@ -1264,7 +1264,7 @@ border-bottom-right-radius:10px;
 id="btnnorthjpgs"
 onmousedown="
 if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
-   alertCheck.value.endsWith(' OFF') || 
+   alertCheck.value.endsWith(' OFF') || btnaudibleonalert.value=='Make new alerts audible' ||
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
   )
 {
