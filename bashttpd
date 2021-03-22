@@ -150,7 +150,7 @@ declare -a HTTP_RESPONSE=(
    [405]="Method Not Allowed"
    [416]="Range Not Satisfiable"
    [500]="Internal Server Error")
-declare DATE="$(date +"%a, %d %b";printf $(( $(date +%Y) + 1 ));date +" %H:%M:%S %Z")"
+declare DATE="$(date +"%a, %d %b %Y %H:%M:%S %Z")"
 declare -a RESPONSE_HEADERS=(
       "Date: $DATE"
    "Expires: $DATE"
@@ -309,7 +309,7 @@ function send_response_binary() {
 echo "Serving file ${file} and code= ${code}" >> /var/log/bashttpd.log
  send "HTTP/1.1 $1 ${HTTP_RESPONSE[$1]}"
  for i in "${RESPONSE_HEADERS[@]}"; do
-    if [[ ${file} =~ .htm$ ]] || [[ ${file} =~ .html$ ]] || [[ ${file} =~ .txt$ ]] ;then if [[ $i =~ Expires: ]]; then i="Expires: $(date +"%a, %d %b %Y %H:%M:%S %Z")";fi;fi
+    if [[ ${file} =~ .jpg$ ]] || [[ ${file} =~ .mp4$ ]];then if [[ $i =~ Expires: ]]; then i="Expires: $(date +"%a, %d %b";printf $(( $(date +%Y) + 2 ));date +" %H:%M:%S %Z")";fi;fi
     send "$i"
  done
  send
