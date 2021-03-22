@@ -120,12 +120,7 @@ for(var i=0;i<objdedicatedjpgviewer.length;i++)
      {
         if(!this.parentElement.data.includes(this.contentDocument.body.innerText.substring(0,this.contentDocument.body.innerText.length-1)))
         {
-           this.parentElement.data=this.contentDocument.body.innerText;
-           filenametool1.src=sourcesdedicatedjpgviewer[1];if(filenametool0.contentDocument.body.innerText.includes(filenametool1.src.substr(filenametool1.src.indexOf('camera_')+24,7))){filenametool1.parentElement.parentElement.style.border='4px solid red';}else{filenametool1.parentElement.parentElement.style.border='0px';}
-           filenametool2.src=sourcesdedicatedjpgviewer[2];if(filenametool0.contentDocument.body.innerText.includes(filenametool2.src.substr(filenametool2.src.indexOf('camera_')+24,7))){filenametool2.parentElement.parentElement.style.border='4px solid red';}else{filenametool2.parentElement.parentElement.style.border='0px';}
-           filenametool3.src=sourcesdedicatedjpgviewer[3];if(filenametool0.contentDocument.body.innerText.includes(filenametool3.src.substr(filenametool3.src.indexOf('camera_')+24,7))){filenametool3.parentElement.parentElement.style.border='4px solid red';}else{filenametool3.parentElement.parentElement.style.border='0px';}
-           filenametool4.src=sourcesdedicatedjpgviewer[4];if(filenametool0.contentDocument.body.innerText.includes(filenametool4.src.substr(filenametool4.src.indexOf('camera_')+24,7))){filenametool4.parentElement.parentElement.style.border='4px solid red';}else{filenametool4.parentElement.parentElement.style.border='0px';}
-           filenametool5.src=sourcesdedicatedjpgviewer[5];if(filenametool0.contentDocument.body.innerText.includes(filenametool5.src.substr(filenametool5.src.indexOf('camera_')+24,7))){filenametool5.parentElement.parentElement.style.border='4px solid red';}else{filenametool5.parentElement.parentElement.style.border='0px';}
+           this.parentElement.data=this.contentDocument.body.innerText;/*then wait until this.parentElement. is loaded to proceed*/
         };
           setTimeout(function()
           {
@@ -144,7 +139,7 @@ for(var i=0;i<objdedicatedjpgviewer.length;i++)
    iframe.setAttributeNode(attid);
    iframe.type='text:html'
    iframe.id='filenametool'+objdedicatedjpgviewer[i].id.substring(objdedicatedjpgviewer[i].id.length-1)
-   iframe.style='display:none'
+   iframe.style='display:none;border:0px'
    iframe.src=sourcesdedicatedjpgviewer[i]
    objdedicatedjpgviewer[i].appendChild(iframe);
 }
@@ -726,18 +721,23 @@ Script on server: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nb
 </tr>
 </table>
 </div><div id="divmain" class="divmain" class="tablinks" style="position:relative;top:0px">
-<div  width="440px" height="290px" style="display: inline-block;"><object id="dedicatedjpgviewer0" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer" onload="this.style.border='3px dashed red';setTimeout(function(){var myiframe=document.getElementById('filenametool0');myiframe.src=sourcesdedicatedjpgviewer[0]},5000)"></object></div>
-<div  width="440px" height="290px" style="display: inline-block;"><object onclick="btndockjpgs.onmousedown()"   id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer"></object>
-<br><input disabled id="camapp_lr1dup" size="58" style="border:1px ridge blue;" value="working..."></div>
-<div  width="440px" height="290px" style="display: inline-block;"><object onclick="btneastjpgs.onmousedown()"   id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer"></object>
-<br><input disabled id="camapp_ur1dup" size="58" style="border:1px ridge blue;" value="working..."></div>
-<div  width="440px" height="290px" style="display: inline-block;"><object onclick="btnseastjpgs.onmousedown()"  id="dedicatedjpgviewer3" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer"></object>
-<br><input disabled id="camapp_ll1dup" size="58" style="border:1px ridge blue;" value="working..."></div>
-<div  width="440px" height="290px" style="display: inline-block;"><object onclick="btnofficejpgs.onmousedown()" id="dedicatedjpgviewer4" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer"></object>
-<br><input disabled id="camapp_ul1dup" size="58" style="border:1px ridge blue;" value="working..."></div>
-<div  width="440px" height="290px" style="display: inline-block;"><object onclick="btnnorthjpgs.onmousedown()"  id="dedicatedjpgviewer5" type="text/html" value="Alt jpg viewer" width="440px" height="290px" data="" class="dedicatedjpgviewer"></object>
-<br><input disabled id="camapp_lst1dup" size="58" style="border:1px ridge blue;" value="working..."></div>
-</div>
+<div  width="440px" height="280px" style="display: inline-block;border:3px dashed red"><object id="dedicatedjpgviewer0" type="text/html" style="border:0px" value="Alt jpg viewer" width="440px" height="280px" data="" class="dedicatedjpgviewer" onload="this.style.border='0px';
+filenametool1.src=sourcesdedicatedjpgviewer[1];if(filenametool0.contentDocument.body.innerText.includes(filenametool1.src.substr(filenametool1.src.indexOf('camera_')+24,7))){filenametool1.parentElement.parentElement.style.border='4px solid red';}else{filenametool1.parentElement.parentElement.style.border='0px';}
+filenametool2.src=sourcesdedicatedjpgviewer[2];if(filenametool0.contentDocument.body.innerText.includes(filenametool2.src.substr(filenametool2.src.indexOf('camera_')+24,7))){filenametool2.parentElement.parentElement.style.border='4px solid red';}else{filenametool2.parentElement.parentElement.style.border='4px solid transparent';}
+filenametool3.src=sourcesdedicatedjpgviewer[3];if(filenametool0.contentDocument.body.innerText.includes(filenametool3.src.substr(filenametool3.src.indexOf('camera_')+24,7))){filenametool3.parentElement.parentElement.style.border='4px solid red';}else{filenametool3.parentElement.parentElement.style.border='4px solid transparent';}
+filenametool4.src=sourcesdedicatedjpgviewer[4];if(filenametool0.contentDocument.body.innerText.includes(filenametool4.src.substr(filenametool4.src.indexOf('camera_')+24,7))){filenametool4.parentElement.parentElement.style.border='4px solid red';}else{filenametool4.parentElement.parentElement.style.border='4px solid transparent';}
+filenametool5.src=sourcesdedicatedjpgviewer[5];if(filenametool0.contentDocument.body.innerText.includes(filenametool5.src.substr(filenametool5.src.indexOf('camera_')+24,7))){filenametool5.parentElement.parentElement.style.border='4px solid red';}else{filenametool5.parentElement.parentElement.style.border='4px solid transparent';}
+setTimeout(function(){var myiframe=document.getElementById('filenametool0');myiframe.src=sourcesdedicatedjpgviewer[0]},5000)"></object></div>
+<div  width="440px" height="260px" style="display: inline-block;border:4px solid transparent"><object onclick="btndockjpgs.onmousedown()" style="border:0px" id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="440px" height="260px" data="" class="dedicatedjpgviewer"></object>
+<br><input disabled id="camapp_lr1dup" size="58" value="working..."></div>
+<div  width="440px" height="260px" style="display: inline-block;border:4px solid transparent"><object onclick="btneastjpgs.onmousedown()" style="border:0px" id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="440px" height="260px" data="" class="dedicatedjpgviewer"></object>
+<br><input disabled id="camapp_ur1dup" size="58" value="working..."></div>
+<div  width="440px" height="260px" style="display: inline-block;border:4px solid transparent"><object onclick="btnseastjpgs.onmousedown()" style="border:0px" id="dedicatedjpgviewer3" type="text/html" value="Alt jpg viewer" width="440px" height="260px" data="" class="dedicatedjpgviewer"></object>
+<br><input disabled id="camapp_ll1dup" size="58" value="working..."></div>
+<div  width="440px" height="260px" style="display: inline-block;border:4px solid transparent"><object onclick="btnofficejpgs.onmousedown()" style="border:0px" id="dedicatedjpgviewer4" type="text/html" value="Alt jpg viewer" width="440px" height="260px" data="" class="dedicatedjpgviewer"></object>
+<br><input disabled id="camapp_ul1dup" size="58" value="working..."></div>
+<div  width="440px" height="260px" style="display: inline-block;border:4px solid transparent"><object onclick="btnnorthjpgs.onmousedown()" style="border:0px" id="dedicatedjpgviewer5" type="text/html" value="Alt jpg viewer" width="440px" height="260px" data="" class="dedicatedjpgviewer"></object>
+<br><input disabled id="camapp_lst1dup" size="58" value="working..."></div>
 <script type="text/javascript">
 var animationdivalertsdirectorytomainjpgviewer0=null
 function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
