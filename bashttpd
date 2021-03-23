@@ -497,6 +497,9 @@ if [[ ${#GREPV} > 0 ]];then
 #   do GREPV="${GRPEV} -v ${URL_PATH##*?-}";done
 fi
   local HEADLINES=${URL_PATH##*mostrecent}
+
+  local OPENHERE=${URL_PATH//\?openhere}
+  if [[ ${#OPENHERE} != ${#URL_PATH} ]];then OPENHERE=true;URL_PATH="${URL_PATH//\?openhere}";echo "OPENHERE=$OPENHERE"  >>  /var/log/bashttpd.log;else OPENHERE="false";fi
   local PLAINTEXT=${URL_PATH//\?plaintext}
   if [[ ${#PLAINTEXT} != ${#URL_PATH} ]];then PLAINTEXT=true;URL_PATH="${URL_PATH//\?plaintext}";echo "PLAINTEXT=$PLAINTEXT"  >>  /var/log/bashttpd.log;else PLAINTEXT="false";fi
   local ALIASED=${URL_PATH//\?aliased}
@@ -564,7 +567,7 @@ if [[ ${#HEADLINES} == 0 ]] && [[ ${#GREPV} == 0 ]]; then ls -l --full-time --ti
 elif [[ ${#HEADLINES} > 0 ]] && [[ ${#GREPV} == 0 ]];then ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|head -n$(( ${HEADLINES} ));
 elif [[ ${#HEADLINES} == 0 ]] && [[ ${#GREPV} > 0 ]];then ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|grep -v ${GREPV};
 elif [[ ${#HEADLINES} > 0 ]] && [[ ${#GREPV} > 0 ]]; then ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|head -n$(( ${HEADLINES} ))|grep -v ${GREPV};
-fi|awk -v headlines=${HEADLINES} -v linkpre="${LINKPRE}" -v aliased=$ALIASED -v css_style="$css_styling" -v cams_needed=$CAMS_ACTIVE -v path="${URL_PATH}" -v plaintext=$PLAINTEXT '
+fi|awk -v openhere="${OPENHERE}" -v headlines=${HEADLINES} -v linkpre="${LINKPRE}" -v aliased=$ALIASED -v css_style="$css_styling" -v cams_needed=$CAMS_ACTIVE -v path="${URL_PATH}" -v plaintext=$PLAINTEXT '
 BEGIN {toptencounter=0;lines=0;if(plaintext=="false"){print css_style "<table class=\"elif3\" style=\"width:100%;\">"}}
 {
  if(plaintext=="false")
@@ -574,7 +577,7 @@ BEGIN {toptencounter=0;lines=0;if(plaintext=="false"){print css_style "<table cl
  if(substr($1,1,1)!="l"){printf $10}else{printf $12};
 if(plaintext=="false")
 {
- if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+ if(substr($10,length($10)-3)=="\.jpg" && openhere=='false'){printf "\" target=\"_blank"}
  printf "\">"
  if(substr($1,1,1)!="l")
  {
@@ -678,7 +681,7 @@ END{
 #END {print "</table>"}')"
 
   elif [[ "${URL_PATH}" =~ .*\*jpg-MOTION.mostrecent[0-9]{1,3}$ ]]; then
-      serve_html_string "$(echo "elif1, ${URL_PATH}" >> /var/log/bashttpd.log;URL_PATH="${URL_PATH%%\?*}";URL_PATH="${URL_PATH%%mostrecent*}";ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -t ${URL_PATH%%-MOTION*}|grep -v MOTION|head -n$(( ${HEADLINES} ))|awk -v linkpre="${LINKPRE}" -v aliased=$ALIASED -v css_style="$css_styling"  -v plaintext=$PLAINTEXT '
+      serve_html_string "$(echo "elif1, ${URL_PATH}" >> /var/log/bashttpd.log;URL_PATH="${URL_PATH%%\?*}";URL_PATH="${URL_PATH%%mostrecent*}";ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -t ${URL_PATH%%-MOTION*}|grep -v MOTION|head -n$(( ${HEADLINES} ))|awk -v openhere="${OPENHERE}" -v linkpre="${LINKPRE}" -v aliased=$ALIASED -v css_style="$css_styling"  -v plaintext=$PLAINTEXT '
 BEGIN {print css_style "<table class=\"elif1\" style=\"width:100%\">"}
 {printf "<tr><td aria-label=\"[&nbsp;"
  if($6=="") 
@@ -701,7 +704,7 @@ BEGIN {print css_style "<table class=\"elif1\" style=\"width:100%\">"}
  else 
  {
   printf $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre "/" $10
-  if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+  if(substr($10,length($10)-3)=="\.jpg" && openhere=='false'){printf "\" target=\"_blank"}
   printf "\">"
   if (substr($1,1,1)!="l")
   {
@@ -753,10 +756,10 @@ BEGIN {print css_style "<table class=\"elif1\" style=\"width:100%\">"}
 END {print "</table>";if(lines<1){print "Fetched list is too short or too long in " path " to display anything"}}')"
 
   elif [[ "${URL_PATH}" =~ .*\*jpg-MOTION$ ]] || [[ "${URL_PATH}" =~ .*\*mp4-MOTION$ ]]; then
-      serve_html_string "$(echo "elif2, ${URL_PATH}" >> /var/log/bashttpd.log;ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%-MOTION*}|grep -v MOTION|awk -v linkpre="${LINKPRE}" -v css_style="$css_styling" -v aliased=$ALIASED -v path="${URL_PATH%%-MOTION*}"  -v plaintext=$PLAINTEXT '
+      serve_html_string "$(echo "elif2, ${URL_PATH}" >> /var/log/bashttpd.log;ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH%%-MOTION*}|grep -v MOTION|awk -v openhere=${OPENHERE} -v linkpre="${LINKPRE}" -v css_style="$css_styling" -v aliased=$ALIASED -v path="${URL_PATH%%-MOTION*}"  -v plaintext=$PLAINTEXT '
 BEGIN {print css_style "<table class=\"elif2\" style=\"width:100%;\">";lines=0}
 {printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10
- if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+ if(substr($10,length($10)-3)=="\.jpg" && openhere=='false'){printf "\" target=\"_blank"}
  printf "\">"
  if (substr($1,1,1)!="l")
  {
@@ -803,10 +806,10 @@ BEGIN {print css_style "<table class=\"elif2\" style=\"width:100%;\">";lines=0}
 END {print "</table>";if(lines<1){print "Fetched list is too short or too long in " path " to display anything"}}')"
 
   elif [[ "${URL_PATH}" =~ .*\*mp4$ ]] || ([[ "${URL_PATH}" =~ .*\*jpg$ ]] && $ALIASED); then
-      serve_html_string "$(echo "elif3.5, ${URL_PATH}" >> /var/log/bashttpd.log;ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v linkpre="${LINKPRE}" -v css_style="$css_styling" -v aliased=$ALIASED  -v plaintext=$PLAINTEXT '
+      serve_html_string "$(echo "elif3.5, ${URL_PATH}" >> /var/log/bashttpd.log;ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v openhere=${OPENHERE} -v linkpre="${LINKPRE}" -v css_style="$css_styling" -v aliased=$ALIASED  -v plaintext=$PLAINTEXT '
 BEGIN {print css_style "<table class=\"elif3.5\" style=\"width:100%;\">"}
 {printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10
- if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+ if(substr($10,length($10)-3)=="\.jpg" && openhere=='false'){printf "\" target=\"_blank"}
  printf "\" "
  if (line==1){printf " id=\"latestalert\""};printf " \
  onmousedown=\"mdown(event)\" \
@@ -868,7 +871,7 @@ END {print "</table>";if(lines<1){print "Fetched list is too short or too long i
 #
 #
   elif [[ "${URL_PATH}" =~ .*links_to_alerting_activity/$ ]] && [[ ${#HEADLINES} > 0 ]]; then
-      serve_html_string "$(echo "elif4, ${URL_PATH},  ${HEADLINES}" >> /var/log/bashttpd.log;ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t "${URL_PATH}"/*|head -n$(( $(( ${HEADLINES} )) + 1 ))|awk -v linkpre="${LINKPRE}" -v css_style="$css_styling" -v aliased=$ALIASED -v path="${URL_PATH}\*"  -v plaintext=$PLAINTEXT '
+      serve_html_string "$(echo "elif4, ${URL_PATH},  ${HEADLINES}" >> /var/log/bashttpd.log;ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t "${URL_PATH}"/*|head -n$(( $(( ${HEADLINES} )) + 1 ))|awk -v openhere=${OPENHERE} -v linkpre="${LINKPRE}" -v css_style="$css_styling" -v aliased=$ALIASED -v path="${URL_PATH}\*"  -v plaintext=$PLAINTEXT '
 BEGIN {print css_style "<script>var dblclickflag=false;var month = [];month['\''Jan'\''] = '\''-01-'\'';month['\''Feb'\''] = '\''-02-'\'';month['\''Mar'\''] = '\''-03-'\'';month['\''Apr'\''] = '\''-04-'\'';month['\''May'\''] = '\''-05-'\'';month['\''Jun'\''] = '\''-06-'\'';month['\''Jul'\''] = '\''-07-'\'';month['\''Aug'\''] = '\''-08-'\'';month['\''Sep'\''] = '\''-09-'\'';month['\''Oct'\''] = '\''-10-'\'';month['\''Nov'\''] = '\''-11-'\'';month['\''Dec'\''] = '\''-12-'\''; \
 var mousedownedhere;var StartTimeOfInterest='\'''\'';function mdown(e){mousedownedhere=e.pageY}; \
 function giveRowIndicesSpanData(e,me){var downrowindex=Math.trunc((mousedownedhere+2)/((me.parentNode.clientHeight+2)/me.parentNode.childElementCount)-.5); \
@@ -882,7 +885,7 @@ var uprowindex=Math.trunc((e.pageY+2)/((me.parentNode.clientHeight+2)/me.parentN
       {
          printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre;
          if (substr($1,1,1)!="l"){printf path "/" $10 
-         if(substr($10,length($10)-3)=="\.jpg")
+         if(substr($10,length($10)-3)=="\.jpg" && openhere=='false')
          {
             printf "\" target=\"_blank"
          }
@@ -939,7 +942,7 @@ END {print "</table>";if(line<2){print "Fetched list is too short or too long in
 #THE BUTTON ONCLICK PROGRAMMING BELOW NEEDS WORK.  THE INTENT IS THAT AN ARRAY CALLED GETS FILLED WITH WINDOW HANDLES THAT GET OPENED BY ONCLICK OF THEIR ANCHOR TAGS.  THAT ARRAY IS CYCLED THROUGH IN 500MS STEPS OPENING EACH WINDOW
 #TODO: add alias checking below
   elif [[ "${URL_PATH}" =~ .*links_to_alerting_activity ]]; then
-      serve_html_string "$(echo "elif5, ${URL_PATH}" >> /var/log/bashttpd.log;ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t "${URL_PATH}"/*/|awk -v linkpre="${LINKPRE}" -v css_style="$css_styling"  -v path="${URL_PATH}" -v aliased=$ALIASED -v subpath="${URL_PATH##*/links_to_alerting_activity}"  -v plaintext=$PLAINTEXT '
+      serve_html_string "$(echo "elif5, ${URL_PATH}" >> /var/log/bashttpd.log;ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t "${URL_PATH}"/*/|awk -v openhere=${OPENHERE} -v linkpre="${LINKPRE}" -v css_style="$css_styling"  -v path="${URL_PATH}" -v aliased=$ALIASED -v subpath="${URL_PATH##*/links_to_alerting_activity}"  -v plaintext=$PLAINTEXT '
 BEGIN {printf css_style "<script>var month = [];month['\''Jan'\''] = '\''-01-'\'';month['\''Feb'\''] = '\''-02-'\'';month['\''Mar'\''] = '\''-03-'\'';month['\''Apr'\''] = '\''-04-'\'';month['\''May'\''] = '\''-05-'\'';month['\''Jun'\''] = '\''-06-'\'';month['\''Jul'\''] = '\''-07-'\'';month['\''Aug'\''] = '\''-08-'\'';month['\''Sep'\''] = '\''-09-'\'';month['\''Oct'\''] = '\''-10-'\'';month['\''Nov'\''] = '\''-11-'\'';month['\''Dec'\''] = '\''-12-'\'';var mousedownedhere;var StartTimeOfInterest='\'''\'';function mdown(e){mousedownedhere=e.pageY};function giveRowIndicesSpanData(e,me){var downrowindex=Math.trunc((mousedownedhere+2)/((me.parentNode.clientHeight+2)/me.parentNode.childElementCount)-.5);StartTimeOfInterest=me.parentNode.parentNode.cells[0].attributes[0].textContent.trim().substring(1,32);StartTimeOfInterest=StartTimeOfInterest.substring(1,5) + month[StartTimeOfInterest.substr(6,3)] + StartTimeOfInterest.substring(10);window.top.StartTimeOfInterestEl.value=StartTimeOfInterest.substring(0,19);var uprowindex=Math.trunc((e.pageY+2)/((me.parentNode.clientHeight+2)/me.parentNode.childElementCount)-.5)}</script> \
 <table class=\"elif5\" style=\"width:100%;\">";line=1}
 {
@@ -949,7 +952,7 @@ BEGIN {printf css_style "<script>var month = [];month['\''Jan'\''] = '\''-01-'\'
   if (substr($1,1,1)!="l")
   {
    printf path $10
-   if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+   if(substr($10,length($10)-3)=="\.jpg" && openhere=='false'){printf "\" target=\"_blank"}
   }
   else 
   {
@@ -987,12 +990,12 @@ BEGIN {printf css_style "<script>var month = [];month['\''Jan'\''] = '\''-01-'\'
 END {print "</table>";if(line<2){print "Fetched list is too short or too long in " path " to display anything"}}')"
 
   elif [[ ${#HEADLINES} > 0 ]]; then
-      serve_html_string "$(echo "elif6, ${URL_PATH}" >> /var/log/bashttpd.log;ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|head -n$(( $(( ${HEADLINES} )) + 1 ))|awk -v linkpre="${LINKPRE}" -v css_style="$css_styling" -v aliased=$ALIASED -v path="${URL_PATH}"  -v plaintext=$PLAINTEXT '
+      serve_html_string "$(echo "elif6, ${URL_PATH}" >> /var/log/bashttpd.log;ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|head -n$(( $(( ${HEADLINES} )) + 1 ))|awk -v openhere=${OPENHERE} -v linkpre="${LINKPRE}" -v css_style="$css_styling" -v aliased=$ALIASED -v path="${URL_PATH}"  -v plaintext=$PLAINTEXT '
 BEGIN {lines=0;print css_style "<table class=\"elif6\">"}
 {printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre;
  if (substr($1,1,1)!="l"){printf path "/" $10}
  else {printf $12} 
- if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+ if(substr($10,length($10)-3)=="\.jpg" && openhere=='false'){printf "\" target=\"_blank"}
  printf "\">"
  if (substr($1,1,1)!="l")
  {
@@ -1039,10 +1042,10 @@ BEGIN {lines=0;print css_style "<table class=\"elif6\">"}
 END {print "</table>";if(lines<1){print "Fetched list is too short or too long in " path " to display anything"}}')"
 
   elif [[ "${URL_PATH}" =~ important* ]]; then
-      serve_html_string "$(echo "elif7, ${URL_PATH}" >> /var/log/bashttpd.log;ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH}|awk -v linkpre="${LINKPRE}" -v css_style="$css_styling" -v aliased=$ALIASED -v path="${URL_PATH}"  -v plaintext=$PLAINTEXT '
+      serve_html_string "$(echo "elif7, ${URL_PATH}" >> /var/log/bashttpd.log;ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S -r ${URL_PATH}|awk -v openhere=${OPENHERE} -v linkpre="${LINKPRE}" -v css_style="$css_styling" -v aliased=$ALIASED -v path="${URL_PATH}"  -v plaintext=$PLAINTEXT '
 BEGIN {lines=0;print css_style "<table class=\"elif7\">"}
 {printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10 
-if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+if(substr($10,length($10)-3)=="\.jpg" && openhere=='false'){printf "\" target=\"_blank"}
 printf "\">"
 if(substr($10,length($10)-3)=="\.jpg"){
 gsub(".*192\.168\.0\.14","Dock  ",$10)
@@ -1142,10 +1145,10 @@ END {print "</table>";if(lines<1){print "Fetched list is too short or too long i
 #      echo "Trapped a minutesbefore put: ${StartTimeOfInterest} ${URL_PATH}" >> /home/homeowner/bashttpd.log
       findResults="$(find ${URL_PATH} -newermt "$(date --date="$StartTimeOfInterest $minsbefore minutes ago")" ! -newermt "$(date --date="$StartTimeOfInterest $((7 - minsbefore)) minutes hence")")"
 #      echo -e "1. findResults=${findResults}"  >> /home/homeowner/bashttpd.log
-      findResults="$(echo "elif9, ${URL_PATH}" >> /var/log/bashttpd.log;while read filename;do ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N "$filename";done <<< "$findResults"|awk -v linkpre="${LINKPRE}" -v css_style="$css_styling" -v path="${URL_PATH}" -v aliased=$ALIASED -v findResults="${findResults}"  -v plaintext=$PLAINTEXT '
+      findResults="$(echo "elif9, ${URL_PATH}" >> /var/log/bashttpd.log;while read filename;do ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N "$filename";done <<< "$findResults"|awk -v openhere=${OPENHERE} -v linkpre="${LINKPRE}" -v css_style="$css_styling" -v path="${URL_PATH}" -v aliased=$ALIASED -v findResults="${findResults}"  -v plaintext=$PLAINTEXT '
 BEGIN {printf css_style "<table class=\"elif9\">";line=0}
 {printf "<tr><td aria-label=\"[&nbsp;" $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre $10
-if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+if(substr($10,length($10)-3)=="\.jpg" && openhere=='false'){printf "\" target=\"_blank"}
 printf "\">"
 if(substr($10,length($10)-3)=="\.jpg"){
 gsub(".*192\.168\.0\.14","Dock  ",$10)
@@ -1172,7 +1175,7 @@ END {if (line==0){print "<tr><td aria-label=\"" findResults  "\"></td><td></td><
 
   elif [[ -d "${URL_PATH}" ]]; then
      [[ -x "${URL_PATH}" ]] && \
-          serve_html_string "$(echo "is a traversable directory=${URL_PATH}" >> /var/log/bashttpd.log;ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v linkpre="${LINKPRE}" -v aliased=$ALIASED -v css_style="$css_styling" -v path="${URL_PATH}"  -v path1="${URL_PATH}"  -v plaintext=$PLAINTEXT '
+          serve_html_string "$(echo "is a traversable directory=${URL_PATH}" >> /var/log/bashttpd.log;ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|awk -v openhere=${OPENHERE} -v linkpre="${LINKPRE}" -v aliased=$ALIASED -v css_style="$css_styling" -v path="${URL_PATH}"  -v path1="${URL_PATH}"  -v plaintext=$PLAINTEXT '
 BEGIN {lines=0;print css_style "<table class=\"elif10\" style=\"width:100%;\">"}
 {printf "<tr><td aria-label=\"[&nbsp;"
  if($6=="") 
@@ -1195,7 +1198,7 @@ BEGIN {lines=0;print css_style "<table class=\"elif10\" style=\"width:100%;\">"}
  else 
  {
   printf $6 "&nbsp;" $7 "&nbsp;" $8 "&nbsp;" $9 "&nbsp;]\" width=\"108px\"></td><td align=\"left\">&nbsp;&nbsp;<a href=\"http\://" linkpre path "/" $10;
-  if(substr($10,length($10)-3)=="\.jpg"){printf "\" target=\"_blank"}
+  if(substr($10,length($10)-3)=="\.jpg" && openhere=='false'){printf "\" target=\"_blank"}
   printf "\">"
   if (substr($1,1,1)!="l")
   {

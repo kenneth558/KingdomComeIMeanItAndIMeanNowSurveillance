@@ -108,7 +108,7 @@ for(var i=0;i<delayedDisplayElements.length;i++)
 setTimeout(function(){sysjpgmp4_motion.data='/camera_snapshots/camera_*/*jpg /var/www/camera_streams/camera_*/*mp4?-MOTION?aliased'},1000)
 setTimeout(function(){sysmp4mostrecent.data='/var/www/camera_streams/*/*mp4?mostrecent10'},1000)
 setTimeout(function(){alertrelated.click()},100)
-document.title='Surveillance Recordings';
+document.title='Surveillance Recordings - blacklist risk if traveling';
 entiredocument.style='pointer-events:auto;'
 var objdedicatedjpgviewer = document.getElementsByClassName('dedicatedjpgviewer');
 for(var i=0;i<objdedicatedjpgviewer.length;i++)
@@ -430,13 +430,13 @@ Help Manual</button>
   <button id="btnfuturediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
 onclick="tabactivate(this)">
 Future</button>
-<input type="button" value="Alerts now audible" style="background-color:#C0C0C0;color:#808080" id="btnaudibleonalert" onclick="if(this.value=='Alerts now audible'){this.value='Make new alerts audible'}else{previousalert='waiting';this.value='Alerts now audible'}">
+<input type="button" value="Alerts now audible" style="font-size:13px;background-color:#C0C0C0;color:#808080" id="btnaudibleonalert" onclick="if(this.value=='Alerts now audible'){this.value='Make new alerts audible'}else{previousalert='waiting';this.value='Alerts now audible'}">
 <input type="button" 
-id="alertCheck" style="font-size:12px;background:#e6e6e6;border-radius:1px;border-color:black;border-width:0px;" 
+id="alertCheck" style="font-size:15px;background:pink;border-radius:1px;border-color:black;border-width:0px;" 
 value="Alert checking OFF"
 onclick="
 if (!this.value.endsWith(' OFF'))
-{   alertkeepalive.data='';androidconnection.style.display='none';this.value='Alert checking OFF';this.style.background='#e6e6e6';clearInterval(checkingAlerted);btnaudibleonalert.style.color='#808080'
+{   alertkeepalive.data='';androidconnection.style.display='none';this.value='Alert checking OFF';this.style.background='pink';clearInterval(checkingAlerted);btnaudibleonalert.style.color='#808080'
     previousalert='waiting';
          if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
            alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
@@ -454,7 +454,7 @@ if (!this.value.endsWith(' OFF'))
 
 else 
 {
-    this.value='Alert checking ON. Blacklist risk if traveling';alertCheck.style.background='Chartreuse';btnaudibleonalert.style.color='#000';if(isAndroid){androidconnection.style.display='inline'}
+    this.value='Alert checking ON';alertCheck.style.background='Chartreuse';btnaudibleonalert.style.color='#000';if(isAndroid){androidconnection.style.display='inline'}
     previousalert='waiting';
         if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
           alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
@@ -788,13 +788,15 @@ Script on server: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nb
 </tr>
 </table>
 </div><div id="divmain" class="divmain" class="tablinks" style="position:relative;top:0px">
-<div width="432px" height="282px" style="display: inline-block;border:4px dashed red;width:432px;height:282px;position:relative;"><object id="dedicatedjpgviewer0" type="text/html" style="border:0px;position:absolute;" value="Alt jpg viewer" width="432px" height="282px" data="" class="dedicatedjpgviewer" onload="setTimeout(function(){
+<div width="432px" height="282px" style="display: inline-block;border:4px dashed red;width:432px;height:282px;position:relative;">
+<!--<table  width="432px" height="282px" style="border-collapse:collapse;;width:432px;height:282px;position:relative;"><tr><td>-->
+<object id="dedicatedjpgviewer0" type="text/html" style="border:0px;position:absolute;" value="Alt jpg viewer" width="432px" height="282px" data="" class="dedicatedjpgviewer" onload="setTimeout(function(){
 filenametool1.src=sourcesdedicatedjpgviewer[1];if(filenametool0.contentDocument.body.innerText.includes(filenametool1.src.substr(filenametool1.src.indexOf('camera_')+24,7))){filenametool1.parentElement.parentElement.style.border='4px solid red';}else{filenametool1.parentElement.parentElement.style.border='0px';}
 filenametool2.src=sourcesdedicatedjpgviewer[2];if(filenametool0.contentDocument.body.innerText.includes(filenametool2.src.substr(filenametool2.src.indexOf('camera_')+24,7))){filenametool2.parentElement.parentElement.style.border='4px solid red';}else{filenametool2.parentElement.parentElement.style.border='4px solid transparent';}
 filenametool3.src=sourcesdedicatedjpgviewer[3];if(filenametool0.contentDocument.body.innerText.includes(filenametool3.src.substr(filenametool3.src.indexOf('camera_')+24,7))){filenametool3.parentElement.parentElement.style.border='4px solid red';}else{filenametool3.parentElement.parentElement.style.border='4px solid transparent';}
 filenametool4.src=sourcesdedicatedjpgviewer[4];if(filenametool0.contentDocument.body.innerText.includes(filenametool4.src.substr(filenametool4.src.indexOf('camera_')+24,7))){filenametool4.parentElement.parentElement.style.border='4px solid red';}else{filenametool4.parentElement.parentElement.style.border='4px solid transparent';}
 filenametool5.src=sourcesdedicatedjpgviewer[5];if(filenametool0.contentDocument.body.innerText.includes(filenametool5.src.substr(filenametool5.src.indexOf('camera_')+24,7))){filenametool5.parentElement.parentElement.style.border='4px solid red';}else{filenametool5.parentElement.parentElement.style.border='4px solid transparent';}
-},100)"></object></div>
+},100)"></object><!--</td></tr></table>--></div>
 <div  width="432px" height="262px" style="display: inline-block;border:4px solid transparent;width:432px;height:282px;position:relative;top:-262px;"><object onclick="btndockjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="432px" height="262px" data="" class="dedicatedjpgviewer"></object>
 <input disabled id="camapp_lr1dup" size="58" style="position:relative;top:261px" value="working..."></div>
 <div  width="432px" height="262px" style="display: inline-block;border:4px solid transparent;width:432px;height:282px;position:relative;top:-262px;"><object onclick="btneastjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="432px" height="262px" data="" class="dedicatedjpgviewer"></object>
@@ -2299,7 +2301,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 <table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholderedjpg" width="1px" height="100%">
 <object id="edjpg" type="text/plain" value="Click here to collect these snapshots" class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_east_driveway?aliased';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_east_driveway?aliased?openhere';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="1000px" 
 height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object></td></tr></table>
@@ -2330,7 +2332,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 <table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholdersdjpg" width="1px" height="100%">
 <object id="sdjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_south_driveway/?aliased';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_south_driveway/?aliased?openhere';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="594px" 
 height="745px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object></td></tr></table>
@@ -2362,7 +2364,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 <table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholderfpjpg" width="1px" height="100%">
 <object id="fpjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_front_parking/?aliased';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}"
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_front_parking/?aliased?openhere';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}"
 width="1000px" 
 height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object></td></tr></table>
@@ -2372,7 +2374,7 @@ height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholderswjpg" width="1px" height="100%">
 <object id="swjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_sw_corner/?aliased';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_sw_corner/?aliased?openhere';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="945px" 
 height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object></td></tr></table>
@@ -2401,7 +2403,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 <table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholdernejpg" width="1px" height="100%">
 <object id="nejpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_ne_corner/?aliased';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_ne_corner/?aliased?openhere';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="960px" 
 height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object></td></tr></table>
@@ -2470,7 +2472,7 @@ queueing, sorry about that.  It's just that videos must get loaded enough to sta
 function can be executed, and only a human operator can enforce that rule.  A related rule is that you may<br>
 NOT start using page whatsoever, not even page scrolling, until entire page is completely finished rendering<br>
 and calculating values, or else unbeknownst to you, startup code will never finish initializing remaining aspects<br>
-of the page, leaving bugs in the page's partially-loaded code.  Enforcement of that rule is encoded so you can't<br>
+of the page, leaving bugs in the page's partially-loaded code.  Enforcement of that rule is in code so you can't<br>
 violate it even if you try.
 </li>
 <li>
@@ -2509,141 +2511,6 @@ Hopefully I'll find it soon.
     <input type="button" id="btnposition" style="height:100px;width:100px;font-size:12px;" onmousemove="this.value=event.clientX+':'+event.clientY+', '+event.screenX+':'+event.screenY" value="....................Mouse over me..........................">
 <br>
 </div><div id="futurediv" class="futurediv" class="tabontent" style="display:none">
-<p id="label3day" style="position:relative;top:0px;left:0px">3-day timeline</p>
-Timeline problems:<br>
-DUE TO CROSS-BROWSER INCONSISTENCIES RELATIVE TO FINDING CODE HELP ON STACKEXCHANGE, I HAVE BETTER PROJECTS TO WORK ON RIGHT NOW...UNTIL BROWSERS' TECHNOLOGIES MATURE<br>
-<canvas id="canvas3day" style="width:100px; height:100px" width="5" height="5"></canvas>
-<input type="range" id="futureslider" value="0" min="-86400" max="0"  step="1" list="tickmarks" name="futureslider" class="futureslider" class="3dayslider"
-style="width:1352px;position:relative;left:-8px;top:-7px"
-oninput="/*place red line*/;"
->
-<canvas id="canvas3min" style="width:1340px; height:60px;" width="5" height="5"></canvas>
-<br>
-3-minute timeline of selection
-<br>
-<script type="text/javascript">
-    var canvas3day = document.getElementById('canvas3day');
-    var canvas3min = document.getElementById('canvas3min');
-
-    var context3day = canvas3day.getContext('2d');
-    var context3min = canvas3min.getContext('2d');
-
-    context3day.fillStyle = '#000';
-    context3day.fillRect(0, 0, canvas3day.width, canvas3day.height);
-    context3min.fillStyle = '#000';
-    context3min.fillRect(0, 0, canvas3min.width, canvas3min.height);
-
-    canvas3day.addEventListener('click', function(e) {
-        var x3day = Math.floor(e.x * canvas3day.width / parseInt(canvas3day.style.width));
-        var y3day = Math.floor(e.y * canvas3day.height / parseInt(canvas3day.style.height));
-
-
-        context3day.fillStyle = '#F00';
-        context3day.fillRect(x3day, y3day, 1, 1);
-
-    }, true);
-
-    canvas3min.addEventListener('mousedown', function(e) {
-        var x3min = Math.floor(e.x * canvas3min.width / parseInt(canvas3min.style.width));
-        var y3min = Math.floor(e.y * canvas3min.height / parseInt(canvas3min.style.height));
-
-        context3min.fillStyle = '#FF0000';
-        context3min.fillRect(x3min/5, y3min/5, 1, 1);
-    }, true);
-</script>
-<!--/*850px=259200 seconds 
-259200000/850 = mSec/px
-850/259200000 = px/mSec * mSec=px
-850/259200 = px/sec
-180*850/259200= px/3min*/
-/*for(var i=0;i<sysjpgs.contentDocument.body.children[0].rows.length;i++)
-{
-      var timestamp=sysjpgs.contentDocument.body.children[0].rows[i].cells[0].outerHTML.substr(18).replace(/&/g,' ').replace(/nbsp;/g,'')
-      timestamp=timestamp.substring(0,4) + month[timestamp.substr(5,3)] + timestamp.substring(9,timestamp.indexOf(' ]'))
-*/      /*timestamp.substr(0,19) is time truncated past second*//*
- 
-/*      var localStartTimeOfInterestDT=new Date(timestamp)
-*//*         var localStartTimeOfInterestDTmSec=localStartTimeOfInterestDT.getTime()
-      var timenow=Date.now()*//*
-      pxFromMaxAge=850-(((timenow.getTime()-localStartTimeOfInterestDT.getTime())*850)/259200000)
-}*/
-</script>-->
-<script type="text/javascript">
-const timespan = (() => {
-    let rtf, tokensRtf;
-    const
-    tokens = /[Dhmsf][#~]?|"[^"]*"|'[^']*'/g,
-    map = [
-        {t: [['D', 1], ['D#'], ['D~', 'day']], u: 86400000},
-        {t: [['h', 2], ['h#'], ['h~', 'hour']], u: 3600000},
-        {t: [['m', 2], ['m#'], ['m~', 'minute']], u: 60000},
-        {t: [['s', 2], ['s#'], ['s~', 'second']], u: 1000},
-        {t: [['f', 3], ['f#'], ['f~']], u: 1}
-    ],
-    locale = (value, style = 'long') => {
-        try {
-            rtf = new Intl.RelativeTimeFormat(value, {style});
-        } catch (e) {
-            if (rtf) throw e;
-            return;
-        }
-        const h = rtf.format(1, 'hour').split(' ');
-        tokensRtf = new Set(rtf.format(1, 'day').split(' ')
-            .filter(t => t != 1 && h.indexOf(t) > -1));
-        return true;
-    },
-    fallback = (t, u) => u + ' ' + t.fmt + (u == 1 ? '' : 's'),
-    mapper = {
-        number: (t, u) => (u + '').padStart(t.fmt, '0'),
-        string: (t, u) => rtf ? rtf.format(u, t.fmt).split(' ')
-            .filter(t => !tokensRtf.has(t)).join(' ')
-            .trim().replace(/[+-]/g, '') : fallback(t, u),
-    },
-    replace = (out, t) => out[t] || t.slice(1, t.length - 1),
-    format = (pattern, value) => {
-        if (typeof pattern !== 'string')
-            throw Error('invalid pattern');
-        if (!Number.isFinite(value))
-            throw Error('invalid value');
-        if (!pattern)
-            return '';
-        const out = {};
-        value = Math.abs(value);
-        pattern.match(tokens)?.forEach(t => out[t] = null);
-        map.forEach(m => {
-            let u = null;
-            m.t.forEach(t => {
-                if (out[t.token] !== null)
-                    return;
-                if (u === null) {
-                    u = Math.floor(value / m.u);
-                    value %= m.u;
-                }
-                out[t.token] = '' + (t.fn ? t.fn(t, u) : u);
-            })
-        });
-        return pattern.replace(tokens, replace.bind(null, out));
-    };
-    map.forEach(m => m.t = m.t.map(t => ({
-        token: t[0], fmt: t[1], fn: mapper[typeof t[1]]
-    })));
-    locale('en');
-    return {format, locale};
-})();
-</script>
-To be vertical lines dropping in distances related to their event (not to be confused with "alert") priority
-<br>
-<br>
-locale: <select id="locale"></select>
-custom: <input id="loc" style="width:8em"><br>
-style: <select id="style"></select><br>
-datetime1: <i id="fd" style="color:green"></i><br>
-datetime2: <input id="td"><br>
-pattern: <input id="fmt">
-<button id="run" onclick="test()">test</button><br><br>
-<i id="out" style="color:green"></i>
-<br><br><br><br><br>FUTURE: "MAIN PAGE MAY GO THIS DIRECTION", SO TO SPEAK.
-<div id="timelapsed"></div>
 </div>
 
 </div><div id="loadingdiv" class="loadingdiv" class="tabcontent" style="display:none">WAIT WHILE PAGE IS LOADING. PERFORM NO USER INPUT WHILE LOADING OR PAGE ELEMENTS WILL ABORT THEIR LOADING</div>
