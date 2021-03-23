@@ -116,19 +116,19 @@ for(var i=0;i<objdedicatedjpgviewer.length;i++)
    iframe = document.createElement('IFRAME');
    if(i==0)
    {
-      iframe.onload=function()
+     iframe.onload=function()
      {
         if(!this.parentElement.data.includes(this.contentDocument.body.innerText.substring(0,this.contentDocument.body.innerText.length-1)))
         {
-           this.parentElement.data=this.contentDocument.body.innerText;/*then wait until this.parentElement. is loaded to proceed so as to maximize caching effect*/
+           this.parentElement.data=this.contentDocument.body.innerText;/*then wait until this.parentElement. is loaded to proceed so as to maximize caching benefit*/
         };
-          setTimeout(function()
-          {
-            document.getElementById('filenametool0').src=sourcesdedicatedjpgviewer[0]
-          },4500)
-        }
+        setTimeout(function()
+        {
+          document.getElementById('filenametool0').src=sourcesdedicatedjpgviewer[0]
+        },4500)
      }
-     else {iframe.onload=function(){if(!this.parentElement.data.includes(this.contentDocument.body.innerText.substring(0,this.contentDocument.body.innerText.length-1))){this.parentElement.data=this.contentDocument.body.innerText;}}}
+   }
+   else {iframe.onload=function(){if(!this.parentElement.data.includes(this.contentDocument.body.innerText.substring(0,this.contentDocument.body.innerText.length-1))){this.parentElement.data=this.contentDocument.body.innerText;}}}
    var attsrc = document.createAttribute('src')
    iframe.setAttributeNode(attsrc);
    var attsty = document.createAttribute('style')
@@ -139,7 +139,7 @@ for(var i=0;i<objdedicatedjpgviewer.length;i++)
    iframe.setAttributeNode(attid);
    iframe.type='text:html'
    iframe.id='filenametool'+objdedicatedjpgviewer[i].id.substring(objdedicatedjpgviewer[i].id.length-1)
-   iframe.style='display:none;border:0px'
+   iframe.style='display:none;border:0px;position:absolute;width:0px;height:0px'
    iframe.src=sourcesdedicatedjpgviewer[i]
    objdedicatedjpgviewer[i].appendChild(iframe);
 }
@@ -300,7 +300,7 @@ for( var rowindex=downrowindex;rowindex!=uprowindex;)
 {
    if(this.rows[rowindex].cells[1].firstElementChild!='undefined' && this.rows[rowindex].cells[1].firstElementChild!=null)
    {
-      animationdiv.innerHTML += '<img src=\''+ this.rows[rowindex].cells[1].children[0].href+'\' height=\''+(parseInt(alertsdirectory.offsetHeight)+15)+'px\' width=\''+mainjpgviewer0.width+'\' style=\'position:absolute;\' />';
+      animationdiv.innerHTML += '<img src=\''+ this.rows[rowindex].cells[1].children[0].href+'\' height=\''+parseInt(alertsdirectory.offsetHeight)+'px\' width=\''+mainjpgviewer0.width+'\' style=\'position:absolute;top:15px;\' />';
       if(downrowindex < uprowindex){rowindex++}else{rowindex--}
    }
 }
@@ -408,7 +408,7 @@ setTimeout(function(){if(!confirm('Allow more time for snapshot animation elemen
 <option value="360" label="6 hrs"></option>
 </datalist>
 <div id="entiredocument" style="z-Index:5;pointer-events:none;" onclick="return false">
-<div id="buttonsdiv" style="position:sticky;top:0px;z-index:4;background:rgb(215,215,245,0.4);padding: 0px 0px 0px 0px;border:0px solid black;border-width:0px 0px 0px 0px;width:765px">
+<div id="buttonsdiv" style="display:inline-block;position:sticky;top:0px;z-index:4;background:rgb(215,215,245,0.4);padding: 0px 0px 0px 0px;border:0px solid black;border-width:0px 0px 0px 0px;">
   <button id="btndivmain" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
 onclick="tabactivate(this)">
 Main</button>
@@ -423,13 +423,80 @@ onclick="tabactivate(this)">
 Suspend alerts, Links to live streams</button>
   <button id="btntitlediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px;" 
 onclick="tabactivate(this)">
-Help</button>
+Tips</button>
   <button id="btnnotesdiv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
 onclick="tabactivate(this)">
-Notes</button>
+Help Manual</button>
   <button id="btnfuturediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
 onclick="tabactivate(this)">
 Future</button>
+<input type="button" value="Alerts now audible" style="background-color:#C0C0C0;color:#808080" id="btnaudibleonalert" onclick="if(this.value=='Alerts now audible'){this.value='Make new alerts audible'}else{previousalert='waiting';this.value='Alerts now audible'}">
+<input type="button" 
+id="alertCheck" style="font-size:12px;background:#e6e6e6;border-radius:1px;border-color:black;border-width:0px;" 
+value="Alert checking OFF"
+onclick="
+if (!this.value.endsWith(' OFF'))
+{   alertkeepalive.data='';androidconnection.style.display='none';this.value='Alert checking OFF';this.style.background='#e6e6e6';clearInterval(checkingAlerted);btnaudibleonalert.style.color='#808080'
+    previousalert='waiting';
+         if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
+           alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
+           alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
+         {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
+             {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
+                 {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
+                     {
+                         previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
+                     }
+                 }
+             }
+         }
+} 
+
+else 
+{
+    this.value='Alert checking ON. Blacklist risk if traveling';alertCheck.style.background='Chartreuse';btnaudibleonalert.style.color='#000';if(isAndroid){androidconnection.style.display='inline'}
+    previousalert='waiting';
+        if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
+          alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
+          alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
+        {;
+            if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
+            {;
+                if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
+                {;
+                    if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
+                    {;
+                        if(previousalert!='waiting')
+                        {   if(btnaudibleonalert.value=='Alerts now audible'){soundalarm()};show_eventsmainjpgviewer2.value=0;show_eventsmainjpgviewer2.oninput()
+                        }
+                        else
+                        {   previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
+                        }
+                    }
+                }
+                else {previousalert='waiting';}
+             }
+         }
+    alertsdirectory.data=alertsdirectory.data
+    if(isAndroid)
+    {   alertkeepalive.data='/var/www/html/silence.mp3';
+        setTimeout(function()
+           {   alertkeepalive.contentDocument.body.children[0].muted=true;
+               alertkeepalive.contentDocument.body.children[0].loop=true
+               alertkeepalive.contentDocument.body.children[0].play()
+           },4000
+        )
+    }
+    checkingAlerted=setInterval(function()
+       {   alertsdirectory.data=alertsdirectory.data},6500
+    )
+}
+">
+<div id="androidconnection" class="androidconnection" style="display:none">
+<br>This silent audio loop is used to maintain Android connections
+<object id="alertkeepalive" type="audio/mpeg" data="" height="20px" width="200px">
+</object>
+</div>
 
 <!--
   <button id="btntrack_snaps" class="collectlinks" style="font-size:10px;background:white" 
@@ -721,23 +788,25 @@ Script on server: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nb
 </tr>
 </table>
 </div><div id="divmain" class="divmain" class="tablinks" style="position:relative;top:0px">
-<div  width="440px" height="282px" style="display: inline-block;border:3px dashed red"><object id="dedicatedjpgviewer0" type="text/html" style="border:0px" value="Alt jpg viewer" width="440px" height="282px" data="" class="dedicatedjpgviewer" onload="setTimeout(function(){
+<div width="440px" height="282px" style="display: inline-block;border:4px dashed red;width:440px;height:282px;position:relative;"><object id="dedicatedjpgviewer0" type="text/html" style="border:0px;position:absolute;" value="Alt jpg viewer" width="440px" height="282px" data="" class="dedicatedjpgviewer" onload="setTimeout(function(){
 filenametool1.src=sourcesdedicatedjpgviewer[1];if(filenametool0.contentDocument.body.innerText.includes(filenametool1.src.substr(filenametool1.src.indexOf('camera_')+24,7))){filenametool1.parentElement.parentElement.style.border='4px solid red';}else{filenametool1.parentElement.parentElement.style.border='0px';}
 filenametool2.src=sourcesdedicatedjpgviewer[2];if(filenametool0.contentDocument.body.innerText.includes(filenametool2.src.substr(filenametool2.src.indexOf('camera_')+24,7))){filenametool2.parentElement.parentElement.style.border='4px solid red';}else{filenametool2.parentElement.parentElement.style.border='4px solid transparent';}
 filenametool3.src=sourcesdedicatedjpgviewer[3];if(filenametool0.contentDocument.body.innerText.includes(filenametool3.src.substr(filenametool3.src.indexOf('camera_')+24,7))){filenametool3.parentElement.parentElement.style.border='4px solid red';}else{filenametool3.parentElement.parentElement.style.border='4px solid transparent';}
 filenametool4.src=sourcesdedicatedjpgviewer[4];if(filenametool0.contentDocument.body.innerText.includes(filenametool4.src.substr(filenametool4.src.indexOf('camera_')+24,7))){filenametool4.parentElement.parentElement.style.border='4px solid red';}else{filenametool4.parentElement.parentElement.style.border='4px solid transparent';}
 filenametool5.src=sourcesdedicatedjpgviewer[5];if(filenametool0.contentDocument.body.innerText.includes(filenametool5.src.substr(filenametool5.src.indexOf('camera_')+24,7))){filenametool5.parentElement.parentElement.style.border='4px solid red';}else{filenametool5.parentElement.parentElement.style.border='4px solid transparent';}
 },100)"></object></div>
-<div  width="440px" height="262px" style="display: inline-block;border:4px solid transparent"><object onclick="btndockjpgs.onmousedown()" style="border:0px" id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="440px" height="262px" data="" class="dedicatedjpgviewer"></object>
-<br><input disabled id="camapp_lr1dup" size="58" value="working..."></div>
-<div  width="440px" height="262px" style="display: inline-block;border:4px solid transparent"><object onclick="btneastjpgs.onmousedown()" style="border:0px" id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="440px" height="262px" data="" class="dedicatedjpgviewer"></object>
-<br><input disabled id="camapp_ur1dup" size="58" value="working..."></div>
-<div  width="440px" height="262px" style="display: inline-block;border:4px solid transparent"><object onclick="btnseastjpgs.onmousedown()" style="border:0px" id="dedicatedjpgviewer3" type="text/html" value="Alt jpg viewer" width="440px" height="262px" data="" class="dedicatedjpgviewer"></object>
-<br><input disabled id="camapp_ll1dup" size="58" value="working..."></div>
-<div  width="440px" height="262px" style="display: inline-block;border:4px solid transparent"><object onclick="btnofficejpgs.onmousedown()" style="border:0px" id="dedicatedjpgviewer4" type="text/html" value="Alt jpg viewer" width="440px" height="262px" data="" class="dedicatedjpgviewer"></object>
-<br><input disabled id="camapp_ul1dup" size="58" value="working..."></div>
-<div  width="440px" height="262px" style="display: inline-block;border:4px solid transparent"><object onclick="btnnorthjpgs.onmousedown()" style="border:0px" id="dedicatedjpgviewer5" type="text/html" value="Alt jpg viewer" width="440px" height="262px" data="" class="dedicatedjpgviewer"></object>
-<br><input disabled id="camapp_lst1dup" size="58" value="working..."></div>
+<div  width="440px" height="262px" style="display: inline-block;border:4px solid transparent;width:440px;height:282px;position:relative;top:-262px;"><object onclick="btndockjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="440px" height="262px" data="" class="dedicatedjpgviewer"></object>
+<input disabled id="camapp_lr1dup" size="58" style="position:relative;top:261px" value="working..."></div>
+<div  width="440px" height="262px" style="display: inline-block;border:4px solid transparent;width:440px;height:282px;position:relative;top:-262px;"><object onclick="btneastjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="440px" height="262px" data="" class="dedicatedjpgviewer"></object>
+<input disabled id="camapp_ur1dup" size="58" style="position:relative;top:261px" value="working..."></div>
+<div  width="440px" height="262px" style="display: inline-block;border:4px solid transparent;width:440px;height:282px;position:relative;top:-262px;"><object onclick="btnseastjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer3" type="text/html" value="Alt jpg viewer" width="440px" height="262px" data="" class="dedicatedjpgviewer"></object>
+<input disabled id="camapp_ll1dup" size="58" style="position:relative;top:261px" value="working..."></div>
+<div  width="440px" height="262px" style="display: inline-block;border:4px solid transparent;width:440px;height:282px;position:relative;top:-262px;"><object onclick="btnofficejpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer4" type="text/html" value="Alt jpg viewer" width="440px" height="262px" data="" class="dedicatedjpgviewer"></object>
+<input disabled id="camapp_ul1dup" size="58" style="position:relative;top:261px" value="working..."></div>
+<div  width="440px" height="262px" style="display: inline-block;border:4px solid transparent;width:440px;height:282px;position:relative;top:-262px;"><object onclick="btnnorthjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer5" type="text/html" value="Alt jpg viewer" width="440px" height="262px" data="" class="dedicatedjpgviewer"></object>
+<input disabled id="camapp_lst1dup" size="58" style="position:relative;top:261px" value="working..."></div>
+<!--                            if(mainjpgviewer0.data!=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
+                            {   mainjpgviewer0.data=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href}-->
 <script type="text/javascript">
 var animationdivalertsdirectorytomainjpgviewer0=null
 function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
@@ -762,7 +831,7 @@ function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
    var firstmatch=animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
    if(firstmatch==null)
    {
-      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" height=\''+(parseInt(alertsdirectory.offsetHeight)+15)+'px\' width=\''+mainjpgviewer0.width+'\' style=\'position:absolute;\' />';
+      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" height=\''+parseInt(alertsdirectory.offsetHeight)+'px\' width=\''+mainjpgviewer0.width+'\' style=\'position:absolute;top:15px;\' />';
       animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'})
    }
    else
@@ -812,7 +881,7 @@ function animatealertsdirectorytomainjpgviewer2(rowindex,table_el)
    var firstmatch=animatordivalertsdirectorytomainjpgviewer2.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
    if(firstmatch==null)
    {
-      animatordivalertsdirectorytomainjpgviewer2.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" height=\''+(parseInt(snapsdirectory.offsetHeight)+15)+'px\' width=\''+mainjpgviewer2.width+'\' style=\'position:absolute;\' />';
+      animatordivalertsdirectorytomainjpgviewer2.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" height=\''+parseInt(snapsdirectory.offsetHeight)+'px\' width=\''+mainjpgviewer2.width+'\' style=\'position:absolute;top:15px;\' />';
       animatordivalertsdirectorytomainjpgviewer2.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer2.style.display='none'})
    }
    else
@@ -859,7 +928,6 @@ if (el.offsetParent) {
 }
 }}
 </script>
-<div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-Index:2;top:0px">
 <script type="text/javascript">
 var alertsdirectoryheightmode0 =245+'px'
 var alertsdirectoryheightmode1 =612+'px'
@@ -900,89 +968,220 @@ alertsdirectoryaliases[5] = 'S-East snapshots'
 alertsdirectoryaliases[6] = 'North snapshots'
 /*delayedDisplayElements[0].styleleft='379px' disabled for now*/
 </script>
-<table><tr><td>
-<input type="button" value="Make new alerts audible" style="background-color:#C0C0C0;color:#808080" id="btnaudibleonalert" onclick="if(this.value=='Alerts now audible'){this.value='Make new alerts audible'}else{previousalert='waiting';this.value='Alerts now audible'}">
-<div id="alertchecking" class="alertchecking" class="tabcontent"  style="display:inline;position:absolute;top:20px;left:0px">
-<table><tr><td width="1535px">
-<input type="button" 
-id="alertCheck" style="position:relative;top:-22px;left:165px;height:18px;font-size:12px;background:#e6e6e6;border-radius:1px;border-color:black;border-width:0px;" 
-value="Alert checking now OFF"
-onclick="
-if (!this.value.endsWith(' OFF'))
-{   alertkeepalive.data='';androidconnection.style.display='none';this.value='Alert checking now OFF';this.style.background='#e6e6e6';this.style.width='300px';clearInterval(checkingAlerted);btnaudibleonalert.style.color='#808080'
-    previousalert='waiting';
-         if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
-           alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
-           alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
-         {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
-             {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
-                 {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
-                     {
-                         previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
-                     }
-                 }
-             }
-         }
-} 
-
-else 
-{
-    this.value='Alert checking now ON.  If you\'re traveling, you\'ll risk getting your mobile device blacklisted';alertCheck.style.background='Chartreuse';this.style.width='540px';btnaudibleonalert.style.color='#000';if(isAndroid){androidconnection.style.display='inline'}
-    previousalert='waiting';
-        if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
-          alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
-          alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
-        {;
-            if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
-            {;
-                if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
-                {;
-                    if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
-                    {;
-                        if(previousalert!='waiting')
-                        {   if(btnaudibleonalert.value=='Alerts now audible'){soundalarm()};show_eventsmainjpgviewer2.value=0;show_eventsmainjpgviewer2.oninput()
-                        }
-                        else
-                        {   previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
-                        }
-                    }
-                }
-                else {previousalert='waiting';}
-             }
-         }
-    alertsdirectory.data=alertsdirectory.data
-    if(isAndroid)
-    {   alertkeepalive.data='/var/www/html/silence.mp3';
-        setTimeout(function()
-           {   alertkeepalive.contentDocument.body.children[0].muted=true;
-               alertkeepalive.contentDocument.body.children[0].loop=true
-               alertkeepalive.contentDocument.body.children[0].play()
-           },4000
-        )
-    }
-    checkingAlerted=setInterval(function()
-       {   alertsdirectory.data=alertsdirectory.data},6500
-    )
+<div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-Index:2;top:6px">
+<div style="position:relative;top:-260px">
+<i>Upper left is the most recent event of all views, so it will duplicate one of the others</i>
+<table width="1px" height="582px" cellspacing="0" style="border-collapse:collapse;position:relative;top:0px" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholder2" width="1px" height="100%" valign="top">
+<!-- Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=
+<input type="button" value="Most recent alert event" onclick="this.value=previousalert">
+<br> -->
+<input type="range" id="show_eventsmainjpgviewer4" notes="11px per line, 25 lines in mode0=275"
+oninput="
+this.value=(snapsdirectory.contentDocument!='undefined' && snapsdirectory.contentDocument!=null && snapsdirectory.contentDocument.body.children[0] !='undefined' && snapsdirectory.contentDocument.body.children[0] != null && snapsdirectory.contentDocument.body.children[0].rows!='undefined' && snapsdirectory.contentDocument.body.children[0].rows!=null && snapsdirectory.contentDocument.body.children[0].rows.length!='undefined' && snapsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-snapsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
+if(this.value<1)
+{/*alert(parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.0089)*/
+   var rowselected=Math.round(snapsdirectory.contentDocument.body.children[0].rows.length*(snapsdirectory.contentDocument.body.scrollTop/((parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.99957)))-this.value)
+   if(rowselected<snapsdirectory.contentDocument.body.children[0].rows.length)
+   {
+      if(snapsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg'))
+      {
+         animatealertsdirectorytomainjpgviewer2(rowselected,snapsdirectory.contentDocument.body.children[0]);
+         StartTimeOfInterest=snapsdirectory.contentDocument.body.children[0].rows[rowselected].cells[0].outerHTML.substr(18)
+         StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
+         StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
+         StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
+         StartCamOfInterestEl.value=snapsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].innerText.trim()
+      }
+   }
+   else
+   {
+      this.value=(parseInt(this.value)-(snapsdirectory.contentDocument.body.children[0].rows.length-1-rowselected))
+   }
 }
+else if(snapsdirectory.data.includes(alertsdirectorysources[0].substring(7,(snapsdirectory.data.indexOf('?')<1?snapsdirectory.data.length:snapsdirectory.data.indexOf('?')-1))) || 1==1)
+{
+   if(animatordivalertsdirectorytomainjpgviewer2!='undefined' && animatordivalertsdirectorytomainjpgviewer2 != null)
+   {
+       animatordivalertsdirectorytomainjpgviewer2.style.display='none';
+       if(confirm(animationdivalertsdirectorytomainjpgviewer2.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory'))
+       {
+           animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
+           clearInterval(animatetimeralertsdirectorytomainjpgviewer2);animatetimeralertsdirectorytomainjpgviewer2=null
+       }
+   }
+}
+"  
+name="show_eventsmainjpgviewer4" class="slidersNeedingDelayedDisplay"
+min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
+style="position:absolute;top:9px;left:244px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+" 
+note="1+395/36=11,159+245=1+747/68=11"
+orient="vertical">
+<object id="snapsdirectory" type="text/html"
+data=""
+onclick="this.data=this.data"
+onload="
+     setTimeout(function(){
+       show_eventsmainjpgviewer4.value='0'
+       show_eventsmainjpgviewer4.value=(snapsdirectory.contentDocument!='undefined' && snapsdirectory.contentDocument!=null && snapsdirectory.contentDocument.body.children[0] !='undefined' && snapsdirectory.contentDocument.body.children[0] != null && snapsdirectory.contentDocument.body.children[0].rows!='undefined' && snapsdirectory.contentDocument.body.children[0].rows!=null && snapsdirectory.contentDocument.body.children[0].rows.length!='undefined' && snapsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-snapsdirectory.contentDocument.body.children[0].rows.length,show_eventsmainjpgviewer4.value):1;
+       if(show_eventsmainjpgviewer4.value<1){
+   /*alert(parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.0089)*/
+          var rowselected=Math.round(snapsdirectory.contentDocument.body.children[0].rows.length*(snapsdirectory.contentDocument.body.scrollTop/((parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.9943)))-show_eventsmainjpgviewer4.value)
+          if(rowselected<snapsdirectory.contentDocument.body.children[0].rows.length){
+             if(snapsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg')){
+                animatealertsdirectorytomainjpgviewer2(rowselected,snapsdirectory.contentDocument.body.children[0]);
+                StartTimeOfInterest=snapsdirectory.contentDocument.body.children[0].rows[rowselected].cells[0].outerHTML.substr(18)
+                StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
+                StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
+                StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
+                StartCamOfInterestEl.value=snapsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].innerText.trim()
+             }
+          }
+          else{
+             show_eventsmainjpgviewer4.value=(parseInt(show_eventsmainjpgviewer4.value)-(snapsdirectory.contentDocument.body.children[0].rows.length-1-rowselected))
+          }
+        }
+        else{
+           if(animatordivalertsdirectorytomainjpgviewer2!='undefined' && animatordivalertsdirectorytomainjpgviewer2 != null)
+           {
+              animatordivalertsdirectorytomainjpgviewer2.style.display='none';
+              if(confirm(animationdivalertsdirectorytomainjpgviewer2.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory')){
+                 animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
+                 clearInterval(animatetimeralertsdirectorytomainjpgviewer2);animatetimeralertsdirectorytomainjpgviewer2=null
+              }
+           }
+        }
+     },100)
+     glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
+width="379px" height="582px"
+style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 0px 3px;position:absolute;
 ">
-<i style="position:relative;top:-25px;left:200px">Upper left is the most recent event of all views, so it will duplicate one of the others</i>
-<!--                            if(mainjpgviewer0.data!=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
-                            {   mainjpgviewer0.data=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href}-->
-<tr><td>
+   <param name="timestamp" value="initial" />
+   <param name="nextfilename" value="initial" />
+   <param name="currenttime" value=0 />
+   <param name="playingjpgs_number" value="0" />
+   <param name="marker" value=0 />
+    </object>
 
-<div id="androidconnection" class="androidconnection" style="display:none">
-<br>This silent audio loop is used to maintain Android connections
-<object id="alertkeepalive" type="audio/mpeg" data="" height="20px" width="200px">
-</object>
+<button style="position:relative;top:600px;white-space:nowrap;background:rgb(215,215,245)
+border:0px solid black;
+border-width:0px 0px 3px 0px;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+"
+id="btnalljpgs2"
+onmousedown="
+   snapsdirectory.children['marker'].value=0
+   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]
+   this.style.background='rgb(255,255,255)';btneastjpgs2.style.background='rgb(215,215,245)';
+   btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';
+   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
+/*   show_eventsmainjpgviewer3.style.display='none'*/
+/*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
+">All (Expect simple motion detects TO BE DELETED without notice)</button>
+
+<button style="position:relative;top:582px;left:384px;white-space:nowrap;background:rgb(215,215,245)
+border:0px solid black;
+border-width:0px 0px 3px 0px;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+"
+id="btneastjpgs2"
+onmousedown="
+   snapsdirectory.children['marker'].value=2
+   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]
+   this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
+   btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';
+   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
+/*   show_eventsmainjpgviewer3.style.display='none'*/
+/*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
+">East</button>
+
+<button style="position:relative;top:582px;left:384px;white-space:nowrap;background:rgb(215,215,245)
+border:0px solid black;
+border-width:0px 0px 3px 0px;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+"
+id="btndockjpgs2"
+onmousedown="
+   snapsdirectory.children['marker'].value=3
+   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]
+   this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
+   btneastjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';
+   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
+/*   show_eventsmainjpgviewer3.style.display='none'*/
+/*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
+">Dock</button>
+
+<button style="position:relative;top:582px;left:384px;white-space:nowrap;background:rgb(215,215,245)
+border:0px solid black;
+border-width:0px 0px 3px 0px;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+"
+id="btnofficejpgs2"
+onmousedown="
+   snapsdirectory.children['marker'].value=4
+   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]
+   this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
+   btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';
+   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
+/*   show_eventsmainjpgviewer3.style.display='none'*/
+/*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
+">Office</button>
+
+<button style="position:relative;top:582px;left:384px;white-space:nowrap;background:rgb(215,215,245)
+border:0px solid black;
+border-width:0px 0px 3px 0px;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+"
+id="btnseastjpgs2"
+onmousedown="
+   snapsdirectory.children['marker'].value=5
+   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]
+   this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
+   btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';
+   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
+/*   show_eventsmainjpgviewer3.style.display='none'*/
+/*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
+">S-East</button>
+
+<button style="position:relative;top:582px;left:384px;white-space:nowrap;background:rgb(215,215,245)
+border:0px solid black;
+border-width:0px 0px 3px 0px;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+"
+id="btnnorthjpgs2"
+onmousedown="
+   snapsdirectory.children['marker'].value=6
+   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]
+   this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
+   btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
+   btnseastjpgs2.style.background='rgb(215,215,245)';
+   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
+/*   show_eventsmainjpgviewer3.style.display='none'*/
+/*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
+">North</button>
+</td></tr>
+</table>
+
 </div>
-</td></tr></table>
-</div>
-<table style="border-collapse:collapse"><tr><td>
+<div style="position:relative;top:-200px">
+<table width="1px" height="582px" cellspacing="0" style="border-collapse:collapse;position:relative;top:0px" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholder1" width="1px" height="100%" valign="top">
+<tr><td>
 <!-- Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=
 <input type="button" value="Most recent alert event" onclick="this.value=previousalert">
 <br> -->
 <input type="range" id="show_eventsmainjpgviewer1" name="show_eventsmainjpgviewer1" min="-53" max="-1" value="-1" step="1" list="tickmarks" class="vertical-slider"
-style="position:absolute;z-index:5;top:54px;left:3px;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+style="position:absolute;top:20px;left:0px;z-index:5;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 "
 orient="vertical"
 onchange="
@@ -1037,11 +1236,10 @@ else if(alertsdirectory.data.includes(alertsdirectorysources[0].substring(7,(ale
 "  
 name="show_eventsmainjpgviewer2" class="slidersNeedingDelayedDisplay"
 min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;z-index:5;top:43px;left:248px;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+style="position:absolute;top:8px;left:242px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 " 
 note="1+395/36=11,159+245=1+747/68=11"
 orient="vertical">
-<table width="1px" height="582px" cellspacing="0" style="border-collapse:collapse;position:relative;top:11px" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholder1" width="1px" height="100%" valign="top">
 <object id="alertsdirectory" type="text/html"
 data=""
 onclick="this.data=this.data"
@@ -1103,7 +1301,7 @@ onload="if (!alertCheck.value.endsWith(' OFF'))
      },100)
      glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 width="379px" height="582px"
-style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 0px 3px;position:absolute;
+style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 0px 3px;position:relative;
 ">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
@@ -1112,7 +1310,7 @@ style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px
    <param name="marker" value=0 />
     </object>
 
-<button style="position:absolute;top:600px;white-space:nowrap;background:rgb(215,215,245)
+<button style="position:relative;left:0px;top:0px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
 border-bottom-left-radius:10px;
@@ -1135,7 +1333,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[1].substring(7,(alertsdi
 "
 >Alert-related</button>
 
-<button style="position:absolute;top:600px;left:96px;white-space:nowrap;background:rgb(215,215,245)
+<button style="position:relative;top:-18px;left:96px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
 border-bottom-left-radius:10px;
@@ -1157,9 +1355,9 @@ if(alertsdirectory.data.includes(alertsdirectorysources[0].substring(7,(alertsdi
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
-">All (expect dynamically deleted motion detects here and on remaining buttons ->)</button>
+">All (Expect simple motion detects TO BE DELETED without notice ->)</button>
 
-<button style="position:absolute;top:600px;left:576px;white-space:nowrap;background:rgb(215,215,245)
+<button style="position:relative;top:-36px;left:494px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
 border-bottom-left-radius:10px;
@@ -1183,7 +1381,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[2].substring(7,(alertsdi
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
 ">East</button>
 
-<button style="position:absolute;top:600px;left:620px;white-space:nowrap;background:rgb(215,215,245)
+<button style="position:relative;top:-36px;left:494px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
 border-bottom-left-radius:10px;
@@ -1207,7 +1405,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[3].substring(7,(alertsdi
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
 ">Dock</button>
 
-<button style="position:absolute;top:600px;left:667px;white-space:nowrap;background:rgb(215,215,245)
+<button style="position:relative;top:-36px;left:494px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
 border-bottom-left-radius:10px;
@@ -1231,7 +1429,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[4].substring(7,(alertsdi
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
 ">Office</button>
 
-<button style="position:absolute;top:600px;left:718px;white-space:nowrap;background:rgb(215,215,245)
+<button style="position:relative;top:-36px;left:494px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
 border-bottom-left-radius:10px;
@@ -1255,7 +1453,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[5].substring(7,(alertsdi
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
 ">S-East</button>
 
-<button style="position:absolute;top:600px;left:770px;white-space:nowrap;background:rgb(215,215,245)
+<button style="position:relative;top:-36px;left:494px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
 border-bottom-left-radius:10px;
@@ -1280,212 +1478,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdi
 ">North</button>
 </td></tr>
 </table>
-<table style="position:relative;top:50px" width="1200px"><tr><td width="1200px">
-<i>THE ABOVE SNAPSHOT VIEWER IS ALSO MANIPULATED BY ALERT CHECKING.  The viewer below would be more available whenever alert checking is active</i>
-</td></tr></table>
-<table style="border-collapse:collapse"><tr><td>
-<!-- Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=
-<input type="button" value="Most recent alert event" onclick="this.value=previousalert">
-<br> -->
-<input type="range" id="show_eventsmainjpgviewer4" notes="11px per line, 25 lines in mode0=275"
-oninput="
-this.value=(snapsdirectory.contentDocument!='undefined' && snapsdirectory.contentDocument!=null && snapsdirectory.contentDocument.body.children[0] !='undefined' && snapsdirectory.contentDocument.body.children[0] != null && snapsdirectory.contentDocument.body.children[0].rows!='undefined' && snapsdirectory.contentDocument.body.children[0].rows!=null && snapsdirectory.contentDocument.body.children[0].rows.length!='undefined' && snapsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-snapsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
-if(this.value<1)
-{/*alert(parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.0089)*/
-   var rowselected=Math.round(snapsdirectory.contentDocument.body.children[0].rows.length*(snapsdirectory.contentDocument.body.scrollTop/((parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.99957)))-this.value)
-   if(rowselected<snapsdirectory.contentDocument.body.children[0].rows.length)
-   {
-      if(snapsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg'))
-      {
-         animatealertsdirectorytomainjpgviewer2(rowselected,snapsdirectory.contentDocument.body.children[0]);
-         StartTimeOfInterest=snapsdirectory.contentDocument.body.children[0].rows[rowselected].cells[0].outerHTML.substr(18)
-         StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
-         StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
-         StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
-         StartCamOfInterestEl.value=snapsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].innerText.trim()
-      }
-   }
-   else
-   {
-      this.value=(parseInt(this.value)-(snapsdirectory.contentDocument.body.children[0].rows.length-1-rowselected))
-   }
-}
-else if(snapsdirectory.data.includes(alertsdirectorysources[0].substring(7,(snapsdirectory.data.indexOf('?')<1?snapsdirectory.data.length:snapsdirectory.data.indexOf('?')-1))) || 1==1)
-{
-   if(animatordivalertsdirectorytomainjpgviewer2!='undefined' && animatordivalertsdirectorytomainjpgviewer2 != null)
-   {
-       animatordivalertsdirectorytomainjpgviewer2.style.display='none';
-       if(confirm(animationdivalertsdirectorytomainjpgviewer2.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory'))
-       {
-           animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
-           clearInterval(animatetimeralertsdirectorytomainjpgviewer2);animatetimeralertsdirectorytomainjpgviewer2=null
-       }
-   }
-}
-"  
-name="show_eventsmainjpgviewer4" class="slidersNeedingDelayedDisplay"
-min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;z-index:5;top:727px;left:248px;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
-" 
-note="1+395/36=11,159+245=1+747/68=11"
-orient="vertical">
-<br><br><br><br><br>
-<table width="1px" height="582px" cellspacing="0" style="border-collapse:collapse;position:relative;top:11px" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholder2" width="1px" height="100%" valign="top">
-<object id="snapsdirectory" type="text/html"
-data=""
-onclick="this.data=this.data"
-onload="
-     setTimeout(function(){
-       show_eventsmainjpgviewer4.value='0'
-       show_eventsmainjpgviewer4.value=(snapsdirectory.contentDocument!='undefined' && snapsdirectory.contentDocument!=null && snapsdirectory.contentDocument.body.children[0] !='undefined' && snapsdirectory.contentDocument.body.children[0] != null && snapsdirectory.contentDocument.body.children[0].rows!='undefined' && snapsdirectory.contentDocument.body.children[0].rows!=null && snapsdirectory.contentDocument.body.children[0].rows.length!='undefined' && snapsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-snapsdirectory.contentDocument.body.children[0].rows.length,show_eventsmainjpgviewer4.value):1;
-       if(show_eventsmainjpgviewer4.value<1){
-   /*alert(parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.0089)*/
-          var rowselected=Math.round(snapsdirectory.contentDocument.body.children[0].rows.length*(snapsdirectory.contentDocument.body.scrollTop/((parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.9943)))-show_eventsmainjpgviewer4.value)
-          if(rowselected<snapsdirectory.contentDocument.body.children[0].rows.length){
-             if(snapsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg')){
-                animatealertsdirectorytomainjpgviewer2(rowselected,snapsdirectory.contentDocument.body.children[0]);
-                StartTimeOfInterest=snapsdirectory.contentDocument.body.children[0].rows[rowselected].cells[0].outerHTML.substr(18)
-                StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
-                StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
-                StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
-                StartCamOfInterestEl.value=snapsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].innerText.trim()
-             }
-          }
-          else{
-             show_eventsmainjpgviewer4.value=(parseInt(show_eventsmainjpgviewer4.value)-(snapsdirectory.contentDocument.body.children[0].rows.length-1-rowselected))
-          }
-        }
-        else{
-           if(animatordivalertsdirectorytomainjpgviewer2!='undefined' && animatordivalertsdirectorytomainjpgviewer2 != null)
-           {
-              animatordivalertsdirectorytomainjpgviewer2.style.display='none';
-              if(confirm(animationdivalertsdirectorytomainjpgviewer2.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory')){
-                 animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
-                 clearInterval(animatetimeralertsdirectorytomainjpgviewer2);animatetimeralertsdirectorytomainjpgviewer2=null
-              }
-           }
-        }
-     },100)
-     glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-width="379px" height="582px"
-style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 0px 3px;position:absolute;
-">
-   <param name="timestamp" value="initial" />
-   <param name="nextfilename" value="initial" />
-   <param name="currenttime" value=0 />
-   <param name="playingjpgs_number" value="0" />
-   <param name="marker" value=0 />
-    </object>
-
-<button style="position:absolute;top:605px;white-space:nowrap;background:rgb(215,215,245)
-border:0px solid black;
-border-width:0px 0px 3px 0px;
-border-bottom-left-radius:10px;
-border-bottom-right-radius:10px;
-"
-id="btnalljpgs2"
-onmousedown="
-   snapsdirectory.children['marker'].value=0
-   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]
-   this.style.background='rgb(255,255,255)';btneastjpgs2.style.background='rgb(215,215,245)';
-   btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';
-   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
-/*   show_eventsmainjpgviewer3.style.display='none'*/
-/*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
-">All (expect dynamically deleted motion detects for all these)</button>
-
-<button style="position:absolute;top:605px;left:354px;white-space:nowrap;background:rgb(215,215,245)
-border:0px solid black;
-border-width:0px 0px 3px 0px;
-border-bottom-left-radius:10px;
-border-bottom-right-radius:10px;
-"
-id="btneastjpgs2"
-onmousedown="
-   snapsdirectory.children['marker'].value=2
-   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]
-   this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
-   btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';
-   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
-/*   show_eventsmainjpgviewer3.style.display='none'*/
-/*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
-">East</button>
-
-<button style="position:absolute;top:605px;left:398px;white-space:nowrap;background:rgb(215,215,245)
-border:0px solid black;
-border-width:0px 0px 3px 0px;
-border-bottom-left-radius:10px;
-border-bottom-right-radius:10px;
-"
-id="btndockjpgs2"
-onmousedown="
-   snapsdirectory.children['marker'].value=3
-   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]
-   this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
-   btneastjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';
-   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
-/*   show_eventsmainjpgviewer3.style.display='none'*/
-/*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
-">Dock</button>
-
-<button style="position:absolute;top:605px;left:445px;white-space:nowrap;background:rgb(215,215,245)
-border:0px solid black;
-border-width:0px 0px 3px 0px;
-border-bottom-left-radius:10px;
-border-bottom-right-radius:10px;
-"
-id="btnofficejpgs2"
-onmousedown="
-   snapsdirectory.children['marker'].value=4
-   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]
-   this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
-   btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';
-   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
-/*   show_eventsmainjpgviewer3.style.display='none'*/
-/*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
-">Office</button>
-
-<button style="position:absolute;top:605px;left:496px;white-space:nowrap;background:rgb(215,215,245)
-border:0px solid black;
-border-width:0px 0px 3px 0px;
-border-bottom-left-radius:10px;
-border-bottom-right-radius:10px;
-"
-id="btnseastjpgs2"
-onmousedown="
-   snapsdirectory.children['marker'].value=5
-   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]
-   this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
-   btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';
-   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
-/*   show_eventsmainjpgviewer3.style.display='none'*/
-/*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
-">S-East</button>
-
-<button style="position:absolute;top:605px;left:548px;white-space:nowrap;background:rgb(215,215,245)
-border:0px solid black;
-border-width:0px 0px 3px 0px;
-border-bottom-left-radius:10px;
-border-bottom-right-radius:10px;
-"
-id="btnnorthjpgs2"
-onmousedown="
-   snapsdirectory.children['marker'].value=6
-   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]
-   this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
-   btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
-   btnseastjpgs2.style.background='rgb(215,215,245)';
-   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
-/*   show_eventsmainjpgviewer3.style.display='none'*/
-/*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
-">North</button>
-</td></tr>
-</table>
+</div>
 <!--
 -webkit-appearance: none;background-image: url('/var/www/html/arrow_4_SE.png')
 
@@ -1548,14 +1541,6 @@ style="position:absolute;z-index:5;top:14px;left:270px;height:404px;-webkit-appe
 <!--
 the following object might need to be duplicated for a second instance
 -->
-
-
-
-
-
-
-
-
 <object id="mainjpgviewer0" type="text/html" value="Main jpg viewer" width="950px" height="260px"
 draggable="true"
 style="font-size:15px;overflow:auto;border:0px;"
@@ -1644,7 +1629,7 @@ ondragend="/*Now simply catch the very next mouse event to locate mouse*/
 </table>
 </td></tr>
 </table>
-</div></div><tr><td><div id="watchfootage" class="watchfootage" class="tablinks" style="display:none">
+</div></div></div><tr><td><div id="watchfootage" class="watchfootage" class="tablinks" style="display:none">
 <b>Separate Camera Recordings.  Click a blue border to list/unlist </b>
 
 &nbsp;&nbsp; &nbsp; &nbsp;
@@ -1675,9 +1660,6 @@ for(i=0;i<lmentList.length;i++)
 <tr><td></td></tr>
 
 <tr><td id="scrollmarker" class="camtitle">
-
-
-
 
 <a href="" target="_blank">East</a>
 </td></tr>
@@ -2463,9 +2445,18 @@ button gets back to the listing again.
 </div><div id="notesdiv" class="notesdiv" class="tabcontent" style="display:none;border:1px dashed red;border-width:0px 1px 1px 0px;width:1340px;height:608px">
 <h3><ul>
 <li>
-Drag over jpg files and you'll notice they can launch into new and separate viewer elements.  If that is not<br>
-what you want, for example when only to drag and drop, just move the mouse sideways while dragging so it<br>
-egresses the element then ingresses back into it.  That will disable the auto-multi-play and only highlight.
+</li>
+<li>
+The layout on the "Main" screen is intended to place all camera views of the dynamically updated snapshots<br>
+as large as possible yet allow room for the two alert-related buttions at the very bottom of your unscrolled,<br>
+maximized viewspace.  Scrolling down will then bring other elements into view.  Agree with this notion or not,<br>
+you may edit the sizes of the elements for different layouts if you change the HTML code.
+</li>
+<li>
+Mouse pointer drag over jpg file names - better yet, over their timestamps - and you'll notice they can launch<br>
+into new and separate viewer elements.  If that is not what you want, for example when only to drag and drop,<br>
+just move the pointer sideways while dragging so it egresses the element then ingresses back into it.  That will<br>
+disable the auto- multi-play and only allow browser-based select/highlight.
 </li>
 <li>
 "Time Of Interest" and "View Of Interest" are determined from the file last-modified (creation) time of most<br>
@@ -2479,7 +2470,8 @@ queueing, sorry about that.  It's just that videos must get loaded enough to sta
 function can be executed, and only a human operator can enforce that rule.  A related rule is that you may<br>
 NOT start using page whatsoever, not even page scrolling, until entire page is completely finished rendering<br>
 and calculating values, or else unbeknownst to you, startup code will never finish initializing remaining aspects<br>
-of the page, leaving bugs in the page's partially-loaded code.
+of the page, leaving bugs in the page's partially-loaded code.  Enforcement of that rule is encoded so you can't<br>
+violate it even if you try.
 </li>
 <li>
 Video snippets are about 6 minutes, so that is as early as the currently recording .mp4 will be ready;<br>
@@ -2487,7 +2479,9 @@ i.e.,the  most recent .mp4 (at the top of the listed stream files) video will ne
 since it is not finished recording. Snapshot files on the other hand, are always ready for viewing.<br>
 </li>
 <li>
-To navigate upward to the higher directory use the browser back arrow.<br>
+Within any filename listing, directory names may be encountered and navigated down into.  To navigate back upward<br>
+to the higher directory again, use the browser back arrow.  Apologies for lack of any clickable links for the<br>
+purpose.
 </li>
 <li>
 When viewing or playing by simple clicking, the back button can end the player app if the focus is on it.<br>
