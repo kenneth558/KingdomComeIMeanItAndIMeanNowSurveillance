@@ -977,6 +977,10 @@ alertsdirectoryaliases[6] = 'North snapshots'
 <!-- Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=
 <input type="button" value="Most recent alert event" onclick="this.value=previousalert">
 <br> -->
+<button id="btnreclaim2" style="background:#fff;position:absolute;top:-7px;left:170px;z-Index:1;display:none" onmousedown="
+this.style.display='none'
+animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
+">Release viewer memory</button>
 <input type="range" id="show_eventsmainjpgviewer4" notes="11px per line, 25 lines in mode0=275"
 oninput="
 this.value=(snapsdirectory.contentDocument!='undefined' && snapsdirectory.contentDocument!=null && snapsdirectory.contentDocument.body.children[0] !='undefined' && snapsdirectory.contentDocument.body.children[0] != null && snapsdirectory.contentDocument.body.children[0].rows!='undefined' && snapsdirectory.contentDocument.body.children[0].rows!=null && snapsdirectory.contentDocument.body.children[0].rows.length!='undefined' && snapsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-snapsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
@@ -1169,10 +1173,6 @@ onmousedown="
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
 ">North</button>
-<button id="btnreclaim2" style="background:#fff;position:relative;top:-45px;left:170px;display:none" onmousedown="
-this.style.display='none'
-animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
-">Release viewer memory</button>
 </td></tr>
 </table>
 
@@ -1203,6 +1203,11 @@ else if(alertsdirectory.data.includes(alertsdirectorysources[5].substring(7,(ale
 else if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))))
 {btnnorthjpgs.onmousedown()}
 ">
+<button id="btnreclaim1" style="background:#fff;position:absolute;top:-8px;left:170px;display:none;z-Index:2;" onmousedown="
+this.style.display='none'
+animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
+clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=null
+">Release viewer memory</button>
 <input type="range" id="show_eventsmainjpgviewer2" notes="11px per line, 25 lines in mode0=275"
 oninput="
 this.value=(alertsdirectory.contentDocument!='undefined' && alertsdirectory.contentDocument!=null && alertsdirectory.contentDocument.body.children[0] !='undefined' && alertsdirectory.contentDocument.body.children[0] != null && alertsdirectory.contentDocument.body.children[0].rows!='undefined' && alertsdirectory.contentDocument.body.children[0].rows!=null && alertsdirectory.contentDocument.body.children[0].rows.length!='undefined' && alertsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-alertsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
@@ -1475,11 +1480,6 @@ if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdi
 }
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
 ">North</button>
-<button id="btnreclaim1" style="background:#fff;position:relative;top:-665px;left:170px;display:none" onmousedown="
-this.style.display='none'
-animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
-clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=null
-">Release viewer memory</button>
 </td></tr>
 </table>
 </div>
