@@ -788,9 +788,9 @@ Script on server: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nb
 </tr>
 </table>
 </div><div id="divmain" class="divmain" class="tablinks" style="position:relative;top:0px">
-<div width="430px" height="282px" style="display: inline-block;border:4px dashed red;width:430px;height:282px;position:relative;">
+<div width="420px" height="272px" style="display: inline-block;border:4px dashed red;width:420px;height:272px;position:relative;">
 <!--<table  width="430px" height="282px" style="border-collapse:collapse;;width:432px;height:282px;position:relative;"><tr><td>-->
-<object id="dedicatedjpgviewer0" type="text/html" style="border:0px;position:absolute;" value="Alt jpg viewer" width="430px" height="282px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function(){
+<object id="dedicatedjpgviewer0" type="text/html" style="border:0px;position:absolute;" value="Alt jpg viewer" width="420px" height="272px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function(){
 filenametool1.src=sourcesdedicatedjpgviewer[1];if(filenametool0.contentDocument.body.innerText.includes(filenametool1.src.substr(filenametool1.src.indexOf('camera_')+24,7))){filenametool1.parentElement.parentElement.style.border='4px solid red';}else{filenametool1.parentElement.parentElement.style.border='0px';}
 filenametool2.src=sourcesdedicatedjpgviewer[2];if(filenametool0.contentDocument.body.innerText.includes(filenametool2.src.substr(filenametool2.src.indexOf('camera_')+24,7))){filenametool2.parentElement.parentElement.style.border='4px solid red';}else{filenametool2.parentElement.parentElement.style.border='4px solid transparent';}
 filenametool3.src=sourcesdedicatedjpgviewer[3];if(filenametool0.contentDocument.body.innerText.includes(filenametool3.src.substr(filenametool3.src.indexOf('camera_')+24,7))){filenametool3.parentElement.parentElement.style.border='4px solid red';}else{filenametool3.parentElement.parentElement.style.border='4px solid transparent';}
@@ -982,6 +982,7 @@ oninput="
 this.value=(snapsdirectory.contentDocument!='undefined' && snapsdirectory.contentDocument!=null && snapsdirectory.contentDocument.body.children[0] !='undefined' && snapsdirectory.contentDocument.body.children[0] != null && snapsdirectory.contentDocument.body.children[0].rows!='undefined' && snapsdirectory.contentDocument.body.children[0].rows!=null && snapsdirectory.contentDocument.body.children[0].rows.length!='undefined' && snapsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-snapsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
 if(this.value<1)
 {/*alert(parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.0089)*/
+   btnreclaim2.style.display='none'
    var rowselected=Math.round(snapsdirectory.contentDocument.body.children[0].rows.length*(snapsdirectory.contentDocument.body.scrollTop/((parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.99957)))-this.value)
    if(rowselected<snapsdirectory.contentDocument.body.children[0].rows.length)
    {
@@ -1005,11 +1006,7 @@ else if(snapsdirectory.data.includes(alertsdirectorysources[0].substring(7,(snap
    if(animatordivalertsdirectorytomainjpgviewer2!='undefined' && animatordivalertsdirectorytomainjpgviewer2 != null)
    {
        animatordivalertsdirectorytomainjpgviewer2.style.display='none';
-       if(confirm(animationdivalertsdirectorytomainjpgviewer2.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory'))
-       {
-           animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
-           clearInterval(animatetimeralertsdirectorytomainjpgviewer2);animatetimeralertsdirectorytomainjpgviewer2=null
-       }
+       btnreclaim2.style.display=''
    }
 }
 "  
@@ -1172,6 +1169,9 @@ onmousedown="
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
 ">North</button>
+<button id="btnreclaim2" style="background:#fff;position:relative;top:-45px;left:170px;display:none" onmousedown="
+animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
+">Release viewer memory</button>
 </td></tr>
 </table>
 
@@ -1207,6 +1207,7 @@ oninput="
 this.value=(alertsdirectory.contentDocument!='undefined' && alertsdirectory.contentDocument!=null && alertsdirectory.contentDocument.body.children[0] !='undefined' && alertsdirectory.contentDocument.body.children[0] != null && alertsdirectory.contentDocument.body.children[0].rows!='undefined' && alertsdirectory.contentDocument.body.children[0].rows!=null && alertsdirectory.contentDocument.body.children[0].rows.length!='undefined' && alertsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-alertsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
 if(this.value<1)
 {/*alert(parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.0089)*/
+   btnreclaim1.style.display='none'
    var rowselected=Math.round(alertsdirectory.contentDocument.body.children[0].rows.length*(alertsdirectory.contentDocument.body.scrollTop/((parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.99957)))-this.value)
    if(rowselected<alertsdirectory.contentDocument.body.children[0].rows.length)
    {
@@ -1228,12 +1229,7 @@ if(this.value<1)
 else if(alertsdirectory.data.includes(alertsdirectorysources[0].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) || 1==1)
 {
    animatordivalertsdirectorytomainjpgviewer0.style.display='none';
-   if(animatordivalertsdirectorytomainjpgviewer0!='undefined' && animatordivalertsdirectorytomainjpgviewer0 != null)
-   {   if(confirm(animationdivalertsdirectorytomainjpgviewer0.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory'))
-       {
-           animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
-       }
-   }
+   btnreclaim1.style.display=''
 }
 "  
 name="show_eventsmainjpgviewer2" class="slidersNeedingDelayedDisplay"
@@ -1263,7 +1259,6 @@ onload="if (!alertCheck.value.endsWith(' OFF'))
                      }
                      else
                      {   previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
-                         
                      }
                  }
                  else {previousalert='waiting';}
@@ -1277,6 +1272,7 @@ onload="if (!alertCheck.value.endsWith(' OFF'))
        show_eventsmainjpgviewer2.value=(alertsdirectory.contentDocument!='undefined' && alertsdirectory.contentDocument!=null && alertsdirectory.contentDocument.body.children[0] !='undefined' && alertsdirectory.contentDocument.body.children[0] != null && alertsdirectory.contentDocument.body.children[0].rows!='undefined' && alertsdirectory.contentDocument.body.children[0].rows!=null && alertsdirectory.contentDocument.body.children[0].rows.length!='undefined' && alertsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-alertsdirectory.contentDocument.body.children[0].rows.length,show_eventsmainjpgviewer2.value):1;
        if(show_eventsmainjpgviewer2.value<1){
    /*alert(parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.0089)*/
+
           var rowselected=Math.round(alertsdirectory.contentDocument.body.children[0].rows.length*(alertsdirectory.contentDocument.body.scrollTop/((parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.9943)))-show_eventsmainjpgviewer2.value)
           if(rowselected<alertsdirectory.contentDocument.body.children[0].rows.length){
              if(alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg')){
@@ -1478,6 +1474,10 @@ if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdi
 }
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
 ">North</button>
+<button id="btnreclaim1" style="background:#fff;position:relative;top:-665px;left:170px;display:none" onmousedown="
+animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
+clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=null
+">Release viewer memory</button>
 </td></tr>
 </table>
 </div>
