@@ -776,29 +776,88 @@ else
 id="btnaudibleonalert" onclick="if(this.value=='Alerts now audible'){this.value='Make new alerts audible'}else{previousalert='waiting';this.value='Alerts now audible'}">
 </div>
 <div style="position:relative;top:15px;">
+<input type="button" value="Squares" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions5" onclick="
+var dedicatedjpgviewer = getElementByClassName('dedicatedjpgviewer')
+for(var i=0;i<dedicatedjpgviewer;i++)
+{
+    dedicatedjpgviewer.getParent.style.height=dedicatedjpgviewer.style.width
+    dedicatedjpgviewer.style.height=dedicatedjpgviewer.style.width
+}
+">
+<input type="button" value="True ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions6" onclick="">
+<input type="button" value="Screen's ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions7" onclick="">
+<input type="button" value="Browser's ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions8" onclick="">
+</div>
+<div style="position:relative;top:20px;">
 <input type="button" value="Sizing sliders" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btnsliders" onclick="">
 <input type="button" value="1 row" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions1" onclick="">
 <input type="button" value="2 rows" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions2" onclick="">
 <input type="button" value="1 column" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions3" onclick="">
 </div>
-<div style="position:relative;top:20px;">
-<input type="button" value="Squares" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions5" onclick="">
-<input type="button" value="True ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions6" onclick="">
-<input type="button" value="Screen's ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions7" onclick="">
-<input type="button" value="Browser's ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions8" onclick="">
-</div>
 <div style="position:relative;top:25px;">
 <input type="button" value="jpg<->mp4" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btnjpgormp41" onclick="">
 </div>
 </div>
-<div style="display: inline-block;border:4px;width:0px;height:272px;position:relative;top:00px">
-<!--<table  width="430px" height="282px" style="border-collapse:collapse;;width:432px;height:282px;position:relative;"><tr><td>-->
-<object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:100px" value="Alt jpg viewer" width="420px" height="172px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function(){
-filenametool1.src=sourcesdedicatedjpgviewer[1];if(filenametool0.contentDocument.body.innerText.includes(filenametool1.src.substr(filenametool1.src.indexOf('camera_')+24,7))){filenametool1.parentElement.parentElement.style.border='4px solid red';if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.background.startsWith('rgb(255, 255, 255)') || btneastjpgs2.style.background.startsWith('rgb(255, 255, 255)'))){filenametool1.parentElement.click();}}else{filenametool1.parentElement.parentElement.style.border='0px';}
-filenametool2.src=sourcesdedicatedjpgviewer[2];if(filenametool0.contentDocument.body.innerText.includes(filenametool2.src.substr(filenametool2.src.indexOf('camera_')+24,7))){filenametool2.parentElement.parentElement.style.border='4px solid red';if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.background.startsWith('rgb(255, 255, 255)') || btndockjpgs2.style.background.startsWith('rgb(255, 255, 255)'))){filenametool2.parentElement.click();}}else{filenametool2.parentElement.parentElement.style.border='4px solid transparent';}
-filenametool3.src=sourcesdedicatedjpgviewer[3];if(filenametool0.contentDocument.body.innerText.includes(filenametool3.src.substr(filenametool3.src.indexOf('camera_')+24,7))){filenametool3.parentElement.parentElement.style.border='4px solid red';if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.background.startsWith('rgb(255, 255, 255)') || btnofficejpgs2.style.background.startsWith('rgb(255, 255, 255)'))){filenametool3.parentElement.click();}}else{filenametool3.parentElement.parentElement.style.border='4px solid transparent';}
-filenametool4.src=sourcesdedicatedjpgviewer[4];if(filenametool0.contentDocument.body.innerText.includes(filenametool4.src.substr(filenametool4.src.indexOf('camera_')+24,7))){filenametool4.parentElement.parentElement.style.border='4px solid red';if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.background.startsWith('rgb(255, 255, 255)') || btnseastjpgs2.style.background.startsWith('rgb(255, 255, 255)'))){filenametool4.parentElement.click();}}else{filenametool4.parentElement.parentElement.style.border='4px solid transparent';}
-filenametool5.src=sourcesdedicatedjpgviewer[5];if(filenametool0.contentDocument.body.innerText.includes(filenametool5.src.substr(filenametool5.src.indexOf('camera_')+24,7))){filenametool5.parentElement.parentElement.style.border='4px solid red';if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.background.startsWith('rgb(255, 255, 255)') || btnnorthjpgs2.style.background.startsWith('rgb(255, 255, 255)'))){filenametool5.parentElement.click();}}else{filenametool5.parentElement.parentElement.style.border='4px solid transparent';}
+<div style="display: inline-block;border:4px;width:420px;height:272px;position:relative;top:00px">
+<!--<table  width="430px" height="282px" style="border-collapse:collapse;;width:432px;height:282px;position:relative;"><tr><td>
+var dedicatedjpgviewer = getElementByClassName('dedicatedjpgviewer')
+for(var i=0;i<dedicatedjpgviewer;i++)
+{
+    dedicatedjpgviewer.getParent.style.height=dedicatedjpgviewer.style.width
+    dedicatedjpgviewer.style.height=dedicatedjpgviewer.style.width
+}
+
+       if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.background.startsWith('rgb(255, 255, 255)') || btneastjpgs2.style.background.startsWith('rgb(255, 255, 255)')))
+       {
+          filenametool1.parentElement.click();
+       }
+      if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.background.startsWith('rgb(255, 255, 255)') || btndockjpgs2.style.background.startsWith('rgb(255, 255, 255)'))){filenametool2.parentElement.click();}
+if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.background.startsWith('rgb(255, 255, 255)') || btnofficejpgs2.style.background.startsWith('rgb(255, 255, 255)'))){filenametool3.parentElement.click();}
+if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.background.startsWith('rgb(255, 255, 255)') || btnseastjpgs2.style.background.startsWith('rgb(255, 255, 255)'))){filenametool4.parentElement.click();}
+if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.background.startsWith('rgb(255, 255, 255)') || btnnorthjpgs2.style.background.startsWith('rgb(255, 255, 255)'))){filenametool5.parentElement.click();}
+-->
+<object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:100px" value="Alt jpg viewer" width="420px" height="172px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function()
+{
+   filenametool1.src=sourcesdedicatedjpgviewer[1];if(filenametool0.contentDocument.body.innerText.includes(filenametool1.src.substr(filenametool1.src.indexOf('camera_')+24,7)))
+   {
+       filenametool1.parentElement.parentElement.style.border='4px solid red';
+   }
+   else
+   {
+      filenametool1.parentElement.parentElement.style.border='0px';
+   }
+   filenametool2.src=sourcesdedicatedjpgviewer[2];if(filenametool0.contentDocument.body.innerText.includes(filenametool2.src.substr(filenametool2.src.indexOf('camera_')+24,7)))
+   {
+      filenametool2.parentElement.parentElement.style.border='4px solid red';
+   }
+   else
+   {
+      filenametool2.parentElement.parentElement.style.border='4px solid transparent';
+   }
+   filenametool3.src=sourcesdedicatedjpgviewer[3];if(filenametool0.contentDocument.body.innerText.includes(filenametool3.src.substr(filenametool3.src.indexOf('camera_')+24,7)))
+   {
+      filenametool3.parentElement.parentElement.style.border='4px solid red';
+   }
+   else
+   {
+      filenametool3.parentElement.parentElement.style.border='4px solid transparent';
+   }
+   filenametool4.src=sourcesdedicatedjpgviewer[4];if(filenametool0.contentDocument.body.innerText.includes(filenametool4.src.substr(filenametool4.src.indexOf('camera_')+24,7)))
+   {
+      filenametool4.parentElement.parentElement.style.border='4px solid red';
+   }
+   else
+   {
+      filenametool4.parentElement.parentElement.style.border='4px solid transparent';
+   }
+   filenametool5.src=sourcesdedicatedjpgviewer[5];if(filenametool0.contentDocument.body.innerText.includes(filenametool5.src.substr(filenametool5.src.indexOf('camera_')+24,7)))
+   {
+      filenametool5.parentElement.parentElement.style.border='4px solid red';
+   }
+   else
+   {
+      filenametool5.parentElement.parentElement.style.border='4px solid transparent';
+   }
 },80)"></object><!--</td></tr></table>--></div>
 </div>
 <div  width="430px" height="262px" style="display: inline-block;border:4px solid transparent;width:430px;height:282px;position:relative;top:-262px;"><object onclick="btndockjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"></object>
@@ -996,7 +1055,7 @@ onmousedown="
    {this.style.background='rgb(255,255,255)'
     this.style.color='#000'
     this.innerText='Staying current on this view'}
-">Stay current on this view</button>
+">Stay current on this view</button>Future---->
 <table width="1px" height="582px" cellspacing="0" style="border-collapse:collapse;position:relative;top:0px" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholder2" width="1px" height="100%" valign="top">
 <!-- Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=
 <input type="button" value="Most recent alert event" onclick="this.value=previousalert">
@@ -1142,7 +1201,7 @@ border-bottom-right-radius:10px;
 id="btnalljpgs2"
 onmousedown="
    snapsdirectory.children['marker'].value=0
-   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+(show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
+   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btneastjpgs2.style.background='rgb(215,215,245)';
    btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
    btnnorthjpgs2.style.background='rgb(215,215,245)';
@@ -1160,7 +1219,7 @@ border-bottom-right-radius:10px;
 id="btneastjpgs2"
 onmousedown="
    snapsdirectory.children['marker'].value=2
-   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+(show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
+   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
    btnnorthjpgs2.style.background='rgb(215,215,245)';
@@ -1178,7 +1237,7 @@ border-bottom-right-radius:10px;
 id="btndockjpgs2"
 onmousedown="
    snapsdirectory.children['marker'].value=3
-   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+(show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
+   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
    btnnorthjpgs2.style.background='rgb(215,215,245)';
@@ -1196,7 +1255,7 @@ border-bottom-right-radius:10px;
 id="btnofficejpgs2"
 onmousedown="
    snapsdirectory.children['marker'].value=4
-   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+(show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
+   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
    btnnorthjpgs2.style.background='rgb(215,215,245)';
@@ -1215,7 +1274,7 @@ id="btnseastjpgs2"
 onmousedown="
    snapsdirectory.children['marker'].value=5
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]
-   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+(show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
+   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
    btnnorthjpgs2.style.background='rgb(215,215,245)';
@@ -1233,7 +1292,7 @@ border-bottom-right-radius:10px;
 id="btnnorthjpgs2"
 onmousedown="
    snapsdirectory.children['marker'].value=6
-   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+(show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
+   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
    btnseastjpgs2.style.background='rgb(215,215,245)';
@@ -1292,7 +1351,7 @@ if(this.value<1)
 /*alert(0-show_eventsmainjpgviewer1.value+', '+alertsdirectory.contentDocument.body.children[0].rows.length+', '+(0-parseInt(this.oldvalue))+', '+(0-this.value)+', '+rowselected);*/
    if((parseInt(this.oldvalue)!=null) && 
       (0-show_eventsmainjpgviewer1.value<alertsdirectory.contentDocument.body.children[0].rows.length) &&
-      (parseInt(this.oldvalue)-1==show_eventsmainjpgviewer1.value) &&
+      ((parseInt(this.oldvalue)-1)==show_eventsmainjpgviewer1.value) &&
       (this.value-1>show_eventsmainjpgviewer1.value))
    {this.value=this.oldvalue
 /*      alert(show_eventsmainjpgviewer1.value+', '+this.value);*/
@@ -1320,7 +1379,7 @@ else if(alertsdirectory.data.includes(alertsdirectorysources[0].substring(7,(ale
    {
       if((parseInt(this.oldvalue)!=null) &&
          (0-show_eventsmainjpgviewer1.value<alertsdirectory.contentDocument.body.children[0].rows.length) &&
-         (parseInt(this.oldvalue)-1==show_eventsmainjpgviewer1.value) &&
+         ((parseInt(this.oldvalue)-1)==show_eventsmainjpgviewer1.value) &&
          (this.value-1>show_eventsmainjpgviewer1.value))
       {
           this.value=this.oldvalue 
@@ -1426,7 +1485,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[1].substring(7,(alertsdi
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:'))
 {
    alertsdirectory.children['marker'].value=1
-   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min?'':'?mostrecent'+(Math.round(0-show_eventsmainjpgviewer1.value)))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
+   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(Math.round(0-show_eventsmainjpgviewer1.value)))/*+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max)?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';btnalljpgs.style.background='rgb(215,215,245)';btneastjpgs.style.background='rgb(215,215,245)';
    btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
    btnnorthjpgs.style.background='rgb(215,215,245)';
@@ -1450,7 +1509,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[0].substring(7,(alertsdi
   )
 {
    alertsdirectory.children['marker'].value=0
-   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
+   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btneastjpgs.style.background='rgb(215,215,245)';
    btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
    btnnorthjpgs.style.background='rgb(215,215,245)';
@@ -1474,7 +1533,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[2].substring(7,(alertsdi
   )
 {
    alertsdirectory.children['marker'].value=2
-   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
+   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
    btnnorthjpgs.style.background='rgb(215,215,245)';
@@ -1498,7 +1557,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[3].substring(7,(alertsdi
   )
 {
    alertsdirectory.children['marker'].value=3
-   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
+   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
    btnnorthjpgs.style.background='rgb(215,215,245)';
@@ -1522,7 +1581,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[4].substring(7,(alertsdi
   )
 {
    alertsdirectory.children['marker'].value=4
-   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
+   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
    btnnorthjpgs.style.background='rgb(215,215,245)';
@@ -1546,7 +1605,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[5].substring(7,(alertsdi
   )
 {
    alertsdirectory.children['marker'].value=5
-   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
+   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';
    btnnorthjpgs.style.background='rgb(215,215,245)';
@@ -1570,7 +1629,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdi
   )
 {
    alertsdirectory.children['marker'].value=6
-   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
+   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';
    btnseastjpgs.style.background='rgb(215,215,245)';
