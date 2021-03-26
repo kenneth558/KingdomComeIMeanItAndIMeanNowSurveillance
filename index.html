@@ -764,7 +764,7 @@ else
         )
     }
     checkingAlerted=setInterval(function()
-       {   alertsdirectory.data=alertsdirectory.data},6500
+       {alertsdirectory.data=alertsdirectory.data},6500
     )
 }
 ">Alert checking OFF</button>
@@ -778,7 +778,7 @@ id="btnaudibleonalert" onclick="if(this.value=='Alerts now audible'){this.value=
 <div style="position:relative;top:15px;">
 <input type="button" value="Squares" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions5" onclick="
 var dedicatedjpgviewer = getElementByClassName('dedicatedjpgviewer')
-for(var i=0;i<dedicatedjpgviewer;i++)
+for(var i=0;i<dedicatedjpgviewer.length;i++)
 {
     dedicatedjpgviewer.getParent.style.height=dedicatedjpgviewer.style.width
     dedicatedjpgviewer.style.height=dedicatedjpgviewer.style.width
@@ -1140,8 +1140,8 @@ this.oldvalue=this.value
 name="show_eventsmainjpgviewer4" class="slidersNeedingDelayedDisplay"
 min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
 style="position:absolute;top:9px;left:405px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
-oldvalue=""
 " 
+oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
 orient="vertical">
 <object id="snapsdirectory" type="text/html"
@@ -1396,8 +1396,8 @@ this.oldvalue=this.value
 name="show_eventsmainjpgviewer2" class="slidersNeedingDelayedDisplay"
 min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
 style="position:absolute;top:8px;left:405px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
-oldvalue=""
 " 
+oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
 orient="vertical">
 <object id="alertsdirectory" type="text/html"
