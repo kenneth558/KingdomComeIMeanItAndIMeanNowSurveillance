@@ -743,7 +743,7 @@ else
                     if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
                     {;
                         if(previousalert!='waiting')
-                        {   if(btnaudibleonalert.value=='Alerts now audible'){soundalarm()};show_eventsmainjpgviewer2.value=0;show_eventsmainjpgviewer2.oninput()
+                        {   if(btnaudibleonalert.innerText=='Alerts now audible'){soundalarm()};show_eventsmainjpgviewer2.value=0;show_eventsmainjpgviewer2.oninput()
                         }
                         else
                         {   previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
@@ -772,36 +772,37 @@ else
 <object id="alertkeepalive" type="audio/mpeg" data="" height="20px" width="200px">
 </object>
 </div>
-<input type="button" value="Alerts now audible" style="position:relative;left:150px;top:-15px;width:170px;font-size:13px;background-color:#C0C0C0;color:#808080" 
-id="btnaudibleonalert" onclick="if(this.value=='Alerts now audible'){this.value='Make new alerts audible'}else{previousalert='waiting';this.value='Alerts now audible'}">
+<button value="Alerts now audible" style="position:relative;left:150px;top:-15px;width:170px;font-size:13px;background-color:#C0C0C0;color:#808080" 
+id="btnaudibleonalert" onclick="if(this.innerText=='Alerts now audible'){this.innerText='Make new alerts audible'}else{previousalert='waiting';this.innerText='Alerts now audible'}">Alerts now audible</button>
 </div>
 <div style="position:relative;top:15px;">
-<input type="button" value="Squares" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions5" onclick="
-var dedicatedjpgviewer = getElementByClassName('dedicatedjpgviewer')
+<button value="Squares" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions5" 
+onclick="alert()
+var dedicatedjpgviewer=document.getElementsByClassName('dedicatedjpgviewer')
 for(var i=0;i<dedicatedjpgviewer.length;i++)
 {
     dedicatedjpgviewer.getParent.style.height=dedicatedjpgviewer.style.width
     dedicatedjpgviewer.style.height=dedicatedjpgviewer.style.width
-}
-">
-<input type="button" value="True ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions6" onclick="">
-<input type="button" value="Screen's ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions7" onclick="">
-<input type="button" value="Browser's ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions8" onclick="">
+}"
+>Squares</button>
+<button value="True ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions6" onclick="">True ARs</button>
+<button value="Screens ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions7" onclick="">Screens ARs</button>
+<button value="Browsers ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions8" onclick="">Browsers ARs</button>
 </div>
 <div style="position:relative;top:20px;">
-<input type="button" value="Sizing sliders" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btnsliders" onclick="">
-<input type="button" value="1 row" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions1" onclick="">
-<input type="button" value="2 rows" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions2" onclick="">
-<input type="button" value="1 column" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions3" onclick="">
+<button value="Sizing sliders" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btnsliders" onclick="">Sizing sliders</button>
+<button value="1 row" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions1" onclick="">1 row</button>
+<button value="2 rows" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions2" onclick="">2 rows</button>
+<button value="1 column" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions3" onclick="">1 column</button>
 </div>
 <div style="position:relative;top:25px;">
-<input type="button" value="jpg<->mp4" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btnjpgormp41" onclick="">
+<button value="jpg<->mp4" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btnjpgormp41" onclick="">jpg<->mp4</button>
 </div>
 </div>
 <div style="display: inline-block;border:4px;width:420px;height:272px;position:relative;top:00px">
 <!--<table  width="430px" height="282px" style="border-collapse:collapse;;width:432px;height:282px;position:relative;"><tr><td>
-var dedicatedjpgviewer = getElementByClassName('dedicatedjpgviewer')
-for(var i=0;i<dedicatedjpgviewer;i++)
+var dedicatedjpgviewer = document.getElementsByClassName('dedicatedjpgviewer')
+for(var i=0;i<dedicatedjpgviewer.length;i++)
 {
     dedicatedjpgviewer.getParent.style.height=dedicatedjpgviewer.style.width
     dedicatedjpgviewer.style.height=dedicatedjpgviewer.style.width
@@ -1415,7 +1416,7 @@ onload="if (!alertCheck.innerText.endsWith(' OFF'))
               {
                  if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert){
                      if(previousalert!='waiting'){
-                        if(btnaudibleonalert.value=='Alerts now audible'){soundalarm()};show_eventsmainjpgviewer2.value=0;show_eventsmainjpgviewer2.oninput()
+                        if(btnaudibleonalert.innerText=='Alerts now audible'){soundalarm()};show_eventsmainjpgviewer2.value=0;show_eventsmainjpgviewer2.oninput()
 /* obsolete for now                            if(mainjpgviewer0.data!=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
                              {   mainjpgviewer0.data=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href}*/
                      }
@@ -1481,7 +1482,7 @@ border-bottom-right-radius:10px;
 id="alertrelated"
 onclick="
 if(alertsdirectory.data.includes(alertsdirectorysources[1].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
-   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.value=='Make new alerts audible' ||
+   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.innerText=='Make new alerts audible' ||
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:'))
 {
    alertsdirectory.children['marker'].value=1
@@ -1504,7 +1505,7 @@ border-bottom-right-radius:10px;
 id="btnalljpgs"
 onmousedown="
 if(alertsdirectory.data.includes(alertsdirectorysources[0].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
-   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.value=='Make new alerts audible' ||
+   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.innerText=='Make new alerts audible' ||
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
   )
 {
@@ -1528,7 +1529,7 @@ border-bottom-right-radius:10px;
 id="btneastjpgs"
 onmousedown="
 if(alertsdirectory.data.includes(alertsdirectorysources[2].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
-   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.value=='Make new alerts audible' ||
+   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.innerText=='Make new alerts audible' ||
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
   )
 {
@@ -1552,7 +1553,7 @@ border-bottom-right-radius:10px;
 id="btndockjpgs"
 onmousedown="
 if(alertsdirectory.data.includes(alertsdirectorysources[3].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
-   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.value=='Make new alerts audible' ||
+   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.innerText=='Make new alerts audible' ||
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
   )
 {
@@ -1576,7 +1577,7 @@ border-bottom-right-radius:10px;
 id="btnofficejpgs"
 onmousedown="
 if(alertsdirectory.data.includes(alertsdirectorysources[4].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
-   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.value=='Make new alerts audible' ||
+   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.innerText=='Make new alerts audible' ||
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
   )
 {
@@ -1600,7 +1601,7 @@ border-bottom-right-radius:10px;
 id="btnseastjpgs"
 onmousedown="
 if(alertsdirectory.data.includes(alertsdirectorysources[5].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
-   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.value=='Make new alerts audible' ||
+   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.innerText=='Make new alerts audible' ||
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
   )
 {
@@ -1624,7 +1625,7 @@ border-bottom-right-radius:10px;
 id="btnnorthjpgs"
 onmousedown="
 if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
-   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.value=='Make new alerts audible' ||
+   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.innerText=='Make new alerts audible' ||
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
   )
 {
