@@ -91,7 +91,6 @@ textmaster.click()
 textmaster.value=43.5
 sldrmaster.value=textmaster.value
 textmaster.value=textmaster.value
-if(isAndroid){androidconnection.style='display: inline-block;'}else{androidconnection.style='display:none'}
 /*
 show_eventsmainjpgviewer2.style.left=parseFloat(show_eventsmainjpgviewer2.style.left)-((show_eventsmainjpgviewer2.getBoundingClientRect().right-287)/2.2)+'px'
 var delayedDisplayElements=document.querySelectorAll('.slidersNeedingDelayedDisplay')
@@ -407,7 +406,7 @@ setTimeout(function(){if(!confirm('Allow more time for snapshot animation elemen
 <option value="2" label="2 min"></option>
 <option value="360" label="6 hrs"></option>
 </datalist>
-<div id="entiredocument" style="z-Index:5;pointer-events:none;" onclick="return false">
+<div id="entiredocument" style="z-index:5;pointer-events:none;" onclick="return false">
 <div id="buttonsdiv" style="display:inline-block;position:sticky;top:0px;z-index:4;background:rgb(215,215,245,0.4);padding: 0px 0px 0px 0px;border:0px solid black;border-width:0px 0px 0px 0px;">
   <button id="btndivmain" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
 onclick="tabactivate(this)">
@@ -712,7 +711,7 @@ id="alertCheck" style="display: inline-block;position:absolute;left:0px;top:-15p
 value="Alert checking OFF"
 onclick="
 if (!this.innerText.endsWith(' OFF'))
-{   alertkeepalive.data='';androidconnection.style.display='none';this.innerText='Alert checking OFF';this.style.background='pink';clearInterval(checkingAlerted);btnaudibleonalert.style.color='#808080'
+{   if(isAndroid){alertkeepalive.data='';androidconnection.style.display='none';}this.innerText='Alert checking OFF';this.style.background='pink';clearInterval(checkingAlerted);btnaudibleonalert.style.color='#808080'
     previousalert='waiting';
          if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
            alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
@@ -730,7 +729,7 @@ if (!this.innerText.endsWith(' OFF'))
 
 else 
 {
-    this.innerText='Alert checking ON';alertCheck.style.background='Chartreuse';btnaudibleonalert.style.color='#000';if(isAndroid){androidconnection.style.display='inline'}
+    this.innerText='Alert checking ON';alertCheck.style.background='Chartreuse';btnaudibleonalert.style.color='#000';if(isAndroid){alertkeepalive.data='/var/www/html/silence.mp3';androidconnection.style.display='inline'}
     previousalert='waiting';
         if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
           alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
@@ -754,7 +753,7 @@ else
              }
          }
     alertsdirectory.data=alertsdirectory.data
-    if(isAndroid)
+    if(isAndroid || 1 == 1)
     {   alertkeepalive.data='/var/www/html/silence.mp3';
         setTimeout(function()
            {   alertkeepalive.contentDocument.body.children[0].muted=true;
@@ -768,12 +767,11 @@ else
     )
 }
 ">Alert checking OFF</button>
-<div id="androidconnection" class="androidconnection" style="display:none;border:0px">
-<object id="alertkeepalive" type="audio/mpeg" data="" height="20px" width="200px">
-</object>
-</div>
 <button value="Alerts now audible" style="position:relative;left:150px;top:-15px;width:170px;font-size:13px;background-color:#C0C0C0;color:#808080" 
 id="btnaudibleonalert" onclick="if(this.innerText=='Alerts now audible'){this.innerText='Make new alerts audible'}else{previousalert='waiting';this.innerText='Alerts now audible'}">Alerts now audible</button>
+<div id="androidconnection" class="androidconnection" style="position:absolute;top:-150px;left:750px;border:0px;z-index:-1;display:none">
+<object id="alertkeepalive" type="audio/mpeg" data=""></object>
+</div>
 </div>
 <div style="position:relative;top:15px;">
 <button value="Squares" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions5" 
@@ -1036,10 +1034,10 @@ alertsdirectoryaliases[5] = 'S-East snapshots'
 alertsdirectoryaliases[6] = 'North snapshots'
 /*delayedDisplayElements[0].styleleft='379px' disabled for now*/
 </script>
-<div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-Index:2;top:6px">
+<div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:2;top:6px">
 <div style="position:relative;top:-260px">
 <i>Upper left is the most recent event of all views, so it will duplicate one of the others</i>
-<button id="btnreclaim2" style="background:#fff;position:absolute;top:10px;left:340px;z-Index:1;display:none" onmousedown="
+<button id="btnreclaim2" style="background:#fff;position:absolute;top:10px;left:340px;z-index:1;display:none" onmousedown="
 this.style.display='none'
 animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
 ">Release viewer memory</button>
@@ -1145,6 +1143,20 @@ style="position:absolute;top:9px;left:405px;z-index:5;height:596px;-webkit-appea
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
 orient="vertical">
+<i style="position:absolute;width:600px;left:450px;top:20px" width="600px"><ul><br>A sub-range can be made <b>at the bottom of the master range</b> by putting the right slider 
+button below the left one, as follows:
+<br><br>
+<li>
+While a list of file names is being displayed (which makes a snapshot cover these instructions if you don't fully raise the right slider button), with the left slider button establish the low 
+boundary of the master range where you want the low boundary of your sub-range. <b>A sub-range can only be at the bottom of the master range.</b>
+</li><li>
+Lower the right slider to that same level
+</li><li>
+Click on the left slider bar where you want the upper boundary; sliding the button there isn't 
+allowed
+</li><li>
+Done.  Now you can slide the right slider button up and down between the two boundaries.
+</li></ul></i>
 <object id="snapsdirectory" type="text/html"
 data=""
 onclick="this.data=this.data"
@@ -1304,7 +1316,7 @@ onmousedown="
 </div>
 </div>
 <div style="position:relative;top:-225px">
-<button id="btnreclaim1" style="background:#fff;position:absolute;top:-9px;left:340px;display:none;z-Index:2;" onmousedown="
+<button id="btnreclaim1" style="background:#fff;position:absolute;top:-9px;left:340px;display:none;z-index:2;" onmousedown="
 this.style.display='none'
 animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
 clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=null
@@ -2374,7 +2386,7 @@ style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data=streamListings[this.id];} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="960px" 
-height="720px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;z-Index:1">
+height="720px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;z-index:1">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
@@ -3348,6 +3360,5 @@ function checkforcache() {
    else {alert('This browser cannot cache');}
 }
     </script> 
-</div>
 </body>
 </html>
