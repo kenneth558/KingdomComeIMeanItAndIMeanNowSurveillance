@@ -151,122 +151,211 @@ document.links[13].href='http://' + window.location.hostname + ':14080';//set fo
 document.links[16].href='http://' + window.location.hostname + ':9080';//set for Front Parking Lot 9080
 document.links[19].href='http://' + window.location.hostname + ':15080';//set for NE Corner 15080
 -->
-<script type="text/javascript">
-var filenameholderdedicatedjpgviewer = []
-var sourcesdedicatedjpgviewer = []
-sourcesdedicatedjpgviewer[0]='/../../camera_snapshots/*/*jpg?mostrecent1?plaintext'
-sourcesdedicatedjpgviewer[5]='/../../camera_snapshots/camera_ne_corner/*jpg?mostrecent1?plaintext'
-sourcesdedicatedjpgviewer[4]='/../../camera_snapshots/camera_front_parking/*jpg?mostrecent1?plaintext'
-sourcesdedicatedjpgviewer[3]='/../../camera_snapshots/camera_south_driveway/*jpg?mostrecent1?plaintext'
-sourcesdedicatedjpgviewer[1]='/../../camera_snapshots/camera_sw_corner/*jpg?mostrecent1?plaintext'
-sourcesdedicatedjpgviewer[2]='/../../camera_snapshots/camera_east_driveway/*jpg?mostrecent1?plaintext'
-var timerdedicatedjpgviewer;
-var adaptivetimemaster=15000;
-var adaptivetime;
-var notalldoneyet=false
-var manualqmsg1='Auto re\-Qs every 20 seconds maximum until success'
-var manualqmsg2='Manual Q\'ing permitted, but allow pre\-loading'
-var manualqmsg3='between retries to get some efficiency doing that'
-var manualqmsg4='Queue\-to time\='
-var qmodemsg='Auto-queueing mode 20 second maximum interval'
-var isOpera;
-var isFirefox;
-var isSafari;
-var isIE;
-var isEdge;
-var isChrome;
-var isBlink;
-var isAndroid=/(android)/i.test(navigator.userAgent);
-function tellBrowser(){
-/* Opera 8.0+*/
-var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-
-/* Firefox 1.0+*/
-var isFirefox = typeof InstallTrigger !== 'undefined';
-
-/* Safari 3.0+ "[object HTMLElementConstructor]" */
-var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
-
-/* Internet Explorer 6-11*/
-var isIE = /*@cc_on!@*/false || !!document.documentMode;
-
-/* Edge 20+*/
-var isEdge = !isIE && !!window.StyleMedia;
-
-/* Chrome 1 - 71*/
-var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
-
-/* Blink engine detection*/
-var isBlink = (isChrome || isOpera) && !!window.CSS;
-
+<datalist id="tickmarks">
+<option value="2" label="2 min"></option>
+<option value="360" label="6 hrs"></option>
+</datalist>
+<div id="entiredocument" style="z-index:5;pointer-events:none;" onclick="return false">
+<div id="buttonsdiv" style="display:inline-block;position:sticky;top:0px;z-index:4;background:rgb(215,215,245,0.4);padding: 0px 0px 0px 0px;border:0px solid black;border-width:0px 0px 0px 0px;">
+  <button id="btndivmain" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
+onclick="tabactivate(this)">
+Main</button>
+  <button  id="btnwatchfootage" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px" 
+onclick="tabactivate(this)">
+Watch footage</button>
+  <button  id="btnsystem_wide" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px" 
+onclick="tabactivate(this)">
+Combined views recordings</button>
+  <button  id="btndisablesandlivelinks" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px;" 
+onclick="tabactivate(this)">
+Suspend alerts, Links to live streams</button>
+  <button id="btntitlediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px;" 
+onclick="tabactivate(this)">
+Tips</button>
+  <button id="btnnotesdiv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
+onclick="tabactivate(this)">
+Help Manual</button>
+  <button id="btnfuturediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
+onclick="tabactivate(this)">
+Future</button>
+<button
+id="alertCheck" style="white-space:nowrap;font-size:15px;background:pink;border-radius:1px;border-color:black;border-width:0px;" 
+value="Alert checking OFF"
+onclick="
+if (!this.innerText.endsWith(' OFF'))
+{   if(isAndroid){alertkeepalive.data='';androidconnection.style.display='none';}this.innerText='Alert checking OFF';this.style.background='pink';clearInterval(checkingAlerted);btnaudibleonalert.style.color='#808080'
+    previousalert='waiting';
+         if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
+           alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
+           alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
+         {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
+             {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
+                 {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
+                     {
+                         previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
+                     }
+                 }
+             }
+         }
+} 
+else 
+{
+    this.innerText='Alert checking ON';alertCheck.style.background='Chartreuse';btnaudibleonalert.style.color='#000';if(isAndroid){alertkeepalive.data='/var/www/html/silence.mp3';androidconnection.style.display='inline'}
+    previousalert='waiting';
+        if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
+          alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
+          alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
+        {;
+            if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
+            {;
+                if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
+                {;
+                    if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
+                    {;
+                        if(previousalert!='waiting')
+                        {   if(btnaudibleonalert.innerText=='Alerts now audible'){soundalarm()};show_eventsmainjpgviewer2.value=0;show_eventsmainjpgviewer2.oninput()
+                        }
+                        else
+                        {   previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
+                        }
+                    }
+                }
+                else {previousalert='waiting';}
+             }
+         }
+    alertsdirectory.data=alertsdirectory.data
+    if(isAndroid || 1 == 1)
+    {   alertkeepalive.data='/var/www/html/silence.mp3';
+        setTimeout(function()
+           {   alertkeepalive.contentDocument.body.children[0].muted=true;
+               alertkeepalive.contentDocument.body.children[0].loop=true
+               alertkeepalive.contentDocument.body.children[0].play()
+           },4000
+        )
+    }
+    checkingAlerted=setInterval(function()
+       {alertsdirectory.data=alertsdirectory.data},6500
+    )
 }
+">Alert checking OFF</button>
+<button value="Alerts now audible" style="white-space:nowrap;width:170px;font-size:13px;background-color:#C0C0C0;color:#808080" 
+id="btnaudibleonalert" onclick="previousalert='waiting';if(this.innerText=='Alerts now audible'){this.innerText='Make new alerts audible'}else{this.innerText='Alerts now audible'}"
+>Alerts now audible</button>
+   <div id="androidconnection" class="androidconnection" style="border:0px;z-index:-1;display:none">
+   <object id="alertkeepalive" type="audio/mpeg" data=""></object>
+   </div>
+</div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
+<b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
+<table style="border:3px solid black"><tr><td>
+<table style="border:1px solid black"><tr><td>
+<table><tr><td>
+<label>Drag/droppable, cut/pasteable low-res (.../102) and high-res (.../101) camera stream addresses, layed out the way I arrange the players on my screen:</label><br>
+<center>
+<table><tr><td style="border:1px ridge black">
+<center>
+<b>
+<a href="#sd_location_on_page" target="_blank">South East</a></b><br>
+<input disabled id="camapp_ll" size="41" style="border:1px ridge blue;" value="working..." ><br>
+<input disabled id="camapp_ll1" size="41" style="border:1px ridge blue;" value="working..." ><br>
+  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
+  <form  method="put">
+  <input type="range" id="south_driveway" oninput="slidersd()" name="!home!homeowner!camera_snapshots!camera_south_driveway!settimeout"
+         min="0" max="360" value="4" step="1" list="tickmarks">
+  <input type="submit" id="sdsubmit" value="Set to n minutes">
+  </form>
+<br>
+</td></tr><tr><td style="border:1px ridge black">
+<center><b>
+<a href="#sw_corner_location_on_page" target="_blank">Dock</a></b><br>
+<input disabled id="camapp_lr" size="41" style="border:1px ridge blue;" value="working..."><br>
+<input disabled id="camapp_lr1" size="41" style="border:1px ridge blue;" value="working..."><br>
+  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
+  <form  method="put">
+  <input type="range" id="sw_corner" oninput="slidersw()" name="!home!homeowner!camera_snapshots!camera_sw_corner!settimeout"
+         min="0" max="360" value="4" step="1" list="tickmarks">
+  <input type="submit" id="swsubmit" value="Set to n minutes">
+  </form>
+<br>
+</td></tr></table>
+</td>
+<td width="615px">
+<center><table><tr><td style="border:1px ridge black">
+<center><b><a href="#fp_location_on_page" target="_blank">Office</a></b><br>
+<input disabled id="camapp_ul" size="58" style="border:1px ridge blue;" value="working..."><br>
+<input disabled id="camapp_ul1" size="58" style="border:1px ridge blue;" value="working..."><br>
+  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
+  <form  method="put">
+  <input type="range" id="front_parking" oninput="sliderfp()"  name="!home!homeowner!camera_snapshots!camera_front_parking!settimeout"
+         min="0" max="360" value="4" step="1"  list="tickmarks">
+  <input type="submit" id="fpsubmit" value="Set to n minutes">
+  </form>
+<br>
+</td></tr><tr><td style="border:1px ridge black">
+<center><b><a href="#ed_location_on_page" target="_blank">East</a></b><br>
+<input disabled id="camapp_ur" size="42" style="border:1px ridge blue;" value="working..."><br>
+<input disabled id="camapp_ur1" size="42" style="border:1px ridge blue;" value="working..."><br>
+  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
+  <form  method="put">
+  <input type="range" id="east_driveway" oninput="slidered()"  name="!home!homeowner!camera_snapshots!camera_east_driveway!settimeout"
+         min="0" max="360" value="4" step="1" list="tickmarks">
+  <input type="submit" id="edsubmit" value="Set to n minutes">
+  </form>
+ <!--<input type="submit" formaction="" name="PlayAll" value="Start all four">-->
+<!-- <button onclick="playVid()" type="button">Play Video</button>
+<button onclick="pauseVid()" type="button">Pause Video</button><br> 
 
-  var x = document.getElementsByClassName("announcement");
-  for (var i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-    setInterval(function(){x[i].style.visibility=(x[i].style.visibility == "hidden" ? "" : "hidden");},750);}
-<!-- This is embedded by web server customizing, or at least it was at one stage of development-> setInterval(function(){announcement.style.visibility=(announcement.style.visibility=="hidden" ? "" : "hidden");},750) -->
-<!-- "/../../camera_snapshots/*/*jpg?-MOTION/mostrecent1"  or "/../../home/homeowner/emails_log
-<!-- var holderforalertcompare = document.querySelector("alertcompare");
-<!-- var eventstocompare = holderforalertcompare.textContent;
-<!-- setInterval( id="stablealertsdirectory" data="/../../links_to_alerting_activity/mostrecent1",7000)
-<!--  id="latestalert" of link of interest, then innerHTML
-<!-- rewrite hrefs for alarm system and be sure to have a sounder 
-<!-- alert(latestalert.innerHTML);
+<video src="" id="camembed_ul" width="320" height="176" autoplay controls debug>
+</video>
 -->
-var videoneedsqueueing = []
-var qbtnInactiveValue='Queue the playing or paused videos to queue-to time.'
-var StartTimeOfInterest;
-<!-- var StartCamOfInterest; -->
-var StartTimeOfInterestDT=new Date();
-var StartTimeOfInterestmSec;
-var StartTimeOfInterestmSecminus60=new Date();
-var windows = [];
-var windowsx = 0;
-var winOpen;
-var playingjpgs = [];/*the size of this array could be the number of jpg viewers on page*/
-var checkingAlerted = null;
-var previousalert = 'waiting'; 
-let requestAlerted = new XMLHttpRequest();
-requestAlerted.open('GET', '/../../camera_snapshots/*/*jpg?-MOTION?mostrecent1')
-var lastcomplexevent = 'something';
-var thiscomplexevent = 'something';
-var element = null;
-requestAlerted.onload = function() { thiscomplexevent = requestAlerted.response; };
-function do_me_false( anchr ){
-alert(anchr.href)
-return false
-}
-function openSection(event, arg1){;}
-var month = [];
-month["Jan"] = "-01-";
-month["Feb"] = "-02-";
-month["Mar"] = "-03-";
-month["Apr"] = "-04-";
-month["May"] = "-05-";
-month["Jun"] = "-06-";
-month["Jul"] = "-07-";
-month["Aug"] = "-08-";
-month["Sep"] = "-09-";
-month["Oct"] = "-10-";
-month["Nov"] = "-11-";
-month["Dec"] = "-12-";
-var streamListings = [];
-streamListings["swmp4"] = "/var/www/camera_streams/camera_sw_corner/";
-streamListings["fpmp4"] = "/var/www/camera_streams/camera_front_parking/";
-streamListings["nemp4"] = "/var/www/camera_streams/camera_ne_corner/";
-streamListings["edmp4"] = "/var/www/camera_streams/camera_east_driveway/";
-streamListings["sdmp4"] = "/var/www/camera_streams/camera_south_driveway/";
-streamListings["swjpg"] = "/../../camera_snapshots/camera_sw_corner/?aliased";
-streamListings["fpjpg"] = "/../../camera_snapshots/camera_front_parking/?aliased";
-streamListings["nejpg"] = "/../../camera_snapshots/camera_ne_corner/?aliased";
-streamListings["edjpg"] = "/../../camera_snapshots/camera_east_driveway/?aliased";
-streamListings["sdjpg"] = "/../../camera_snapshots/camera_south_driveway/?aliased";
-streamListings["11"] = "East" ;/*These correspond to 192.168.0.nn or 192.168.0.n_ since they are 2 characters long extracted from the file name*/
-streamListings["14"] = "Dock"
-streamListings["15"] = "North"
-streamListings["12"] = "Office"
-streamListings["13"] = "S East"
+<br>
+</td></tr><tr><td style="border:1px solid black">
+<center><b><a href="#ne_location_on_page" target="_blank">North</a></b><br>
+<input disabled id="camapp_lst" size="41" style="border:1px ridge blue;" value="working..."><br>
+<input disabled id="camapp_lst1" size="41" style="border:1px ridge blue;" value="working..."><br>
+  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
+  <form method="put">
+  <input type="range" id="ne_corner" oninput="sliderne()" name="!home!homeowner!camera_snapshots!camera_ne_corner!settimeout"
+         min="0" max="360" value="4" step="1" list="tickmarks">
+  <input type="submit" id="nesubmit" value="Set to n minutes">
+   </form>
+<br></center>
+</td></tr></table>
+</td></tr></table>
+</td></tr>
+<tr><td>
+<table width="100%"><tr><td>
+<br>
+  <center><label><b>Entire system short term alerts disable</b></label>
+<br>This disable operates independent of the others while overscoping them
+</center><br>
+  <center><form  method="put">
+  </center><center><input type="range" id="entire_system" oninput="slideres()" name="!home!homeowner!camera_snapshots!settimeout"
+         min="0" max="3600" value="4" step="1" list="tickmarks">
+  <input type="submit" id="essubmit" value="Set to n minutes"></center><br>
+  </form>
+</td><td>
+</td></tr></table>
+</td></tr></table>
+</td>
+<td>
+<table width="150px"><tr><td>
+<textarea cols="35" rows="1" style="font-size: 12pt"  value="In here could be the recipient list">
+In here could be the recipient list
+</textarea>
+<textarea cols="35" style="font-size: 12pt" >FUTURE Ability to send notices to others on a notification list</textarea>
+</td></tr></table>
+</td></tr></table>
+</div><div id="system_wide" class="system_wide" class="tabcontent" style="display:none">
+<b>
+<br>System-wide:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None of these this page (combined views page) span months correctly right now<br>
+<table width="2250px">
+<tr><td>
+<table width="1050px">
+<tr><td align="left">
+Every link in here will open in its own new window, or new tab if you have your browser set for tabs <bold> Topmost six motion detections per camera are subject to deletion at any time</bold>
+<!-- needs to have setInterval, clearInterval with a static var.  Note that a camera of interest might only have motion detects but we still may want to traverse those snaps -->
+<div id="overlayimg_sysjpgmp4_snap" class="overlayimg_sysjpgmp4_snap">
+<script type="text/javascript">
 var mousedownedhere;
 function glonload( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) 
 {
@@ -402,144 +491,6 @@ setTimeout(function(){if(!confirm('Allow more time for snapshot animation elemen
   }
 }
 </script>
-<datalist id="tickmarks">
-<option value="2" label="2 min"></option>
-<option value="360" label="6 hrs"></option>
-</datalist>
-<div id="entiredocument" style="z-index:5;pointer-events:none;" onclick="return false">
-<div id="buttonsdiv" style="display:inline-block;position:sticky;top:0px;z-index:4;background:rgb(215,215,245,0.4);padding: 0px 0px 0px 0px;border:0px solid black;border-width:0px 0px 0px 0px;">
-  <button id="btndivmain" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
-onclick="tabactivate(this)">
-Main</button>
-  <button  id="btnwatchfootage" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px" 
-onclick="tabactivate(this)">
-Watch footage</button>
-  <button  id="btnsystem_wide" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px" 
-onclick="tabactivate(this)">
-Combined views recordings</button>
-  <button  id="btndisablesandlivelinks" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px;" 
-onclick="tabactivate(this)">
-Suspend alerts, Links to live streams</button>
-  <button id="btntitlediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px;" 
-onclick="tabactivate(this)">
-Tips</button>
-  <button id="btnnotesdiv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
-onclick="tabactivate(this)">
-Help Manual</button>
-  <button id="btnfuturediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
-onclick="tabactivate(this)">
-Future</button>
-</div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
-<b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
-<table style="border:3px solid black"><tr><td>
-<table style="border:1px solid black"><tr><td>
-<table><tr><td>
-<label>Drag/droppable, cut/pasteable low-res (.../102) and high-res (.../101) camera stream addresses, layed out the way I arrange the players on my screen:</label><br>
-<center>
-<table><tr><td style="border:1px ridge black">
-<center>
-<b>
-<a href="#sd_location_on_page" target="_blank">South East</a></b><br>
-<input disabled id="camapp_ll" size="41" style="border:1px ridge blue;" value="working..." ><br>
-<input disabled id="camapp_ll1" size="41" style="border:1px ridge blue;" value="working..." ><br>
-  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
-  <form  method="put">
-  <input type="range" id="south_driveway" oninput="slidersd()" name="!home!homeowner!camera_snapshots!camera_south_driveway!settimeout"
-         min="0" max="360" value="4" step="1" list="tickmarks">
-  <input type="submit" id="sdsubmit" value="Set to n minutes">
-  </form>
-<br>
-</td></tr><tr><td style="border:1px ridge black">
-<center><b>
-<a href="#sw_corner_location_on_page" target="_blank">Dock</a></b><br>
-<input disabled id="camapp_lr" size="41" style="border:1px ridge blue;" value="working..."><br>
-<input disabled id="camapp_lr1" size="41" style="border:1px ridge blue;" value="working..."><br>
-  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
-  <form  method="put">
-  <input type="range" id="sw_corner" oninput="slidersw()" name="!home!homeowner!camera_snapshots!camera_sw_corner!settimeout"
-         min="0" max="360" value="4" step="1" list="tickmarks">
-  <input type="submit" id="swsubmit" value="Set to n minutes">
-  </form>
-<br>
-</td></tr></table>
-</td>
-<td width="615px">
-<center><table><tr><td style="border:1px ridge black">
-<center><b><a href="#fp_location_on_page" target="_blank">Office</a></b><br>
-<input disabled id="camapp_ul" size="58" style="border:1px ridge blue;" value="working..."><br>
-<input disabled id="camapp_ul1" size="58" style="border:1px ridge blue;" value="working..."><br>
-  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
-  <form  method="put">
-  <input type="range" id="front_parking" oninput="sliderfp()"  name="!home!homeowner!camera_snapshots!camera_front_parking!settimeout"
-         min="0" max="360" value="4" step="1"  list="tickmarks">
-  <input type="submit" id="fpsubmit" value="Set to n minutes">
-  </form>
-<br>
-</td></tr><tr><td style="border:1px ridge black">
-<center><b><a href="#ed_location_on_page" target="_blank">East</a></b><br>
-<input disabled id="camapp_ur" size="42" style="border:1px ridge blue;" value="working..."><br>
-<input disabled id="camapp_ur1" size="42" style="border:1px ridge blue;" value="working..."><br>
-  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
-  <form  method="put">
-  <input type="range" id="east_driveway" oninput="slidered()"  name="!home!homeowner!camera_snapshots!camera_east_driveway!settimeout"
-         min="0" max="360" value="4" step="1" list="tickmarks">
-  <input type="submit" id="edsubmit" value="Set to n minutes">
-  </form>
- <!--<input type="submit" formaction="" name="PlayAll" value="Start all four">-->
-<!-- <button onclick="playVid()" type="button">Play Video</button>
-<button onclick="pauseVid()" type="button">Pause Video</button><br> 
-
-<video src="" id="camembed_ul" width="320" height="176" autoplay controls debug>
-</video>
--->
-<br>
-</td></tr><tr><td style="border:1px solid black">
-<center><b><a href="#ne_location_on_page" target="_blank">North</a></b><br>
-<input disabled id="camapp_lst" size="41" style="border:1px ridge blue;" value="working..."><br>
-<input disabled id="camapp_lst1" size="41" style="border:1px ridge blue;" value="working..."><br>
-  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
-  <form method="put">
-  <input type="range" id="ne_corner" oninput="sliderne()" name="!home!homeowner!camera_snapshots!camera_ne_corner!settimeout"
-         min="0" max="360" value="4" step="1" list="tickmarks">
-  <input type="submit" id="nesubmit" value="Set to n minutes">
-   </form>
-<br></center>
-</td></tr></table>
-</td></tr></table>
-</td></tr>
-<tr><td>
-<table width="100%"><tr><td>
-<br>
-  <center><label><b>Entire system short term alerts disable</b></label>
-<br>This disable operates independent of the others while overscoping them
-</center><br>
-  <center><form  method="put">
-  </center><center><input type="range" id="entire_system" oninput="slideres()" name="!home!homeowner!camera_snapshots!settimeout"
-         min="0" max="3600" value="4" step="1" list="tickmarks">
-  <input type="submit" id="essubmit" value="Set to n minutes"></center><br>
-  </form>
-</td><td>
-</td></tr></table>
-</td></tr></table>
-</td>
-<td>
-<table width="150px"><tr><td>
-<textarea cols="35" rows="1" style="font-size: 12pt"  value="In here could be the recipient list">
-In here could be the recipient list
-</textarea>
-<textarea cols="35" style="font-size: 12pt" >FUTURE Ability to send notices to others on a notification list</textarea>
-</td></tr></table>
-</td></tr></table>
-</div><div id="system_wide" class="system_wide" class="tabcontent" style="display:none">
-<b>
-<br>System-wide:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None of these this page (combined views page) span months correctly right now<br>
-<table width="2250px">
-<tr><td>
-<table width="1050px">
-<tr><td align="left">
-Every link in here will open in its own new window, or new tab if you have your browser set for tabs <bold> Topmost six motion detections per camera are subject to deletion at any time</bold>
-<!-- needs to have setInterval, clearInterval with a static var.  Note that a camera of interest might only have motion detects but we still may want to traverse those snaps -->
-<div id="overlayimg_sysjpgmp4_snap" class="overlayimg_sysjpgmp4_snap">
 <object data="/../../camera_snapshots/*/*jpg?aliased"
 onclick="this.data=this.data"
 id="img_sysjpgmp4_snap"
@@ -702,120 +653,73 @@ Script on server: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nb
 </td>
 </tr>
 </table>
-</div><div id="divmain" class="divmain" class="tablinks" style="position:relative;top:15px">
-<div style="display: inline-block;border:0px;width:430px;height:272px;position:relative;">
-<div style="border:0px;position:absolute">
-<div style="position:absolute">
-<button
-id="alertCheck" style="display: inline-block;position:absolute;left:0px;top:-15px;font-size:15px;background:pink;border-radius:1px;border-color:black;border-width:0px;" 
-value="Alert checking OFF"
+</div>
+<div id="divmain" class="divmain" class="tablinks" style="position:relative;top:0px">
+<!--
+<div style="position:relative;top:0px;height:0px;">
+<button value="Squares" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btndimensions5" 
 onclick="
-if (!this.innerText.endsWith(' OFF'))
-{   if(isAndroid){alertkeepalive.data='';androidconnection.style.display='none';}this.innerText='Alert checking OFF';this.style.background='pink';clearInterval(checkingAlerted);btnaudibleonalert.style.color='#808080'
-    previousalert='waiting';
-         if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
-           alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
-           alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
-         {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
-             {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
-                 {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
-                     {
-                         previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
-                     }
-                 }
-             }
-         }
-} 
-
-else 
+var ASratio=(1/1)
+var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
+for(var i=0;i<dedicatedjpgviewers.length;i++)
 {
-    this.innerText='Alert checking ON';alertCheck.style.background='Chartreuse';btnaudibleonalert.style.color='#000';if(isAndroid){alertkeepalive.data='/var/www/html/silence.mp3';androidconnection.style.display='inline'}
-    previousalert='waiting';
-        if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
-          alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
-          alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
-        {;
-            if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
-            {;
-                if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
-                {;
-                    if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
-                    {;
-                        if(previousalert!='waiting')
-                        {   if(btnaudibleonalert.innerText=='Alerts now audible'){soundalarm()};show_eventsmainjpgviewer2.value=0;show_eventsmainjpgviewer2.oninput()
-                        }
-                        else
-                        {   previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
-                        }
-                    }
-                }
-                else {previousalert='waiting';}
-             }
-         }
-    alertsdirectory.data=alertsdirectory.data
-    if(isAndroid || 1 == 1)
-    {   alertkeepalive.data='/var/www/html/silence.mp3';
-        setTimeout(function()
-           {   alertkeepalive.contentDocument.body.children[0].muted=true;
-               alertkeepalive.contentDocument.body.children[0].loop=true
-               alertkeepalive.contentDocument.body.children[0].play()
-           },4000
-        )
-    }
-    checkingAlerted=setInterval(function()
-       {alertsdirectory.data=alertsdirectory.data},6500
-    )
+   if(dedicatedjpgviewers[i].nextElementSibling!=undefined && dedicatedjpgviewers[i].nextElementSibling!=null && dedicatedjpgviewers[i].nextElementSibling.nodeName=='INPUT' && !dedicatedjpgviewers[i].id.endsWith('r0'))
+   {
+      if(1!=1){ASratio=(16/9)}
+      dedicatedjpgviewers[i].offsetParent.style.height=(parseFloat(dedicatedjpgviewers[i].width)/ASratio)+'px' /* change the container size? */
+      dedicatedjpgviewers[i].height=(parseFloat(dedicatedjpgviewers[i].width)/ASratio)+'px'
+/* alert(dedicatedjpgviewers[i].height+', '+dedicatedjpgviewers[i].height.length+', input.offsetTop='+dedicatedjpgviewers[i].nextElementSibling.offsetTop+', '+dedicatedjpgviewers[i].height.substring(0,dedicatedjpgviewers[i].height.length-2))*/
+      dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].height.substring(0,dedicatedjpgviewers[i].height.length-2)-22)+'px';
+      dedicatedjpgviewers[i].nextElementSibling.clientWidth=dedicatedjpgviewers[i].height.substring(0,dedicatedjpgviewers[i].height.length-2)-100
+      dedicatedjpgviewers[i].nextElementSibling.offsetWidth=dedicatedjpgviewers[i].height.substring(0,dedicatedjpgviewers[i].height.length-2)-100
+      dedicatedjpgviewers[i].nextElementSibling.scrollWidth=dedicatedjpgviewers[i].height.substring(0,dedicatedjpgviewers[i].height.length-2)-100
+/*      offsetWidth=438;
+      scrollWidth=432;
+      style.cssText='top:261px';
+      style top:261px from '261' with height='262px' and style.height='282px' and style.top='-262px' to 
+*/
+   }
+   else
+   {;
+   }
 }
-">Alert checking OFF</button>
-<button value="Alerts now audible" style="position:relative;left:150px;top:-15px;width:170px;font-size:13px;background-color:#C0C0C0;color:#808080" 
-id="btnaudibleonalert" onclick="if(this.innerText=='Alerts now audible'){this.innerText='Make new alerts audible'}else{previousalert='waiting';this.innerText='Alerts now audible'}">Alerts now audible</button>
-<div id="androidconnection" class="androidconnection" style="position:absolute;top:-150px;left:750px;border:0px;z-index:-1;display:none">
-<object id="alertkeepalive" type="audio/mpeg" data=""></object>
+">Squares</button>
+<button value="True ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btndimensions6" onclick="">True ARs</button>
+<button value="Screens ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btndimensions7" onclick="">Screens ARs</button>
+<button value="Browsers ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btndimensions8" onclick="">Browsers ARs</button>
+</div><div style="position:relative;top:25px;height:0px">
+<button value="Sizing sliders" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btnsliders" onclick="">Sizing sliders</button>
+<button value="1 row" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btndimensions1" onclick="">1 row</button>
+<button value="2 rows" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btndimensions2" onclick="">2 rows</button>
+<button value="1 column" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btndimensions3" onclick="">1 column</button>
+</div><div style="position:relative;top:50px;height:0px">
+<button value="jpg<->mp4" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btnjpgormp41" onclick="">jpg<->mp4</button>
 </div>
-</div>
-<div style="position:relative;top:15px;">
-<button value="Squares" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions5" 
-onclick="alert()
-var dedicatedjpgviewer=document.getElementsByClassName('dedicatedjpgviewer')
-for(var i=0;i<dedicatedjpgviewer.length;i++)
-{
-    dedicatedjpgviewer.getParent.style.height=dedicatedjpgviewer.style.width
-    dedicatedjpgviewer.style.height=dedicatedjpgviewer.style.width
-}"
->Squares</button>
-<button value="True ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions6" onclick="">True ARs</button>
-<button value="Screens ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions7" onclick="">Screens ARs</button>
-<button value="Browsers ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions8" onclick="">Browsers ARs</button>
-</div>
-<div style="position:relative;top:20px;">
-<button value="Sizing sliders" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btnsliders" onclick="">Sizing sliders</button>
-<button value="1 row" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions1" onclick="">1 row</button>
-<button value="2 rows" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions2" onclick="">2 rows</button>
-<button value="1 column" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btndimensions3" onclick="">1 column</button>
-</div>
-<div style="position:relative;top:25px;">
-<button value="jpg<->mp4" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080" id="btnjpgormp41" onclick="">jpg<->mp4</button>
-</div>
-</div>
-<div style="display: inline-block;border:4px;width:420px;height:272px;position:relative;top:00px">
-<!--<table  width="430px" height="282px" style="border-collapse:collapse;;width:432px;height:282px;position:relative;"><tr><td>
-var dedicatedjpgviewer = document.getElementsByClassName('dedicatedjpgviewer')
-for(var i=0;i<dedicatedjpgviewer.length;i++)
-{
-    dedicatedjpgviewer.getParent.style.height=dedicatedjpgviewer.style.width
-    dedicatedjpgviewer.style.height=dedicatedjpgviewer.style.width
-}
-
-       if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.background.startsWith('rgb(255, 255, 255)') || btneastjpgs2.style.background.startsWith('rgb(255, 255, 255)')))
-       {
-          filenametool1.parentElement.click();
-       }
-      if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.background.startsWith('rgb(255, 255, 255)') || btndockjpgs2.style.background.startsWith('rgb(255, 255, 255)'))){filenametool2.parentElement.click();}
-if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.background.startsWith('rgb(255, 255, 255)') || btnofficejpgs2.style.background.startsWith('rgb(255, 255, 255)'))){filenametool3.parentElement.click();}
-if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.background.startsWith('rgb(255, 255, 255)') || btnseastjpgs2.style.background.startsWith('rgb(255, 255, 255)'))){filenametool4.parentElement.click();}
-if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.background.startsWith('rgb(255, 255, 255)') || btnnorthjpgs2.style.background.startsWith('rgb(255, 255, 255)'))){filenametool5.parentElement.click();}
 -->
-<object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:100px" value="Alt jpg viewer" width="420px" height="172px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function()
+<i style="position:absolute;top:2px;left:0px;font-size:11px" >Slider will adjust one or the other dimension, all views</i>
+<div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;">
+<input type="range" min="40" max="2000" step="1" list="tickmarks" value="432"  
+oninput="
+var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
+for(var i=0;i<dedicatedjpgviewers.length;i++)
+{
+   dedicatedjpgviewers[i].width=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(this.value)-50):parseInt(this.value))+'px'
+   dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewers[i].width)+50)+'px':dedicatedjpgviewers[i].width
+}
+" 
+style="position:absolute;top:15px;width:370px;left:45px">
+<input type="range" min="-1380" max="-30" step="1" list="tickmarks" value="-259" name="vertical"
+oninput="
+var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
+for(var i=0;i<dedicatedjpgviewers.length;i++)
+{
+   dedicatedjpgviewers[i].height=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(0-parseInt(this.value))-45):(parseInt(0-parseInt(this.value))))+'px'
+   dedicatedjpgviewers[i].offsetParent.style.height=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewers[i].height)+parseInt(45))+'px':dedicatedjpgviewers[i].height
+   dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].id.endsWith('r0')?dedicatedjpgviewers[i].nextElementSibling.style.top:(dedicatedjpgviewers[i].height.substring(0,dedicatedjpgviewers[i].height.length-2)-22)+'px')
+}
+" 
+style="position:absolute;top:37px;height:225px;left:10px" orient="vertical">
+<object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:45px;left:50px" value="Alt jpg viewer" width="380px" height="217px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function()
 {
    filenametool1.src=sourcesdedicatedjpgviewer[1];if(filenametool0.contentDocument.body.innerText.includes(filenametool1.src.substr(filenametool1.src.indexOf('camera_')+24,7)))
    {
@@ -857,186 +761,21 @@ if(btnmostrecentjpgs2.innerText.startsWith('Staying') && (btnalljpgs2.style.back
    {
       filenametool5.parentElement.parentElement.style.border='4px solid transparent';
    }
-},80)"></object><!--</td></tr></table>--></div>
-</div>
-<div  width="430px" height="262px" style="display: inline-block;border:4px solid transparent;width:430px;height:282px;position:relative;top:-262px;"><object onclick="btndockjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"></object>
-<input disabled id="camapp_lr1dup" size="58" style="position:relative;top:261px" value="working..."></div>
-<div  width="430px" height="262px" style="display: inline-block;border:4px solid transparent;width:430px;height:282px;position:relative;top:-262px;"><object onclick="btneastjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"></object>
-<input disabled id="camapp_ur1dup" size="58" style="position:relative;top:261px" value="working..."></div>
-<div  width="430px" height="262px" style="display: inline-block;border:4px solid transparent;width:430px;height:282px;position:relative;top:-262px;"><object onclick="btnseastjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer3" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"></object>
-<input disabled id="camapp_ll1dup" size="58" style="position:relative;top:261px" value="working..."></div>
-<div  width="430px" height="262px" style="display: inline-block;border:4px solid transparent;width:430px;height:282px;position:relative;top:-262px;"><object onclick="btnofficejpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer4" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"></object>
-<input disabled id="camapp_ul1dup" size="58" style="position:relative;top:261px" value="working..."></div>
-<div  width="430px" height="262px" style="display: inline-block;border:4px solid transparent;width:430px;height:282px;position:relative;top:-262px;"><object onclick="btnnorthjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer5" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"></object>
-<input disabled id="camapp_lst1dup" size="58" style="position:relative;top:261px" value="working..."></div>
-<!--                            if(mainjpgviewer0.data!=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
-                            {   mainjpgviewer0.data=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href}-->
-<script type="text/javascript">
-var animationdivalertsdirectorytomainjpgviewer0=null
-function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
-{
-   if(animationdivalertsdirectorytomainjpgviewer0==null)
-   {
-      animationdivalertsdirectorytomainjpgviewer0 = document.createElement('div'); /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory or otherwise have a way of limiting memory useage */
-      animationdivalertsdirectorytomainjpgviewer0.id = 'animatordivalertsdirectorytomainjpgviewer0'
-      animationdivalertsdirectorytomainjpgviewer0.className = 'jpganimator'
-      animationdivalertsdirectorytomainjpgviewer0.className = 'divmain'
-
-
-      document.getElementById('spaceholder1').appendChild(animationdivalertsdirectorytomainjpgviewer0) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
-
-
-      animatordivalertsdirectorytomainjpgviewer0.style='position:absolute;left:'+(alertsdirectory.offsetWidth+60)+'px;top:-15px'
-      animatordivalertsdirectorytomainjpgviewer0.height=(parseInt(alertsdirectory.offsetHeight)+15)+'px'
-      animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
-/*      animatordivalertsdirectorytomainjpgviewer0.style.top='0px'*/
-/*      animatordivalertsdirectorytomainjpgviewer0.style.top=(parseInt(alertsdirectory.height)>350?'42px':'420px')*/
-   }
-   var firstmatch=animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
-   if(firstmatch==null)
-   {
-      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" height=\''+parseInt(alertsdirectory.offsetHeight)+'px\' width=\''+mainjpgviewer0.width+'\' style=\'position:absolute;top:15px;\' />';
-      animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'})
-   }
-   else
-   {
-      for(var i=0;i<animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
-      {
-         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].style.zIndex='0'
-      }
-      firstmatch.style.zIndex='1'
-      /*animatordivalertsdirectorytomainjpgviewer0.appendChild(firstmatch)*/
-   }
-   if(animatordivalertsdirectorytomainjpgviewer0.style.display=='none')
-   {
-      animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
-      animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
-
-      for(var i=0;i<animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
-      {
-         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['width'].value=mainjpgviewer0.width
-         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['height'].value=alertsdirectory.parentElement.clientHeight
-      }
-      animatordivalertsdirectorytomainjpgviewer0.style.display=''
-   }
-}
-var animationdivalertsdirectorytomainjpgviewer2=null
-var animatetimeralertsdirectorytomainjpgviewer2=null
-var animatordivalertsdirectorytomainjpgviewer2=null /*not sure why this prevents error in console, but it does*/
-function animatealertsdirectorytomainjpgviewer2(rowindex,table_el,jpgname)
-{
-   if(animationdivalertsdirectorytomainjpgviewer2==null)
-   {
-      animationdivalertsdirectorytomainjpgviewer2 = document.createElement('div'); /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory or otherwise have a way of limiting memory useage */
-      animationdivalertsdirectorytomainjpgviewer2.id = 'animatordivalertsdirectorytomainjpgviewer2'
-      animationdivalertsdirectorytomainjpgviewer2.className = 'jpganimator'
-      animationdivalertsdirectorytomainjpgviewer2.className = 'divmain'
-
-
-      document.getElementById('spaceholder2').appendChild(animationdivalertsdirectorytomainjpgviewer2) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
-
-      animatordivalertsdirectorytomainjpgviewer2=animationdivalertsdirectorytomainjpgviewer2
-      animatordivalertsdirectorytomainjpgviewer2.style='position:absolute;left:'+(snapsdirectory.offsetWidth+60)+'px;top:-15px'
-      animatordivalertsdirectorytomainjpgviewer2.height=(parseInt(snapsdirectory.offsetHeight)+15)+'px'
-      animatordivalertsdirectorytomainjpgviewer2.width=mainjpgviewer2.width
-/*      animatordivalertsdirectorytomainjpgviewer2.style.top='0px'*/
-/*      animatordivalertsdirectorytomainjpgviewer2.style.top=(parseInt(snapsdirectory.height)>350?'42px':'420px')*/
-   }/*Next lines need to return the same or possibly changed index like if the jpg is already here somewhere*/
-/*TODO: when a jpg is to be displayed that is not in the table, figure out how to display it with its filename as the only list member*/
-
-   var firstmatch=animatordivalertsdirectorytomainjpgviewer2.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
-   if(firstmatch==null)
-   {
-      animatordivalertsdirectorytomainjpgviewer2.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" height=\''+parseInt(snapsdirectory.offsetHeight)+'px\' width=\''+mainjpgviewer2.width+'\' style=\'position:absolute;top:15px;\' />';
-      animatordivalertsdirectorytomainjpgviewer2.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer2.style.display='none'})
-   }
-   else
-   {
-      for(var i=0;i<animatordivalertsdirectorytomainjpgviewer2.childNodes.length;i++)
-      {
-         animatordivalertsdirectorytomainjpgviewer2.childNodes[i].style.zIndex='0'
-      }
-      firstmatch.style.zIndex='1'
-      /*animatordivalertsdirectorytomainjpgviewer2.appendChild(firstmatch)*/
-   }
-   if(animatordivalertsdirectorytomainjpgviewer2.style.display=='none')
-   {
-      animatordivalertsdirectorytomainjpgviewer2.height=snapsdirectory.parentElement.clientHeight
-      animatordivalertsdirectorytomainjpgviewer2.width=mainjpgviewer2.width
-
-      for(var i=0;i<animatordivalertsdirectorytomainjpgviewer2.childNodes.length;i++)
-      {
-         animatordivalertsdirectorytomainjpgviewer2.childNodes[i].attributes['width'].value=mainjpgviewer2.width
-         animatordivalertsdirectorytomainjpgviewer2.childNodes[i].attributes['height'].value=snapsdirectory.parentElement.clientHeight
-      }
-      animatordivalertsdirectorytomainjpgviewer2.style.display=''
-   }
-}
-
-var mousestartXmainjpgviewer0=''
-var mousestartYmainjpgviewer0=''
-var mouseendXmainjpgviewer0=''
-var mouseendYmainjpgviewer0=''
-function foo(event){
-if(mousestartXmainjpgviewer0==''){
-mousestartXmainjpgviewer0=event.screenX;
-mousestartYmainjpgviewer0=event.screenY;console.log('first move')
-}else
-{
-mouseendXmainjpgviewer0=event.screenX;
-mouseendYmainjpgviewer0=event.screenY;console.log('not first move')
-}
-function getParentOffsets(el) {
-if (el.offsetParent) {
-    return el.offsetParent.offsetTop + getParentOffsets(el.offsetParent);
-} else {
-    return 0;
-}
-}}
-</script>
-<script type="text/javascript">
-var alertsdirectoryheightmode0 =245+'px'
-var alertsdirectoryheightmode1 =612+'px'
-var alertsdirectorywidthmode0 =379+'px'
-var alertsdirectorywidthmode1 =""
-var alertsdirectorytopmode0 =""
-var alertsdirectorytopmode1 =""
-var alertsdirectoryleftmode0 =""
-var alertsdirectoryleftmode1 =""
-
-var mainjpgviewer0topmode0 =""
-var mainjpgviewer0topmode1 =""
-var mainjpgviewer0leftmode0 =""
-var mainjpgviewer0leftmode1 =""
-var mainjpgviewer0widthmode0 =860+'px'
-var mainjpgviewer0widthmode1 =860+'px'
-
-var forbuttonstopmode0 =""
-var forbuttonstopmode1 =0+'px'
-var forbuttonstopmode2 =0+'px'
-var forbuttonsleftmode0 =""
-var forbuttonsleftmode1 =""
-var alertsdirectorysources = []
-alertsdirectorysources[0] = '/../../camera_snapshots/*/*jpg?aliased'
-alertsdirectorysources[1] = '/../../links_to_alerting_activity/*/*jpg?aliased'
-alertsdirectorysources[2] = '/../../camera_snapshots/camera_east_driveway/*jpg?aliased'
-alertsdirectorysources[3] = '/../../camera_snapshots/camera_sw_corner/*jpg?aliased'
-alertsdirectorysources[4] = '/../../camera_snapshots/camera_front_parking/*jpg?aliased'
-alertsdirectorysources[5] = '/../../camera_snapshots/camera_south_driveway/*jpg?aliased'
-alertsdirectorysources[6] = '/../../camera_snapshots/camera_ne_corner/*jpg?aliased'
-var alertsdirectoryaliases = []
-alertsdirectoryaliases[0] = 'All snapshots, including motion detects which may no longer exist'
-alertsdirectoryaliases[1] = 'Alert-related snapshots'
-alertsdirectoryaliases[2] = 'East snapshots'
-alertsdirectoryaliases[3] = 'Dock snapshots'
-alertsdirectoryaliases[4] = 'Office snapshots'
-alertsdirectoryaliases[5] = 'S-East snapshots'
-alertsdirectoryaliases[6] = 'North snapshots'
-/*delayedDisplayElements[0].styleleft='379px' disabled for now*/
-</script>
+},80)"></object>
+<input disabled size="0" style="position:relative;top:0px;opacity:0;z-index=2" value=""></div>
+<div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btndockjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"></object>
+<input disabled id="camapp_lr1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index=2" value="working..."></div>
+<div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btneastjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"></object>
+<input disabled id="camapp_ur1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index=2" value="working..."></div>
+<div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btnseastjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer3" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"></object>
+<input disabled id="camapp_ll1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index=2" value="working..."></div>
+<div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btnofficejpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer4" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"></object>
+<input disabled id="camapp_ul1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index=2" value="working..."></div>
+<div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btnnorthjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer5" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"></object>
+<input disabled id="camapp_lst1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index=2" value="working..."></div>
 <div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:2;top:6px">
-<div style="position:relative;top:-260px">
-<i>Upper left is the most recent event of all views, so it will duplicate one of the others</i>
+<div style="position:relative;top:0px">
+<i>&nbsp;^-&nbsp;Upper left is the most recent event of all views, so it will duplicate one of the others</i>
 <button id="btnreclaim2" style="background:#fff;position:absolute;top:10px;left:340px;z-index:1;display:none" onmousedown="
 this.style.display='none'
 animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
@@ -1143,20 +882,25 @@ style="position:absolute;top:9px;left:405px;z-index:5;height:596px;-webkit-appea
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
 orient="vertical">
-<i style="position:absolute;width:600px;left:450px;top:20px" width="600px"><ul><br>A sub-range can be made <b>at the bottom of the master range</b> by putting the right slider 
-button below the left one, as follows:
+<i style="position:absolute;width:600px;left:450px;top:20px;font-size:13px" width="600px"><ul><br>A sub-range can be made <b>at the <u>bottom</u> of the listed snapshots</b> by putting the <b>right</b> slider 
+button <b>below the left one</b>, as follows:
 <br><br>
 <li>
-While a list of file names is being displayed (which makes a snapshot cover these instructions if you don't fully raise the right slider button), with the left slider button establish the low 
-boundary of the master range where you want the low boundary of your sub-range. <b>A sub-range can only be at the bottom of the master range.</b>
+While a list of file names is being displayed (which results in these instructions getting covered by a snapshot unless you <u>raise the right slider button</u> fully to see them again), put both the slider buttons at the low 
+boundary of the master range where the low boundary of your sub-range will also be. Again, <b>a sub-range can only be located where you put the <u>bottom</u> of the list.</b> "Click-to" on the right slider button is preferred (but not required) instead of "slide-to" to reduce jpg downloads that aren't really needed - it saves time.
 </li><li>
-Lower the right slider to that same level
+<u>Click</u> on the <b>left</b> slider bar where you want the upper boundary; <u>sliding</u> the left slider button upwards (as in 'sliding past' the right one) <b>isn't 
+allowed</b>
 </li><li>
-Click on the left slider bar where you want the upper boundary; sliding the button there isn't 
-allowed
+Done.  Now you can slide the <b>right</b> slider button up and down between the two boundaries...
 </li><li>
-Done.  Now you can slide the right slider button up and down between the two boundaries.
-</li></ul></i>
+...slowly if the snapshots are being loaded for the first time.  Once the snapshots do get loaded, the button may be slid reasonably faster.  Reason - while snapshots are being [down]loaded the first time, the "event" of the right slider button hitting the upper limit can be lost in the busy-ness of network communications and then not restrain the button within your sub-range.  Still, sliding too fast in <u>either</u> case case can cause the button to skip past the upper boundary
+</li><li>
+Since this technique is a little complex already without the additional complexity added when the list has to be scrolled, consider using the view-dedication 
+tabs underneath to limit the list size to have a better likelihood of your desired sub-range showing up in the unscrolled portion of the list of file names. 
+Testing has not been extensive enough to prove conclusive reliability when the file name list is scrolled, though you might discover anyway that it actually does work fine even when scrolled.
+</li>
+</ul></i>
 <object id="snapsdirectory" type="text/html"
 data=""
 onclick="this.data=this.data"
@@ -1205,6 +949,7 @@ style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px
 </td></tr>
 </table>
 <div style="position:relative;top:15px">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expect simple motion detects&nbsp;&nbsp;&nbsp;TO GET DELETED without notice -> 
 <button style="position:relative;top:0px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
@@ -1221,9 +966,9 @@ onmousedown="
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
-">All (Expect simple motion detects TO BE DELETED without notice)</button>
+">All</button>
 
-<button style="position:relative;top:0px;left:30px;white-space:nowrap;background:rgb(215,215,245)
+<button style="position:relative;top:0px;left:0px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
 border-bottom-left-radius:10px;
@@ -1241,7 +986,7 @@ onmousedown="
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
 ">East</button>
 
-<button style="position:relative;top:0px;left:30px;white-space:nowrap;background:rgb(215,215,245)
+<button style="position:relative;top:0px;left:0px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
 border-bottom-left-radius:10px;
@@ -1259,7 +1004,7 @@ onmousedown="
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
 ">Dock</button>
 
-<button style="position:relative;top:0px;left:30px;white-space:nowrap;background:rgb(215,215,245)
+<button style="position:relative;top:0px;left:0px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
 border-bottom-left-radius:10px;
@@ -1277,7 +1022,7 @@ onmousedown="
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
 ">Office</button>
 
-<button style="position:relative;top:0px;left:30px;white-space:nowrap;background:rgb(215,215,245)
+<button style="position:relative;top:0px;left:0px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
 border-bottom-left-radius:10px;
@@ -1296,7 +1041,7 @@ onmousedown="
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
 ">S-East</button>
 
-<button style="position:relative;top:0px;left:30px;white-space:nowrap;background:rgb(215,215,245)
+<button style="position:relative;top:0px;left:0px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
 border-bottom-left-radius:10px;
@@ -1315,7 +1060,7 @@ onmousedown="
 ">North</button>
 </div>
 </div>
-<div style="position:relative;top:-225px">
+<div style="position:relative;top:20px">
 <button id="btnreclaim1" style="background:#fff;position:absolute;top:-9px;left:340px;display:none;z-index:2;" onmousedown="
 this.style.display='none'
 animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
@@ -1507,7 +1252,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[1].substring(7,(alertsdi
 }
 "
 >Alert-related</button>
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expect simple motion detects TO BE DELETED without notice ->
 <button style="position:relative;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
@@ -1530,7 +1275,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[0].substring(7,(alertsdi
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
-">All (Expect simple motion detects TO BE DELETED without notice ->)</button>
+">All</button>
 
 <button style="position:relative;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
@@ -2075,7 +1820,8 @@ setTimeout(function(){btnSetForRecentAlert.value='Last alert'},3000)
         objectelement[i].data=streamListings[objectelement[i].id] + '*?1minutesbefore' + StartTimeOfInterest;
     }
 setTimeout(function(){lsbtn.click()},500)
-StartCamOfInterestEl.value=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].innerText.trim(); /*MUST be last thing in function in case it doesn't exist*/
+try {StartCamOfInterestEl.value=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].innerText.trim();} /*MUST be last thing in function in case it doesn't exist*/
+finally{;}
 }">
 &nbsp;<input type="button" id="btnSetForRecentSmartEvent" value="Last [minor] activity" style="background:#3399FF;font-size:18px;" 
 onclick="closebtn.click()
@@ -2690,67 +2436,266 @@ Hopefully I'll find it soon.
 onerror="this.data=':1958/silence.mp3';setTimeout(function(){this.data=':15554/silence.mp3';setTimeout(function(){this.data=':14554/silence.mp3';this.data='/var/www/html/silence.mp3';},300)},300);"
 
 
-Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to whomsoever he will".  God is HOLY and will NOT allow people that hate Him to team up with Him by using fraud.  Can God really say "Trump honored me, but I'll allow the dishonorable fraud to team with me to get my choice in this time, and I'll choose a man who doesn't even know me [and will take orders from China instead of me] over a man who honors me unprecedentedly to sit rule over my people who are praying en masse against that"? I KNOW BETTER
+Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to whomsoever he will".  God is HOLY and will NOT allow people that hate Him to team up with Him by using fraud.  Can God really say "Trump honored me, but I'll allow the dishonorable fraud to team with me to get my choice in this time, and I'll choose a man who doesn't even know me [and will take orders from China instead of me] over a man who honors me unprecedentedly to sit rule over my people who are praying en masse against that"? I KNOW BETTER-->
 
-function change(){
-    document.getElementById('film').src='frames/'+frames[on_frame]; //I have my images in a folder named frames
-    on_frame++;
-    if(on_frame==frames.length){on_frame=0;}
-    if(playing){
-        timer=setTimeout(change,document.getElementById('framerate').value?document.getElementById('framerate').value:50);
-    }
-}
-
-function play(){
-    document.getElementById('actionbutton').removeEventListener('click',play);
-    document.getElementById('actionbutton').addEventListener('click',pause);
-    document.getElementById('actionbutton').innerHTML='Pause';
-    clearInterval(timer);
-    playing=true;
-    change();
-}
-
-function pause(){
-    document.getElementById('actionbutton').removeEventListener('click',pause);
-    document.getElementById('actionbutton').addEventListener('click',play);
-    document.getElementById('actionbutton').innerHTML='Play'; 
-    playing=false; 
-
-}
-
-function stop(){
-    document.getElementById('actionbutton').removeEventListener('click',pause);
-    document.getElementById('actionbutton').addEventListener('click',play);
-    document.getElementById('actionbutton').innerHTML='Play'; 
-    playing=false; 
-    on_frame=0;
-}
-
-function goFrame(x){
-    if((x>-1)&&(x<=frames.length)){
-        on_frame=x;
-        if(!playing){document.getElementById('film').src='frames/'+frames[on_frame];}
-    }
-    else{
-        alert('Out of range');
-    }
-}
--->
-<!-- var frames=['frame1.png','frame2.png','frame3.png','frame4.png','frame5.png','frame6.png','frame7.png','frame8.png','frame9.png','frame10.png']; 
-the frames will point to the jpg list of the <div> in block
-
-var divinblock = getElementBy
--->
-<!--var playing=true;
-var on_frame=0;
-var timer;
--->
-<!--
-    document.body.innerHTML='<img id="film" src="frames/'+frames[on_frame]+'"/><br/><button id="actionbutton">Play</button><button onclick="stop()">Stop</button><br/>Milliseconds between frames:<input type="text" id="framerate" value="50"/><br/>Go to frame:<input type="text" id="gotoframe"><button onclick="goFrame(document.getElementById(\'gotoframe\').value);">Go</button>';   
-    document.getElementById('actionbutton').addEventListener('click',play); 
-    play();
-} -->
 <script type="text/javascript">
+var animationdivalertsdirectorytomainjpgviewer0=null
+function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
+{
+   if(animationdivalertsdirectorytomainjpgviewer0==null)
+   {
+      animationdivalertsdirectorytomainjpgviewer0 = document.createElement('div'); /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory or otherwise have a way of limiting memory useage */
+      animationdivalertsdirectorytomainjpgviewer0.id = 'animatordivalertsdirectorytomainjpgviewer0'
+      animationdivalertsdirectorytomainjpgviewer0.className = 'jpganimator'
+      animationdivalertsdirectorytomainjpgviewer0.className = 'divmain'
+
+
+      document.getElementById('spaceholder1').appendChild(animationdivalertsdirectorytomainjpgviewer0) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
+
+
+      animatordivalertsdirectorytomainjpgviewer0.style='position:absolute;left:'+(alertsdirectory.offsetWidth+60)+'px;top:-15px'
+      animatordivalertsdirectorytomainjpgviewer0.height=(parseInt(alertsdirectory.offsetHeight)+15)+'px'
+      animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
+/*      animatordivalertsdirectorytomainjpgviewer0.style.top='0px'*/
+/*      animatordivalertsdirectorytomainjpgviewer0.style.top=(parseInt(alertsdirectory.height)>350?'42px':'420px')*/
+   }
+   var firstmatch=animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
+   if(firstmatch==null)
+   {
+      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" height=\''+parseInt(alertsdirectory.offsetHeight)+'px\' width=\''+mainjpgviewer0.width+'\' style=\'position:absolute;top:15px;\' />';
+      animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'})
+   }
+   else
+   {
+      for(var i=0;i<animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
+      {
+         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].style.zIndex='0'
+      }
+      firstmatch.style.zIndex='1'
+      /*animatordivalertsdirectorytomainjpgviewer0.appendChild(firstmatch)*/
+   }
+   if(animatordivalertsdirectorytomainjpgviewer0.style.display=='none')
+   {
+      animatordivalertsdirectorytomainjpgviewer0.height=alertsdirectory.parentElement.clientHeight
+      animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
+
+      for(var i=0;i<animatordivalertsdirectorytomainjpgviewer0.childNodes.length;i++)
+      {
+         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['width'].value=mainjpgviewer0.width
+         animatordivalertsdirectorytomainjpgviewer0.childNodes[i].attributes['height'].value=alertsdirectory.parentElement.clientHeight
+      }
+      animatordivalertsdirectorytomainjpgviewer0.style.display=''
+   }
+}
+var animationdivalertsdirectorytomainjpgviewer2=null
+var animatetimeralertsdirectorytomainjpgviewer2=null
+var animatordivalertsdirectorytomainjpgviewer2=null /*not sure why this prevents error in console, but it does*/
+function animatealertsdirectorytomainjpgviewer2(rowindex,table_el,jpgname)
+{
+   if(animationdivalertsdirectorytomainjpgviewer2==null)
+   {
+      animationdivalertsdirectorytomainjpgviewer2 = document.createElement('div'); /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory or otherwise have a way of limiting memory useage */
+      animationdivalertsdirectorytomainjpgviewer2.id = 'animatordivalertsdirectorytomainjpgviewer2'
+      animationdivalertsdirectorytomainjpgviewer2.className = 'jpganimator'
+      animationdivalertsdirectorytomainjpgviewer2.className = 'divmain'
+
+
+      document.getElementById('spaceholder2').appendChild(animationdivalertsdirectorytomainjpgviewer2) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
+
+      animatordivalertsdirectorytomainjpgviewer2=animationdivalertsdirectorytomainjpgviewer2
+      animatordivalertsdirectorytomainjpgviewer2.style='position:absolute;left:'+(snapsdirectory.offsetWidth+60)+'px;top:-15px'
+      animatordivalertsdirectorytomainjpgviewer2.height=(parseInt(snapsdirectory.offsetHeight)+15)+'px'
+      animatordivalertsdirectorytomainjpgviewer2.width=mainjpgviewer2.width
+/*      animatordivalertsdirectorytomainjpgviewer2.style.top='0px'*/
+/*      animatordivalertsdirectorytomainjpgviewer2.style.top=(parseInt(snapsdirectory.height)>350?'42px':'420px')*/
+   }/*Next lines need to return the same or possibly changed index like if the jpg is already here somewhere*/
+/*TODO: when a jpg is to be displayed that is not in the table, figure out how to display it with its filename as the only list member*/
+
+   var firstmatch=animatordivalertsdirectorytomainjpgviewer2.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
+   if(firstmatch==null)
+   {
+      animatordivalertsdirectorytomainjpgviewer2.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" height=\''+parseInt(snapsdirectory.offsetHeight)+'px\' width=\''+mainjpgviewer2.width+'\' style=\'position:absolute;top:15px;\' />';
+      animatordivalertsdirectorytomainjpgviewer2.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer2.style.display='none'})
+   }
+   else
+   {
+      for(var i=0;i<animatordivalertsdirectorytomainjpgviewer2.childNodes.length;i++)
+      {
+         animatordivalertsdirectorytomainjpgviewer2.childNodes[i].style.zIndex='0'
+      }
+      firstmatch.style.zIndex='1'
+      /*animatordivalertsdirectorytomainjpgviewer2.appendChild(firstmatch)*/
+   }
+   if(animatordivalertsdirectorytomainjpgviewer2.style.display=='none')
+   {
+      animatordivalertsdirectorytomainjpgviewer2.height=snapsdirectory.parentElement.clientHeight
+      animatordivalertsdirectorytomainjpgviewer2.width=mainjpgviewer2.width
+
+      for(var i=0;i<animatordivalertsdirectorytomainjpgviewer2.childNodes.length;i++)
+      {
+         animatordivalertsdirectorytomainjpgviewer2.childNodes[i].attributes['width'].value=mainjpgviewer2.width
+         animatordivalertsdirectorytomainjpgviewer2.childNodes[i].attributes['height'].value=snapsdirectory.parentElement.clientHeight
+      }
+      animatordivalertsdirectorytomainjpgviewer2.style.display=''
+   }
+}
+
+var mousestartXmainjpgviewer0=''
+var mousestartYmainjpgviewer0=''
+var mouseendXmainjpgviewer0=''
+var mouseendYmainjpgviewer0=''
+function foo(event){
+if(mousestartXmainjpgviewer0==''){
+mousestartXmainjpgviewer0=event.screenX;
+mousestartYmainjpgviewer0=event.screenY;console.log('first move')
+}else
+{
+mouseendXmainjpgviewer0=event.screenX;
+mouseendYmainjpgviewer0=event.screenY;console.log('not first move')
+}
+function getParentOffsets(el) {
+if (el.offsetParent) {
+    return el.offsetParent.offsetTop + getParentOffsets(el.offsetParent);
+} else {
+    return 0;
+}
+}}
+var alertsdirectoryheightmode0 =245+'px'
+var alertsdirectoryheightmode1 =612+'px'
+var alertsdirectorywidthmode0 =379+'px'
+var alertsdirectorywidthmode1 =""
+var alertsdirectorytopmode0 =""
+var alertsdirectorytopmode1 =""
+var alertsdirectoryleftmode0 =""
+var alertsdirectoryleftmode1 =""
+
+var mainjpgviewer0topmode0 =""
+var mainjpgviewer0topmode1 =""
+var mainjpgviewer0leftmode0 =""
+var mainjpgviewer0leftmode1 =""
+var mainjpgviewer0widthmode0 =860+'px'
+var mainjpgviewer0widthmode1 =860+'px'
+
+var forbuttonstopmode0 =""
+var forbuttonstopmode1 =0+'px'
+var forbuttonstopmode2 =0+'px'
+var forbuttonsleftmode0 =""
+var forbuttonsleftmode1 =""
+var alertsdirectorysources = []
+alertsdirectorysources[0] = '/../../camera_snapshots/*/*jpg?aliased'
+alertsdirectorysources[1] = '/../../links_to_alerting_activity/*/*jpg?aliased'
+alertsdirectorysources[2] = '/../../camera_snapshots/camera_east_driveway/*jpg?aliased'
+alertsdirectorysources[3] = '/../../camera_snapshots/camera_sw_corner/*jpg?aliased'
+alertsdirectorysources[4] = '/../../camera_snapshots/camera_front_parking/*jpg?aliased'
+alertsdirectorysources[5] = '/../../camera_snapshots/camera_south_driveway/*jpg?aliased'
+alertsdirectorysources[6] = '/../../camera_snapshots/camera_ne_corner/*jpg?aliased'
+var alertsdirectoryaliases = []
+alertsdirectoryaliases[0] = 'All snapshots, including motion detects which may no longer exist'
+alertsdirectoryaliases[1] = 'Alert-related snapshots'
+alertsdirectoryaliases[2] = 'East snapshots'
+alertsdirectoryaliases[3] = 'Dock snapshots'
+alertsdirectoryaliases[4] = 'Office snapshots'
+alertsdirectoryaliases[5] = 'S-East snapshots'
+alertsdirectoryaliases[6] = 'North snapshots'
+/*delayedDisplayElements[0].styleleft='379px' disabled for now*/
+var filenameholderdedicatedjpgviewer = []
+var sourcesdedicatedjpgviewer = []
+sourcesdedicatedjpgviewer[0]='/../../camera_snapshots/*/*jpg?mostrecent1?plaintext'
+sourcesdedicatedjpgviewer[5]='/../../camera_snapshots/camera_ne_corner/*jpg?mostrecent1?plaintext'
+sourcesdedicatedjpgviewer[4]='/../../camera_snapshots/camera_front_parking/*jpg?mostrecent1?plaintext'
+sourcesdedicatedjpgviewer[3]='/../../camera_snapshots/camera_south_driveway/*jpg?mostrecent1?plaintext'
+sourcesdedicatedjpgviewer[1]='/../../camera_snapshots/camera_sw_corner/*jpg?mostrecent1?plaintext'
+sourcesdedicatedjpgviewer[2]='/../../camera_snapshots/camera_east_driveway/*jpg?mostrecent1?plaintext'
+var timerdedicatedjpgviewer;
+var adaptivetimemaster=15000;
+var adaptivetime;
+var notalldoneyet=false
+var manualqmsg1='Auto re\-Qs every 20 seconds maximum until success'
+var manualqmsg2='Manual Q\'ing permitted, but allow pre\-loading'
+var manualqmsg3='between retries to get some efficiency doing that'
+var manualqmsg4='Queue\-to time\='
+var qmodemsg='Auto-queueing mode 20 second maximum interval'
+var isOpera;
+var isFirefox;
+var isSafari;
+var isIE;
+var isEdge;
+var isChrome;
+var isBlink;
+var isAndroid=/(android)/i.test(navigator.userAgent);
+function tellBrowser(){
+/* Opera 8.0+*/
+var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+/* Firefox 1.0+*/
+var isFirefox = typeof InstallTrigger !== 'undefined';
+/* Safari 3.0+ "[object HTMLElementConstructor]" */
+var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+/* Internet Explorer 6-11*/
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+/* Edge 20+*/
+var isEdge = !isIE && !!window.StyleMedia;
+/* Chrome 1 - 71*/
+var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+/* Blink engine detection*/
+var isBlink = (isChrome || isOpera) && !!window.CSS;
+}
+var x = document.getElementsByClassName("announcement");
+for (var i = 0; i < x.length; i++) {
+   x[i].style.display = "none";
+   setInterval(function(){x[i].style.visibility=(x[i].style.visibility == "hidden" ? "" : "hidden");},750);
+}
+var videoneedsqueueing = []
+var qbtnInactiveValue='Queue the playing or paused videos to queue-to time.'
+var StartTimeOfInterest;
+var StartTimeOfInterestDT=new Date();
+var StartTimeOfInterestmSec;
+var StartTimeOfInterestmSecminus60=new Date();
+var windows = [];
+var windowsx = 0;
+var winOpen;
+var playingjpgs = [];/*the size of this array could be the number of jpg viewers on page*/
+var checkingAlerted = null;
+var previousalert = 'waiting'; 
+let requestAlerted = new XMLHttpRequest();
+requestAlerted.open('GET', '/../../camera_snapshots/*/*jpg?-MOTION?mostrecent1')
+var lastcomplexevent = 'something';
+var thiscomplexevent = 'something';
+var element = null;
+requestAlerted.onload = function() { thiscomplexevent = requestAlerted.response; };
+function do_me_false( anchr ){
+alert(anchr.href)
+return false
+}
+function openSection(event, arg1){;}
+var month = [];
+month["Jan"] = "-01-";
+month["Feb"] = "-02-";
+month["Mar"] = "-03-";
+month["Apr"] = "-04-";
+month["May"] = "-05-";
+month["Jun"] = "-06-";
+month["Jul"] = "-07-";
+month["Aug"] = "-08-";
+month["Sep"] = "-09-";
+month["Oct"] = "-10-";
+month["Nov"] = "-11-";
+month["Dec"] = "-12-";
+var streamListings = [];
+streamListings["swmp4"] = "/var/www/camera_streams/camera_sw_corner/";
+streamListings["fpmp4"] = "/var/www/camera_streams/camera_front_parking/";
+streamListings["nemp4"] = "/var/www/camera_streams/camera_ne_corner/";
+streamListings["edmp4"] = "/var/www/camera_streams/camera_east_driveway/";
+streamListings["sdmp4"] = "/var/www/camera_streams/camera_south_driveway/";
+streamListings["swjpg"] = "/../../camera_snapshots/camera_sw_corner/?aliased";
+streamListings["fpjpg"] = "/../../camera_snapshots/camera_front_parking/?aliased";
+streamListings["nejpg"] = "/../../camera_snapshots/camera_ne_corner/?aliased";
+streamListings["edjpg"] = "/../../camera_snapshots/camera_east_driveway/?aliased";
+streamListings["sdjpg"] = "/../../camera_snapshots/camera_south_driveway/?aliased";
+streamListings["11"] = "East" ;/*These correspond to 192.168.0.nn or 192.168.0.n_ since they are 2 characters long extracted from the file name*/
+streamListings["14"] = "Dock"
+streamListings["15"] = "North"
+streamListings["12"] = "Office"
+streamListings["13"] = "S East"
 function checkLaterForLinkToClick(objectelementi=null)
 {
 /*alert('This user acknowledge is needed to avoid some racing condition or something.  May get fixed later...')*/
@@ -2795,8 +2740,6 @@ function launch(){
     document.getElementById('actionbutton').addEventListener('click',play); 
     play();
 }
-</script>
-    <script type="text/javascript"> 
         function soundalarm() { 
             var audio = new Audio( 
 'https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3'); 
@@ -2815,18 +2758,6 @@ function collectthis( _href ){
    alert('Jpg saved');
    return false;
 }
-</script>
-    <script type="text/javascript"> 
-<!--
-    objectelement=document.getElementsByClassName('jpgobjmainpg')
-    for(var i=0;i<objectelement.length;i++)
-    {
-       if(objectelement[i].contentDocument =='undefined')
-       {
-          objectelement[i].click()
-       }
-    }
--->
 function startbtncclick() 
 {
    var progress=0
@@ -2885,11 +2816,6 @@ function startbtncclick()
       objectelement=document.getElementsByClassName('jpgobjmainpg');
    }
 }
-</script>
-<!-- document.getElementById(btn.id).style.background='#CCCCCC' -->
-<!-- document.getElementById(btn.id).style.background='#FFFFFF' -->
-<script type="text/javascript"> 
-
 function tabactivate( btn )
 {
    var btnset = document.getElementsByClassName('tablinks');
@@ -2927,8 +2853,6 @@ function tabactivate( btn )
    }
    setTimeout(function(){entiredocument.scrollIntoView(true,{behavior: 'smooth'})},10)
 }
-</script>
-    <script type="text/javascript"> 
 function glonabort( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onabort. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -2938,8 +2862,6 @@ function glonanimationcancel( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 
 function glonanimationend( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onanimationend. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
-</script>
-    <script type="text/javascript"> 
 function glonanimationiteration( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onanimationiteration. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -2976,8 +2898,6 @@ function gloncopy( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 function gloncuechange( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element oncuechange. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
-</script>
-    <script type="text/javascript"> 
 function gloncut( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element oncut. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -3017,8 +2937,6 @@ function glonemptied( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 function glonencrypted( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onencrypted. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
-</script>
-    <script type="text/javascript"> 
 function glonended( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) 
 {
    if(qbtn.style.backgroundColor == 'rgb(230, 230, 230)')
@@ -3059,8 +2977,6 @@ function glonended( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 )
 function glonerror( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onerror. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
-</script>
-    <script type="text/javascript"> 
 function glonfocus( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onfocus. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -3091,24 +3007,6 @@ function glonkeypress( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 function glonkeyup( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onkeyup. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
-</script>
-    <script type="text/javascript"> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
-    <script type="text/javascript"> 
 function glonloadeddata( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onloadeddata. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -3145,8 +3043,6 @@ function glonmouseover( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 function glonmouseup( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onmouseup. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
-</script>
-    <script type="text/javascript"> 
 function glonpaste( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onpaste. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -3174,8 +3070,6 @@ function glonpointerleave( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 function glonpointermove( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onpointermove. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
-</script>
-    <script type="text/javascript"> 
 function glonpointerout( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onpointerout. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -3193,8 +3087,6 @@ function glonratechange( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 ;
 /*must change all videos to maintain synchronization*/
 }
-</script>
-    <script type="text/javascript"> 
 function glonreset( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onreset. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -3219,8 +3111,6 @@ function glonselectstart( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
 function glonshow( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onshow. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
-</script>
-    <script type="text/javascript"> 
 function glonstalled( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onstalled. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 ;
@@ -3250,8 +3140,6 @@ function glontransitionrun( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) 
 function glontransitionstart( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element ontransitionstart. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
-</script>
-    <script type="text/javascript"> 
 function glonvolumechange( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
    alert("Element onvolumechange. currentSrc=" + currSrc + ", id=" + elmnt.attributes["id"].nodeValue + ", name=" + elname + ", tagName=" + tagname + ". arg1=" + arg1 + ", arg2=" + arg2 + ", arg3=" + arg3);
 }
@@ -3283,8 +3171,6 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
 } else {
   alert('HTML5 is NOT fully supported enough in this browser.  Can you upgrade it?');
 }
-</script>
-    <script type="text/javascript"> 
 
 var vidul = document.getElementById("camembed_ul");
 
@@ -3325,8 +3211,6 @@ function slidered(a) {
    if (a !== undefined) {edsliderbarinput.value = a;}
    edsubmit.value = "Set to " + edsliderbarinput.value + " minutes";
 }
-</script>
-    <script type="text/javascript"> 
 
 var swsliderbarinput = document.getElementById("sw_corner");
 var swsubmit = document.getElementById("swsubmit");
