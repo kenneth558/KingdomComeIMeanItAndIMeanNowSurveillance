@@ -1,4 +1,4 @@
-https://raw.githubusercontent.com/kenneth558/a/master/Screenshot%20from%202021-03-21%2020-28-02.png
+https://raw.githubusercontent.com/kenneth558/a/master/Surveillance%20Main%20Page.png
 
 # Web Page to play back my Surveillance Recordings, includes client-side alerting and ability to disable system alerts for current weather and such
 
@@ -16,5 +16,5 @@ There is room for improvement if you want to: the playback synchronizing algorit
 
 Instructions: copy all these files to your Ubuntu 20.04 server.  Look at the source code in all files and build the directories referenced, customized as you desire.  Move the index.html into the directory you built for it.  Create the user you want to run this under, considering anyone pulling up the web page will have those same rights.  Assign rights and file permissions.  There is no live stream server for the rtsp live streams, but on my server I use **socat** to buffer the live streams going to off-page rtsp player[s] on clients.
 
-Screen shot: https://raw.githubusercontent.com/kenneth558/a/master/SurvWebPg.png
+Screen shot: https://raw.githubusercontent.com/kenneth558/a/master/Surveillance%20Main%20Page.png
 
