@@ -157,8 +157,30 @@ document.links[19].href='http://' + window.location.hostname + ':15080';//set fo
 </datalist>
 <div id="entiredocument" style="z-index:5;pointer-events:none;" onclick="return false">
 <div id="buttonsdiv" style="display:inline-block;position:sticky;top:0px;z-index:4;background:rgb(215,215,245,0.4);padding: 0px 0px 0px 0px;border:0px solid black;border-width:0px 0px 0px 0px;">
+<input type="range" min="60" max="4000" step="1" list="tickmarks" value="415" id="sliderhoriz"
+/*FUTURE: determine which element[s] are in rendered area and apply to those only.  The following always manipulates the main tab dedicated view elements*/
+oninput="
+var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
+for(var i=0;i<dedicatedjpgviewers.length;i++)
+{
+   dedicatedjpgviewers[i].width=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(this.value)-35):parseInt(this.value))+'px'
+   dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewers[i].width)+35)+'px':dedicatedjpgviewers[i].width
+}
+" 
+style="position:absolute;top:40px;width:370px;left:45px">
+<input type="range" min="-2800" max="-50" step="1" list="tickmarks" value="-258" id="slidervert"
+oninput="
+var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
+for(var i=0;i<dedicatedjpgviewers.length;i++)
+{
+   dedicatedjpgviewers[i].height=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(0-parseInt(this.value))-45):(parseInt(0-parseInt(this.value))))+'px'
+   dedicatedjpgviewers[i].offsetParent.style.height=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewers[i].height)+parseInt(45))+'px':dedicatedjpgviewers[i].height
+   dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].id.endsWith('r0')?dedicatedjpgviewers[i].nextElementSibling.style.top:(dedicatedjpgviewers[i].height.substring(0,dedicatedjpgviewers[i].height.length-2)-22)+'px')
+}
+" 
+style="position:absolute;top:62px;height:225px;left:10px" orient="vertical">
   <button id="btndivmain" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
-onclick="tabactivate(this)">
+onclick="tabactivate(this);slidervert.style.display='inline';sliderhoriz.style.display='inline'">
 Main</button>
   <button  id="btnwatchfootage" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px" 
 onclick="tabactivate(this)">
@@ -696,30 +718,9 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 <button value="jpg<->mp4" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btnjpgormp41" onclick="">jpg<->mp4</button>
 </div>
 -->
-<i style="position:absolute;top:2px;left:0px;font-size:11px" >Slider will adjust one or the other dimension, all views</i>
+<i style="position:absolute;top:2px;left:0px;font-size:11px" >Hint: Arrow etc. keys are active after slider is touched</i>
 <div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;">
-<input type="range" min="40" max="2000" step="1" list="tickmarks" value="432"  
-oninput="
-var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
-for(var i=0;i<dedicatedjpgviewers.length;i++)
-{
-   dedicatedjpgviewers[i].width=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(this.value)-50):parseInt(this.value))+'px'
-   dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewers[i].width)+50)+'px':dedicatedjpgviewers[i].width
-}
-" 
-style="position:absolute;top:15px;width:370px;left:45px">
-<input type="range" min="-1380" max="-30" step="1" list="tickmarks" value="-259" name="vertical"
-oninput="
-var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
-for(var i=0;i<dedicatedjpgviewers.length;i++)
-{
-   dedicatedjpgviewers[i].height=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(0-parseInt(this.value))-45):(parseInt(0-parseInt(this.value))))+'px'
-   dedicatedjpgviewers[i].offsetParent.style.height=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewers[i].height)+parseInt(45))+'px':dedicatedjpgviewers[i].height
-   dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].id.endsWith('r0')?dedicatedjpgviewers[i].nextElementSibling.style.top:(dedicatedjpgviewers[i].height.substring(0,dedicatedjpgviewers[i].height.length-2)-22)+'px')
-}
-" 
-style="position:absolute;top:37px;height:225px;left:10px" orient="vertical">
-<object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:45px;left:50px" value="Alt jpg viewer" width="380px" height="217px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function()
+<object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:35px;left:30px" value="Alt jpg viewer" width="395px" height="219px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function()
 {
    filenametool1.src=sourcesdedicatedjpgviewer[1];if(filenametool0.contentDocument.body.innerText.includes(filenametool1.src.substr(filenametool1.src.indexOf('camera_')+24,7)))
    {
@@ -775,7 +776,7 @@ style="position:absolute;top:37px;height:225px;left:10px" orient="vertical">
 <input disabled id="camapp_lst1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index=2" value="working..."></div>
 <div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:2;top:6px">
 <div style="position:relative;top:0px">
-<i>&nbsp;^-&nbsp;Upper left is the most recent event of all views, so it will duplicate one of the others</i>
+<i style="font-size:11px">&nbsp;^-&nbsp;Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i>
 <button id="btnreclaim2" style="background:#fff;position:absolute;top:10px;left:340px;z-index:1;display:none" onmousedown="
 this.style.display='none'
 animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
@@ -2817,7 +2818,8 @@ function startbtncclick()
    }
 }
 function tabactivate( btn )
-{
+{ /*slidervert.style.display='none';sliderhoriz.style.display='none'
+    slidervert.style.display='inline';sliderhoriz.style.display='inline'*/
    var btnset = document.getElementsByClassName('tablinks');
    for(var i=0;i<btnset.length;i++)
    {
@@ -2851,6 +2853,7 @@ function tabactivate( btn )
          }
       }
    }
+   slidervert.style.display='none';sliderhoriz.style.display='none'
    setTimeout(function(){entiredocument.scrollIntoView(true,{behavior: 'smooth'})},10)
 }
 function glonabort( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
