@@ -239,7 +239,7 @@ else
                             alertvisualblinker=setInterval(function(){alertCheck.style.background=(alertCheck.style.background=='Chartreuse')?'red':'Chartreuse'},300)
                             if(btnaudibleonalert.innerText=='Alerts now audible')
                             {
-                               soundalarm()
+                               soundalarm(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
                             };
                             show_eventsmainjpgviewer2.value=0;show_eventsmainjpgviewer2.oninput()
                         }
@@ -724,7 +724,7 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 <button value="jpg<->mp4" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btnjpgormp41" onclick="">jpg<->mp4</button>
 </div>
 -->
-<i style="position:absolute;top:2px;left:0px;font-size:11px" >Hint: Arrow etc. keys are active after slider is touched</i>
+<i style="position:absolute;top:2px;left:4px;font-size:11px" >Hint: Arrow etc. keyboard keys allowed for slider control once it is clicked on</i>
 <div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;">
 <object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:35px;left:30px" value="Alt jpg viewer" width="395px" height="219px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function()
 {
@@ -1180,7 +1180,7 @@ onload="if (!alertCheck.innerText.endsWith(' OFF'))
               {
                  if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert){
                      if(previousalert!='waiting'){
-                        if(btnaudibleonalert.innerText=='Alerts now audible'){soundalarm()};show_eventsmainjpgviewer2.value=0;show_eventsmainjpgviewer2.oninput()
+                        if(btnaudibleonalert.innerText=='Alerts now audible'){soundalarm(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)};show_eventsmainjpgviewer2.value=0;show_eventsmainjpgviewer2.oninput()
 /* obsolete for now                            if(mainjpgviewer0.data!=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
                              {   mainjpgviewer0.data=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href}*/
                      }
@@ -2748,11 +2748,42 @@ function launch(){
     document.getElementById('actionbutton').addEventListener('click',play); 
     play();
 }
-        function soundalarm() { 
-            var audio = new Audio( 
-'https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3'); 
-            audio.play(); 
-        } 
+var soundalarmmp3s = []
+soundalarmmp3s[0] = 'eastdriveway.mp3'
+soundalarmmp3s[1] = 'dockcorner.mp3'
+soundalarmmp3s[2] = 'frontoffice.mp3'
+soundalarmmp3s[3] = 'southeastcorner.mp3'
+soundalarmmp3s[4] = 'frontoffice.mp3'
+var audioelement2ndstage=null
+var audiosrc2ndstage=null
+var audio3rdstage=null
+function soundalarm(causehref=null) 
+{ 
+   var audio = new Audio('600hz900mS.mp3'); 
+   audio.play(); 
+   if(causehref!='undefined' && causehref!=null)
+   {
+      for(var i=0;i<alertsdirectorysources.length-2;i++)
+      {
+         if(causehref.substring(20).includes(alertsdirectorysources[i+2].substr(31,7)))
+         {
+            audiosrc2ndstage=soundalarmmp3s[i]
+            audioelement2ndstage= new Audio(audiosrc2ndstage)
+            audio.addEventListener('ended', event => 
+            {
+               audioelement2ndstage.play()
+               audioelement2ndstage.addEventListener('ended', event =>
+               {
+                  audio3rdstage = new Audio('600hz900mS.mp3'); 
+                  audio3rdstage.play(); 
+               })
+            })
+            break
+         }
+      }
+   }
+}
+ 
 function checkforcache() { if ('caches' in window){ alert ('This browser supports cache, FUTURE Considering to use it for sounds, pictures, videos, etc.')} 
 else {alert('This browser cannot cache');}
                           }
