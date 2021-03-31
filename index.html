@@ -266,12 +266,12 @@ else
     )
 }
 ">Alert checking OFF</button>
-<button value="Alerts now audible" style="white-space:nowrap;width:170px;font-size:13px;background-color:#C0C0C0;color:#808080" 
+<button value="Alerts now audible" style="white-space:nowrap;width:170px;font-size:13px;background-color:#C0C0C0;color:#808080;position:absolute" 
 id="btnaudibleonalert" onclick="previousalert='waiting';if(alertvisualblinker!=null){clearInterval(alertvisualblinker);alertvisualblinker=null};alertCheck.style.background='Chartreuse';if(this.innerText=='Alerts now audible'){this.innerText='Make new alerts audible'}else{this.innerText='Alerts now audible'}"
 >Alerts now audible</button>
-   <div id="androidconnection" class="androidconnection" style="border:0px;z-index:-1;display:none">
-   <object id="alertkeepalive" type="audio/mpeg" data=""></object>
-   </div>
+ <div id="androidconnection" class="androidconnection" style="display:none;border:0px;z-index:-1;position:absolute">
+   <object id="alertkeepalive" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object>
+</div>
 </div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
 <b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
 <table style="border:3px solid black"><tr><td>
@@ -724,7 +724,7 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 <button value="jpg<->mp4" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btnjpgormp41" onclick="">jpg<->mp4</button>
 </div>
 -->
-<i style="position:absolute;top:2px;left:4px;font-size:11px" >Hint: Arrow etc. keyboard keys allowed for slider control once it is clicked on</i>
+<i style="position:absolute;top:2px;left:4px;font-size:11px" >Hint: Arrow etc. keyboard keys work for slider control once one is clicked on</i>
 <div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;">
 <object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:35px;left:30px" value="Alt jpg viewer" width="395px" height="219px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function()
 {
