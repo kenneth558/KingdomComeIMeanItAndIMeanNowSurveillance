@@ -206,7 +206,7 @@ value="Alert checking OFF"
 onclick="
 if (!this.innerText.endsWith(' OFF'))
 {   if(isAndroid){alertkeepalive.data='';androidconnection.style.display='none';}this.innerText='Alert checking OFF';this.style.background='pink';clearInterval(checkingAlerted);btnaudibleonalert.style.color='#808080'
-    previousalert='waiting';
+    previousalert='waiting';if(alertvisualblinker!=null){clearInterval(alertvisualblinker);alertvisualblinker=null}
          if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
            alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
            alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
@@ -235,7 +235,13 @@ else
                     if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
                     {;
                         if(previousalert!='waiting')
-                        {   if(btnaudibleonalert.innerText=='Alerts now audible'){soundalarm()};show_eventsmainjpgviewer2.value=0;show_eventsmainjpgviewer2.oninput()
+                        {
+                            alertvisualblinker=setInterval(function(){alertCheck.style.background=(alertCheck.style.background=='Chartreuse')?'red':'Chartreuse'},300)
+                            if(btnaudibleonalert.innerText=='Alerts now audible')
+                            {
+                               soundalarm()
+                            };
+                            show_eventsmainjpgviewer2.value=0;show_eventsmainjpgviewer2.oninput()
                         }
                         else
                         {   previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
@@ -261,7 +267,7 @@ else
 }
 ">Alert checking OFF</button>
 <button value="Alerts now audible" style="white-space:nowrap;width:170px;font-size:13px;background-color:#C0C0C0;color:#808080" 
-id="btnaudibleonalert" onclick="previousalert='waiting';if(this.innerText=='Alerts now audible'){this.innerText='Make new alerts audible'}else{this.innerText='Alerts now audible'}"
+id="btnaudibleonalert" onclick="previousalert='waiting';if(alertvisualblinker!=null){clearInterval(alertvisualblinker);alertvisualblinker=null};alertCheck.style.background='Chartreuse';if(this.innerText=='Alerts now audible'){this.innerText='Make new alerts audible'}else{this.innerText='Alerts now audible'}"
 >Alerts now audible</button>
    <div id="androidconnection" class="androidconnection" style="border:0px;z-index:-1;display:none">
    <object id="alertkeepalive" type="audio/mpeg" data=""></object>
@@ -2440,6 +2446,7 @@ onerror="this.data=':1958/silence.mp3';setTimeout(function(){this.data=':15554/s
 Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to whomsoever he will".  God is HOLY and will NOT allow people that hate Him to team up with Him by using fraud.  Can God really say "Trump honored me, but I'll allow the dishonorable fraud to team with me to get my choice in this time, and I'll choose a man who doesn't even know me [and will take orders from China instead of me] over a man who honors me unprecedentedly to sit rule over my people who are praying en masse against that"? I KNOW BETTER-->
 
 <script type="text/javascript">
+var alertvisualblinker=null
 var animationdivalertsdirectorytomainjpgviewer0=null
 function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
 {
