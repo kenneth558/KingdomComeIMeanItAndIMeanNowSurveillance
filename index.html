@@ -236,7 +236,7 @@ else
                     {;
                         if(previousalert!='waiting')
                         {
-                            alertvisualblinker=setInterval(function(){alertCheck.style.background=(alertCheck.style.background=='Chartreuse')?'red':'Chartreuse'},300)
+                            alertvisualblinker=setInterval(function(){alertCheck.style.background=(alertCheck.style.background.includes('chartreuse'))?'red':'Chartreuse'},300)
                             if(btnaudibleonalert.innerText=='Alerts now audible')
                             {
                                soundalarm(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
@@ -267,7 +267,7 @@ else
 }
 ">Alert checking OFF</button>
 <button value="Alerts now audible" style="white-space:nowrap;width:170px;font-size:13px;background-color:#C0C0C0;color:#808080;position:absolute" 
-id="btnaudibleonalert" onclick="previousalert='waiting';if(alertvisualblinker!=null){clearInterval(alertvisualblinker);alertvisualblinker=null};alertCheck.style.background='Chartreuse';if(this.innerText=='Alerts now audible'){this.innerText='Make new alerts audible'}else{this.innerText='Alerts now audible'}"
+id="btnaudibleonalert" onclick="previousalert='waiting';if(alertvisualblinker!=null){clearInterval(alertvisualblinker);alertvisualblinker=null};if(!alertCheck.innerText.endsWith(' OFF')){alertCheck.style.background='Chartreuse'};if(this.innerText=='Alerts now audible'){this.innerText='Make new alerts audible'}else{this.innerText='Alerts now audible'}"
 >Alerts now audible</button>
  <div id="androidconnection" class="androidconnection" style="display:none;border:0px;z-index:-1;position:absolute">
    <object id="alertkeepalive" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object>
@@ -677,7 +677,7 @@ Script on server: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nb
 </table>
 </td>
 </tr>
-</table>
+	</table>
 </td>
 </tr>
 </table>
@@ -724,7 +724,7 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 <button value="jpg<->mp4" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btnjpgormp41" onclick="">jpg<->mp4</button>
 </div>
 -->
-<i style="position:absolute;top:2px;left:4px;font-size:11px" >Hint: Arrow etc. keyboard keys work for slider control once one is clicked on</i>
+<i style="position:absolute;top:0px;left:4px;font-size:11px" >Hint: Arrow etc. keyboard keys work for<br>slider control once one is clicked on</i>
 <div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;">
 <object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:35px;left:30px" value="Alt jpg viewer" width="395px" height="219px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function()
 {
@@ -884,7 +884,7 @@ this.oldvalue=this.value
 "  
 name="show_eventsmainjpgviewer4" class="slidersNeedingDelayedDisplay"
 min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;top:9px;left:405px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+style="position:absolute;top:9px;left:385px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 " 
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
@@ -944,7 +944,7 @@ onload="
         }
      },100)
      glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-width="379px" height="582px"
+width="365px" height="582px"
 style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 0px 3px;position:absolute;
 ">
    <param name="timestamp" value="initial" />
@@ -1160,7 +1160,7 @@ this.oldvalue=this.value
 "  
 name="show_eventsmainjpgviewer2" class="slidersNeedingDelayedDisplay"
 min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;top:8px;left:405px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+style="position:absolute;top:8px;left:385px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 " 
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
@@ -1225,7 +1225,7 @@ onload="if (!alertCheck.innerText.endsWith(' OFF'))
         }
      },100)
      glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-width="379px" height="582px"
+width="365px" height="582px"
 style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 0px 3px;position:relative;
 ">
    <param name="timestamp" value="initial" />
@@ -2461,7 +2461,7 @@ function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
       document.getElementById('spaceholder1').appendChild(animationdivalertsdirectorytomainjpgviewer0) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
 
 
-      animatordivalertsdirectorytomainjpgviewer0.style='position:absolute;left:'+(alertsdirectory.offsetWidth+60)+'px;top:-15px'
+      animatordivalertsdirectorytomainjpgviewer0.style='position:absolute;left:'+(alertsdirectory.offsetWidth+50)+'px;top:-15px'
       animatordivalertsdirectorytomainjpgviewer0.height=(parseInt(alertsdirectory.offsetHeight)+15)+'px'
       animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
 /*      animatordivalertsdirectorytomainjpgviewer0.style.top='0px'*/
@@ -2511,7 +2511,7 @@ function animatealertsdirectorytomainjpgviewer2(rowindex,table_el,jpgname)
       document.getElementById('spaceholder2').appendChild(animationdivalertsdirectorytomainjpgviewer2) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
 
       animatordivalertsdirectorytomainjpgviewer2=animationdivalertsdirectorytomainjpgviewer2
-      animatordivalertsdirectorytomainjpgviewer2.style='position:absolute;left:'+(snapsdirectory.offsetWidth+60)+'px;top:-15px'
+      animatordivalertsdirectorytomainjpgviewer2.style='position:absolute;left:'+(snapsdirectory.offsetWidth+50)+'px;top:-15px'
       animatordivalertsdirectorytomainjpgviewer2.height=(parseInt(snapsdirectory.offsetHeight)+15)+'px'
       animatordivalertsdirectorytomainjpgviewer2.width=mainjpgviewer2.width
 /*      animatordivalertsdirectorytomainjpgviewer2.style.top='0px'*/
@@ -2757,6 +2757,8 @@ soundalarmmp3s[4] = 'frontoffice.mp3'
 var audioelement2ndstage=null
 var audiosrc2ndstage=null
 var audio3rdstage=null
+var documenttitle=null
+var documenttitletimer=null
 function soundalarm(causehref=null) 
 { 
    var audio = new Audio('600hz900mS.mp3'); 
@@ -2782,6 +2784,9 @@ function soundalarm(causehref=null)
          }
       }
    }
+documenttitle=document.title
+document.title=audiosrc2ndstage.substr(31)
+if(documenttitletimer==null){documenttitletimer=1;setTimeout(function(){document.title=documenttitle;documenttitletimer=null},2000)}
 }
  
 function checkforcache() { if ('caches' in window){ alert ('This browser supports cache, FUTURE Considering to use it for sounds, pictures, videos, etc.')} 
