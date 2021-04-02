@@ -889,22 +889,19 @@ style="position:absolute;top:9px;left:385px;z-index:5;height:596px;-webkit-appea
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
 orient="vertical">
-<!--
-<input type="range" min="60" max="4000" step="1" list="tickmarks" value="415" id="snapssliderhoriz"
+
+<input type="range" min="20" max="10000" step="1" list="tickmarks" value="740" id="snapssliderhoriz"
 /*FUTURE: determine which element[s] are in rendered area and apply to those only.*/
 oninput="
-console.log(this.value+', '+document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.width)
-   document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.width=parseInt(parseInt(this.value)+440)+'px'
-console.log(document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.width)
+   document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.width=parseInt(parseInt(this.value))+'px'
 " 
 style="position:absolute;top:20px;width:370px;left:450px;z-index:2">
-<input type="range" min="-2800" max="-50" step="1" list="tickmarks" value="-258" id="snapsslidervert"
-oninput="console.log(this.value+', '+document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.height)
-   animatordivalertsdirectorytomainjpgviewer2.style.height=parseInt(parseInt(0-parseInt(this.value))+360)+'px'
-console.log(this.value+', '+document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.height)
+<input type="range" min="-2500" max="-20" step="1" list="tickmarks" value="-360" id="snapsslidervert"
+oninput="
+   document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.height=parseInt(parseInt(0-parseInt(this.value)))+'px'
 " 
 style="position:absolute;top:42px;height:225px;left:430px;z-index:2" orient="vertical">
--->
+
 <i style="position:absolute;width:600px;left:450px;top:20px;font-size:13px" width="600px"><ul><br>A sub-range can be made <b>at the <u>bottom</u> of the listed snapshots</b> by putting the <b>right</b> slider 
 button <b>below the left one</b>, as follows:
 <br><br>
@@ -2540,7 +2537,7 @@ function animatealertsdirectorytomainjpgviewer2(rowindex,table_el,jpgname)
    var firstmatch=document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
    if(firstmatch==null)
    {
-      document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" style=\'position:absolute;top:15px;height:'+parseInt(snapsdirectory.offsetHeight)+'px;width:'+mainjpgviewer2.width+';z-index:1;object-fit: fill;\' />';
+      document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" style=\'position:absolute;top:15px;height:100%;width:100%;z-index:1;object-fit: fill;\' />';
       document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer2.style.display='none'})
    }
    else
