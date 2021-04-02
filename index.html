@@ -895,12 +895,12 @@ orient="vertical">
 oninput="
    document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.width=parseInt(parseInt(this.value))+'px'
 " 
-style="position:absolute;top:20px;width:370px;left:450px;z-index:2">
+style="position:absolute;top:20px;width:370px;left:450px;z-index:3">
 <input type="range" min="-2500" max="-20" step="1" list="tickmarks" value="-360" id="snapsslidervert"
 oninput="
    document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.height=parseInt(parseInt(0-parseInt(this.value)))+'px'
 " 
-style="position:absolute;top:42px;height:225px;left:430px;z-index:2" orient="vertical">
+style="position:absolute;top:42px;height:225px;left:430px;z-index:3" orient="vertical">
 
 <i style="position:absolute;width:600px;left:450px;top:20px;font-size:13px" width="600px"><ul><br>A sub-range can be made <b>at the <u>bottom</u> of the listed snapshots</b> by putting the <b>right</b> slider 
 button <b>below the left one</b>, as follows:
@@ -2526,7 +2526,7 @@ function animatealertsdirectorytomainjpgviewer2(rowindex,table_el,jpgname)
       document.getElementById('spaceholder2').appendChild(animationdivalertsdirectorytomainjpgviewer2) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
 
       animatordivalertsdirectorytomainjpgviewer2=animationdivalertsdirectorytomainjpgviewer2
-      animatordivalertsdirectorytomainjpgviewer2.style='position:absolute;left:'+(snapsdirectory.offsetWidth+50)+'px;top:-15px;background-size: contain;'
+      animatordivalertsdirectorytomainjpgviewer2.style='position:absolute;left:'+(snapsdirectory.offsetWidth+50)+'px;top:-15px;z-index:2;'
       animatordivalertsdirectorytomainjpgviewer2.style.height=(parseInt(snapsdirectory.offsetHeight)+15)+'px'
       animatordivalertsdirectorytomainjpgviewer2.style.width=mainjpgviewer2.width
 /*      animatordivalertsdirectorytomainjpgviewer2.style.top='0px'*/
@@ -2537,7 +2537,7 @@ function animatealertsdirectorytomainjpgviewer2(rowindex,table_el,jpgname)
    var firstmatch=document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
    if(firstmatch==null)
    {
-      document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" style=\'position:absolute;top:15px;height:100%;width:100%;z-index:1;object-fit: fill;\' />';
+      document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" style=\'position:absolute;top:15px;height:100%;width:100%;z-index:2;object-fit: fill;\' />';
       document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer2.style.display='none'})
    }
    else
