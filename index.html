@@ -167,7 +167,7 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
    dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewers[i].width)+35)+'px':dedicatedjpgviewers[i].width
 }
 " 
-style="position:absolute;top:40px;width:370px;left:45px">
+style="position:absolute;top:43px;width:370px;left:45px">
 <input type="range" min="-2800" max="-50" step="1" list="tickmarks" value="-258" id="slidervert"
 oninput="
 var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
@@ -178,7 +178,7 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
    dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].id.endsWith('r0')?dedicatedjpgviewers[i].nextElementSibling.style.top:(dedicatedjpgviewers[i].height.substring(0,dedicatedjpgviewers[i].height.length-2)-22)+'px')
 }
 " 
-style="position:absolute;top:62px;height:225px;left:10px" orient="vertical">
+style="position:absolute;top:62px;height:225px;left:17px;z-index:-1" orient="vertical">
   <button id="btndivmain" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
 onclick="tabactivate(this);slidervert.style.display='inline';sliderhoriz.style.display='inline'">
 Main</button>
@@ -927,7 +927,7 @@ oninput="
 snapsdirectory.height=(0-this.value)+'px'
 divsnapstabsrow.style.top=((0-this.value)-565)+'px'
 " 
-style="position:absolute;top:43px;height:565px;left:7px;z-index:3" orient="vertical">
+style="position:absolute;top:43px;height:565px;left:3px;z-index:3" orient="vertical">
 <object id="snapsdirectory" type="text/html"
 data=""
 onclick="this.data=this.data"
