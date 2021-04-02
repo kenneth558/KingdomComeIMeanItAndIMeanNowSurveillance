@@ -725,7 +725,7 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 </div>
 -->
 <i style="position:absolute;top:0px;left:4px;font-size:11px" >Hint: Arrow etc. keyboard keys work for<br>slider control once one is clicked on</i>
-<div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;">
+<div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;z-index:3">
 <object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:35px;left:30px" value="Alt jpg viewer" width="395px" height="219px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function()
 {
    filenametool1.src=sourcesdedicatedjpgviewer[1];if(filenametool0.contentDocument.body.innerText.includes(filenametool1.src.substr(filenametool1.src.indexOf('camera_')+24,7)))
@@ -836,6 +836,7 @@ oninput="
 this.value=(snapsdirectory.contentDocument!='undefined' && snapsdirectory.contentDocument!=null && snapsdirectory.contentDocument.body.children[0] !='undefined' && snapsdirectory.contentDocument.body.children[0] != null && snapsdirectory.contentDocument.body.children[0].rows!='undefined' && snapsdirectory.contentDocument.body.children[0].rows!=null && snapsdirectory.contentDocument.body.children[0].rows.length!='undefined' && snapsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-snapsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
 if(this.value<1)
 {/*alert(parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.0089)*/
+   animatordivalertsdirectorytomainjpgviewer2.style.display=''
    btnreclaim2.style.display='none'
    var rowselected=Math.round(snapsdirectory.contentDocument.body.children[0].rows.length*(snapsdirectory.contentDocument.body.scrollTop/((parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.99957)))-this.value)
    if((parseInt(this.oldvalue)!=null) &&
@@ -921,6 +922,12 @@ tabs underneath to limit the list size to have a better likelihood of your desir
 Testing has not been extensive enough to prove conclusive reliability when the file name list is scrolled, though you might discover anyway that it actually does work fine even when scrolled.
 </li>
 </ul></i>
+<input type="range" min="-582" max="-28" step="10" list="tickmarks" value="-582" id="snapsheightslider"
+oninput="
+snapsdirectory.height=(0-this.value)+'px'
+divsnapstabsrow.style.top=((0-this.value)-565)+'px'
+" 
+style="position:absolute;top:43px;height:565px;left:7px;z-index:3" orient="vertical">
 <object id="snapsdirectory" type="text/html"
 data=""
 onclick="this.data=this.data"
@@ -968,7 +975,8 @@ style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px
     </object>
 </td></tr>
 </table>
-<div style="position:relative;top:15px">
+</div>
+<div id="divsnapstabsrow" style="position:relative;top:15px;backgound:rgb(215,215,245);z-index:1">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expect simple motion detects&nbsp;&nbsp;&nbsp;TO GET DELETED without notice -> 
 <button style="position:relative;top:0px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
@@ -1078,10 +1086,7 @@ onmousedown="
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
 ">North</button>
-</div>
-</div>
-<div style="position:relative;top:20px">
-<button id="btnreclaim1" style="background:#fff;position:absolute;top:-9px;left:340px;display:none;z-index:2;" onmousedown="
+<button id="btnreclaim1" style="background:#fff;position:absolute;top:40px;left:340px;display:none;z-index:2;" onmousedown="
 this.style.display='none'
 animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
 clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=null
@@ -1092,7 +1097,7 @@ clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdir
 <input type="button" value="Most recent alert event" onclick="this.value=previousalert">
 <br> -->
 <input type="range" id="show_eventsmainjpgviewer1" name="show_eventsmainjpgviewer1" min="-53" max="-1" value="-1" step="1" list="tickmarks" class="vertical-slider"
-style="position:absolute;top:20px;left:220px;z-index:5;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+style="position:absolute;top:50px;left:220px;z-index:5;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 "
 orient="vertical"
 onchange="
@@ -1173,7 +1178,7 @@ this.oldvalue=this.value
 "  
 name="show_eventsmainjpgviewer2" class="slidersNeedingDelayedDisplay"
 min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;top:8px;left:385px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+style="position:absolute;top:38px;left:385px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 " 
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
@@ -1239,7 +1244,7 @@ onload="if (!alertCheck.innerText.endsWith(' OFF'))
      },100)
      glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
 width="365px" height="582px"
-style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 0px 3px;position:relative;
+style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 0px 3px;position:relative;top:30px;
 ">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
@@ -2474,7 +2479,7 @@ function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
       document.getElementById('spaceholder1').appendChild(animationdivalertsdirectorytomainjpgviewer0) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
 
 
-      animatordivalertsdirectorytomainjpgviewer0.style='position:absolute;left:'+(alertsdirectory.offsetWidth+50)+'px;top:-15px;background-size: contain;'
+      animatordivalertsdirectorytomainjpgviewer0.style='position:absolute;left:'+(alertsdirectory.offsetWidth+50)+'px;top:20px;background-size: contain;'
       animatordivalertsdirectorytomainjpgviewer0.height=(parseInt(alertsdirectory.offsetHeight)+15)+'px'
       animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
 /*      animatordivalertsdirectorytomainjpgviewer0.style.top='0px'*/
