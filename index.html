@@ -891,13 +891,13 @@ oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
 orient="vertical">
 
-<input type="range" min="20" max="10000" step="1" list="tickmarks" value="740" id="snapssliderhoriz"
+<input type="range" min="20" max="10000" step="1" list="tickmarks" value="840" id="snapssliderhoriz"
 /*FUTURE: determine which element[s] are in rendered area and apply to those only.*/
 oninput="
    document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.width=parseInt(parseInt(this.value))+'px'
 " 
 style="position:absolute;top:20px;width:370px;left:450px;z-index:3">
-<input type="range" min="-2500" max="-20" step="1" list="tickmarks" value="-360" id="snapsslidervert"
+<input type="range" min="-2500" max="-20" step="1" list="tickmarks" value="-570" id="snapsslidervert"
 oninput="
    document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.height=parseInt(parseInt(0-parseInt(this.value)))+'px'
 " 
@@ -2532,7 +2532,7 @@ function animatealertsdirectorytomainjpgviewer2(rowindex,table_el,jpgname)
 
       animatordivalertsdirectorytomainjpgviewer2=animationdivalertsdirectorytomainjpgviewer2
       animatordivalertsdirectorytomainjpgviewer2.style='position:absolute;left:'+(snapsdirectory.offsetWidth+50)+'px;top:-15px;z-index:2;'
-      animatordivalertsdirectorytomainjpgviewer2.style.height=(parseInt(snapsdirectory.offsetHeight)+15)+'px'
+      animatordivalertsdirectorytomainjpgviewer2.style.height=(parseInt(snapsdirectory.offsetHeight))+'px'
       animatordivalertsdirectorytomainjpgviewer2.style.width=mainjpgviewer2.width
 /*      animatordivalertsdirectorytomainjpgviewer2.style.top='0px'*/
 /*      animatordivalertsdirectorytomainjpgviewer2.style.top=(parseInt(snapsdirectory.height)>350?'42px':'420px')*/
