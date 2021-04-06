@@ -272,7 +272,7 @@ id="btnaudibleonalert" onclick="previousalert='waiting';if(alertvisualblinker!=n
  <div id="androidconnection" class="androidconnection" style="display:none;border:0px;z-index:-1;position:absolute">
    <object id="alertkeepalive" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object>
 </div>
-<button value="Sizing sliders" style="position:absolute;left:-4px;top:25px;font-size:9px;background-color:#C0C0C0;color:#000;z-index:3" id="btnsliders" onclick="if(snapssliderhoriz.style.display=='none'){sliderhint.style.display='inline';snapssliderhoriz.style.display='inline';sliderhoriz.style.display='inline';snapsslidervert.style.display='inline';slidervert.style.display='inline';}else{snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';sliderhoriz.style.display='none';slidervert.style.display='none';sliderhint.style.display='none';}">Sizing sliders</button>
+<button value="Sizing sliders" style="position:absolute;left:-4px;top:25px;font-size:9px;background-color:#C0C0C0;color:#000;z-index:3" id="btnsliders" onclick="if(snapssliderhoriz.style.display=='none'){sliderhint.style.display='inline';snapssliderhoriz.style.display='inline';sliderhoriz.style.display='inline';snapsslidervert.style.display='inline';slidervert.style.display='inline';snapsheightslider.style.display='inline';}else{snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';sliderhoriz.style.display='none';slidervert.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';}">Sizing sliders</button>
 <i id="sliderhint" style="position:absolute;top:23px;left:75px;font-size:11px;display:none;" >Hint: Arrow etc. keyboard keys work for<br>slider control once one is clicked on</i>
 </div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
 <b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
@@ -929,7 +929,7 @@ oninput="
 snapsdirectory.height=(0-this.value)+'px'
 divsnapstabsrow.style.top=((0-this.value)-565)+'px'
 " 
-style="position:absolute;top:43px;height:565px;left:3px;z-index:3" orient="vertical">
+style="position:absolute;top:43px;height:565px;left:3px;z-index:3;display:none" orient="vertical">
 <object id="snapsdirectory" type="text/html"
 data=""
 onclick="this.data=this.data"
