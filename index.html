@@ -167,7 +167,7 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
    dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewers[i].width)+35)+'px':dedicatedjpgviewers[i].width
 }
 " 
-style="position:absolute;top:43px;width:370px;left:45px">
+style="position:absolute;top:43px;width:370px;left:70px;display:none;">
 <input type="range" min="-2800" max="-50" step="1" list="tickmarks" value="-258" id="slidervert"
 oninput="
 var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
@@ -178,7 +178,7 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
    dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].id.endsWith('r0')?dedicatedjpgviewers[i].nextElementSibling.style.top:(dedicatedjpgviewers[i].height.substring(0,dedicatedjpgviewers[i].height.length-2)-22)+'px')
 }
 " 
-style="position:absolute;top:62px;height:225px;left:17px;z-index:-1" orient="vertical">
+style="position:absolute;top:62px;height:225px;left:17px;z-index:-1;display:none" orient="vertical">
   <button id="btndivmain" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
 onclick="tabactivate(this);slidervert.style.display='inline';sliderhoriz.style.display='inline'">
 Main</button>
@@ -272,6 +272,8 @@ id="btnaudibleonalert" onclick="previousalert='waiting';if(alertvisualblinker!=n
  <div id="androidconnection" class="androidconnection" style="display:none;border:0px;z-index:-1;position:absolute">
    <object id="alertkeepalive" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object>
 </div>
+<button value="Sizing sliders" style="position:absolute;left:-4px;top:25px;font-size:9px;background-color:#C0C0C0;color:#000;z-index:3" id="btnsliders" onclick="if(snapssliderhoriz.style.display=='none'){sliderhint.style.display='inline';snapssliderhoriz.style.display='inline';sliderhoriz.style.display='inline';snapsslidervert.style.display='inline';slidervert.style.display='inline';}else{snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';sliderhoriz.style.display='none';slidervert.style.display='none';sliderhint.style.display='none';}">Sizing sliders</button>
+<i id="sliderhint" style="position:absolute;top:23px;left:75px;font-size:11px;display:none;" >Hint: Arrow etc. keyboard keys work for<br>slider control once one is clicked on</i>
 </div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
 <b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
 <table style="border:3px solid black"><tr><td>
@@ -715,16 +717,16 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 <button value="True ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btndimensions6" onclick="">True ARs</button>
 <button value="Screens ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btndimensions7" onclick="">Screens ARs</button>
 <button value="Browsers ARs" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btndimensions8" onclick="">Browsers ARs</button>
-</div><div style="position:relative;top:25px;height:0px">
-<button value="Sizing sliders" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btnsliders" onclick="">Sizing sliders</button>
-<button value="1 row" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btndimensions1" onclick="">1 row</button>
+</div><div style="position:relative;top:25px;height:0px">-->
+
+
+<!--<button value="1 row" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btndimensions1" onclick="">1 row</button>
 <button value="2 rows" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btndimensions2" onclick="">2 rows</button>
 <button value="1 column" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btndimensions3" onclick="">1 column</button>
 </div><div style="position:relative;top:50px;height:0px">
 <button value="jpg<->mp4" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btnjpgormp41" onclick="">jpg<->mp4</button>
 </div>
 -->
-<i style="position:absolute;top:0px;left:4px;font-size:11px" >Hint: Arrow etc. keyboard keys work for<br>slider control once one is clicked on</i>
 <div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;z-index:3">
 <object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:35px;left:30px" value="Alt jpg viewer" width="395px" height="219px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function()
 {
@@ -896,12 +898,12 @@ orient="vertical">
 oninput="
    document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.width=parseInt(parseInt(this.value))+'px'
 " 
-style="position:absolute;top:20px;width:370px;left:450px;z-index:3">
+style="position:absolute;top:20px;width:370px;left:450px;z-index:3;display:none;">
 <input type="range" min="-2500" max="-20" step="1" list="tickmarks" value="-570" id="snapsslidervert"
 oninput="
    document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.height=parseInt(parseInt(0-parseInt(this.value)))+'px'
 " 
-style="position:absolute;top:42px;height:225px;left:430px;z-index:3" orient="vertical">
+style="position:absolute;top:42px;height:225px;left:430px;z-index:3;display:none;" orient="vertical">
 
 <i style="position:absolute;width:600px;left:450px;top:20px;font-size:13px" width="600px"><ul><br>A sub-range can be made <b>at the <u>bottom</u> of the listed snapshots</b> by putting the <b>right</b> slider 
 button <b>below the left one</b>, as follows:
