@@ -177,28 +177,28 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
    dedicatedjpgviewers[i].offsetParent.style.height=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewers[i].height)+parseInt(45))+'px':dedicatedjpgviewers[i].height
    dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].id.endsWith('r0')?dedicatedjpgviewers[i].nextElementSibling.style.top:(dedicatedjpgviewers[i].height.substring(0,dedicatedjpgviewers[i].height.length-2)-22)+'px')
 }
-" 
+"
 style="position:absolute;top:62px;height:225px;left:17px;z-index:-1;display:none" orient="vertical">
   <button id="btndivmain" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
-onclick="tabactivate(this);slidervert.style.display='inline';sliderhoriz.style.display='inline'">
+onclick="tabactivate(this);btnsliders.style.display='inline';">
 Main</button>
   <button  id="btnwatchfootage" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px" 
-onclick="tabactivate(this)">
+onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Watch footage</button>
   <button  id="btnsystem_wide" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px" 
-onclick="tabactivate(this)">
+onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Combined views recordings</button>
   <button  id="btndisablesandlivelinks" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px;" 
-onclick="tabactivate(this)">
+onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Suspend alerts, Links to live streams</button>
   <button id="btntitlediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px;" 
-onclick="tabactivate(this)">
+onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Tips</button>
   <button id="btnnotesdiv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
-onclick="tabactivate(this)">
+onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Help Manual</button>
   <button id="btnfuturediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
-onclick="tabactivate(this)">
+onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Future</button>
 <button
 id="alertCheck" style="white-space:nowrap;font-size:15px;background:pink;border-radius:1px;border-color:black;border-width:0px;" 
@@ -272,8 +272,16 @@ id="btnaudibleonalert" onclick="previousalert='waiting';if(alertvisualblinker!=n
  <div id="androidconnection" class="androidconnection" style="display:none;border:0px;z-index:-1;position:absolute">
    <object id="alertkeepalive" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object>
 </div>
-<button value="Sizing sliders" style="position:absolute;left:-4px;top:25px;font-size:9px;background-color:#C0C0C0;color:#000;z-index:3" id="btnsliders" onclick="if(snapssliderhoriz.style.display=='none'){sliderhint.style.display='inline';snapssliderhoriz.style.display='inline';sliderhoriz.style.display='inline';snapsslidervert.style.display='inline';slidervert.style.display='inline';snapsheightslider.style.display='inline';}else{snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';sliderhoriz.style.display='none';slidervert.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';}">Sizing sliders</button>
-<i id="sliderhint" style="position:absolute;top:23px;left:75px;font-size:11px;display:none;" >Hint: Arrow etc. keyboard keys work for<br>slider control once one is clicked on</i>
+<button value="Sizing sliders" style="position:absolute;left:-4px;top:25px;font-size:9px;background-color:#C0C0C0;color:#000;z-index:3" id="btnsliders" onclick="
+if(snapssliderhoriz.style.display=='none')
+{
+sliderhint.style.display='inline';snapssliderhoriz.style.display='inline';sliderhoriz.style.display='inline';snapsslidervert.style.display='inline';slidervert.style.display='inline';snapsheightslider.style.display='inline';
+}
+else
+{
+snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';sliderhoriz.style.display='none';slidervert.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';
+}">Sizing sliders</button>
+<i id="sliderhint" style="position:absolute;top:23px;left:75px;font-size:11px;display:none;">Hint: Arrow etc. keyboard keys work for<br>slider control once one is clicked on</i>
 </div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
 <b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
 <table style="border:3px solid black"><tr><td>
@@ -782,9 +790,10 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 <input disabled id="camapp_ul1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div>
 <div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btnnorthjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer5" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"></object>
 <input disabled id="camapp_lst1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div>
-<div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:2;top:6px">
-<div style="position:relative;top:0px">
-<i style="font-size:11px">&nbsp;^-&nbsp;Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i>
+<div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:0;top:6px"
+notes="this is the snaps middle viewer">
+<div style="position:relative;top:0px;" notes="This level in the page is where Android Firefox starts breaking down">
+<i style="font-size:11px">Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i>
 <button id="btnreclaim2" style="background:#fff;position:absolute;top:10px;left:340px;z-index:1;display:none" onmousedown="
 this.style.display='none'
 animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
@@ -887,7 +896,7 @@ this.oldvalue=this.value
 "  
 name="show_eventsmainjpgviewer4" class="slidersNeedingDelayedDisplay"
 min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;top:9px;left:385px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+style="position:absolute;top:9px;left:370px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 " 
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
@@ -1099,7 +1108,8 @@ clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdir
 <input type="button" value="Most recent alert event" onclick="this.value=previousalert">
 <br> -->
 <input type="range" id="show_eventsmainjpgviewer1" name="show_eventsmainjpgviewer1" min="-53" max="-1" value="-1" step="1" list="tickmarks" class="vertical-slider"
-style="position:absolute;top:50px;left:220px;z-index:5;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+notes="this alers element slider needs to be higher in absolute z-index than the snaps element slider above, but their image needs to be the other way around."
+style="position:absolute;top:50px;left:240px;z-index:1;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 "
 orient="vertical"
 onchange="
@@ -2918,7 +2928,6 @@ function tabactivate( btn )
          }
       }
    }
-   slidervert.style.display='none';sliderhoriz.style.display='none'
    setTimeout(function(){entiredocument.scrollIntoView(true,{behavior: 'smooth'})},10)
 }
 function glonabort( currSrc, elmnt, elname, tagname, arg1, arg2, arg3 ) {
@@ -3312,5 +3321,74 @@ function checkforcache() {
    else {alert('This browser cannot cache');}
 }
     </script> 
+<!--
+
+To implement an SSE client, instantiate the EventSource object and start listening for events. When this code is loaded in the browser, it will open up a TCP connection and send an HTTP request to the server, telling it to push events down the line when it has them. We can even listen for custom events, like dad jokes:
+JavaScript
+
+1
+
+const source = new EventSource(`https://localhost:7080/events`, {
+
+2
+
+   withCredentials: true
+
+3
+
+});
+
+4
+
+5
+
+source.addEventListener("dadJoke", function(event) {
+
+6
+
+   console.log(event.data)
+
+7
+
+});
+
+
+
+
+If the connection drops, EventSource will send an error event and automatically try to reconnect!
+
+The server implementation is also very straightforward. For a server to become an SSE server, it needs to:
+
+    Set the appropriate headers (text/event-stream).
+
+    Keep track of connected clients.
+
+    Maintain a history of messages so clients can catch up on missed messages (optional).
+
+    Send messages in a specific format  —  a block of text terminated by a pair of newlines:
+
+Plain Text
+
+1
+
+id: 150
+
+2
+
+event: dadJoke
+
+3
+
+retry: 10000
+
+4
+
+data: They're making a movie about clocks. It's about time.
+
+
+
+
+
+-->
 </body>
 </html>
