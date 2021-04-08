@@ -120,15 +120,27 @@ for(var i=0;i<objdedicatedjpgviewer.length;i++)
         if(!this.parentElement.data.includes(this.contentDocument.body.innerText.substring(0,this.contentDocument.body.innerText.length-1)))
         {
            this.parentElement.data=this.contentDocument.body.innerText;/*then wait until this.parentElement. is loaded to proceed so as to maximize caching benefit*/
+           if( btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnalljpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)'))
+           {
+              setTimeout(function(){btnalljpgs2.click()},1000)
+           }
         };
         setTimeout(function()
         {
           document.getElementById('filenametool0').src=sourcesdedicatedjpgviewer[0]
         },4500)
-        if( btnmostrecentjpgs2.style.backgroundColor.includes('rgb(255, 255, 255)') && btnalljpgs2.style.backgroundColor.includes('rgb(255, 255, 255)')){btnalljpgs2.click()}
      }
    }
-   else {iframe.onload=function(){if(!this.parentElement.data.includes(this.contentDocument.body.innerText.substring(0,this.contentDocument.body.innerText.length-1))){this.parentElement.data=this.contentDocument.body.innerText;}}}
+   else 
+   {
+        iframe.onload=function()
+        {
+            if(!this.parentElement.data.includes(this.contentDocument.body.innerText.substring(0,this.contentDocument.body.innerText.length-1)))
+            {
+               this.parentElement.data=this.contentDocument.body.innerText;
+            }
+        }
+   }
    var attsrc = document.createAttribute('src')
    iframe.setAttributeNode(attsrc);
    var attsty = document.createAttribute('style')
@@ -181,25 +193,25 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 "
 style="position:absolute;top:62px;height:225px;left:17px;z-index:-1;display:none" orient="vertical">
   <button id="btndivmain" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
-onclick="tabactivate(this);btnsliders.style.display='inline';">
+onclick="tabactivate(this);btnsliders.style.display='inline';btnlistlength.style.display='inline';">
 Main</button>
   <button  id="btnwatchfootage" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px" 
-onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
+onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Watch footage</button>
   <button  id="btnsystem_wide" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px" 
-onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
+onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Combined views recordings</button>
   <button  id="btndisablesandlivelinks" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px;" 
-onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
+onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Suspend alerts, Links to live streams</button>
   <button id="btntitlediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px;" 
-onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
+onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Tips</button>
   <button id="btnnotesdiv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
-onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
+onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Help Manual</button>
   <button id="btnfuturediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
-onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
+onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Future</button>
 <button
 id="alertCheck" style="white-space:nowrap;font-size:15px;background:pink;border-radius:1px;border-color:black;border-width:0px;" 
@@ -273,7 +285,11 @@ id="btnaudibleonalert" onclick="previousalert='waiting';if(alertvisualblinker!=n
  <div id="androidconnection" class="androidconnection" style="display:none;border:0px;z-index:-1;position:absolute">
    <object id="alertkeepalive" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object>
 </div>
-<button value="Sizing sliders" style="position:absolute;left:-4px;top:25px;font-size:9px;background-color:#C0C0C0;color:#000;z-index:3" id="btnsliders" onclick="
+<button style="text-indent:-16px;text-align:left;width:100px;white-space:nowrap;font-size:10px;position:absolute;left:0px;top:23px;z-index:3"
+id="btnlistlength"
+onclick="if(show_eventsmainjpgviewer4.style.display=='none'){show_eventsmainjpgviewer3.style.display='inline';show_eventsmainjpgviewer4.style.display='inline'}else{show_eventsmainjpgviewer3.style.display='none';show_eventsmainjpgviewer4.style.display='none'}"
+>List length sliders</button>
+<button value="Sizing sliders" style="text-align:left;text-indent:-13px;white-space:nowrap;font-size:10px;width:80px;position:absolute;left:-4px;top:46px;z-index:3" id="btnsliders" onclick="
 if(snapssliderhoriz.style.display=='none')
 {
 sliderhint.style.display='inline';snapssliderhoriz.style.display='inline';sliderhoriz.style.display='inline';snapsslidervert.style.display='inline';slidervert.style.display='inline';snapsheightslider.style.display='inline';
@@ -282,7 +298,7 @@ else
 {
 snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';sliderhoriz.style.display='none';slidervert.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';
 }">Sizing sliders</button>
-<i id="sliderhint" style="position:absolute;top:23px;left:75px;font-size:11px;display:none;">Hint: Arrow etc. keyboard keys work for<br>slider control once one is clicked on</i>
+<i id="sliderhint" style="position:absolute;top:23px;left:115px;font-size:10px;display:none;">Hint: Arrow etc. keyboard keys work for<br>slider control once one is clicked on</i>
 </div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
 <b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
 <table style="border:3px solid black"><tr><td>
@@ -820,7 +836,7 @@ btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btn
 <div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:0;top:6px"
 notes="this is the snaps middle viewer">
 <div style="position:relative;top:0px;" notes="This level in the page is where Android Firefox starts breaking down">
-<i style="font-size:11px">Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i>
+<i style="font-size:11px;position:relative;top:-10px;left:170px">Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i>
 <button id="btnreclaim2" style="background-color:#fff;position:absolute;top:10px;left:340px;z-index:1;display:none" onmousedown="
 this.style.display='none'
 animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
@@ -850,8 +866,8 @@ onmousedown="
 <!-- Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=
 <input type="button" value="Most recent alert event" onclick="this.value=previousalert">
 <br> -->
-<input type="range" id="show_eventsmainjpgviewer3" name="show_eventsmainjpgviewer3" min="-53" max="-1" value="-53" step="1" list="tickmarks" class="vertical-slider"
-style="position:absolute;top:20px;left:216px;z-index:5;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+<input type="range" id="show_eventsmainjpgviewer3" name="show_eventsmainjpgviewer3" min="-53" max="-1" value="-1" step="1" list="tickmarks" class="vertical-slider"
+style="position:absolute;top:20px;left:216px;z-index:5;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;display:none;
 "
 orient="vertical"
 onchange="
@@ -930,7 +946,7 @@ this.oldvalue=this.value
 "  
 name="show_eventsmainjpgviewer4" class="slidersNeedingDelayedDisplay"
 min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;top:9px;left:370px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+style="position:absolute;top:9px;left:370px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;display:none
 " 
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
@@ -947,7 +963,6 @@ oninput="
    document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.height=parseInt(parseInt(0-parseInt(this.value)))+'px'
 " 
 style="position:absolute;top:42px;height:225px;left:430px;z-index:3;display:none;" orient="vertical">
-
 <i style="position:absolute;width:600px;left:450px;top:20px;font-size:13px" width="600px"><ul><br>A sub-range can be made <b>at the <u>bottom</u> of the listed snapshots</b> by putting the <b>right</b> slider 
 button <b>below the left one</b>, as follows:
 <br><br>
@@ -967,12 +982,12 @@ tabs underneath to limit the list size to have a better likelihood of your desir
 Testing has not been extensive enough to prove conclusive reliability when the file name list is scrolled, though you might discover anyway that it actually does work fine even when scrolled.
 </li>
 </ul></i>
-<input type="range" min="-582" max="-28" step="10" list="tickmarks" value="-582" id="snapsheightslider"
+<input type="range" min="-582" max="12" step="10" list="tickmarks" value="-582" id="snapsheightslider"
 oninput="
 snapsdirectory.height=(0-this.value)+'px'
 divsnapstabsrow.style.top=((0-this.value)-565)+'px'
 " 
-style="position:absolute;top:43px;height:565px;left:3px;z-index:3;display:none" orient="vertical">
+style="position:absolute;top:0px;height:608px;left:3px;z-index:3;display:none" orient="vertical">
 <object id="snapsdirectory" type="text/html"
 data=""
 onclick="this.data=this.data"
