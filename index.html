@@ -182,40 +182,40 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
    dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiwidth)+35)+'px':dedicatedjpgviewersiwidth
 }
 " 
-style="position:absolute;top:43px;width:370px;left:70px;display:none;">
+style="position:absolute;top:63px;width:370px;left:70px;display:none;">
 <input type="range" min="-2800" max="-50" step="1" list="tickmarks" value="-258" id="slidervert"
 oninput="
 var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
 var dedicatedjpgviewersiheight
 for(var i=0;i<dedicatedjpgviewers.length;i++)
 {
-   dedicatedjpgviewersiheight=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(0-parseInt(this.value))-43):(parseInt(0-parseInt(this.value))))+'px'
+   dedicatedjpgviewersiheight=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(0-parseInt(this.value))-63):(parseInt(0-parseInt(this.value))))+'px'
    if(dedicatedjpgviewers[i].id.endsWith('r0')){dedicatedjpgviewers[i].height=dedicatedjpgviewersiheight}
-   dedicatedjpgviewers[i].offsetParent.style.height=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiheight)+parseInt(47))+'px':dedicatedjpgviewersiheight
+   dedicatedjpgviewers[i].offsetParent.style.height=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiheight)+parseInt(67))+'px':dedicatedjpgviewersiheight
    dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].id.endsWith('r0')?dedicatedjpgviewers[i].nextElementSibling.style.top:(dedicatedjpgviewersiheight.substring(0,dedicatedjpgviewersiheight.length-2)-22)+'px')
 }
 "
 style="position:absolute;top:70px;height:225px;left:17px;z-index:-1;display:none" orient="vertical">
   <button id="btndivmain" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
-onclick="tabactivate(this);btnsliders.style.display='inline';btnlistlength.style.display='inline';">
+onclick="tabactivate(this);btnsizes.style.display='inline';btnsliders.style.display='inline';btnlistlength.style.display='inline';">
 Main</button>
   <button  id="btnwatchfootage" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px" 
-onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
+onclick="tabactivate(this);btnsizes.style.display='none';slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Watch footage</button>
   <button  id="btnsystem_wide" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px" 
-onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
+onclick="tabactivate(this);btnsizes.style.display='none';slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Combined views recordings</button>
   <button  id="btndisablesandlivelinks" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px;" 
-onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
+onclick="tabactivate(this);btnsizes.style.display='none';slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Suspend alerts, Links to live streams</button>
   <button id="btntitlediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px;" 
-onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
+onclick="tabactivate(this);btnsizes.style.display='none';slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Tips</button>
   <button id="btnnotesdiv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
-onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
+onclick="tabactivate(this);btnsizes.style.display='none';slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Help Manual</button>
   <button id="btnfuturediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
-onclick="tabactivate(this);slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
+onclick="tabactivate(this);btnsizes.style.display='none';slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Future</button>
 <button
 id="alertCheck" style="white-space:nowrap;font-size:15px;background:pink;border-radius:1px;border-color:black;border-width:0px;" 
@@ -306,8 +306,17 @@ btnsizes.style.display='inline';snapsslidervert.style.display='none';snapsslider
 <button style="position:absolute;top:50px;left:90px;height:22px"
 id="btnsizes"
 onclick="
-alert(((window.outerWidth-18)/6)-8)
-" notes="the 6 is dedicatedjpgviewer1-5.offsetParent.style.width">Give sizes</button>
+var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
+var dedicatedjpgviewersiwidth=(((window.outerWidth-18)/(dedicatedjpgviewers.length/parseInt(this.attributes['row'].value)))-8)+'px'
+for(var i=0;i<dedicatedjpgviewers.length;i++)
+{
+   dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewersiwidth
+   if(dedicatedjpgviewers[i].id.endsWith('r0')){dedicatedjpgviewers[i].width=(parseInt(dedicatedjpgviewersiwidth)-parseInt(35))+'px'}
+}
+if(parseInt(this.attributes['row'].value)<Math.floor(dedicatedjpgviewers.length/2)){var rowvalue=parseInt(this.attributes['row'].value)+1;this.attributes['row'].value=rowvalue;this.innerText='Arrange to '+rowvalue+' rows'}
+else if(parseInt(this.attributes['row'].value)==Math.floor(dedicatedjpgviewers.length/2)){this.attributes['row'].value=dedicatedjpgviewers.length;this.innerText='Arrange to '+dedicatedjpgviewers.length+' rows'}
+else {this.attributes['row'].value=1;this.innerText='Arrange to 1 row'}
+" row=1>Arrange to 1 row</button>
 </div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
 <b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
 <table style="border:3px solid black"><tr><td>
@@ -761,7 +770,7 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 </div>
 Adhere to this technique of removing whitespace between inline elements in this container:
 --><div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;z-index:3;"><!--
---><object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:39px;left:30px;" value="Alt jpg viewer" width="395px" height="219px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function()
+--><object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:59px;left:30px;" value="Alt jpg viewer" width="395px" height="199px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function()
 {
    filenametool1.src=sourcesdedicatedjpgviewer[1];if(filenametool0.contentDocument.body.innerText.includes(filenametool1.src.substr(filenametool1.src.indexOf('camera_')+24,7)))
    {
