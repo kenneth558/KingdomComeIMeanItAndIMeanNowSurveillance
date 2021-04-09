@@ -124,7 +124,7 @@ function exit_gracefully() {
 trap "{ exit_gracefully; }" EXIT SIGINT SIGHUP SIGQUIT SIGTERM 
 
   ### CHANGE THIS IF YOU WOULD LIKE TO LISTEN ON A DIFFERENT PORT 
-declare -i LISTEN_PORT=8080  
+declare -i LISTEN_PORT=1958  
 
  ## If you are on AIX, IRIX, Solaris, or a hardened system redirecting 
  ## to /dev/random will probably break, you can change it to /dev/null.  
@@ -359,6 +359,14 @@ function serve_file() {
     *\.*)
       CONTENT_TYPE=$(file -b --mime-type "${file}")
       ;;
+#    *\.server side event & send HTTP/2)
+#      CONTENT_TYPE="text/event-stream"
+#      CONTENT_TYPE+="\nCache-Control: no-cache"
+#Output the data to send (Always start with "data: ")
+#      ;;
+#    *\.*)
+#      CONTENT_TYPE=$(file -b --mime-type "${file}")
+#      ;;
   esac
 # CONTENT_TYPE=video/mp4
 #echo "Serving file ${file}" >> /var/log/bashttpd.log
@@ -1304,7 +1312,7 @@ function start_media_daemon() {
 } 
 
 function main() { 
-LINKPRE="$(ip -o address|grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:8080"
+LINKPRE="$(ip -o address|grep 'eno1    inet '|cut -c 17-35|cut -d/ -f1)\:${LISTEN_PORT}"
  local recv="" 
  # line variable is used in serve_dir_with_tree() so it is global.
  line="" 
