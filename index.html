@@ -174,24 +174,28 @@ document.links[19].href='http://' + window.location.hostname + ':15080';//set fo
 /*FUTURE: determine which element[s] are in rendered area and apply to those only.  The following always manipulates the main tab dedicated view elements*/
 oninput="
 var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
+var dedicatedjpgviewersiwidth
 for(var i=0;i<dedicatedjpgviewers.length;i++)
 {
-   dedicatedjpgviewers[i].width=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(this.value)-35):parseInt(this.value))+'px'
-   dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewers[i].width)+35)+'px':dedicatedjpgviewers[i].width
+   dedicatedjpgviewersiwidth=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(this.value)-35):parseInt(this.value))+'px'
+   if(dedicatedjpgviewers[i].id.endsWith('r0')){dedicatedjpgviewers[i].width=dedicatedjpgviewersiwidth}
+   dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiwidth)+35)+'px':dedicatedjpgviewersiwidth
 }
 " 
 style="position:absolute;top:43px;width:370px;left:70px;display:none;">
 <input type="range" min="-2800" max="-50" step="1" list="tickmarks" value="-258" id="slidervert"
 oninput="
 var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
+var dedicatedjpgviewersiheight
 for(var i=0;i<dedicatedjpgviewers.length;i++)
 {
-   dedicatedjpgviewers[i].height=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(0-parseInt(this.value))-45):(parseInt(0-parseInt(this.value))))+'px'
-   dedicatedjpgviewers[i].offsetParent.style.height=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewers[i].height)+parseInt(45))+'px':dedicatedjpgviewers[i].height
-   dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].id.endsWith('r0')?dedicatedjpgviewers[i].nextElementSibling.style.top:(dedicatedjpgviewers[i].height.substring(0,dedicatedjpgviewers[i].height.length-2)-22)+'px')
+   dedicatedjpgviewersiheight=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(0-parseInt(this.value))-43):(parseInt(0-parseInt(this.value))))+'px'
+   if(dedicatedjpgviewers[i].id.endsWith('r0')){dedicatedjpgviewers[i].height=dedicatedjpgviewersiheight}
+   dedicatedjpgviewers[i].offsetParent.style.height=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiheight)+parseInt(45))+'px':dedicatedjpgviewersiheight
+   dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].id.endsWith('r0')?dedicatedjpgviewers[i].nextElementSibling.style.top:(dedicatedjpgviewersiheight.substring(0,dedicatedjpgviewersiheight.length-2)-22)+'px')
 }
 "
-style="position:absolute;top:62px;height:225px;left:17px;z-index:-1;display:none" orient="vertical">
+style="position:absolute;top:70px;height:225px;left:17px;z-index:-1;display:none" orient="vertical">
   <button id="btndivmain" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
 onclick="tabactivate(this);btnsliders.style.display='inline';btnlistlength.style.display='inline';">
 Main</button>
@@ -289,16 +293,21 @@ id="btnaudibleonalert" onclick="previousalert='waiting';if(alertvisualblinker!=n
 id="btnlistlength"
 onclick="if(show_eventsmainjpgviewer4.style.display=='none'){show_eventsmainjpgviewer3.style.display='inline';show_eventsmainjpgviewer4.style.display='inline'}else{show_eventsmainjpgviewer3.style.display='none';show_eventsmainjpgviewer4.style.display='none'}"
 >List length sliders</button>
-<button value="Sizing sliders" style="text-align:left;text-indent:-13px;white-space:nowrap;font-size:10px;width:80px;position:absolute;left:-4px;top:46px;z-index:3" id="btnsliders" onclick="
+<button value="Sizing sliders" style="text-align:left;text-indent:-13px;white-space:nowrap;font-size:10px;width:80px;position:absolute;left:-4px;top:50px;z-index:3" id="btnsliders" onclick="
 if(snapssliderhoriz.style.display=='none')
 {
-sliderhint.style.display='inline';snapssliderhoriz.style.display='inline';sliderhoriz.style.display='inline';snapsslidervert.style.display='inline';slidervert.style.display='inline';snapsheightslider.style.display='inline';
+btnsizes.style.display='none';sliderhint.style.display='inline';snapssliderhoriz.style.display='inline';sliderhoriz.style.display='inline';snapsslidervert.style.display='inline';slidervert.style.display='inline';snapsheightslider.style.display='inline';
 }
 else
 {
-snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';sliderhoriz.style.display='none';slidervert.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';
+btnsizes.style.display='inline';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';sliderhoriz.style.display='none';slidervert.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';
 }">Sizing sliders</button>
 <i id="sliderhint" style="position:absolute;top:23px;left:115px;font-size:10px;display:none;">Hint: Arrow etc. keyboard keys work for<br>slider control once one is clicked on</i>
+<button style="position:absolute;top:50px;left:90px;height:22px"
+id="btnsizes"
+onclick="
+alert(((window.outerWidth-18)/6)-8)
+" notes="the 6 is dedicatedjpgviewer1-5.offsetParent.style.width">Give sizes</button>
 </div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
 <b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
 <table style="border:3px solid black"><tr><td>
@@ -709,8 +718,7 @@ Script on server: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nb
 </tr>
 </table>
 </div>
-<div id="divmain" class="divmain" class="tablinks" style="position:relative;top:0px">
-<!--
+<div id="divmain" class="divmain" class="tablinks" style="position:relative;top:0px"><!--
 <div style="position:relative;top:0px;height:0px;">
 <button value="Squares" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btndimensions5" 
 onclick="
@@ -751,9 +759,9 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 </div><div style="position:relative;top:50px;height:0px">
 <button value="jpg<->mp4" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btnjpgormp41" onclick="">jpg<->mp4</button>
 </div>
--->
-<div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;z-index:3">
-<object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:35px;left:30px" value="Alt jpg viewer" width="395px" height="219px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function()
+Adhere to this technique of removing whitespace between inline elements in this container:
+--><div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;z-index:3;"><!--
+--><object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:39px;left:30px;" value="Alt jpg viewer" width="395px" height="219px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="setTimeout(function()
 {
    filenametool1.src=sourcesdedicatedjpgviewer[1];if(filenametool0.contentDocument.body.innerText.includes(filenametool1.src.substr(filenametool1.src.indexOf('camera_')+24,7)))
    {
@@ -796,44 +804,44 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
       filenametool5.parentElement.parentElement.style.border='4px solid transparent';
    }
 },80);
-"></object>
-<input disabled size="0" style="position:relative;top:0px;opacity:0;z-index:2" value=""></div>
-<div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btndockjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"
+"></object><!--
+--><input disabled size="0" style="position:relative;top:0px;opacity:0;z-index:2" value=""></div><!--
+--><div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btndockjpgs2.onmousedown()" style="border:0px;position:absolute;object-fit: fill;" id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btndockjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
 ){btndockjpgs2.click()}
-"></object>
-<input disabled id="camapp_lr1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div>
-<div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btneastjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"
+"></object><!--
+--><input disabled id="camapp_lr1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
+--><div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btneastjpgs2.onmousedown()" style="border:0px;position:absolute;object-fit: fill;" id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btneastjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
 ){btneastjpgs2.click()}
-"></object>
-<input disabled id="camapp_ur1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div>
-<div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btnseastjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer3" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"
+"></object><!--
+--><input disabled id="camapp_ur1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
+--><div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btnseastjpgs2.onmousedown()" style="border:0px;position:absolute;object-fit: fill;" id="dedicatedjpgviewer3" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnseastjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
 ){btnseastjpgs2.click()}
-"></object>
-<input disabled id="camapp_ll1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div>
-<div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btnofficejpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer4" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"
+"></object><!--
+--><input disabled id="camapp_ll1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
+--><div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btnofficejpgs2.onmousedown()" style="border:0px;position:absolute;object-fit: fill;" id="dedicatedjpgviewer4" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnofficejpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
 ){btnofficejpgs2.click()}
-"></object>
-<input disabled id="camapp_ul1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div>
-<div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btnnorthjpgs2.onmousedown()" style="border:0px;position:absolute;" id="dedicatedjpgviewer5" type="text/html" value="Alt jpg viewer" width="430px" height="262px" data="" class="dedicatedjpgviewer"
+"></object><!--
+--><input disabled id="camapp_ul1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
+--><div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btnnorthjpgs2.onmousedown()" style="border:0px;position:absolute;object-fit: fill;" id="dedicatedjpgviewer5" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnnorthjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
 ){btnnorthjpgs2.click()}
-"></object>
-<input disabled id="camapp_lst1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div>
-<div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:0;top:6px"
+"></object><!--
+--><input disabled id="camapp_lst1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
+--><div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:0;top:6px"
 notes="this is the snaps middle viewer">
 <div style="position:relative;top:0px;" notes="This level in the page is where Android Firefox starts breaking down">
 <i style="font-size:11px;position:relative;top:-10px;left:170px">Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i>
@@ -2549,7 +2557,7 @@ function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
    var firstmatch=animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
    if(firstmatch==null)
    {
-      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" height=\''+parseInt(alertsdirectory.offsetHeight)+'px\' width=\''+mainjpgviewer0.width+'\' style=\'position:absolute;top:15px;z-index:1;object-fit: fill;\' />';
+      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" style=\"height:100%;width:100%;position:absolute;top:15px;z-index:1;object-fit: fill;\" />';
       animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'})
    }
    else
@@ -2603,7 +2611,7 @@ function animatealertsdirectorytomainjpgviewer2(rowindex,table_el,jpgname)
    var firstmatch=document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
    if(firstmatch==null)
    {
-      document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" style=\'position:absolute;top:15px;height:100%;width:100%;z-index:2;object-fit: fill;\' />';
+      document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" style=\"position:absolute;top:15px;height:100%;width:100%;z-index:2;object-fit: fill;\" />';
       document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer2.style.display='none'})
    }
    else
