@@ -191,7 +191,7 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 {
    dedicatedjpgviewersiheight=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(0-parseInt(this.value))-43):(parseInt(0-parseInt(this.value))))+'px'
    if(dedicatedjpgviewers[i].id.endsWith('r0')){dedicatedjpgviewers[i].height=dedicatedjpgviewersiheight}
-   dedicatedjpgviewers[i].offsetParent.style.height=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiheight)+parseInt(45))+'px':dedicatedjpgviewersiheight
+   dedicatedjpgviewers[i].offsetParent.style.height=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiheight)+parseInt(47))+'px':dedicatedjpgviewersiheight
    dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].id.endsWith('r0')?dedicatedjpgviewers[i].nextElementSibling.style.top:(dedicatedjpgviewersiheight.substring(0,dedicatedjpgviewersiheight.length-2)-22)+'px')
 }
 "
