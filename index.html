@@ -827,41 +827,41 @@ Adhere to this technique of removing whitespace between inline elements in this 
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btndockjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
-){btndockjpgs2.click()}
+){btndockjpgs2.onmousedown()}
 "></object><!--
 --><input disabled id="camapp_lr1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
 --><div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btneastjpgs2.onmousedown()" style="border:0px;position:absolute;object-fit: fill;" id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btneastjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
-){btneastjpgs2.click()}
+){btneastjpgs2.onmousedown()}
 "></object><!--
 --><input disabled id="camapp_ur1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
 --><div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btnseastjpgs2.onmousedown()" style="border:0px;position:absolute;object-fit: fill;" id="dedicatedjpgviewer3" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnseastjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
-){btnseastjpgs2.click()}
+){btnseastjpgs2.onmousedown()}
 "></object><!--
 --><input disabled id="camapp_ll1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
 --><div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btnofficejpgs2.onmousedown()" style="border:0px;position:absolute;object-fit: fill;" id="dedicatedjpgviewer4" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnofficejpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
-){btnofficejpgs2.click()}
+){btnofficejpgs2.onmousedown()}
 "></object><!--
 --><input disabled id="camapp_ul1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
 --><div style="display: inline-block;border:4px solid transparent;width:430px;height:262px;position:relative;top:0px;"><object onclick="btnnorthjpgs2.onmousedown()" style="border:0px;position:absolute;object-fit: fill;" id="dedicatedjpgviewer5" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnnorthjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
-){btnnorthjpgs2.click()}
+){btnnorthjpgs2.onmousedown()}
 "></object><!--
 --><input disabled id="camapp_lst1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
 --><div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:0;top:6px"
-notes="this is the snaps middle viewer">
-<div style="position:relative;top:0px;" notes="This level in the page is where Android Firefox starts breaking down">
-<i style="position:relative;top:-10px;left:170px" class="makefontsmallerforandroid">Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i>
+notes="this is the snaps middle viewer"><!--
+--><div style="position:relative;top:0px;"><!--
+--><i style="position:relative;top:-10px;left:70px" class="makefontsmallerforandroid">Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i>
 <button id="btnreclaim2" style="background-color:#fff;position:absolute;top:10px;left:340px;z-index:1;display:none" onmousedown="
 this.style.display='none'
 animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
@@ -918,11 +918,14 @@ else if(snapsdirectory.data.includes(alertsdirectorysources[6].substring(7,(snap
 {btnnorthjpgs2.onmousedown()}
 ">
 <input type="range" id="show_eventsmainjpgviewer4" notes="11px per line, 25 lines in mode0=275"
-oninput="
+oninput="/*alert('successful line 921')*/
 this.value=(snapsdirectory.contentDocument!='undefined' && snapsdirectory.contentDocument!=null && snapsdirectory.contentDocument.body.children[0] !='undefined' && snapsdirectory.contentDocument.body.children[0] != null && snapsdirectory.contentDocument.body.children[0].rows!='undefined' && snapsdirectory.contentDocument.body.children[0].rows!=null && snapsdirectory.contentDocument.body.children[0].rows.length!='undefined' && snapsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-snapsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
 if(this.value<1)
 {/*alert(parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.0089)*/
-   animatordivalertsdirectorytomainjpgviewer2.style.display=''
+   if(getElementById('animatordivalertsdirectorytomainjpgviewer2'))
+   {
+      getElementById('animatordivalertsdirectorytomainjpgviewer2').style.display=''
+   }
    btnreclaim2.style.display='none'
    var rowselected=Math.round(snapsdirectory.contentDocument.body.children[0].rows.length*(snapsdirectory.contentDocument.body.scrollTop/((parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.99957)))-this.value)
    if((parseInt(this.oldvalue)!=null) &&
@@ -930,7 +933,6 @@ if(this.value<1)
       (parseInt(this.oldvalue)-1==show_eventsmainjpgviewer3.value) &&
       (this.value-1>show_eventsmainjpgviewer3.value))
    {this.value=this.oldvalue
-/*      alert(show_eventsmainjpgviewer3.value+', '+this.value);*/
    }
    else if(rowselected<snapsdirectory.contentDocument.body.children[0].rows.length)
    {
@@ -1014,9 +1016,8 @@ style="position:absolute;top:0px;height:608px;left:3px;z-index:3;display:none" o
 <object id="snapsdirectory" type="text/html"
 data=""
 onclick="this.data=this.data"
-onload="
+onload="if(show_eventsmainjpgviewer4.value=='1'){show_eventsmainjpgviewer4.value='0'}
      setTimeout(function(){
-       show_eventsmainjpgviewer4.value='0'
        show_eventsmainjpgviewer4.value=(snapsdirectory.contentDocument!='undefined' && snapsdirectory.contentDocument!=null && snapsdirectory.contentDocument.body.children[0] !='undefined' && snapsdirectory.contentDocument.body.children[0] != null && snapsdirectory.contentDocument.body.children[0].rows!='undefined' && snapsdirectory.contentDocument.body.children[0].rows!=null && snapsdirectory.contentDocument.body.children[0].rows.length!='undefined' && snapsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-snapsdirectory.contentDocument.body.children[0].rows.length,show_eventsmainjpgviewer4.value):1;
        if(show_eventsmainjpgviewer4.value<1){
    /*alert(parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.0089)*/
@@ -1034,6 +1035,7 @@ onload="
           else{
              show_eventsmainjpgviewer4.value=(parseInt(show_eventsmainjpgviewer4.value)-(snapsdirectory.contentDocument.body.children[0].rows.length-1-rowselected))
           }
+          show_eventsmainjpgviewer4.oninput()
         }
         else{
            if(animatordivalertsdirectorytomainjpgviewer2!='undefined' && animatordivalertsdirectorytomainjpgviewer2 != null)
@@ -1147,7 +1149,7 @@ onmousedown="
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
    btnnorthjpgs2.style.background='rgb(215,215,245)';
-   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
+   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900);
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
 ">S-East</button>
@@ -1297,7 +1299,7 @@ onload="if (!alertCheck.innerText.endsWith(' OFF'))
         }
      }
      setTimeout(function(){
-       show_eventsmainjpgviewer2.value='0'
+       if(show_eventsmainjpgviewer2.value=='1'){show_eventsmainjpgviewer2.value='0'}
        show_eventsmainjpgviewer2.value=(alertsdirectory.contentDocument!='undefined' && alertsdirectory.contentDocument!=null && alertsdirectory.contentDocument.body.children[0] !='undefined' && alertsdirectory.contentDocument.body.children[0] != null && alertsdirectory.contentDocument.body.children[0].rows!='undefined' && alertsdirectory.contentDocument.body.children[0].rows!=null && alertsdirectory.contentDocument.body.children[0].rows.length!='undefined' && alertsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-alertsdirectory.contentDocument.body.children[0].rows.length,show_eventsmainjpgviewer2.value):1;
        if(show_eventsmainjpgviewer2.value<1){
    /*alert(parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.0089)*/
@@ -1316,6 +1318,7 @@ onload="if (!alertCheck.innerText.endsWith(' OFF'))
           else{
              show_eventsmainjpgviewer2.value=(parseInt(show_eventsmainjpgviewer2.value)-(alertsdirectory.contentDocument.body.children[0].rows.length-1-rowselected))
           }
+          show_eventsmainjpgviewer2.oninput()
         }
         else{
            animatordivalertsdirectorytomainjpgviewer0.style.display='none';
