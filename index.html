@@ -115,6 +115,7 @@ if(isAndroid)
       makefontsmallerforandroids[i].style.fontSize='4px'
    }
 }
+if(isPalemoon){btnlistlength.style.textIndent='-2px';btnsliders.style.textIndent='0px';}
 document.title='Surveillance Recordings - blacklist risk if traveling';
 entiredocument.style='pointer-events:auto;'
 var objdedicatedjpgviewer = document.getElementsByClassName('dedicatedjpgviewer');
@@ -297,11 +298,12 @@ id="btnaudibleonalert" onclick="previousalert='waiting';if(alertvisualblinker!=n
  <div id="androidconnection" class="androidconnection" style="display:none;border:0px;z-index:-1;position:absolute">
    <object id="alertkeepalive" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object>
 </div>
-<button style="text-indent:-10px;text-align:left;width:100px;white-space:nowrap;font-size:10px;position:absolute;left:5px;top:23px;z-index:3"
+<button style="text-indent:-15px;text-align:left;width:100px;white-space:nowrap;font-size:10px;position:absolute;left:5px;top:23px;z-index:3"
 id="btnlistlength"
 onclick="if(show_eventsmainjpgviewer4.style.display=='none'){show_eventsmainjpgviewer3.style.display='inline';show_eventsmainjpgviewer4.style.display='inline'}else{show_eventsmainjpgviewer3.style.display='none';show_eventsmainjpgviewer4.style.display='none'}"
 >List length sliders</button>
-<button value="Sizing sliders" style="text-align:left;text-indent:-9px;white-space:nowrap;font-size:10px;width:80px;position:absolute;left:5px;top:50px;z-index:3" id="btnsliders" onclick="
+<button value="Sizing sliders" style="text-align:left;text-indent:-14px;white-space:nowrap;font-size:10px;width:80px;position:absolute;left:5px;top:50px;z-index:3" 
+id="btnsliders" onclick="
 if(snapssliderhoriz.style.display=='none')
 {
 btnsizes.style.display='none';sliderhint.style.display='inline';snapssliderhoriz.style.display='inline';sliderhoriz.style.display='inline';snapsslidervert.style.display='inline';slidervert.style.display='inline';snapsheightslider.style.display='inline';
@@ -2737,22 +2739,24 @@ var isIE;
 var isEdge;
 var isChrome;
 var isBlink;
+var isPalemoon=false;
 var isAndroid=/(android)/i.test(navigator.userAgent);
 function tellBrowser(){
 /* Opera 8.0+*/
-var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 /* Firefox 1.0+*/
-var isFirefox = typeof InstallTrigger !== 'undefined';
+isFirefox = typeof InstallTrigger !== 'undefined';
+isPalemoon=navigator.userAgent.includes('PaleMoon');if(isFirefox && isPalemoon){isFirefox=false}
 /* Safari 3.0+ "[object HTMLElementConstructor]" */
-var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
 /* Internet Explorer 6-11*/
-var isIE = /*@cc_on!@*/false || !!document.documentMode;
+isIE = /*@cc_on!@*/false || !!document.documentMode;
 /* Edge 20+*/
-var isEdge = !isIE && !!window.StyleMedia;
+isEdge = !isIE && !!window.StyleMedia;
 /* Chrome 1 - 71*/
-var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
 /* Blink engine detection*/
-var isBlink = (isChrome || isOpera) && !!window.CSS;
+isBlink = (isChrome || isOpera) && !!window.CSS;
 }
 var x = document.getElementsByClassName("announcement");
 for (var i = 0; i < x.length; i++) {
