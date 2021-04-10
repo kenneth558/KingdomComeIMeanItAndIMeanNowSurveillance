@@ -107,6 +107,14 @@ for(var i=0;i<delayedDisplayElements.length;i++)
 setTimeout(function(){sysjpgmp4_motion.data='/camera_snapshots/camera_*/*jpg /var/www/camera_streams/camera_*/*mp4?-MOTION?aliased'},1000)
 setTimeout(function(){sysmp4mostrecent.data='/var/www/camera_streams/*/*mp4?mostrecent10'},1000)
 setTimeout(function(){alertrelated.click()},100)
+if(isAndroid)
+{
+   var makefontsmallerforandroids=document.getElementsByClassName('makefontsmallerforandroid')
+   for(var i=0;i<makefontsmallerforandroids.length;i++)
+   {
+      makefontsmallerforandroids[i].style.fontSize='4px'
+   }
+}
 document.title='Surveillance Recordings - blacklist risk if traveling';
 entiredocument.style='pointer-events:auto;'
 var objdedicatedjpgviewer = document.getElementsByClassName('dedicatedjpgviewer');
@@ -853,7 +861,7 @@ btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btn
 --><div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:0;top:6px"
 notes="this is the snaps middle viewer">
 <div style="position:relative;top:0px;" notes="This level in the page is where Android Firefox starts breaking down">
-<i style="font-size:11px;position:relative;top:-10px;left:170px">Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i>
+<i style="position:relative;top:-10px;left:170px" class="makefontsmallerforandroid">Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i>
 <button id="btnreclaim2" style="background-color:#fff;position:absolute;top:10px;left:340px;z-index:1;display:none" onmousedown="
 this.style.display='none'
 animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
@@ -878,7 +886,7 @@ onmousedown="
        show_eventsmainjpgviewer3.onchange()
     }
    }
-">Stay current on this view</button>
+">Stay current on this view</button>Future ->
 <table width="1px" height="582px" cellspacing="0" style="border-collapse:collapse;position:relative;top:0px" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholder2" width="1px" height="100%" valign="top">
 <!-- Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=
 <input type="button" value="Most recent alert event" onclick="this.value=previousalert">
@@ -980,25 +988,23 @@ oninput="
    document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.height=parseInt(parseInt(0-parseInt(this.value)))+'px'
 " 
 style="position:absolute;top:42px;height:225px;left:430px;z-index:3;display:none;" orient="vertical">
-<i style="position:absolute;width:600px;left:450px;top:20px;font-size:13px" width="600px"><ul><br>A sub-range can be made <b>at the <u>bottom</u> of the listed snapshots</b> by putting the <b>right</b> slider 
-button <b>below the left one</b>, as follows:
-<br><br>
-<li>
-While a list of file names is being displayed (which results in these instructions getting covered by a snapshot unless you <u>raise the right slider button</u> fully to see them again), put both the slider buttons at the low 
+<i style="text-indent:0px;position:absolute;width:600px;left:450px;top:20px;" width="600px" class="makefontsmallerforandroid">A sub-range can be made <b>at the <u>bottom</u> of the listed snapshots</b> by putting the <b>right</b> 'list length' slider 
+button <b>below the left one</b>, as follows:</i>
+<i style="text-indent:-12px;position:absolute;width:600px;left:450px;top:60px;" width="600px" class="makefontsmallerforandroid">
+While a list of file names is being displayed (which results in these instructions getting covered by a snapshot unless you <u>raise the right 'list length' slider button</u> fully to see them again), put both the slider buttons at the low 
 boundary of the master range where the low boundary of your sub-range will also be. Again, <b>a sub-range can only be located where you put the <u>bottom</u> of the list.</b> "Click-to" on the right slider button is preferred (but not required) instead of "slide-to" to reduce jpg downloads that aren't really needed - it saves time.
-</li><li>
-<u>Click</u> on the <b>left</b> slider bar where you want the upper boundary; <u>sliding</u> the left slider button upwards (as in 'sliding past' the right one) <b>isn't 
+</i>
+<i style="text-indent:-12px;position:absolute;width:600px;left:450px;top:170px;" width="600px" class="makefontsmallerforandroid"><u>Click</u> on the <b>left</b> slider bar where you want the upper boundary; <u>sliding</u> the left slider button upwards (as in 'sliding past' the right one) <b>isn't 
 allowed</b>
-</li><li>
-Done.  Now you can slide the <b>right</b> slider button up and down between the two boundaries...
-</li><li>
-...slowly if the snapshots are being loaded for the first time.  Once the snapshots do get loaded, the button may be slid reasonably faster.  Reason - while snapshots are being [down]loaded the first time, the "event" of the right slider button hitting the upper limit can be lost in the busy-ness of network communications and then not restrain the button within your sub-range.  Still, sliding too fast in <u>either</u> case case can cause the button to skip past the upper boundary
-</li><li>
-Since this technique is a little complex already without the additional complexity added when the list has to be scrolled, consider using the view-dedication 
+</i>
+<i style="text-indent:-12px;position:absolute;width:600px;left:450px;top:220px;" width="600px" class="makefontsmallerforandroid">Done.  Now you can slide the <b>right</b> slider button up and down between the two boundaries...
+</i>
+<i style="text-indent:-12px;position:absolute;width:600px;left:450px;top:240px;" width="600px" class="makefontsmallerforandroid">...slowly if the snapshots are being loaded for the first time.  Once the snapshots do get loaded, the button may be slid reasonably faster.  Reason - while snapshots are being [down]loaded the first time, the "event" of the right slider button hitting the upper limit can be lost in the busy-ness of network communications and then not restrain the button within your sub-range.  Still, sliding too fast in <u>either</u> case case can cause the button to skip past the upper boundary
+</i>
+<i style="text-indent:0px;position:absolute;width:600px;left:450px;top:350px;" width="600px" class="makefontsmallerforandroid">Since this technique is a little complex already without the additional complexity added when the list has to be scrolled, consider using the view-dedication 
 tabs underneath to limit the list size to have a better likelihood of your desired sub-range showing up in the unscrolled portion of the list of file names. 
 Testing has not been extensive enough to prove conclusive reliability when the file name list is scrolled, though you might discover anyway that it actually does work fine even when scrolled.
-</li>
-</ul></i>
+</i>
 <input type="range" min="-582" max="12" step="10" list="tickmarks" value="-582" id="snapsheightslider"
 oninput="
 snapsdirectory.height=(0-this.value)+'px'
@@ -1053,8 +1059,8 @@ style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px
 </td></tr>
 </table>
 </div>
-<div id="divsnapstabsrow" style="position:relative;top:15px;background:rgba(215,215,245,1);z-index:1">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expect simple motion detects&nbsp;&nbsp;&nbsp;TO GET DELETED without notice -> 
+<div id="divsnapstabsrow" style="position:relative;top:15px;background:rgba(215,215,245,1);z-index:1"><!--
+--><i  class="makefontsmallerforandroid">Expect simple motion detects&nbsp;&nbsp;&nbsp;TO GET DELETED without notice -> </i>
 <button style="position:relative;top:0px;white-space:nowrap;background-color:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
@@ -1355,7 +1361,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[1].substring(7,(alertsdi
 }
 "
 >Alert-related</button>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expect simple motion detects TO BE DELETED without notice ->
+<i  class="makefontsmallerforandroid">Expect simple motion detects TO BE DELETED without notice -></i>
 <button style="position:relative;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
