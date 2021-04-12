@@ -115,7 +115,7 @@ if(isAndroid)
       makefontsmallerforandroids[i].style.fontSize='4px'
    }
 }
-if(isPalemoon){btnlistlength.style.textIndent='-2px';btnsliders.style.textIndent='0px';}
+if(isPalemoon){btnlistlength.style.textIndent='-2px';btnsliders.style.textIndent='0px';slidervert.style.left='4px';btnsizes.style.fontSize='11px';}
 document.title='Surveillance Recordings - blacklist risk if traveling';
 entiredocument.style='pointer-events:auto;'
 var objdedicatedjpgviewer = document.getElementsByClassName('dedicatedjpgviewer');
@@ -229,50 +229,24 @@ onclick="
 if (!this.innerText.endsWith(' OFF'))
 {   if(isAndroid){alertkeepalive.data='';androidconnection.style.display='none';}this.innerText='Alert checking OFF';this.style.background='pink';clearInterval(checkingAlerted);btnaudibleonalert.style.color='#808080'
     previousalert='waiting';if(alertvisualblinker!=null){clearInterval(alertvisualblinker);alertvisualblinker=null}
-         if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
-           alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
-           alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
-         {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
-             {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
-                 {   if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
-                     {
-                         previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
-                     }
-                 }
-             }
-         }
 } 
 else 
 {
     this.innerText='Alert checking ON';alertCheck.style.background='Chartreuse';btnaudibleonalert.style.color='#000';if(isAndroid){alertkeepalive.data='/var/www/html/silence.mp3';androidconnection.style.display='inline'}
     previousalert='waiting';
-        if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
-          alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
-          alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
+
+    if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
+      alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
+      alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
+    {;
+        if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
         {;
-            if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
+            if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined')
             {;
-                if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
-                {;
-                    if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
-                    {;
-                        if(previousalert!='waiting')
-                        {
-                            alertvisualblinker=setInterval(function(){alertCheck.style.background=(alertCheck.style.background.includes('chartreuse'))?'red':'Chartreuse'},300)
-                            if(btnaudibleonalert.innerText=='Alerts now audible')
-                            {
-                               soundalarm(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
-                            };
-                            show_eventsmainjpgviewer2.value=0;show_eventsmainjpgviewer2.oninput()
-                        }
-                        else
-                        {   previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
-                        }
-                    }
-                }
-                else {previousalert='waiting';}
-             }
-         }
+                previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href;
+            }
+        }
+    }
     alertsdirectory.data=alertsdirectory.data
     if(isAndroid || 1 == 1)
     {   alertkeepalive.data='/var/www/html/silence.mp3';
@@ -283,9 +257,7 @@ else
            },4000
         )
     }
-    checkingAlerted=setInterval(function()
-       {alertsdirectory.data=alertsdirectory.data},12500
-    )
+    checkingAlerted=setInterval(function(){alertsdirectory.data=alertsdirectory.data},10500)
 }
 ">Alert checking OFF</button>
 <button value="Alerts now audible" style="white-space:nowrap;width:170px;font-size:13px;background-color:#C0C0C0;color:#808080;position:absolute" 
@@ -309,11 +281,11 @@ else
 btnsizes.style.display='inline';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';sliderhoriz.style.display='none';slidervert.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';
 }">Sizing sliders</button>
 <i id="sliderhint" style="position:absolute;top:23px;left:115px;font-size:10px;display:none;">Hint: Arrow etc. keyboard keys work for<br>slider control once one is clicked on</i>
-<button style="position:absolute;top:50px;left:90px;height:22px"
+<button style="position:absolute;top:50px;left:90px;height:22px;font"
 id="btnsizes"
 onclick="
 var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
-var dedicatedjpgviewersiwidth=(((window.outerWidth-18)/(dedicatedjpgviewers.length/parseInt(this.attributes['row'].value)))-8)+'px'
+var dedicatedjpgviewersiwidth=((window.innerWidth-11-(isPalemoon?3:(isFirefox?0:(isAndroid?290:5))))/(dedicatedjpgviewers.length/parseInt(this.attributes['row'].value)))+'px'
 for(var i=0;i<dedicatedjpgviewers.length;i++)
 {
    dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewersiwidth
@@ -321,8 +293,7 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 }
 if(parseInt(this.attributes['row'].value)<Math.floor(dedicatedjpgviewers.length/2)){var rowvalue=parseInt(this.attributes['row'].value)+1;this.attributes['row'].value=rowvalue;this.innerText='Arrange to '+rowvalue+' rows'}
 else if(parseInt(this.attributes['row'].value)==Math.floor(dedicatedjpgviewers.length/2)){this.attributes['row'].value=dedicatedjpgviewers.length;this.innerText='Arrange to '+dedicatedjpgviewers.length+' rows'}
-else {this.attributes['row'].value=1;this.innerText='Arrange to 1 row'}
-" row=1>Arrange to 1 row</button>
+else {this.attributes['row'].value=1;this.innerText='Arrange to 1 row'}" row=1>Set widths to arrange to 1 row</button>
 </div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
 <b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
 <table style="border:3px solid black"><tr><td>
@@ -777,40 +748,38 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 Adhere to this technique of removing whitespace between inline elements in this container:
 --><div style="border:0px;display: inline-block;width:430px;height:262px;position:relative;top:0px;z-index:3;background-clip: padding-box;-webkit-background-clip: padding-box;"><!--
 --><object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:59px;left:30px;" value="Alt jpg viewer" width="395px" height="199px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="
-alert(filenametool1.parentElement.style.border)
-filenametool1.parentElement.style.border='0px transparent';filenametool1.parentElement.parentElement.style.zIndex=0
-alert(filenametool1.parentElement.style.border)
-filenametool2.parentElement.style.border='0px transparent';filenametool2.parentElement.parentElement.style.zIndex=0
-filenametool3.parentElement.style.border='0px transparent';filenametool3.parentElement.parentElement.style.zIndex=0
-filenametool4.parentElement.style.border='0px transparent';filenametool4.parentElement.parentElement.style.zIndex=0
-filenametool5.parentElement.style.border='0px transparent';filenametool5.parentElement.parentElement.style.zIndex=0
+filenametool1.parentElement.style.borderColor='transparent';filenametool1.parentElement.parentElement.style.zIndex=0
+filenametool2.parentElement.style.borderColor='transparent';filenametool2.parentElement.parentElement.style.zIndex=0
+filenametool3.parentElement.style.borderColor='transparent';filenametool3.parentElement.parentElement.style.zIndex=0
+filenametool4.parentElement.style.borderColor='transparent';filenametool4.parentElement.parentElement.style.zIndex=0
+filenametool5.parentElement.style.borderColor='transparent';filenametool5.parentElement.parentElement.style.zIndex=0
+filenametool1.src=sourcesdedicatedjpgviewer[1];
+filenametool2.src=sourcesdedicatedjpgviewer[2];
+filenametool3.src=sourcesdedicatedjpgviewer[3];
+filenametool4.src=sourcesdedicatedjpgviewer[4];
+filenametool5.src=sourcesdedicatedjpgviewer[5];
 setTimeout(function()
 {
-   filenametool1.src=sourcesdedicatedjpgviewer[1];
-   filenametool2.src=sourcesdedicatedjpgviewer[2];
-   filenametool3.src=sourcesdedicatedjpgviewer[3];
-   filenametool4.src=sourcesdedicatedjpgviewer[4];
-   filenametool5.src=sourcesdedicatedjpgviewer[5];
 /*the following adjustments to borders cause affected element to shift.  how to stop that without making a permanent border??https://stackoverflow.com/questions/14628601/can-i-add-background-color-only-for-padding*/
    if(filenametool0.contentDocument.body.innerText.includes(filenametool1.src.substr(filenametool1.src.indexOf('camera_')+24,7)))
    {
-      filenametool1.parentElement.style.border='4px solid rgb(127, 0, 0)';filenametool1.parentElement.style.border='4px solid rgba(255, 0, 0, .5';filenametool1.parentElement.parentElement.style.zIndex=1
+      filenametool1.parentElement.style.borderColor='rgb(127, 0, 0)';filenametool1.parentElement.style.borderColor='rgba(255, 0, 0, .5';filenametool1.parentElement.parentElement.style.zIndex=1
    }
-   if(filenametool0.contentDocument.body.innerText.includes(filenametool2.src.substr(filenametool2.src.indexOf('camera_')+24,7)))
+   else if(filenametool0.contentDocument.body.innerText.includes(filenametool2.src.substr(filenametool2.src.indexOf('camera_')+24,7)))
    {
-      filenametool2.parentElement.style.border='4px solid rgb(127, 0, 0)';filenametool2.parentElement.style.border='4px solid rgba(255, 0, 0, .5)';filenametool2.parentElement.parentElement.style.zIndex=1
+      filenametool2.parentElement.style.borderColor='rgb(127, 0, 0)';filenametool2.parentElement.style.borderColor='rgba(255, 0, 0, .5)';filenametool2.parentElement.parentElement.style.zIndex=1
    }
-   if(filenametool0.contentDocument.body.innerText.includes(filenametool3.src.substr(filenametool3.src.indexOf('camera_')+24,7)))
+   else if(filenametool0.contentDocument.body.innerText.includes(filenametool3.src.substr(filenametool3.src.indexOf('camera_')+24,7)))
    {
-      filenametool3.parentElement.style.border='4px solid rgb(127, 0, 0)';filenametool3.parentElement.style.border='4px solid rgba(255, 0, 0, .5)';filenametool3.parentElement.parentElement.style.zIndex=1
+      filenametool3.parentElement.style.borderColor='rgb(127, 0, 0)';filenametool3.parentElement.style.borderColor='rgba(255, 0, 0, .5)';filenametool3.parentElement.parentElement.style.zIndex=1
    }
-   if(filenametool0.contentDocument.body.innerText.includes(filenametool4.src.substr(filenametool4.src.indexOf('camera_')+24,7)))
+   else if(filenametool0.contentDocument.body.innerText.includes(filenametool4.src.substr(filenametool4.src.indexOf('camera_')+24,7)))
    {
-      filenametool4.parentElement.style.border='4px solid rgb(127, 0, 0)';filenametool4.parentElement.style.border='4px solid rgba(255, 0, 0, .5)';filenametool4.parentElement.parentElement.style.zIndex=1
+      filenametool4.parentElement.style.borderColor='rgb(127, 0, 0)';filenametool4.parentElement.style.borderColor=' rgba(255, 0, 0, .5)';filenametool4.parentElement.parentElement.style.zIndex=1
    }
-   if(filenametool0.contentDocument.body.innerText.includes(filenametool5.src.substr(filenametool5.src.indexOf('camera_')+24,7)))
+   else if(filenametool0.contentDocument.body.innerText.includes(filenametool5.src.substr(filenametool5.src.indexOf('camera_')+24,7)))
    {
-      filenametool5.parentElement.style.border='4px solid rgb(127, 0, 0)';filenametool5.parentElement.style.border='4px solid rgba(255, 0, 0, .5)';filenametool5.parentElement.parentElement.style.zIndex=1
+      filenametool5.parentElement.style.borderColor='rgb(127, 0, 0)';filenametool5.parentElement.style.borderColor='rgba(255, 0, 0, .5)';filenametool5.parentElement.parentElement.style.zIndex=1
    }
 },80);
    if( btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnalljpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)'))
@@ -819,35 +788,40 @@ setTimeout(function()
    }
 "></object><!--
 --><input disabled size="0" style="position:relative;top:0px;opacity:0;z-index:2" value=""></div><!--
---><div style="border:0px;display: inline-block;width:430px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btndockjpgs2.onmousedown()" style="border:0px solid transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
+--><div style="border:0px;display: inline-block;width:430px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btndockjpgs2.onmousedown()" 
+style="border-width:6px 0px 6px 0px;border-style:solid;border-color:transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btndockjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
 ){btndockjpgs2.onmousedown()}
 "></object><!--
 --><input disabled id="camapp_lr1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
---><div style="border:0px;display: inline-block;width:430px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btneastjpgs2.onmousedown()" style="border:0px solid transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
+--><div style="border:0px;display: inline-block;width:430px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btneastjpgs2.onmousedown()" 
+style="border-width:6px 0px 6px 0px;border-style:solid;border-color:transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btneastjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
 ){btneastjpgs2.onmousedown()}
 "></object><!--
 --><input disabled id="camapp_ur1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
---><div style="border:0px;display: inline-block;width:430px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btnseastjpgs2.onmousedown()" style="border:0px solid transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer3" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
+--><div style="border:0px;display: inline-block;width:430px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btnseastjpgs2.onmousedown()" 
+style="border-width:6px 0px 6px 0px;border-style:solid;border-color:transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer3" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnseastjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
 ){btnseastjpgs2.onmousedown()}
 "></object><!--
 --><input disabled id="camapp_ll1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
---><div style="border:0px;display: inline-block;width:430px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btnofficejpgs2.onmousedown()" style="border:0px solid transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer4" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
+--><div style="border:0px;display: inline-block;width:430px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btnofficejpgs2.onmousedown()" 
+style="border-width:6px 0px 6px 0px;border-style:solid;border-color:transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer4" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnofficejpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
 ){btnofficejpgs2.onmousedown()}
 "></object><!--
 --><input disabled id="camapp_ul1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
---><div style="border:0px;display: inline-block;width:430px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btnnorthjpgs2.onmousedown()" style="border:0px solid transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer5" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
+--><div style="border:0px;display: inline-block;width:430px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btnnorthjpgs2.onmousedown()" 
+style="border-width:6px 0px 6px 0px;border-style:solid;border-color:transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer5" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnnorthjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
@@ -857,7 +831,7 @@ btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btn
 --><div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:0;top:6px"
 notes="this is the snaps middle viewer"><!--
 --><div style="position:relative;top:0px;"><!--
---><i style="position:relative;top:-10px;left:70px" class="makefontsmallerforandroid">Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i>
+--><i style="position:relative;top:0px;left:70px" class="makefontsmallerforandroid">Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i>
 <button id="btnreclaim2" style="background-color:#fff;position:absolute;top:10px;left:340px;z-index:1;display:none" onmousedown="
 this.style.display='none'
 animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
@@ -1276,55 +1250,57 @@ onload="if (!alertCheck.innerText.endsWith(' OFF'))
         {
            if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
            {
-              if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
+              if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined')
               {
-                 if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert){
-                     if(previousalert!='waiting'){
-                        if(btnaudibleonalert.innerText=='Alerts now audible'){soundalarm(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)};show_eventsmainjpgviewer2.value=0;show_eventsmainjpgviewer2.oninput()
-/* obsolete for now                            if(mainjpgviewer0.data!=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
-                             {   mainjpgviewer0.data=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href}*/
+                 if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
+                 {
+                     if(previousalert!='waiting' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
+                     {
+                        if(btnaudibleonalert.innerText=='Alerts now audible')
+                        {
+                           soundalarm(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
+                        }
+                        show_eventsmainjpgviewer2.value=0;
+                        show_eventsmainjpgviewer2.oninput()
                      }
                      else
                      {   previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
                      }
                  }
-                 else {previousalert='waiting';}
               }
            }
-           setTimeout(function(){this.data=this.data;},3000)/*This doesn't seem to do anything.  I'm confused as to why not...*/
         }
      }
-     setTimeout(function(){
-       if(show_eventsmainjpgviewer2.value=='1'){show_eventsmainjpgviewer2.value='0'}
-       show_eventsmainjpgviewer2.value=(alertsdirectory.contentDocument!='undefined' && alertsdirectory.contentDocument!=null && alertsdirectory.contentDocument.body.children[0] !='undefined' && alertsdirectory.contentDocument.body.children[0] != null && alertsdirectory.contentDocument.body.children[0].rows!='undefined' && alertsdirectory.contentDocument.body.children[0].rows!=null && alertsdirectory.contentDocument.body.children[0].rows.length!='undefined' && alertsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-alertsdirectory.contentDocument.body.children[0].rows.length,show_eventsmainjpgviewer2.value):1;
-       if(show_eventsmainjpgviewer2.value<1){
-   /*alert(parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.0089)*/
-
-          var rowselected=Math.round(alertsdirectory.contentDocument.body.children[0].rows.length*(alertsdirectory.contentDocument.body.scrollTop/((parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.9943)))-show_eventsmainjpgviewer2.value)
-          if(rowselected<alertsdirectory.contentDocument.body.children[0].rows.length){
-             if(alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg')){
-                animatealertsdirectorytomainjpgviewer0(rowselected,alertsdirectory.contentDocument.body.children[0]);
-                StartTimeOfInterest=alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[0].outerHTML.substr(18)
-                StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
-                StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
-                StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
-                StartCamOfInterestEl.value=alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].innerText.trim()
-             }
-          }
-          else{
-             show_eventsmainjpgviewer2.value=(parseInt(show_eventsmainjpgviewer2.value)-(alertsdirectory.contentDocument.body.children[0].rows.length-1-rowselected))
-          }
-          show_eventsmainjpgviewer2.oninput()
-        }
-        else{
-           animatordivalertsdirectorytomainjpgviewer0.style.display='none';
-           if(animatordivalertsdirectorytomainjpgviewer0!='undefined' && animatordivalertsdirectorytomainjpgviewer0 != null){
-              if(confirm(animationdivalertsdirectorytomainjpgviewer0.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory')){
-                 animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
-              }
-           }
-        }
-     },100)
+                        setTimeout(function(){
+                          if(show_eventsmainjpgviewer2.value=='1'){show_eventsmainjpgviewer2.value='0'}
+                          show_eventsmainjpgviewer2.value=(alertsdirectory.contentDocument!='undefined' && alertsdirectory.contentDocument!=null && alertsdirectory.contentDocument.body.children[0] !='undefined' && alertsdirectory.contentDocument.body.children[0] != null && alertsdirectory.contentDocument.body.children[0].rows!='undefined' && alertsdirectory.contentDocument.body.children[0].rows!=null && alertsdirectory.contentDocument.body.children[0].rows.length!='undefined' && alertsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-alertsdirectory.contentDocument.body.children[0].rows.length,show_eventsmainjpgviewer2.value):1;
+                          if(show_eventsmainjpgviewer2.value<1){
+                      /*alert(parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.0089)*/
+                             var rowselected=Math.round(alertsdirectory.contentDocument.body.children[0].rows.length*(alertsdirectory.contentDocument.body.scrollTop/((parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.9943)))-show_eventsmainjpgviewer2.value)
+                             if(rowselected<alertsdirectory.contentDocument.body.children[0].rows.length){
+                                if(alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg')){
+                                   animatealertsdirectorytomainjpgviewer0(rowselected,alertsdirectory.contentDocument.body.children[0]);
+                                   StartTimeOfInterest=alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[0].outerHTML.substr(18)
+                                   StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
+                                   StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
+                                   StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
+                                   StartCamOfInterestEl.value=alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].innerText.trim()
+                                }
+                             }
+                             else{
+                                show_eventsmainjpgviewer2.value=(parseInt(show_eventsmainjpgviewer2.value)-(alertsdirectory.contentDocument.body.children[0].rows.length-1-rowselected))
+                             }
+                             show_eventsmainjpgviewer2.oninput()
+                           }
+                           else{
+                              animatordivalertsdirectorytomainjpgviewer0.style.display='none';
+                              if(animatordivalertsdirectorytomainjpgviewer0!='undefined' && animatordivalertsdirectorytomainjpgviewer0 != null){
+                                 if(confirm(animationdivalertsdirectorytomainjpgviewer0.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory')){
+                                    animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
+                                 }
+                              }
+                           }
+                        },100)
      glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '');"
 width="365px" height="582px"
 style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 0px 3px;position:relative;top:30px;
