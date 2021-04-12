@@ -285,14 +285,14 @@ btnsizes.style.display='inline';snapsslidervert.style.display='none';snapsslider
 id="btnsizes"
 onclick="
 var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
-var dedicatedjpgviewersiwidth=((window.innerWidth-12-(isPalemoon?3:(isFirefox?0:(isAndroid?290:5))))/(dedicatedjpgviewers.length/parseInt(this.attributes['row'].value)))+'px'
+var dedicatedjpgviewersiwidth=((window.innerWidth-18-(isPalemoon?3:(isFirefox?0:(isAndroid?290:5))))/(dedicatedjpgviewers.length/parseInt(this.attributes['row'].value)))+'px'
 for(var i=0;i<dedicatedjpgviewers.length;i++)
 {
    dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewersiwidth
    if(dedicatedjpgviewers[i].id.endsWith('r0')){dedicatedjpgviewers[i].width=(parseInt(dedicatedjpgviewersiwidth)-parseInt(35))+'px'}
 }
-if(parseInt(this.attributes['row'].value)<Math.floor(dedicatedjpgviewers.length/2)){var rowvalue=parseInt(this.attributes['row'].value)+1;this.attributes['row'].value=rowvalue;this.innerText='Arrange to '+rowvalue+' rows'}
-else if(parseInt(this.attributes['row'].value)==Math.floor(dedicatedjpgviewers.length/2)){this.attributes['row'].value=dedicatedjpgviewers.length;this.innerText='Arrange to '+dedicatedjpgviewers.length+' rows'}
+if(parseInt(this.attributes['row'].value)<Math.floor(dedicatedjpgviewers.length/2)){var rowvalue=parseInt(this.attributes['row'].value)+1;this.attributes['row'].value=rowvalue;this.innerText='Set widths to arrange to '+rowvalue+' rows'}
+else if(parseInt(this.attributes['row'].value)==Math.floor(dedicatedjpgviewers.length/2)){this.attributes['row'].value=dedicatedjpgviewers.length;this.innerText='Set widths to arrange to '+dedicatedjpgviewers.length+' rows'}
 else {this.attributes['row'].value=1;this.innerText='Arrange to 1 row'}" row=1>Set widths to arrange to 1 row</button>
 </div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
 <b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
