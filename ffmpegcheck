@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Launch with the following line, sans the hash at beginning:
+#nohup bash -c 'while [ true ];do /home/homeowner/ffmpegcheck;done' 2>/dev/null &
+if [[  $(ps auxf|grep -v grep|grep -c ffmpeg.*11\:) == 0 ]];then bash -c 'nohup ffmpeg -nostdin -stimeout 10000000 -rtsp_transport udp -i "rtsp://192.168.0.11:6554/Streaming/channels/101" -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -c:v libx264 -f segment -segment_time 360 -segment_format_options movflags=+faststart -reset_timestamps 1 -avoid_negative_ts 1 -c copy -flags +global_header /var/www/camera_streams/camera_east_driveway/$(date +%Y%m%d-%H%M%S)%d.mp4 > /dev/null 2>/dev/null & ';fi
+sleep 1
+if [[  $(ps auxf|grep -v grep|grep -c ffmpeg.*12\:) == 0 ]];then bash -c 'nohup ffmpeg -nostdin -stimeout 10000000 -rtsp_transport udp -i "rtsp://kERRY123:Kerry123@192.168.0.12:9554/Streaming/channels/101" -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -c:v libx264 -f segment -segment_time 360 -segment_format_options movflags=+faststart -reset_timestamps 1 -avoid_negative_ts 1 -c copy -flags +global_header /var/www/camera_streams/camera_front_parking/$(date +%Y%m%d-%H%M%S)%d.mp4 > /dev/null 2>/dev/null & ';fi
+sleep 1
+if [[  $(ps auxf|grep -v grep|grep -c ffmpeg.*13\:) == 0 ]];then bash -c 'nohup ffmpeg -nostdin -stimeout 10000000 -rtsp_transport udp -i "rtsp://192.168.0.13:554/Streaming/channels/101" -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -c:v libx264 -f segment -segment_time 360 -segment_format_options movflags=+faststart -reset_timestamps 1 -avoid_negative_ts 1 -c copy -flags +global_header /var/www/camera_streams/camera_south_driveway/$(date +%Y%m%d-%H%M%S)%d.mp4 > /dev/null 2>/dev/null & ';fi
+sleep 1
+if [[  $(ps auxf|grep -v grep|grep -c ffmpeg.*14\:) == 0 ]];then bash -c 'nohup ffmpeg -nostdin -stimeout 10000000 -rtsp_transport udp -i "rtsp://192.168.0.14:7554/Streaming/channels/101" -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -c:v libx264 -f segment -segment_time 360 -segment_format_options movflags=+faststart -reset_timestamps 1 -avoid_negative_ts 1 -c copy -flags +global_header /var/www/camera_streams/camera_sw_corner/$(date +%Y%m%d-%H%M%S)%d.mp4 > /dev/null 2>/dev/null & ';fi
+sleep 1
+if [[  $(ps auxf|grep -v grep|grep -c ffmpeg.*15\:) == 0 ]];then bash -c 'nohup ffmpeg -nostdin -stimeout 10000000 -rtsp_transport udp -i "rtsp://192.168.0.15:7554/Streaming/channels/101" -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -c:v libx264 -f segment -segment_time 360 -segment_format_options movflags=+faststart -reset_timestamps 1 -avoid_negative_ts 1 -c copy -flags +global_header /var/www/camera_streams/camera_ne_corner/$(date +%Y%m%d-%H%M%S)%d.mp4 > /dev/null 2>/dev/null & ';fi
+sleep 30
