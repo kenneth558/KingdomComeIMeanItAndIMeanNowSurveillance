@@ -276,7 +276,7 @@ id="btnaudibleonalert" onclick="previousalert='waiting';if(alertvisualblinker!=n
  <div id="androidconnection" class="androidconnection" style="display:none;border:0px;z-index:-1;position:absolute">
    <object id="alertkeepalive" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object>
 </div><!--
---><div style="position:relative;top:-23px"><input type="range" min="60" max="4000" step="1" list="tickmarks" value="415" id="sliderhoriz"
+--><div style="position:relative;top:-23px;z-index:-1"><input type="range" min="60" max="4000" step="1" list="tickmarks" value="415" id="sliderhoriz"
 /*FUTURE: determine which element[s] are in rendered area and apply to those only.  The following always manipulates the main tab dedicated view elements*/
 oninput="
 var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
