@@ -1236,8 +1236,7 @@ this.value=this.oldvalue
    {
       if(alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg'))
       {
-   animatordivalertsdirectorytomainjpgviewer0.style.display='';
-/*TODO: Determine why next line 1241 errors out sometimes after oldvalue was 0*/
+         animatordivalertsdirectorytomainjpgviewer0.style.display='';
          animatealertsdirectorytomainjpgviewer0(rowselected,alertsdirectory.contentDocument.body.children[0]);
          StartTimeOfInterest=alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[0].outerHTML.substr(18)
          StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
