@@ -176,32 +176,6 @@ document.links[19].href='http://' + window.location.hostname + ':15080';//set fo
 </datalist>
 <div id="entiredocument" style="z-index:5;pointer-events:none;" onclick="return false">
 <div id="buttonsdiv" style="display:inline-block;position:sticky;top:0px;z-index:4;background:rgba(215,215,245,0.7);padding: 0px 0px 0px 0px;border:0px solid black;border-width:0px 0px 0px 0px;">
-<input type="range" min="60" max="4000" step="1" list="tickmarks" value="415" id="sliderhoriz"
-/*FUTURE: determine which element[s] are in rendered area and apply to those only.  The following always manipulates the main tab dedicated view elements*/
-oninput="
-var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
-var dedicatedjpgviewersiwidth
-for(var i=0;i<dedicatedjpgviewers.length;i++)
-{
-   dedicatedjpgviewersiwidth=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(this.value)-35):parseInt(this.value))+'px'
-   if(dedicatedjpgviewers[i].id.endsWith('r0')){dedicatedjpgviewers[i].width=dedicatedjpgviewersiwidth}
-   dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiwidth)+35)+'px':dedicatedjpgviewersiwidth
-}
-" 
-style="position:absolute;top:63px;width:370px;left:70px;display:none;">
-<input type="range" min="-2800" max="-50" step="1" list="tickmarks" value="-258" id="slidervert"
-oninput="
-var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
-var dedicatedjpgviewersiheight
-for(var i=0;i<dedicatedjpgviewers.length;i++)
-{
-   dedicatedjpgviewersiheight=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(0-parseInt(this.value))-63):(parseInt(0-parseInt(this.value))))+'px'
-   if(dedicatedjpgviewers[i].id.endsWith('r0')){dedicatedjpgviewers[i].height=dedicatedjpgviewersiheight}
-   dedicatedjpgviewers[i].offsetParent.style.height=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiheight)+parseInt(67))+'px':dedicatedjpgviewersiheight
-   dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].id.endsWith('r0')?dedicatedjpgviewers[i].nextElementSibling.style.top:(dedicatedjpgviewersiheight.substring(0,dedicatedjpgviewersiheight.length-2)-22)+'px')
-}
-"
-style="position:absolute;top:70px;height:225px;left:17px;z-index:-1;display:none;-webkit-appearance: slider-vertical" orient="vertical">
   <button id="btndivmain" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
 onclick="tabactivate(this);btnsizes.style.display='inline';btnsliders.style.display='inline';btnlistlength.style.display='inline';">
 Main</button>
@@ -226,6 +200,41 @@ Future</button>
 <button
 id="alertCheck" style="white-space:nowrap;font-size:15px;background:pink;border-radius:1px;border-color:black;border-width:0px;" 
 value="Alert checking OFF"
+notes="
+if (!this.innerText.endsWith(' OFF'))
+{   if(isAndroid){alertkeepalive.data='';androidconnection.style.display='none';}this.innerText='Alert checking OFF';this.style.background='pink';clearInterval(checkingAlerted);btnaudibleonalert.style.color='#808080'
+    previousalert='waiting';if(alertvisualblinker!=null){clearInterval(alertvisualblinker);alertvisualblinker=null}
+} 
+else 
+{
+    this.innerText='Alert checking ON';alertCheck.style.background='Chartreuse';btnaudibleonalert.style.color='#000';if(isAndroid){alertkeepalive.data='/var/www/html/silence.mp3';androidconnection.style.display='inline'}
+    previousalert='waiting';
+
+    if(alertsdirectory.nextElementSibling.contentDocument.body.children[0] != 'undefined' && alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0] != null && alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectorynextElementSibling.contentDocument.body.children[0].rows[0].cells[1] != null &&
+      alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0] != null &&
+      alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0].cells[1] != null )
+    {;
+        if(alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
+        {;
+            if(alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined')
+            {;
+                previousalert=alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0].cells[1].children[0].href;
+            }
+        }
+    }
+    alertsdirectory.nextElementSibling.src=alertsdirectory.nextElementSibling.src
+    if(isAndroid || 1 == 1)
+    {   alertkeepalive.data='/var/www/html/silence.mp3';
+        setTimeout(function()
+           {   alertkeepalive.contentDocument.body.children[0].muted=true;
+               alertkeepalive.contentDocument.body.children[0].loop=true
+               alertkeepalive.contentDocument.body.children[0].play()
+           },4000
+        )
+    }
+    checkingAlerted=setInterval(function(){alertsdirectory.nextElementSibling.src=alertsdirectory.nextElementSibling.src},2500)
+}
+"
 onclick="
 if (!this.innerText.endsWith(' OFF'))
 {   if(isAndroid){alertkeepalive.data='';androidconnection.style.display='none';}this.innerText='Alert checking OFF';this.style.background='pink';clearInterval(checkingAlerted);btnaudibleonalert.style.color='#808080'
@@ -261,13 +270,39 @@ else
     checkingAlerted=setInterval(function(){alertsdirectory.data=alertsdirectory.data},10500)
 }
 ">Alert checking OFF</button>
-<button value="Alerts now audible" style="white-space:nowrap;width:170px;font-size:13px;background-color:#C0C0C0;color:#808080;position:absolute" 
+<button value="Alerts now audible" style="white-space:nowrap;width:170px;font-size:13px;background-color:#C0C0C0;color:#808080;position:relative" 
 id="btnaudibleonalert" onclick="previousalert='waiting';if(alertvisualblinker!=null){clearInterval(alertvisualblinker);alertvisualblinker=null};if(!alertCheck.innerText.endsWith(' OFF')){alertCheck.style.background='Chartreuse'};if(this.innerText=='Alerts now audible'){this.innerText='Make new alerts audible'}else{this.innerText='Alerts now audible'}"
 >Alerts now audible</button>
  <div id="androidconnection" class="androidconnection" style="display:none;border:0px;z-index:-1;position:absolute">
    <object id="alertkeepalive" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object>
-</div>
-<button style="text-indent:-15px;text-align:left;width:100px;white-space:nowrap;font-size:10px;position:absolute;left:5px;top:23px;z-index:3"
+</div><!--
+--><div style="position:relative;top:-23px"><input type="range" min="60" max="4000" step="1" list="tickmarks" value="415" id="sliderhoriz"
+/*FUTURE: determine which element[s] are in rendered area and apply to those only.  The following always manipulates the main tab dedicated view elements*/
+oninput="
+var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
+var dedicatedjpgviewersiwidth
+for(var i=0;i<dedicatedjpgviewers.length;i++)
+{
+   dedicatedjpgviewersiwidth=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(this.value)-35):parseInt(this.value))+'px'
+   if(dedicatedjpgviewers[i].id.endsWith('r0')){dedicatedjpgviewers[i].width=dedicatedjpgviewersiwidth}
+   dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiwidth)+35)+'px':dedicatedjpgviewersiwidth
+}
+" 
+style="position:absolute;top:63px;width:370px;left:70px;display:none;">
+<input type="range" min="-2800" max="-75" step="1" list="tickmarks" value="-258" id="slidervert"
+oninput="
+var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
+var dedicatedjpgviewersiheight
+for(var i=0;i<dedicatedjpgviewers.length;i++)
+{
+   dedicatedjpgviewersiheight=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(0-parseInt(this.value))-63):(parseInt(0-parseInt(this.value))))+'px'
+   if(dedicatedjpgviewers[i].id.endsWith('r0')){dedicatedjpgviewers[i].height=dedicatedjpgviewersiheight}
+   dedicatedjpgviewers[i].offsetParent.style.height=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiheight)+parseInt(67))+'px':dedicatedjpgviewersiheight
+   dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].id.endsWith('r0')?dedicatedjpgviewers[i].nextElementSibling.style.top:(dedicatedjpgviewersiheight.substring(0,dedicatedjpgviewersiheight.length-2)-22)+'px')
+}
+"
+style="position:absolute;top:70px;height:225px;left:17px;z-index:-1;display:none;-webkit-appearance: slider-vertical" orient="vertical">
+<button style="text-indent:-15px;text-align:left;width:100px;white-space:nowrap;font-size:10px;position:relative;left:5px;top:23px;z-index:3"
 id="btnlistlength"
 onclick="if(show_eventsmainjpgviewer4.style.display=='none'){show_eventsmainjpgviewer3.style.display='inline';show_eventsmainjpgviewer4.style.display='inline'}else{show_eventsmainjpgviewer3.style.display='none';show_eventsmainjpgviewer4.style.display='none'}"
 >List length sliders</button>
@@ -295,7 +330,7 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 if(parseInt(this.attributes['row'].value)<Math.floor(dedicatedjpgviewers.length/2)){var rowvalue=parseInt(this.attributes['row'].value)+1;this.attributes['row'].value=rowvalue;this.innerText='Set widths to arrange to '+rowvalue+' rows'}
 else if(parseInt(this.attributes['row'].value)==Math.floor(dedicatedjpgviewers.length/2)){this.attributes['row'].value=dedicatedjpgviewers.length;this.innerText='Set widths to arrange to '+dedicatedjpgviewers.length+' rows'}
 else {this.attributes['row'].value=1;this.innerText='Set widths to arrange to 1 row'}" row=1>Set widths to arrange to 1 row</button>
-</div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
+</div></div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
 <b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
 <table style="border:3px solid black"><tr><td>
 <table style="border:1px solid black"><tr><td>
@@ -1242,6 +1277,7 @@ note="1+395/36=11,159+245=1+747/68=11"
 orient="vertical">
 <object id="alertsdirectory" type="text/html"
 data=""
+futureonclick="this.nextElementSibling.src=this.nextElementSibling.src"
 onclick="this.data=this.data"
 onload="if (!alertCheck.innerText.endsWith(' OFF'))
      {
@@ -1311,7 +1347,72 @@ style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="0" />
    <param name="marker" value=0 />
-    </object>
+</object>
+<iframe id="iframealertsdirectory" src="" futuresrc="
+style="display:none;border:0px;position:absolute;width:0px;height:0px"
+futureonload="this.contentDocument.body.childNodes[0].data
+     if (!alertCheck.innerText.endsWith(' OFF'))
+     {
+        if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
+        alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
+        alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
+        {
+           if(this.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && this.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
+           {
+              if(this.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined')
+              {
+                 if(this.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
+                 {
+                     if(previousalert!='waiting' && this.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
+                     {
+                        if(btnaudibleonalert.innerText=='Alerts now audible')
+                        {
+                           this.previousElementSibling.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min?mostrecent1?plaintext" type='text:html'
+                           soundalarm(this.src)
+                        }
+                        show_eventsmainjpgviewer2.value=0;
+                        show_eventsmainjpgviewer2.oninput()
+                     }
+                     else
+                     {   previousalert=this.contentDocument.body.children[0].rows[0].cells[1].children[0].href
+                     }
+                 }
+              }
+           }
+        }
+     }
+                        setTimeout(function(){
+                          if(show_eventsmainjpgviewer2.value=='1'){show_eventsmainjpgviewer2.value='0'}
+                          show_eventsmainjpgviewer2.value=(this.contentDocument!='undefined' && this.contentDocument!=null && this.contentDocument.body.children[0] !='undefined' && this.contentDocument.body.children[0] != null && this.contentDocument.body.children[0].rows!='undefined' && this.contentDocument.body.children[0].rows!=null && this.contentDocument.body.children[0].rows.length!='undefined' && this.contentDocument.body.children[0].rows.length != null)?Math.max(1-this.contentDocument.body.children[0].rows.length,show_eventsmainjpgviewer2.value):1;
+                          if(show_eventsmainjpgviewer2.value<1){
+                      /*alert(parseInt(this.contentDocument.body.scrollHeight)*.0089)*/
+                             var rowselected=Math.round(this.contentDocument.body.children[0].rows.length*(this.contentDocument.body.scrollTop/((parseInt(this.contentDocument.body.scrollHeight)*.9943)))-show_eventsmainjpgviewer2.value)
+                             if(rowselected<this.contentDocument.body.children[0].rows.length){
+                                if(this.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg')){
+                                   animatethistomainjpgviewer0(rowselected,this.contentDocument.body.children[0]);
+                                   StartTimeOfInterest=this.contentDocument.body.children[0].rows[rowselected].cells[0].outerHTML.substr(18)
+                                   StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
+                                   StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
+                                   StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
+                                   StartCamOfInterestEl.value=this.contentDocument.body.children[0].rows[rowselected].cells[1].innerText.trim()
+                                }
+                             }
+                             else{
+                                show_eventsmainjpgviewer2.value=(parseInt(show_eventsmainjpgviewer2.value)-(this.contentDocument.body.children[0].rows.length-1-rowselected))
+                             }
+                             show_eventsmainjpgviewer2.oninput()
+                           }
+                           else{
+                              animatordivalertsdirectorytomainjpgviewer0.style.display='none';
+                              if(animatordivalertsdirectorytomainjpgviewer0!='undefined' && animatordivalertsdirectorytomainjpgviewer0 != null){
+                                 if(confirm(animationdivalertsdirectorytomainjpgviewer0.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory')){
+                                    animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
+                                 }
+                              }
+                           }
+                        },100)
+     glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '');"
+></iframe>
 </td></tr>
 </table>	
 <div style="position:relative;top:0px">
