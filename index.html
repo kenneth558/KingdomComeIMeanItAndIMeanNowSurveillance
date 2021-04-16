@@ -1228,13 +1228,16 @@ if(this.value<1)
       (0-show_eventsmainjpgviewer1.value<alertsdirectory.contentDocument.body.children[0].rows.length) &&
       ((parseInt(this.oldvalue)-1)==show_eventsmainjpgviewer1.value) &&
       (this.value-1>show_eventsmainjpgviewer1.value))
-   {this.value=this.oldvalue
+   {
+this.value=this.oldvalue
 /*      alert(show_eventsmainjpgviewer1.value+', '+this.value);*/
    }
    else if(rowselected<alertsdirectory.contentDocument.body.children[0].rows.length)
    {
       if(alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg'))
       {
+   animatordivalertsdirectorytomainjpgviewer0.style.display='';
+/*TODO: Determine why next line 1241 errors out sometimes after oldvalue was 0*/
          animatealertsdirectorytomainjpgviewer0(rowselected,alertsdirectory.contentDocument.body.children[0]);
          StartTimeOfInterest=alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[0].outerHTML.substr(18)
          StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
@@ -1247,6 +1250,7 @@ if(this.value<1)
    {
       this.value=(parseInt(this.value)-(alertsdirectory.contentDocument.body.children[0].rows.length-1-rowselected))
    }
+   animatordivalertsdirectorytomainjpgviewer0.style.display='';
 }
 else if(alertsdirectory.data.includes(alertsdirectorysources[0].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) || 1==1)
 {
@@ -1348,6 +1352,7 @@ style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px
    <param name="playingjpgs_number" value="0" />
    <param name="marker" value=0 />
 </object>
+<!--
 <iframe id="iframealertsdirectory" src="" futuresrc="
 style="display:none;border:0px;position:absolute;width:0px;height:0px"
 futureonload="this.contentDocument.body.childNodes[0].data
@@ -1413,6 +1418,8 @@ futureonload="this.contentDocument.body.childNodes[0].data
                         },100)
      glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '');"
 ></iframe>
+
+-->
 </td></tr>
 </table>	
 <div style="position:relative;top:0px">
