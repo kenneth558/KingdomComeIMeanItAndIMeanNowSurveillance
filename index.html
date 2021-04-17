@@ -738,8 +738,8 @@ btnsizes.style.display='none';sliderhint.style.display='inline';snapssliderhoriz
 else
 {
 btnsizes.style.display='inline';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';sliderhoriz.style.display='none';slidervert.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';
-}">Sizing sliders</button>
-<button style="position:absolute;top:0px;left:88px;height:24px;font;white-space:nowrap;"
+}">Sizing sliders</button><!--
+--><button style="position:absolute;top:0px;left:88px;height:24px;font;white-space:nowrap;"
 id="btnsizes"
 onclick="
 var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
@@ -755,14 +755,13 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 }
 if(parseInt(this.attributes['row'].value)<Math.floor(dedicatedjpgviewers.length/2)){var rowvalue=parseInt(this.attributes['row'].value)+1;this.attributes['row'].value=rowvalue;this.innerText='Set widths to arrange to '+rowvalue+' rows'}
 else if(parseInt(this.attributes['row'].value)==Math.floor(dedicatedjpgviewers.length/2)){this.attributes['row'].value=dedicatedjpgviewers.length;this.innerText='Set widths to arrange to '+dedicatedjpgviewers.length+' rows'}
-else {this.attributes['row'].value=1;this.innerText='Set widths to arrange to 1 row'}" row=1>Set widths to arrange to 1 row</button>
-<button style="text-indent:-15px;text-align:left;width:100px;white-space:nowrap;font-size:10px;position:relative;left:316px;top:0px;z-index:3"
+else {this.attributes['row'].value=1;this.innerText='Set widths to arrange to 1 row'}" row=1>Set widths to arrange to 1 row</button><!--
+--><button style="text-indent:-15px;text-align:left;width:100px;white-space:nowrap;font-size:10px;position:relative;left:316px;top:0px;z-index:3"
 id="btnlistlength"
 onclick="if(show_eventsmainjpgviewer4.style.display=='none'){show_eventsmainjpgviewer3.style.display='inline';show_eventsmainjpgviewer4.style.display='inline'}else{show_eventsmainjpgviewer3.style.display='none';show_eventsmainjpgviewer4.style.display='none'}"
->List length sliders</button>
-<!--
+>List length sliders</button><!--
 --></div><!--
---><div style="border:0px;display: inline-block;position:relative;top:-20px;"><!--
+--><div style="border:0px;display: inline-block;position:relative;top:0px;"><!--
 --><div style="border:0px;display: inline-block;width:444px;height:262px;position:relative;top:0px;z-index:3;background-clip: padding-box;-webkit-background-clip: padding-box;"><!--
 --><div style="border:0px;display: inline-block;position:relative;top:-26px;"><!--
 --><div style="border:0px;display: inline-block;"><!--
@@ -877,15 +876,14 @@ btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btn
 "></object><!--
 --><input disabled id="camapp_lst1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
 --></div><!--
---><div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:0;top:6px"
+--><div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:0;top:13px"
 notes="this is the snaps middle viewer"><!--
 --><div style="position:relative;top:0px;"><!--
---><i style="position:relative;top:0px;left:70px" class="makefontsmallerforandroid">Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i>
-<button id="btnreclaim2" style="background-color:#fff;position:absolute;top:10px;left:340px;z-index:1;display:none" onmousedown="
+--><i style="position:relative;top:0px;left:70px" class="makefontsmallerforandroid">Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i><!--
+--><button id="btnreclaim2" style="background-color:#fff;position:absolute;top:10px;left:340px;z-index:1;display:none" onmousedown="
 this.style.display='none'
 animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
 ">Release viewer memory</button>
-
 <button style="position:relative;top:0px;left:120px;white-space:nowrap;background-color:#cccccc;color:#808080;
 border:1px solid black;z-index:3
 "
@@ -905,12 +903,12 @@ onmousedown="
        show_eventsmainjpgviewer3.onchange()
     }
    }
-">Stay current on this view</button>
-<table width="1px" height="582px" cellspacing="0" style="border-collapse:collapse;position:relative;top:0px" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholder2" width="1px" height="100%" valign="top">
-<!-- Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=
+">Stay current on this view</button><!--
+--><table width="1px" height="582px" cellspacing="0" style="border-collapse:collapse;position:relative;top:0px" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholder2" width="1px" height="100%" valign="top"><!--
+ Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=
 <input type="button" value="Most recent alert event" onclick="this.value=previousalert">
-<br> -->
-<input type="range" id="show_eventsmainjpgviewer3" name="show_eventsmainjpgviewer3" min="-53" max="-1" value="-1" step="1" list="tickmarks" class="vertical-slider"
+<br> 
+--><input type="range" id="show_eventsmainjpgviewer3" name="show_eventsmainjpgviewer3" min="-53" max="-1" value="-1" step="1" list="tickmarks" class="vertical-slider"
 style="position:absolute;top:20px;left:216px;z-index:5;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;display:none;
 "
 orient="vertical"
@@ -935,8 +933,8 @@ else if(snapsdirectory.data.includes(alertsdirectorysources[5].substring(7,(snap
 {btnseastjpgs2.onmousedown()}
 else if(snapsdirectory.data.includes(alertsdirectorysources[6].substring(7,(snapsdirectory.data.indexOf('?')<1?snapsdirectory.data.length:snapsdirectory.data.indexOf('?')-1))))
 {btnnorthjpgs2.onmousedown()}
-">
-<input type="range" id="show_eventsmainjpgviewer4" notes="11px per line, 25 lines in mode0=275"
+"><!--
+--><input type="range" id="show_eventsmainjpgviewer4" notes="11px per line, 25 lines in mode0=275"
 oninput="/*alert('successful line 921')*/
 this.value=(snapsdirectory.contentDocument!='undefined' && snapsdirectory.contentDocument!=null && snapsdirectory.contentDocument.body.children[0] !='undefined' && snapsdirectory.contentDocument.body.children[0] != null && snapsdirectory.contentDocument.body.children[0].rows!='undefined' && snapsdirectory.contentDocument.body.children[0].rows!=null && snapsdirectory.contentDocument.body.children[0].rows.length!='undefined' && snapsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-snapsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
 if(this.value<1)
@@ -996,20 +994,19 @@ style="position:absolute;top:9px;left:370px;z-index:5;height:596px;-webkit-appea
 " 
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
-orient="vertical">
-
-<input type="range" min="20" max="10000" step="1" list="tickmarks" value="840" id="snapssliderhoriz"
+orient="vertical"><!--
+--><input type="range" min="20" max="10000" step="1" list="tickmarks" value="840" id="snapssliderhoriz"
 /*FUTURE: determine which element[s] are in rendered area and apply to those only.*/
 oninput="
    document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.width=parseInt(parseInt(this.value))+'px'
 " 
-style="position:absolute;top:20px;width:370px;left:450px;z-index:3;display:none;">
-<input type="range" min="-2500" max="-20" step="1" list="tickmarks" value="-570" id="snapsslidervert"
+style="position:absolute;top:20px;width:370px;left:450px;z-index:3;display:none;"><!--
+--><input type="range" min="-2500" max="-20" step="1" list="tickmarks" value="-570" id="snapsslidervert"
 oninput="
    document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.height=parseInt(parseInt(0-parseInt(this.value)))+'px'
 " 
-style="position:absolute;top:42px;height:225px;left:430px;z-index:3;display:none;-webkit-appearance: slider-vertical" orient="vertical">
-<i style="text-indent:0px;position:absolute;width:600px;left:450px;top:20px;" width="600px" class="makefontsmallerforandroid">A sub-range can be made <b>at the <u>bottom</u> of the listed snapshots</b> by putting the <b>right</b> 'list length' slider 
+style="position:absolute;top:42px;height:225px;left:430px;z-index:3;display:none;-webkit-appearance: slider-vertical" orient="vertical"><!--
+--><i style="text-indent:0px;position:absolute;width:600px;left:450px;top:20px;" width="600px" class="makefontsmallerforandroid">A sub-range can be made <b>at the <u>bottom</u> of the listed snapshots</b> by putting the <b>right</b> 'list length' slider 
 button <b>below the left one</b>, as follows:</i>
 <i style="text-indent:-12px;position:absolute;width:600px;left:450px;top:60px;" width="600px" class="makefontsmallerforandroid">
 While a list of file names is being displayed (which results in these instructions getting covered by a snapshot unless you <u>raise the right 'list length' slider button</u> fully to see them again), put both the slider buttons at the low 
