@@ -270,67 +270,13 @@ else
     checkingAlerted=setInterval(function(){alertsdirectory.data=alertsdirectory.data},10500)
 }
 ">Alert checking OFF</button>
-<button value="Alerts now audible" style="white-space:nowrap;width:170px;font-size:13px;background-color:#C0C0C0;color:#808080;position:relative" 
+<button value="Alerts now audible" style="text-indent:-3px;white-space:nowrap;width:160px;font-size:13px;background-color:#C0C0C0;color:#808080;position:relative" 
 id="btnaudibleonalert" onclick="previousalert='waiting';if(alertvisualblinker!=null){clearInterval(alertvisualblinker);alertvisualblinker=null};if(!alertCheck.innerText.endsWith(' OFF')){alertCheck.style.background='Chartreuse'};if(this.innerText=='Alerts now audible'){this.innerText='Make new alerts audible'}else{this.innerText='Alerts now audible'}"
 >Alerts now audible</button>
  <div id="androidconnection" class="androidconnection" style="display:none;border:0px;z-index:-1;position:absolute">
-   <object id="alertkeepalive" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object>
-</div><!--
---><div style="position:relative;top:-23px;z-index:-1"><input type="range" min="60" max="4000" step="1" list="tickmarks" value="415" id="sliderhoriz"
-/*FUTURE: determine which element[s] are in rendered area and apply to those only.  The following always manipulates the main tab dedicated view elements*/
-oninput="
-var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
-var dedicatedjpgviewersiwidth
-for(var i=0;i<dedicatedjpgviewers.length;i++)
-{
-   dedicatedjpgviewersiwidth=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(this.value)-35):parseInt(this.value))+'px'
-   if(dedicatedjpgviewers[i].id.endsWith('r0')){dedicatedjpgviewers[i].width=dedicatedjpgviewersiwidth}
-   dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiwidth)+35)+'px':dedicatedjpgviewersiwidth
-}
-" 
-style="position:absolute;top:63px;width:370px;left:70px;display:none;">
-<input type="range" min="-2800" max="-75" step="1" list="tickmarks" value="-258" id="slidervert"
-oninput="
-var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
-var dedicatedjpgviewersiheight
-for(var i=0;i<dedicatedjpgviewers.length;i++)
-{
-   dedicatedjpgviewersiheight=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(0-parseInt(this.value))-63):(parseInt(0-parseInt(this.value))))+'px'
-   if(dedicatedjpgviewers[i].id.endsWith('r0')){dedicatedjpgviewers[i].height=dedicatedjpgviewersiheight}
-   dedicatedjpgviewers[i].offsetParent.style.height=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiheight)+parseInt(67))+'px':dedicatedjpgviewersiheight
-   dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].id.endsWith('r0')?dedicatedjpgviewers[i].nextElementSibling.style.top:(dedicatedjpgviewersiheight.substring(0,dedicatedjpgviewersiheight.length-2)-22)+'px')
-}
-"
-style="position:absolute;top:70px;height:225px;left:17px;z-index:-1;display:none;-webkit-appearance: slider-vertical" orient="vertical">
-<button style="text-indent:-15px;text-align:left;width:100px;white-space:nowrap;font-size:10px;position:relative;left:5px;top:23px;z-index:3"
-id="btnlistlength"
-onclick="if(show_eventsmainjpgviewer4.style.display=='none'){show_eventsmainjpgviewer3.style.display='inline';show_eventsmainjpgviewer4.style.display='inline'}else{show_eventsmainjpgviewer3.style.display='none';show_eventsmainjpgviewer4.style.display='none'}"
->List length sliders</button>
-<button value="Sizing sliders" style="text-align:left;text-indent:-14px;white-space:nowrap;font-size:10px;width:80px;position:absolute;left:5px;top:50px;z-index:3" 
-id="btnsliders" onclick="
-if(snapssliderhoriz.style.display=='none')
-{
-btnsizes.style.display='none';sliderhint.style.display='inline';snapssliderhoriz.style.display='inline';sliderhoriz.style.display='inline';snapsslidervert.style.display='inline';slidervert.style.display='inline';snapsheightslider.style.display='inline';
-}
-else
-{
-btnsizes.style.display='inline';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';sliderhoriz.style.display='none';slidervert.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';
-}">Sizing sliders</button>
-<i id="sliderhint" style="position:absolute;top:23px;left:115px;font-size:10px;display:none;">Hint: Arrow etc. keyboard keys work for<br>slider control once one is clicked on</i>
-<button style="position:absolute;top:50px;left:90px;height:22px;font"
-id="btnsizes"
-onclick="
-var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
-var dedicatedjpgviewersiwidth=((window.innerWidth-18-(isPalemoon?3:(isFirefox?0:(isAndroid?290:5))))/(dedicatedjpgviewers.length/parseInt(this.attributes['row'].value)))+'px'
-for(var i=0;i<dedicatedjpgviewers.length;i++)
-{
-   dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewersiwidth
-   if(dedicatedjpgviewers[i].id.endsWith('r0')){dedicatedjpgviewers[i].width=(parseInt(dedicatedjpgviewersiwidth)-parseInt(35))+'px'}
-}
-if(parseInt(this.attributes['row'].value)<Math.floor(dedicatedjpgviewers.length/2)){var rowvalue=parseInt(this.attributes['row'].value)+1;this.attributes['row'].value=rowvalue;this.innerText='Set widths to arrange to '+rowvalue+' rows'}
-else if(parseInt(this.attributes['row'].value)==Math.floor(dedicatedjpgviewers.length/2)){this.attributes['row'].value=dedicatedjpgviewers.length;this.innerText='Set widths to arrange to '+dedicatedjpgviewers.length+' rows'}
-else {this.attributes['row'].value=1;this.innerText='Set widths to arrange to 1 row'}" row=1>Set widths to arrange to 1 row</button>
-</div></div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
+   <object id="alertkeepalive" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object><!--
+--></div><!--
+--></div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
 <b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
 <table style="border:3px solid black"><tr><td>
 <table style="border:1px solid black"><tr><td>
@@ -782,7 +728,73 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 <button value="jpg<->mp4" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btnjpgormp41" onclick="">jpg<->mp4</button>
 </div>
 Adhere to this technique of removing whitespace between inline elements in this container:
+--><div style="position:absolute;top:0px;z-index:4;display: inline-block;"><!--
+--><button value="Sizing sliders" style="text-align:left;text-indent:-14px;white-space:nowrap;font-size:10px;width:80px;position:absolute;left:5px;top:0px;z-index:3" 
+id="btnsliders" onclick="
+if(snapssliderhoriz.style.display=='none')
+{
+btnsizes.style.display='none';sliderhint.style.display='inline';snapssliderhoriz.style.display='inline';sliderhoriz.style.display='inline';snapsslidervert.style.display='inline';slidervert.style.display='inline';snapsheightslider.style.display='inline';
+}
+else
+{
+btnsizes.style.display='inline';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';sliderhoriz.style.display='none';slidervert.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';
+}">Sizing sliders</button>
+<button style="position:absolute;top:0px;left:88px;height:24px;font;white-space:nowrap;"
+id="btnsizes"
+onclick="
+var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
+var dedicatedjpgviewersiwidth=((window.innerWidth-18-(isPalemoon?3:(isFirefox?0:(isAndroid?290:5))))/(dedicatedjpgviewers.length/parseInt(this.attributes['row'].value)))+'px'
+sliderhoriz.value=parseInt(dedicatedjpgviewersiwidth)
+for(var i=0;i<dedicatedjpgviewers.length;i++)
+{
+   dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewersiwidth
+   if(dedicatedjpgviewers[i].id.endsWith('r0'))
+   {
+      dedicatedjpgviewers[i].width=(parseInt(dedicatedjpgviewersiwidth)-parseInt(35))+'px'
+   }
+}
+if(parseInt(this.attributes['row'].value)<Math.floor(dedicatedjpgviewers.length/2)){var rowvalue=parseInt(this.attributes['row'].value)+1;this.attributes['row'].value=rowvalue;this.innerText='Set widths to arrange to '+rowvalue+' rows'}
+else if(parseInt(this.attributes['row'].value)==Math.floor(dedicatedjpgviewers.length/2)){this.attributes['row'].value=dedicatedjpgviewers.length;this.innerText='Set widths to arrange to '+dedicatedjpgviewers.length+' rows'}
+else {this.attributes['row'].value=1;this.innerText='Set widths to arrange to 1 row'}" row=1>Set widths to arrange to 1 row</button>
+<button style="text-indent:-15px;text-align:left;width:100px;white-space:nowrap;font-size:10px;position:relative;left:316px;top:0px;z-index:3"
+id="btnlistlength"
+onclick="if(show_eventsmainjpgviewer4.style.display=='none'){show_eventsmainjpgviewer3.style.display='inline';show_eventsmainjpgviewer4.style.display='inline'}else{show_eventsmainjpgviewer3.style.display='none';show_eventsmainjpgviewer4.style.display='none'}"
+>List length sliders</button>
+<!--
+--></div><!--
+--><div style="border:0px;display: inline-block;position:relative;top:-20px;"><!--
 --><div style="border:0px;display: inline-block;width:444px;height:262px;position:relative;top:0px;z-index:3;background-clip: padding-box;-webkit-background-clip: padding-box;"><!--
+--><div style="border:0px;display: inline-block;position:relative;top:-26px;"><!--
+--><div style="border:0px;display: inline-block;"><!--
+--><i id="sliderhint" style="white-space:nowrap;position:absolute;top:43px;left:115px;font-size:10px;display:none;">Hint: Arrow etc. keyboard keys work for<br>slider control once one is clicked on</i><!--
+--></div><!--
+--><input type="range" min="60" max="4000" step="1" list="tickmarks" value="415" id="sliderhoriz"
+/*FUTURE: determine which element[s] are in rendered area and apply to those only.  The following always manipulates the main tab dedicated view elements*/
+oninput="
+var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
+var dedicatedjpgviewersiwidth
+for(var i=0;i<dedicatedjpgviewers.length;i++)
+{
+   dedicatedjpgviewersiwidth=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(this.value)-35):parseInt(this.value))+'px'
+   if(dedicatedjpgviewers[i].id.endsWith('r0')){dedicatedjpgviewers[i].width=dedicatedjpgviewersiwidth}
+   dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiwidth)+35)+'px':dedicatedjpgviewersiwidth
+}
+" 
+style="position:absolute;top:63px;width:370px;left:75px;display:none;">
+<input type="range" min="-2800" max="-75" step="1" list="tickmarks" value="-258" id="slidervert"
+oninput="
+var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
+var dedicatedjpgviewersiheight
+for(var i=0;i<dedicatedjpgviewers.length;i++)
+{
+   dedicatedjpgviewersiheight=(dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(0-parseInt(this.value))-63):(parseInt(0-parseInt(this.value))))+'px'
+   if(dedicatedjpgviewers[i].id.endsWith('r0')){dedicatedjpgviewers[i].height=dedicatedjpgviewersiheight}
+   dedicatedjpgviewers[i].offsetParent.style.height=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiheight)+parseInt(67))+'px':dedicatedjpgviewersiheight
+   dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].id.endsWith('r0')?dedicatedjpgviewers[i].nextElementSibling.style.top:(dedicatedjpgviewersiheight.substring(0,dedicatedjpgviewersiheight.length-2)-22)+'px')
+}
+"
+style="position:absolute;top:70px;height:225px;left:11px;z-index:-1;display:none;-webkit-appearance: slider-vertical" orient="vertical"><!--
+--></div><!--
 --><object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:59px;left:30px;" value="Alt jpg viewer" width="409px" height="199px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="
 filenametool1.parentElement.style.borderColor='transparent';filenametool1.parentElement.parentElement.style.zIndex=0
 filenametool2.parentElement.style.borderColor='transparent';filenametool2.parentElement.parentElement.style.zIndex=0
@@ -864,6 +876,7 @@ btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btn
 ){btnnorthjpgs2.onmousedown()}
 "></object><!--
 --><input disabled id="camapp_lst1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
+--></div><!--
 --><div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:0;top:6px"
 notes="this is the snaps middle viewer"><!--
 --><div style="position:relative;top:0px;"><!--
