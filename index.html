@@ -2963,30 +2963,42 @@ function soundalarm(causehref=null)
 { 
    var audio = new Audio('600hz900mS.mp3'); 
    audio.play(); 
-   if(causehref!='undefined' && causehref!=null)
+   if(btnaudibleonalert.innerText=='Alerts now audible' && !alertCheck.innerText.endsWith(' OFF'))
    {
-      for(var i=0;i<alertsdirectorysources.length-2;i++)
+      if(causehref!='undefined' && causehref!=null)
       {
-         if(causehref.substring(20).includes(alertsdirectorysources[i+2].substr(31,7)))
+         for(var i=0;i<alertsdirectorysources.length-2;i++)
          {
-            audiosrc2ndstage=soundalarmmp3s[i]
-            audioelement2ndstage= new Audio(audiosrc2ndstage)
-            audio.addEventListener('ended', event => 
+            if(causehref.substring(20).includes(alertsdirectorysources[i+2].substr(31,7)))
             {
-               audioelement2ndstage.play()
-               audioelement2ndstage.addEventListener('ended', event =>
+               audiosrc2ndstage=soundalarmmp3s[i]
+               audioelement2ndstage= new Audio(audiosrc2ndstage)
+               if(btnaudibleonalert.innerText=='Alerts now audible' && !alertCheck.innerText.endsWith(' OFF'))
                {
-                  audio3rdstage = new Audio('600hz900mS.mp3'); 
-                  audio3rdstage.play(); 
-               })
-            })
-            break
+                  audio.addEventListener('ended', event => 
+                  {
+                     if(btnaudibleonalert.innerText=='Alerts now audible' && !alertCheck.innerText.endsWith(' OFF'))
+                     {
+                        audioelement2ndstage.play();
+                        audioelement2ndstage.addEventListener('ended', event =>
+                        {
+                           audio3rdstage = new Audio('600hz900mS.mp3'); 
+                           if(btnaudibleonalert.innerText=='Alerts now audible' && !alertCheck.innerText.endsWith(' OFF'))
+                           {
+                               audio3rdstage.play();
+                           }
+                        })
+                     }
+                  })
+                  break
+               }
+            }
          }
       }
    }
-documenttitle=document.title
-document.title=audiosrc2ndstage.substr(31)
-if(documenttitletimer==null){documenttitletimer=1;setTimeout(function(){document.title=documenttitle;documenttitletimer=null},2000)}
+   documenttitle=document.title
+   document.title=audiosrc2ndstage.substr(31)
+   if(documenttitletimer==null){documenttitletimer=1;setTimeout(function(){document.title=documenttitle;documenttitletimer=null},2000)}
 }
  
 function checkforcache() { if ('caches' in window){ alert ('This browser supports cache, FUTURE Considering to use it for sounds, pictures, videos, etc.')} 
