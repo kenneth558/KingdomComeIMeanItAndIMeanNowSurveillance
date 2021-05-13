@@ -175,7 +175,11 @@ document.links[19].href='http://' + window.location.hostname + ':15080';//set fo
 <option value="360" label="6 hrs"></option>
 </datalist>
 <div id="entiredocument" style="z-index:5;pointer-events:none;" onclick="return false">
-<div id="buttonsdiv" style="display:inline-block;position:sticky;top:0px;z-index:4;background:rgba(215,215,245,0.7);padding: 0px 0px 0px 0px;border:0px solid black;border-width:0px 0px 0px 0px;">
+<div id="MessageForOthers" style="display:none;" onclick="this.style.display='none';"><h2 style="display:inline">
+Kerry:Your barricades ROCK!  See <a href="../camera_streams/camera_front_parking/20210508-0.mp4">00:02:50 (alt-click this)</a></h2>Then they sat pondering for over 5 mins in auto parts lot close to barricade with their headlights pointed across the street.  
+Then click here to close this message...
+</div>
+<span id="buttonsdiv" style="display:inline-block;position:sticky;top:0px;z-index:4;background:rgba(215,215,245,0.7);padding: 0px 0px 0px 0px;border:0px solid black;border-width:0px 0px 0px 0px;">
   <button id="btndivmain" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
 onclick="tabactivate(this);btnsizes.style.display='inline';btnsliders.style.display='inline';btnlistlength.style.display='inline';">
 Main</button>
@@ -197,10 +201,11 @@ Help Manual</button>
   <button id="btnfuturediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
 onclick="tabactivate(this);btnsizes.style.display='none';slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Future</button>
+<span style="white-space:nowrap;">
 <button
 id="alertCheck" style="white-space:nowrap;font-size:15px;background:pink;border-radius:1px;border-color:black;border-width:0px;" 
 value="Alert checking OFF"
-notes="
+futureonclick="
 if (!this.innerText.endsWith(' OFF'))
 {   if(isAndroid){alertkeepalive.data='';androidconnection.style.display='none';}this.innerText='Alert checking OFF';this.style.background='pink';clearInterval(checkingAlerted);btnaudibleonalert.style.color='#808080'
     previousalert='waiting';if(alertvisualblinker!=null){clearInterval(alertvisualblinker);alertvisualblinker=null}
@@ -267,16 +272,57 @@ else
            },4000
         )
     }
-    checkingAlerted=setInterval(function(){alertsdirectory.data=alertsdirectory.data},10500)
+    checkingAlerted=setInterval(function(){alertsdirectory.data=alertsdirectory.data},6500)
 }
 ">Alert checking OFF</button>
 <button value="Alerts now audible" style="text-indent:-3px;white-space:nowrap;width:160px;font-size:13px;background-color:#C0C0C0;color:#808080;position:relative" 
 id="btnaudibleonalert" onclick="previousalert='waiting';if(alertvisualblinker!=null){clearInterval(alertvisualblinker);alertvisualblinker=null};if(!alertCheck.innerText.endsWith(' OFF')){alertCheck.style.background='Chartreuse'};if(this.innerText=='Alerts now audible'){this.innerText='Make new alerts audible'}else{this.innerText='Alerts now audible'}"
 >Alerts now audible</button>
- <div id="androidconnection" class="androidconnection" style="display:none;border:0px;z-index:-1;position:absolute">
+ <span id="androidconnection" class="androidconnection" style="display:none;border:0px;z-index:-1;position:absolute">
    <object id="alertkeepalive" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object><!--
+--></span></span><!--
+--><span style="position:relative;top:0px;z-index:4;display: inline;">
+<button value="Sizing sliders" style="margin-left:0.35em;text-align:left;text-indent:-14px;top:0px;height:24px;white-space:nowrap;font-size:10px;width:80px;position:relative;z-index:3;display: inline;" 
+id="btnsliders" onclick="
+if(snapssliderhoriz.style.display=='none')
+{
+sliderhint.style.display='inline';snapssliderhoriz.style.display='inline';
+sliderhoriz.style.display='inline';snapsslidervert.style.display='inline';
+slidervert.style.display='inline';snapsheightslider.style.display='inline';
+}
+else
+{
+snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';
+sliderhoriz.style.display='none';slidervert.style.display='none';
+sliderhint.style.display='none';snapsheightslider.style.display='none';
+}">Sizing sliders</button>
+<button style="position:relative;top:2px;height:24px;white-space:nowrap;z-index:3;text-align:left;display: inline;"
+id="btnsizes"
+onclick="
+var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
+var dedicatedjpgviewersiwidth=((window.innerWidth-18-(isPalemoon?3:(isFirefox?0:(isAndroid?290:5))))/(dedicatedjpgviewers.length/parseInt(this.attributes['row'].value)))+'px'
+sliderhoriz.value=parseInt(dedicatedjpgviewersiwidth)
+for(var i=0;i<dedicatedjpgviewers.length;i++)
+{
+   dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewersiwidth
+   if(dedicatedjpgviewers[i].id.endsWith('r0'))
+   {
+      dedicatedjpgviewers[i].width=(parseInt(dedicatedjpgviewersiwidth)-parseInt(35))+'px'
+   }
+}
+if(parseInt(this.attributes['row'].value)<Math.floor(dedicatedjpgviewers.length/2)){var rowvalue=parseInt(this.attributes['row'].value)+1;this.attributes['row'].value=rowvalue;this.innerText='Set widths to arrange to '+rowvalue+' rows'}
+else if(parseInt(this.attributes['row'].value)==Math.floor(dedicatedjpgviewers.length/2)){this.attributes['row'].value=dedicatedjpgviewers.length;this.innerText='Set widths to arrange to '+dedicatedjpgviewers.length+' rows'}
+else {this.attributes['row'].value=1;this.innerText='Set widths to arrange to 1 row'}" row=1>
+Set widths to arrange to 1 row
+</button>
+<button style="text-indent:-15px;text-align:left;width:100px;white-space:nowrap;font-size:10px;position:relative;height:24px;top:0px;z-index:3;display: inline;"
+id="btnlistlength"
+onclick="if(show_eventsmainjpgviewer4.style.display=='none'){show_eventsmainjpgviewer3.style.display='inline';show_eventsmainjpgviewer4.style.display='inline'}else{show_eventsmainjpgviewer3.style.display='none';show_eventsmainjpgviewer4.style.display='none'}"
+>List length sliders</button>
+</span><!--
+--></span><!--
 --></div><!--
---></div><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
+--><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
 <b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
 <table style="border:3px solid black"><tr><td>
 <table style="border:1px solid black"><tr><td>
@@ -426,7 +472,7 @@ for( var rowindex=downrowindex;rowindex!=uprowindex;)
 }
 document.body.appendChild(animationdiv) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory 
 animationdiv.style='position:relative;top:0px;left:100px'
-var animatetimer=setInterval(function(){;},700)
+/*var animatetimer=setInterval(function(){;},700)
 setTimeout(function(){if(!confirm('Allow more time for snapshot animation element? Cancel will close the animation element to save memory')){animatordiv.replaceChildren();animatordiv.remove();clearInterval(animatetimer)}},300000)
 */
                  var frames=[]
@@ -728,44 +774,13 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 <button value="jpg<->mp4" style="position:relative;left:0px;top:0px;font-size:13px;background-color:#C0C0C0;color:#808080;z-index:1" id="btnjpgormp41" onclick="">jpg<->mp4</button>
 </div>
 Adhere to this technique of removing whitespace between inline elements in this container:
---><div style="position:absolute;top:0px;z-index:4;display: inline-block;"><!--
---><button value="Sizing sliders" style="text-align:left;text-indent:-14px;white-space:nowrap;font-size:10px;width:80px;position:absolute;left:5px;top:0px;z-index:3" 
-id="btnsliders" onclick="
-if(snapssliderhoriz.style.display=='none')
-{
-btnsizes.style.display='none';sliderhint.style.display='inline';snapssliderhoriz.style.display='inline';sliderhoriz.style.display='inline';snapsslidervert.style.display='inline';slidervert.style.display='inline';snapsheightslider.style.display='inline';
-}
-else
-{
-btnsizes.style.display='inline';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';sliderhoriz.style.display='none';slidervert.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';
-}">Sizing sliders</button><!--
---><button style="position:absolute;top:0px;left:88px;height:24px;font;white-space:nowrap;"
-id="btnsizes"
-onclick="
-var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
-var dedicatedjpgviewersiwidth=((window.innerWidth-18-(isPalemoon?3:(isFirefox?0:(isAndroid?290:5))))/(dedicatedjpgviewers.length/parseInt(this.attributes['row'].value)))+'px'
-sliderhoriz.value=parseInt(dedicatedjpgviewersiwidth)
-for(var i=0;i<dedicatedjpgviewers.length;i++)
-{
-   dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewersiwidth
-   if(dedicatedjpgviewers[i].id.endsWith('r0'))
-   {
-      dedicatedjpgviewers[i].width=(parseInt(dedicatedjpgviewersiwidth)-parseInt(35))+'px'
-   }
-}
-if(parseInt(this.attributes['row'].value)<Math.floor(dedicatedjpgviewers.length/2)){var rowvalue=parseInt(this.attributes['row'].value)+1;this.attributes['row'].value=rowvalue;this.innerText='Set widths to arrange to '+rowvalue+' rows'}
-else if(parseInt(this.attributes['row'].value)==Math.floor(dedicatedjpgviewers.length/2)){this.attributes['row'].value=dedicatedjpgviewers.length;this.innerText='Set widths to arrange to '+dedicatedjpgviewers.length+' rows'}
-else {this.attributes['row'].value=1;this.innerText='Set widths to arrange to 1 row'}" row=1>Set widths to arrange to 1 row</button><!--
---><button style="text-indent:-15px;text-align:left;width:100px;white-space:nowrap;font-size:10px;position:relative;left:316px;top:0px;z-index:3"
-id="btnlistlength"
-onclick="if(show_eventsmainjpgviewer4.style.display=='none'){show_eventsmainjpgviewer3.style.display='inline';show_eventsmainjpgviewer4.style.display='inline'}else{show_eventsmainjpgviewer3.style.display='none';show_eventsmainjpgviewer4.style.display='none'}"
->List length sliders</button><!--
---></div><!--
 --><div style="border:0px;display: inline-block;position:relative;top:0px;"><!--
 --><div style="border:0px;display: inline-block;width:444px;height:262px;position:relative;top:0px;z-index:3;background-clip: padding-box;-webkit-background-clip: padding-box;"><!--
 --><div style="border:0px;display: inline-block;position:relative;top:-26px;"><!--
 --><div style="white-space:nowrap;position:absolute;top:10px;left:0px;border:0px;display: inline-block;"><!--
---><i id="sliderhint" style="white-space:nowrap;position:relative;left:95px;font-size:10px;display:none;">Hint: Arrow etc. keyboard keys work for<br>slider control once one is clicked on</i><!--
+-->
+<!--
+--><i id="sliderhint" style="white-space:nowrap;position:relative;left:15px;font-size:10px;display:none;">Hint: Arrow etc. keyboard keys work for<br>slider control once one is clicked on</i><!--
 --><input type="range" min="60" max="4000" step="1" list="tickmarks" value="415" id="sliderhoriz"
 /*FUTURE: determine which element[s] are in rendered area and apply to those only.  The following always manipulates the main tab dedicated view elements*/
 oninput="
@@ -876,14 +891,17 @@ btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btn
 "></object><!--
 --><input disabled id="camapp_lst1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
 --></div><!--
+--><br><i style="position:relative;top:10px;left:70px" class="makefontsmallerforandroid">Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i><!--
 --><div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:0;top:13px"
 notes="this is the snaps middle viewer"><!--
 --><div style="position:relative;top:0px;"><!--
---><i style="position:relative;top:0px;left:70px" class="makefontsmallerforandroid">Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i><!--
---><button id="btnreclaim2" style="background-color:#fff;position:absolute;top:10px;left:340px;z-index:1;display:none" onmousedown="
-this.style.display='none'
-animatordivalertsdirectorytomainjpgviewer2.replaceChildren();animatordivalertsdirectorytomainjpgviewer2.remove();animationdivalertsdirectorytomainjpgviewer2=null;
-">Release viewer memory</button>
+-->
+<table width="1170px" height="582px" cellspacing="0" style="border-collapse:collapse;position:relative;top:-5px" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes">
+<tr><td id="spaceholder2" width="930px" height="100%" valign="top"><!--
+ Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=
+<input type="button" value="Most recent alert event" onclick="this.value=previousalert">
+<br> 
+-->
 <button style="position:relative;top:0px;left:120px;white-space:nowrap;background-color:#cccccc;color:#808080;
 border:1px solid black;z-index:3
 "
@@ -900,19 +918,46 @@ onmousedown="
     if(show_eventsmainjpgviewer3.value!=-1)
     {
        show_eventsmainjpgviewer3.value=-1
-       show_eventsmainjpgviewer3.onchange()
+       show_eventsmainjpgviewer3.oninput()
     }
    }
-">Stay current on this view</button><!--
---><table width="1px" height="582px" cellspacing="0" style="border-collapse:collapse;position:relative;top:0px" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholder2" width="1px" height="100%" valign="top"><!--
- Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=
-<input type="button" value="Most recent alert event" onclick="this.value=previousalert">
-<br> 
---><input type="range" id="show_eventsmainjpgviewer3" name="show_eventsmainjpgviewer3" min="-53" max="-1" value="-1" step="1" list="tickmarks" class="vertical-slider"
-style="position:absolute;top:20px;left:216px;z-index:5;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;display:none;
+">Stay current on this view</button>
+<input type="range" min="-2500" max="-20" step="1" list="tickmarks" value="-570" id="snapsslidervert"
+oninput="
+   document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.height=parseInt(parseInt(0-parseInt(this.value)))+'px'
+" 
+style="position:absolute;top:35px;height:225px;left:20px;z-index:3;display:none;-webkit-appearance: slider-vertical" orient="vertical">
+<input type="range" min="20" max="10000" step="1" list="tickmarks" value="840" id="snapssliderhoriz"
+/*FUTURE: determine which element[s] are in rendered area and apply to those only.*/
+oninput="
+   document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.width=parseInt(parseInt(this.value))+'px'
+" 
+style="position:absolute;top:20px;width:370px;left:30px;z-index:3;display:none;">
+<br><br><i style="text-indent:-12px;position:relative;width:600px;left:0px;top:0px;padding:0px 0px 10px 20px;display:inline-block" width="600px" class="makefontsmallerforandroid">A sub-range can be made <b>at the <u>bottom</u> of the listed snapshots</b> by putting the <b>right</b> 'list length' slider 
+button <b>below the left one</b>, as follows:</i>
+<i style="text-indent:-12px;position:relative;width:600px;left:0px;top:0px;padding:0px 0px 10px 20px;display:inline-block" width="600px" class="makefontsmallerforandroid">
+While a list of file names is being displayed (which results in these instructions getting covered by a snapshot unless you <u>raise the right 'list length' slider button</u> fully to see them again), put both the slider buttons at the low 
+boundary of the master range where the low boundary of your sub-range will also be. Again, <b>a sub-range can only be located where you put the <u>bottom</u> of the list.</b> "Click-to" on the right slider button is preferred (but not required) instead of "slide-to" to reduce jpg downloads that aren't really needed - it saves time.
+</i>
+<i style="text-indent:-12px;position:relative;width:600px;left:0px;top:0px;padding:0px 0px 10px 20px;display:inline-block" width="600px" class="makefontsmallerforandroid"><u>Click</u> on the <b>left</b> slider bar where you want the upper boundary; <u>sliding</u> the left slider button upwards (as in 'sliding past' the right one) <b>isn't 
+allowed</b>
+</i>
+<i style="text-indent:-12px;position:relative;width:600px;left:0px;top:0px;padding:0px 0px 10px 20px;display:inline-block" width="600px" class="makefontsmallerforandroid">Done.  Now you can slide the <b>right</b> slider button up and down between the two boundaries...
+</i>
+<i style="text-indent:-12px;position:relative;width:600px;left:0px;top:0px;padding:0px 0px 10px 20px;display:inline-block" width="600px" class="makefontsmallerforandroid">...slowly if the snapshots are being loaded for the first time.  Once the snapshots do get loaded, the button may be slid reasonably faster.  Reason - while snapshots are being [down]loaded the first time, the "event" of the right slider button hitting the upper limit can be lost in the busy-ness of network communications and then not restrain the button within your sub-range.  Still, sliding too fast in <u>either</u> case case can cause the button to skip past the upper boundary
+</i>
+<i style="text-indent:-12px;position:relative;width:600px;left:0px;top:0px;padding:0px 0px 10px 20px;display:inline-block" width="600px" class="makefontsmallerforandroid">Since this technique is a little complex already without the additional complexity added when the list has to be scrolled, consider using the view-dedication 
+tabs underneath to limit the list size to have a better likelihood of your desired sub-range showing up in the unscrolled portion of the list of file names. 
+Testing has not been extensive enough to prove conclusive reliability when the file name list is scrolled, though you might discover anyway that it actually does work fine even when scrolled.
+</i>
+</td>
+<td width="400px" valign="top">
+<span style="position:relative;top:0px;display:inline">
+<input type="range" id="show_eventsmainjpgviewer3" name="show_eventsmainjpgviewer3" min="-53" max="-1" value="-1" step="1" list="tickmarks" class="vertical-slider"
+style="position:absolute;top:33px;left:5px;z-index:5;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;display:none;
 "
 orient="vertical"
-onchange="
+oninput="
 if(this.value>(show_eventsmainjpgviewer4.value-1))
 {
    if(this.value==show_eventsmainjpgviewer4.value)
@@ -932,6 +977,8 @@ else if(snapsdirectory.data.includes(alertsdirectorysources[4].substring(7,(snap
 else if(snapsdirectory.data.includes(alertsdirectorysources[5].substring(7,(snapsdirectory.data.indexOf('?')<1?snapsdirectory.data.length:snapsdirectory.data.indexOf('?')-1))))
 {btnseastjpgs2.onmousedown()}
 else if(snapsdirectory.data.includes(alertsdirectorysources[6].substring(7,(snapsdirectory.data.indexOf('?')<1?snapsdirectory.data.length:snapsdirectory.data.indexOf('?')-1))))
+{btnnorthjpgs2.onmousedown()}
+else if(snapsdirectory.data.includes(alertsdirectorysources[7].substring(7,(snapsdirectory.data.indexOf('?')<1?snapsdirectory.data.length:snapsdirectory.data.indexOf('?')-1))))
 {btnnorthjpgs2.onmousedown()}
 "><!--
 --><input type="range" id="show_eventsmainjpgviewer4" notes="11px per line, 25 lines in mode0=275"
@@ -990,45 +1037,16 @@ this.oldvalue=this.value
 "  
 name="show_eventsmainjpgviewer4" class="slidersNeedingDelayedDisplay"
 min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;top:9px;left:370px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;display:none
+style="position:absolute;top:23px;left:45px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;display:none
 " 
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
-orient="vertical"><!--
---><input type="range" min="20" max="10000" step="1" list="tickmarks" value="840" id="snapssliderhoriz"
-/*FUTURE: determine which element[s] are in rendered area and apply to those only.*/
-oninput="
-   document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.width=parseInt(parseInt(this.value))+'px'
-" 
-style="position:absolute;top:20px;width:370px;left:450px;z-index:3;display:none;"><!--
---><input type="range" min="-2500" max="-20" step="1" list="tickmarks" value="-570" id="snapsslidervert"
-oninput="
-   document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.height=parseInt(parseInt(0-parseInt(this.value)))+'px'
-" 
-style="position:absolute;top:42px;height:225px;left:430px;z-index:3;display:none;-webkit-appearance: slider-vertical" orient="vertical"><!--
---><i style="text-indent:0px;position:absolute;width:600px;left:450px;top:20px;" width="600px" class="makefontsmallerforandroid">A sub-range can be made <b>at the <u>bottom</u> of the listed snapshots</b> by putting the <b>right</b> 'list length' slider 
-button <b>below the left one</b>, as follows:</i>
-<i style="text-indent:-12px;position:absolute;width:600px;left:450px;top:60px;" width="600px" class="makefontsmallerforandroid">
-While a list of file names is being displayed (which results in these instructions getting covered by a snapshot unless you <u>raise the right 'list length' slider button</u> fully to see them again), put both the slider buttons at the low 
-boundary of the master range where the low boundary of your sub-range will also be. Again, <b>a sub-range can only be located where you put the <u>bottom</u> of the list.</b> "Click-to" on the right slider button is preferred (but not required) instead of "slide-to" to reduce jpg downloads that aren't really needed - it saves time.
-</i>
-<i style="text-indent:-12px;position:absolute;width:600px;left:450px;top:170px;" width="600px" class="makefontsmallerforandroid"><u>Click</u> on the <b>left</b> slider bar where you want the upper boundary; <u>sliding</u> the left slider button upwards (as in 'sliding past' the right one) <b>isn't 
-allowed</b>
-</i>
-<i style="text-indent:-12px;position:absolute;width:600px;left:450px;top:220px;" width="600px" class="makefontsmallerforandroid">Done.  Now you can slide the <b>right</b> slider button up and down between the two boundaries...
-</i>
-<i style="text-indent:-12px;position:absolute;width:600px;left:450px;top:240px;" width="600px" class="makefontsmallerforandroid">...slowly if the snapshots are being loaded for the first time.  Once the snapshots do get loaded, the button may be slid reasonably faster.  Reason - while snapshots are being [down]loaded the first time, the "event" of the right slider button hitting the upper limit can be lost in the busy-ness of network communications and then not restrain the button within your sub-range.  Still, sliding too fast in <u>either</u> case case can cause the button to skip past the upper boundary
-</i>
-<i style="text-indent:0px;position:absolute;width:600px;left:450px;top:350px;" width="600px" class="makefontsmallerforandroid">Since this technique is a little complex already without the additional complexity added when the list has to be scrolled, consider using the view-dedication 
-tabs underneath to limit the list size to have a better likelihood of your desired sub-range showing up in the unscrolled portion of the list of file names. 
-Testing has not been extensive enough to prove conclusive reliability when the file name list is scrolled, though you might discover anyway that it actually does work fine even when scrolled.
-</i>
-<input type="range" min="-582" max="12" step="10" list="tickmarks" value="-582" id="snapsheightslider"
-oninput="
-snapsdirectory.height=(0-this.value)+'px'
-divsnapstabsrow.style.top=((0-this.value)-565)+'px'
-" 
-style="position:absolute;top:0px;height:608px;left:3px;z-index:3;display:none;-webkit-appearance: slider-vertical" orient="vertical">
+orient="vertical">
+<button id="btnreclaim2" style="background-color:#fff;position:absolute;top:0px;left:65px;z-index:2;display:none" onmousedown="
+animatordivalertsdirectorytomainjpgviewer2.replaceChildren();
+animatordivalertsdirectorytomainjpgviewer2.remove();
+animationdivalertsdirectorytomainjpgviewer2=null;
+">Release viewer memory (will require page reload anyway until fixed)</button>
 <object id="snapsdirectory" type="text/html"
 data=""
 onclick="this.data=this.data"
@@ -1053,7 +1071,8 @@ onload="if(show_eventsmainjpgviewer4.value=='1'){show_eventsmainjpgviewer4.value
           }
           show_eventsmainjpgviewer4.oninput()
         }
-        else{
+/*        else
+        {
            if(animatordivalertsdirectorytomainjpgviewer2!='undefined' && animatordivalertsdirectorytomainjpgviewer2 != null)
            {
               animatordivalertsdirectorytomainjpgviewer2.style.display='none';
@@ -1062,11 +1081,11 @@ onload="if(show_eventsmainjpgviewer4.value=='1'){show_eventsmainjpgviewer4.value
                  clearInterval(animatetimeralertsdirectorytomainjpgviewer2);animatetimeralertsdirectorytomainjpgviewer2=null
               }
            }
-        }
+        }*/
      },100)
      glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '');"
 width="365px" height="582px"
-style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 0px 3px;position:absolute;
+style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 0px 3px;position:absolute;z-index:2;
 ">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
@@ -1074,6 +1093,13 @@ style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px
    <param name="playingjpgs_number" value="0" />
    <param name="marker" value=0 />
     </object>
+<input type="range" min="-582" max="0" step="10" list="tickmarks" value="-582" id="snapsheightslider"
+oninput="
+snapsdirectory.height=(0-this.value)+'px'
+divsnapstabsrow.style.top=((0-this.value)-565)+'px'
+" 
+style="position:absolute;top:0px;height:608px;left:358px;z-index:3;display:none;-webkit-appearance: slider-vertical" orient="vertical">
+</span>
 </td></tr>
 </table>
 </div>
@@ -1091,7 +1117,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btneastjpgs2.style.background='rgb(215,215,245)';
    btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1109,7 +1135,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1127,7 +1153,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1145,7 +1171,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1164,7 +1190,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900);
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1182,27 +1208,49 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
-   btnseastjpgs2.style.background='rgb(215,215,245)';
+   btnseastjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
 ">North</button>
-<button id="btnreclaim1" style="background:#fff;position:absolute;top:40px;left:340px;display:none;z-index:2;" onmousedown="
+<button style="position:relative;top:0px;white-space:nowrap;background:rgb(215,215,245)
+border:0px solid black;
+border-width:0px 0px 3px 0px;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+"
+id="btncustomjpgs2"
+onmousedown="
+   snapsdirectory.children['marker'].value=7
+   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
+   this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
+   btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
+   btnseastjpgs2.style.background='rgb(215,215,245)';btnnorthjpgs2.style.background='rgb(215,215,245)';
+   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
+/*   show_eventsmainjpgviewer3.style.display='none'*/
+/*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
+">Custom</button>
+<table width="1260px" height="582px" cellspacing="0" style="border-collapse:collapse;position:relative;top:-10px" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes">
+<tr><td id="spaceholder1" width="930px" height="100%" valign="top">
+&nbsp;
+</td>
+<td  valign="top">
+<span style="position:relative;top:0px;display:inline">
+<button id="btnreclaim1" style="background:#fff;position:absolute;top:0px;left:100px;display:none;z-index:2;" onmousedown="
 this.style.display='none'
 animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
 clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdirectorytomainjpgviewer0=null
 ">Release viewer memory</button>
-<table width="1px" height="582px" cellspacing="0" style="border-collapse:collapse;position:relative;top:-30px" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholder1" width="1px" height="100%" valign="top">
-<tr><td>
 <!-- Click border to toggle between listing all or just a most recent few (traffic sparing).  Most recent=
 <input type="button" value="Most recent alert event" onclick="this.value=previousalert">
 <br> -->
+<span style="position:relative;top:0px">
 <input type="range" id="show_eventsmainjpgviewer1" name="show_eventsmainjpgviewer1" min="-53" max="-1" value="-1" step="1" list="tickmarks" class="vertical-slider"
 notes="this alerts element slider needs to be higher in absolute z-index than the snaps element slider above, but their image needs to be the other way around."
-style="position:absolute;top:50px;left:240px;z-index:1;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+style="position:absolute;top:50px;left:10px;z-index:1;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 "
 orient="vertical"
-onchange="
+oninput="
 if(this.value>(show_eventsmainjpgviewer2.value-1))
 {
    if(this.value==show_eventsmainjpgviewer2.value)
@@ -1225,6 +1273,8 @@ else if(alertsdirectory.data.includes(alertsdirectorysources[5].substring(7,(ale
 {btnseastjpgs.onmousedown()}
 else if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))))
 {btnnorthjpgs.onmousedown()}
+else if(alertsdirectory.data.includes(alertsdirectorysources[7].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))))
+{btncustomjpgs.onmousedown()}
 ">
 <input type="range" id="show_eventsmainjpgviewer2" notes="11px per line, 25 lines in mode0=275"
 oninput="
@@ -1283,7 +1333,7 @@ this.oldvalue=this.value
 "  
 name="show_eventsmainjpgviewer2" class="slidersNeedingDelayedDisplay"
 min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;top:38px;left:385px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+style="position:absolute;top:38px;left:55px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 " 
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
@@ -1342,18 +1392,19 @@ onload="if (!alertCheck.innerText.endsWith(' OFF'))
                              }
                              show_eventsmainjpgviewer2.oninput()
                            }
-                           else{
+/*                           else
+                           {
                               animatordivalertsdirectorytomainjpgviewer0.style.display='none';
                               if(animatordivalertsdirectorytomainjpgviewer0!='undefined' && animatordivalertsdirectorytomainjpgviewer0 != null){
                                  if(confirm(animationdivalertsdirectorytomainjpgviewer0.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory')){
                                     animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
                                  }
                               }
-                           }
+                           }*/
                         },100)
      glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '');"
 width="365px" height="582px"
-style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 0px 3px;position:relative;top:30px;
+style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 0px 3px;position:absolute;top:29px;
 ">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
@@ -1361,6 +1412,7 @@ style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px
    <param name="playingjpgs_number" value="0" />
    <param name="marker" value=0 />
 </object>
+</span>
 <!--
 <iframe id="iframealertsdirectory" src="" futuresrc="
 style="display:none;border:0px;position:absolute;width:0px;height:0px"
@@ -1429,8 +1481,10 @@ futureonload="this.contentDocument.body.childNodes[0].data
 ></iframe>
 
 -->
+</span>
 </td></tr>
 </table>	
+<br><br>
 <div style="position:relative;top:0px">
 <button style="position:relative;left:0px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
@@ -1448,7 +1502,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[1].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(Math.round(0-show_eventsmainjpgviewer1.value)))/*+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max)?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';btnalljpgs.style.background='rgb(215,215,245)';btneastjpgs.style.background='rgb(215,215,245)';
    btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display=''*/
 }
@@ -1472,7 +1526,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[0].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btneastjpgs.style.background='rgb(215,215,245)';
    btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1496,7 +1550,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[2].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1520,7 +1574,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[3].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1544,7 +1598,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[4].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1568,7 +1622,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[5].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1592,12 +1646,35 @@ if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';
-   btnseastjpgs.style.background='rgb(215,215,245)';
+   btnseastjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
 ">North</button>
+<button style="position:relative;white-space:nowrap;background:rgb(215,215,245)
+border:0px solid black;
+border-width:0px 0px 3px 0px;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+"
+id="btncustomjpgs"
+onmousedown="
+if(alertsdirectory.data.includes(alertsdirectorysources[7].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
+   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.innerText=='Make new alerts audible' ||
+   confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
+  )
+{
+   alertsdirectory.children['marker'].value=7
+   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
+   this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
+   btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';
+   btnseastjpgs.style.background='rgb(215,215,245)';btnnorthjpgs.style.background='rgb(215,215,245)';
+   setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
+/*   show_eventsmainjpgviewer1.style.display='none'*/
+}
+/*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
+">Custom</button>
 </div>
 </div>
 <!--
@@ -1656,7 +1733,7 @@ min="-48" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider"
 style="position:absolute;z-index:5;top:14px;left:270px;height:404px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 -->
 <!-- animatealertsdirectorytomainjpgviewer0(0-this.value,alertsdirectory.contentDocument.body.children[0].rows[0-this.value].cells[1].children[0].href);-->
-</td></tr></table>
+
 </td><td valign="top">
 <div id="mainjpgviewer_buttonsdiv" class="mainjpgviewer_buttonsdiv">
 <!--
@@ -2652,11 +2729,11 @@ function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
       animationdivalertsdirectorytomainjpgviewer0.className = 'jpganimator'
       animationdivalertsdirectorytomainjpgviewer0.className = 'divmain'
 
-
+      document.getElementById('spaceholder1').width=mainjpgviewer0.width
       document.getElementById('spaceholder1').appendChild(animationdivalertsdirectorytomainjpgviewer0) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
 
 
-      animatordivalertsdirectorytomainjpgviewer0.style='position:absolute;left:'+(alertsdirectory.offsetWidth+50)+'px;top:20px;background-size: contain;'
+      animatordivalertsdirectorytomainjpgviewer0.style='position:relative;top:0px;background-size: contain;'
       animatordivalertsdirectorytomainjpgviewer0.height=(parseInt(alertsdirectory.offsetHeight)+15)+'px'
       animatordivalertsdirectorytomainjpgviewer0.width=mainjpgviewer0.width
 /*      animatordivalertsdirectorytomainjpgviewer0.style.top='0px'*/
@@ -2665,8 +2742,8 @@ function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
    var firstmatch=animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
    if(firstmatch==null)
    {
-      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" style=\"height:100%;width:100%;position:absolute;top:15px;z-index:1;object-fit: fill;\" />';
-      animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'})
+      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" style=\"height:100%;width:100%;position:absolute;top:0px;z-index:1;object-fit: fill;\" />';
+/*      animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'})*/
    }
    else
    {
@@ -2708,7 +2785,7 @@ function animatealertsdirectorytomainjpgviewer2(rowindex,table_el,jpgname)
       document.getElementById('spaceholder2').appendChild(animationdivalertsdirectorytomainjpgviewer2) /* use animationdiv.replaceChildren() and animationdiv.remove() when finished using this element to free memory */
 
       animatordivalertsdirectorytomainjpgviewer2=animationdivalertsdirectorytomainjpgviewer2
-      animatordivalertsdirectorytomainjpgviewer2.style='position:absolute;left:'+(snapsdirectory.offsetWidth+50)+'px;top:-15px;z-index:2;'
+      animatordivalertsdirectorytomainjpgviewer2.style='position:absolute;left:0px;top:-15px;z-index:2;'
       animatordivalertsdirectorytomainjpgviewer2.style.height=(parseInt(snapsdirectory.offsetHeight))+'px'
       animatordivalertsdirectorytomainjpgviewer2.style.width=mainjpgviewer2.width
 /*      animatordivalertsdirectorytomainjpgviewer2.style.top='0px'*/
@@ -2720,7 +2797,7 @@ function animatealertsdirectorytomainjpgviewer2(rowindex,table_el,jpgname)
    if(firstmatch==null)
    {
       document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" style=\"position:absolute;top:15px;height:100%;width:100%;z-index:2;object-fit: fill;\" />';
-      document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer2.style.display='none'})
+/*      document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer2.style.display='none'})*/
    }
    else
    {
@@ -2794,6 +2871,7 @@ alertsdirectorysources[3] = '/../../camera_snapshots/camera_sw_corner/*jpg?alias
 alertsdirectorysources[4] = '/../../camera_snapshots/camera_front_parking/*jpg?aliased'
 alertsdirectorysources[5] = '/../../camera_snapshots/camera_south_driveway/*jpg?aliased'
 alertsdirectorysources[6] = '/../../camera_snapshots/camera_ne_corner/*jpg?aliased'
+alertsdirectorysources[7] = '/../../camera_snapshots/*/*jpg?-MOTION?aliased'
 var alertsdirectoryaliases = []
 alertsdirectoryaliases[0] = 'All snapshots, including motion detects which may no longer exist'
 alertsdirectoryaliases[1] = 'Alert-related snapshots'
@@ -2802,6 +2880,7 @@ alertsdirectoryaliases[3] = 'Dock snapshots'
 alertsdirectoryaliases[4] = 'Office snapshots'
 alertsdirectoryaliases[5] = 'S-East snapshots'
 alertsdirectoryaliases[6] = 'North snapshots'
+alertsdirectoryaliases[7] = 'Custom'
 /*delayedDisplayElements[0].styleleft='379px' disabled for now*/
 var filenameholderdedicatedjpgviewer = []
 var sourcesdedicatedjpgviewer = []
@@ -2953,7 +3032,7 @@ soundalarmmp3s[0] = 'eastdriveway.mp3'
 soundalarmmp3s[1] = 'dockcorner.mp3'
 soundalarmmp3s[2] = 'frontoffice.mp3'
 soundalarmmp3s[3] = 'southeastcorner.mp3'
-soundalarmmp3s[4] = 'frontoffice.mp3'
+soundalarmmp3s[4] = 'frontparkinglot.mp3'
 var audioelement2ndstage=null
 var audiosrc2ndstage=null
 var audio3rdstage=null
