@@ -321,7 +321,7 @@ onclick="if(show_eventsmainjpgviewer4.style.display=='none'){show_eventsmainjpgv
 >List length sliders</button>
 </span><!--
 --></span><!--
---></div><!--
+--></span><!--
 --><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
 <b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
 <table style="border:3px solid black"><tr><td>
@@ -1213,7 +1213,8 @@ onmousedown="
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
 ">North</button>
-<button style="position:relative;top:0px;white-space:nowrap;background:rgb(215,215,245)
+<span style="white-space:nowrap;">
+<button style="display:inline;position:relative;top:0px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
 border-bottom-left-radius:10px;
@@ -1222,7 +1223,7 @@ border-bottom-right-radius:10px;
 id="btncustomjpgs2"
 onmousedown="
    snapsdirectory.children['marker'].value=7
-   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
+   snapsdirectory.data=this.nextElementSibling.innerHTML+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
    btnseastjpgs2.style.background='rgb(215,215,245)';btnnorthjpgs2.style.background='rgb(215,215,245)';
@@ -1230,6 +1231,8 @@ onmousedown="
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
 ">Custom</button>
+<textarea style="position:relative;top:6px;display:inline;height:16px" cols="55" rows="1">/../../camera_snapshots/*/*jpg?-MOTION?aliased</textarea>
+</span>
 <table width="1260px" height="582px" cellspacing="0" style="border-collapse:collapse;position:relative;top:-10px" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes">
 <tr><td id="spaceholder1" width="930px" height="100%" valign="top">
 &nbsp;
@@ -1652,7 +1655,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdi
 }
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
 ">North</button>
-<button style="position:relative;white-space:nowrap;background:rgb(215,215,245)
+<span style="white-space:nowrap;"><button style="position:relative;display:inline;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
 border-bottom-left-radius:10px;
@@ -1666,7 +1669,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[7].substring(7,(alertsdi
   )
 {
    alertsdirectory.children['marker'].value=7
-   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
+   alertsdirectory.data=this.nextElementSibling.innerHTML+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';
    btnseastjpgs.style.background='rgb(215,215,245)';btnnorthjpgs.style.background='rgb(215,215,245)';
@@ -1675,7 +1678,8 @@ if(alertsdirectory.data.includes(alertsdirectorysources[7].substring(7,(alertsdi
 }
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
 ">Custom</button>
-</div>
+<textarea style="position:relative;top:6px;display:inline;height:16px" cols="55" rows="1">/../../camera_snapshots/*/*jpg?-MOTION?aliased</textarea>
+</span>
 </div>
 <!--
 -webkit-appearance: none;background-image: url('/var/www/html/arrow_4_SE.png')
@@ -1827,7 +1831,7 @@ ondragend="/*Now simply catch the very next mouse event to locate mouse*/
 </table>
 </td></tr>
 </table>
-</div></div></div><tr><td><div id="watchfootage" class="watchfootage" class="tablinks" style="display:none">
+</div></div></div><tr><td></div><div id="watchfootage" class="watchfootage" class="tablinks" style="display:none">
 <b>Separate Camera Recordings.  Click a blue border to list/unlist </b>
 
 &nbsp;&nbsp; &nbsp; &nbsp;
