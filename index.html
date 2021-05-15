@@ -1223,7 +1223,7 @@ border-bottom-right-radius:10px;
 id="btncustomjpgs2"
 onmousedown="
    snapsdirectory.children['marker'].value=7
-   snapsdirectory.data=this.nextElementSibling.innerHTML+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
+   snapsdirectory.data=this.nextElementSibling.value+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
    btnseastjpgs2.style.background='rgb(215,215,245)';btnnorthjpgs2.style.background='rgb(215,215,245)';
@@ -1669,7 +1669,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[7].substring(7,(alertsdi
   )
 {
    alertsdirectory.children['marker'].value=7
-   alertsdirectory.data=this.nextElementSibling.innerHTML+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
+   alertsdirectory.data=this.nextElementSibling.value+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';
    btnseastjpgs.style.background='rgb(215,215,245)';btnnorthjpgs.style.background='rgb(215,215,245)';
@@ -1680,6 +1680,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[7].substring(7,(alertsdi
 ">Custom</button>
 <textarea style="position:relative;top:6px;display:inline;height:16px" cols="55" rows="1">/../../camera_snapshots/*/*jpg?-MOTION?aliased</textarea>
 </span>
+<br>Another sample custom string: /../../camera_snapshots/camera_front_parking/*jpg?plaintext?aliased
 </div>
 <!--
 -webkit-appearance: none;background-image: url('/var/www/html/arrow_4_SE.png')
