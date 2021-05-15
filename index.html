@@ -954,7 +954,7 @@ Testing has not been extensive enough to prove conclusive reliability when the f
 <td width="400px" valign="top">
 <span style="position:relative;top:0px;display:inline">
 <input type="range" id="show_eventsmainjpgviewer3" name="show_eventsmainjpgviewer3" min="-53" max="-1" value="-1" step="1" list="tickmarks" class="vertical-slider"
-style="position:absolute;top:33px;left:5px;z-index:5;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;display:none;
+style="position:absolute;top:33px;left:0px;z-index:5;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;display:none;
 "
 orient="vertical"
 oninput="
@@ -982,7 +982,7 @@ else if(snapsdirectory.data.includes(alertsdirectorysources[7].substring(7,(snap
 {btnnorthjpgs2.onmousedown()}
 "><!--
 --><input type="range" id="show_eventsmainjpgviewer4" notes="11px per line, 25 lines in mode0=275"
-oninput="/*alert('successful line 921')*/
+oninput="/*When this slider gets bottomed out, it freezes.  TODO FIX  alert('successful line 921')*/
 this.value=(snapsdirectory.contentDocument!='undefined' && snapsdirectory.contentDocument!=null && snapsdirectory.contentDocument.body.children[0] !='undefined' && snapsdirectory.contentDocument.body.children[0] != null && snapsdirectory.contentDocument.body.children[0].rows!='undefined' && snapsdirectory.contentDocument.body.children[0].rows!=null && snapsdirectory.contentDocument.body.children[0].rows.length!='undefined' && snapsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-snapsdirectory.contentDocument.body.children[0].rows.length,this.value):1;
 if(this.value<1)
 {/*alert(parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.0089)*/
@@ -1037,12 +1037,12 @@ this.oldvalue=this.value
 "  
 name="show_eventsmainjpgviewer4" class="slidersNeedingDelayedDisplay"
 min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;top:23px;left:45px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;display:none
+style="position:absolute;top:23px;left:40px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;display:none
 " 
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
 orient="vertical">
-<button id="btnreclaim2" style="background-color:#fff;position:absolute;top:0px;left:65px;z-index:2;display:none" onmousedown="
+<button id="btnreclaim2" style="background-color:#fff;position:absolute;top:0px;left:65px;z-index:3;display:none" onmousedown="
 animatordivalertsdirectorytomainjpgviewer2.replaceChildren();
 animatordivalertsdirectorytomainjpgviewer2.remove();
 animationdivalertsdirectorytomainjpgviewer2=null;
@@ -1093,12 +1093,12 @@ style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px
    <param name="playingjpgs_number" value="0" />
    <param name="marker" value=0 />
     </object>
-<input type="range" min="-582" max="0" step="10" list="tickmarks" value="-582" id="snapsheightslider"
+<input type="range" min="-3582" max="0" step="10" list="tickmarks" value="-582" id="snapsheightslider"
 oninput="
 snapsdirectory.height=(0-this.value)+'px'
 divsnapstabsrow.style.top=((0-this.value)-565)+'px'
 " 
-style="position:absolute;top:0px;height:608px;left:358px;z-index:3;display:none;-webkit-appearance: slider-vertical" orient="vertical">
+style="position:absolute;top:10px;height:608px;left:358px;z-index:3;display:none;-webkit-appearance: slider-vertical" orient="vertical">
 </span>
 </td></tr>
 </table>
@@ -1250,7 +1250,7 @@ clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdir
 <span style="position:relative;top:0px">
 <input type="range" id="show_eventsmainjpgviewer1" name="show_eventsmainjpgviewer1" min="-53" max="-1" value="-1" step="1" list="tickmarks" class="vertical-slider"
 notes="this alerts element slider needs to be higher in absolute z-index than the snaps element slider above, but their image needs to be the other way around."
-style="position:absolute;top:50px;left:10px;z-index:1;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+style="position:absolute;top:50px;left:20px;z-index:1;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 "
 orient="vertical"
 oninput="
@@ -1336,7 +1336,7 @@ this.oldvalue=this.value
 "  
 name="show_eventsmainjpgviewer2" class="slidersNeedingDelayedDisplay"
 min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;top:38px;left:55px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+style="position:absolute;top:38px;left:65px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
 " 
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
@@ -1680,7 +1680,11 @@ if(alertsdirectory.data.includes(alertsdirectorysources[7].substring(7,(alertsdi
 ">Custom</button>
 <textarea style="position:relative;top:6px;display:inline;height:16px" cols="55" rows="1">/../../camera_snapshots/*/*jpg?-MOTION?aliased</textarea>
 </span>
-<br>Another sample custom string: /../../camera_snapshots/camera_front_parking/*jpg?plaintext?aliased
+<br>Other sample custom strings: 
+<span style="white-space:nowrap;">/../../camera_snapshots/camera_front_parking/*jpg?plaintext?aliased </span> 
+<!--<span style="white-space:nowrap;">/../../etc/emails* </span> -->
+<span style="white-space:nowrap;">/var/www/camera_streams/*/*mp4?aliased </span> 
+<span style="white-space:nowrap;">/../../home/homeowner/unarchiving_place/camera_snapshots/camera_front_parking/*jpg </span>
 </div>
 <!--
 -webkit-appearance: none;background-image: url('/var/www/html/arrow_4_SE.png')
