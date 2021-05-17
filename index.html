@@ -995,8 +995,9 @@ if(this.value<1)
    if((parseInt(this.oldvalue)!=null) &&
       (0-show_eventsmainjpgviewer3.value<snapsdirectory.contentDocument.body.children[0].rows.length) &&
       (parseInt(this.oldvalue)-1==show_eventsmainjpgviewer3.value) &&
-      (this.value-1>show_eventsmainjpgviewer3.value))
-   {this.value=this.oldvalue
+      (this.value-1>show_eventsmainjpgviewer3.value) && (this.value!=(parseInt(this.min)+parseInt(1))))
+   {
+      this.value=this.oldvalue
    }
    else if(rowselected<snapsdirectory.contentDocument.body.children[0].rows.length)
    {
@@ -1022,7 +1023,7 @@ else if(snapsdirectory.data.includes(alertsdirectorysources[0].substring(7,(snap
       if((parseInt(this.oldvalue)!=null) &&
          (0-show_eventsmainjpgviewer3.value<snapsdirectory.contentDocument.body.children[0].rows.length) &&
          (parseInt(this.oldvalue)-1==show_eventsmainjpgviewer3.value) &&
-         (this.value-1>show_eventsmainjpgviewer3.value))
+         (this.value-1>show_eventsmainjpgviewer3.value) && (this.value!=(parseInt(this.min)+parseInt(1))))
       {
           this.value=this.oldvalue
       }
@@ -1056,7 +1057,7 @@ onload="if(show_eventsmainjpgviewer4.value=='1'){show_eventsmainjpgviewer4.value
        if(show_eventsmainjpgviewer4.value<1){
    /*alert(parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.0089)*/
           var rowselected=Math.round(snapsdirectory.contentDocument.body.children[0].rows.length*(snapsdirectory.contentDocument.body.scrollTop/((parseInt(snapsdirectory.contentDocument.body.scrollHeight)*.9943)))-show_eventsmainjpgviewer4.value)
-          if(rowselected<snapsdirectory.contentDocument.body.children[0].rows.length){
+          if(snapsdirectory.contentDocument!='undefined' && snapsdirectory.contentDocument!=null && rowselected<snapsdirectory.contentDocument.body.children[0].rows.length){
              if(snapsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg')){
                 animatealertsdirectorytomainjpgviewer2(rowselected,snapsdirectory.contentDocument.body.children[0]);
                 StartTimeOfInterest=snapsdirectory.contentDocument.body.children[0].rows[rowselected].cells[0].outerHTML.substr(18)
@@ -1233,7 +1234,8 @@ onmousedown="
 ">Custom</button>
 <textarea style="position:relative;top:6px;display:inline;height:16px" cols="55" rows="1">/../../camera_snapshots/*/*jpg?-MOTION?aliased</textarea>
 </span>
-<table width="1260px" height="582px" cellspacing="0" style="border-collapse:collapse;position:relative;top:-10px" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes">
+<!--<div style="position:relative;top:0px">-->
+<table width="1260px" height="582px" cellspacing="0" style="border-collapse:collapse;position:relative;top:0px" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes">
 <tr><td id="spaceholder1" width="930px" height="100%" valign="top">
 &nbsp;
 </td>
@@ -1290,9 +1292,9 @@ if(this.value<1)
    if((parseInt(this.oldvalue)!=null) && 
       (0-show_eventsmainjpgviewer1.value<alertsdirectory.contentDocument.body.children[0].rows.length) &&
       ((parseInt(this.oldvalue)-1)==show_eventsmainjpgviewer1.value) &&
-      (this.value-1>show_eventsmainjpgviewer1.value))
+      (this.value-1>show_eventsmainjpgviewer1.value) && (this.value!=(parseInt(this.min)+parseInt(1))))
    {
-this.value=this.oldvalue
+       this.value=this.oldvalue
 /*      alert(show_eventsmainjpgviewer1.value+', '+this.value);*/
    }
    else if(rowselected<alertsdirectory.contentDocument.body.children[0].rows.length)
@@ -1321,8 +1323,9 @@ else if(alertsdirectory.data.includes(alertsdirectorysources[0].substring(7,(ale
       if((parseInt(this.oldvalue)!=null) &&
          (0-show_eventsmainjpgviewer1.value<alertsdirectory.contentDocument.body.children[0].rows.length) &&
          ((parseInt(this.oldvalue)-1)==show_eventsmainjpgviewer1.value) &&
-         (this.value-1>show_eventsmainjpgviewer1.value))
+         (this.value-1>show_eventsmainjpgviewer1.value) && (this.value!=(parseInt(this.min)+parseInt(1))))
       {
+console.log('line 1328:'+this.oldvalue+', '+(parseInt(this.min)+parseInt(1)))
           this.value=this.oldvalue 
       }
       else
@@ -1685,6 +1688,14 @@ if(alertsdirectory.data.includes(alertsdirectorysources[7].substring(7,(alertsdi
 <!--<span style="white-space:nowrap;">/../../etc/emails* </span> -->
 <span style="white-space:nowrap;">/var/www/camera_streams/*/*mp4?aliased </span> 
 <span style="white-space:nowrap;">/../../home/homeowner/unarchiving_place/camera_snapshots/camera_front_parking/*jpg </span>
+<div>Options: ?-word Lines containing word (exact case) are disqualified and removed from the results
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?aliased Self evident
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?plaintext Produces non-links output for reduced traffic
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?mostrecent30 Already controlled by the list length slider; the number may be up to 4 digits
+</div>
 </div>
 <!--
 -webkit-appearance: none;background-image: url('/var/www/html/arrow_4_SE.png')
@@ -2801,7 +2812,6 @@ function animatealertsdirectorytomainjpgviewer2(rowindex,table_el,jpgname)
 /*      animatordivalertsdirectorytomainjpgviewer2.style.top=(parseInt(snapsdirectory.height)>350?'42px':'420px')*/
    }/*Next lines need to return the same or possibly changed index like if the jpg is already here somewhere*/
 /*TODO: when a jpg is to be displayed that is not in the table, figure out how to display it with its filename as the only list member*/
-
    var firstmatch=document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
    if(firstmatch==null)
    {
