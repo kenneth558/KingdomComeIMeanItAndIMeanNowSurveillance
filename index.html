@@ -321,109 +321,8 @@ onclick="if(show_eventsmainjpgviewer4.style.display=='none'){show_eventsmainjpgv
 >List length sliders</button>
 </span><!--
 --></span><!--
---></span><!--
---><div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
-<b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
-<table style="border:3px solid black"><tr><td>
-<table style="border:1px solid black"><tr><td>
-<table><tr><td>
-<label>Drag/droppable, cut/pasteable low-res (.../102) and high-res (.../101) camera stream addresses, layed out the way I arrange the players on my screen:</label><br>
-<center>
-<table><tr><td style="border:1px ridge black">
-<center>
-<b>
-<a href="#sd_location_on_page" target="_blank">South East</a></b><br>
-<input disabled id="camapp_ll" size="41" style="border:1px ridge blue;" value="working..." ><br>
-<input disabled id="camapp_ll1" size="41" style="border:1px ridge blue;" value="working..." ><br>
-  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
-  <form  method="put">
-  <input type="range" id="south_driveway" oninput="slidersd()" name="!home!homeowner!camera_snapshots!camera_south_driveway!settimeout"
-         min="0" max="360" value="4" step="1" list="tickmarks">
-  <input type="submit" id="sdsubmit" value="Set to n minutes">
-  </form>
-<br>
-</td></tr><tr><td style="border:1px ridge black">
-<center><b>
-<a href="#sw_corner_location_on_page" target="_blank">Dock</a></b><br>
-<input disabled id="camapp_lr" size="41" style="border:1px ridge blue;" value="working..."><br>
-<input disabled id="camapp_lr1" size="41" style="border:1px ridge blue;" value="working..."><br>
-  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
-  <form  method="put">
-  <input type="range" id="sw_corner" oninput="slidersw()" name="!home!homeowner!camera_snapshots!camera_sw_corner!settimeout"
-         min="0" max="360" value="4" step="1" list="tickmarks">
-  <input type="submit" id="swsubmit" value="Set to n minutes">
-  </form>
-<br>
-</td></tr></table>
-</td>
-<td width="615px">
-<center><table><tr><td style="border:1px ridge black">
-<center><b><a href="#fp_location_on_page" target="_blank">Office</a></b><br>
-<input disabled id="camapp_ul" size="58" style="border:1px ridge blue;" value="working..."><br>
-<input disabled id="camapp_ul1" size="58" style="border:1px ridge blue;" value="working..."><br>
-  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
-  <form  method="put">
-  <input type="range" id="front_parking" oninput="sliderfp()"  name="!home!homeowner!camera_snapshots!camera_front_parking!settimeout"
-         min="0" max="360" value="4" step="1"  list="tickmarks">
-  <input type="submit" id="fpsubmit" value="Set to n minutes">
-  </form>
-<br>
-</td></tr><tr><td style="border:1px ridge black">
-<center><b><a href="#ed_location_on_page" target="_blank">East</a></b><br>
-<input disabled id="camapp_ur" size="42" style="border:1px ridge blue;" value="working..."><br>
-<input disabled id="camapp_ur1" size="42" style="border:1px ridge blue;" value="working..."><br>
-  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
-  <form  method="put">
-  <input type="range" id="east_driveway" oninput="slidered()"  name="!home!homeowner!camera_snapshots!camera_east_driveway!settimeout"
-         min="0" max="360" value="4" step="1" list="tickmarks">
-  <input type="submit" id="edsubmit" value="Set to n minutes">
-  </form>
- <!--<input type="submit" formaction="" name="PlayAll" value="Start all four">-->
-<!-- <button onclick="playVid()" type="button">Play Video</button>
-<button onclick="pauseVid()" type="button">Pause Video</button><br> 
-
-<video src="" id="camembed_ul" width="320" height="176" autoplay controls debug>
-</video>
--->
-<br>
-</td></tr><tr><td style="border:1px solid black">
-<center><b><a href="#ne_location_on_page" target="_blank">North</a></b><br>
-<input disabled id="camapp_lst" size="41" style="border:1px ridge blue;" value="working..."><br>
-<input disabled id="camapp_lst1" size="41" style="border:1px ridge blue;" value="working..."><br>
-  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
-  <form method="put">
-  <input type="range" id="ne_corner" oninput="sliderne()" name="!home!homeowner!camera_snapshots!camera_ne_corner!settimeout"
-         min="0" max="360" value="4" step="1" list="tickmarks">
-  <input type="submit" id="nesubmit" value="Set to n minutes">
-   </form>
-<br></center>
-</td></tr></table>
-</td></tr></table>
-</td></tr>
-<tr><td>
-<table width="100%"><tr><td>
-<br>
-  <center><label><b>Entire system short term alerts disable</b></label>
-<br>This disable operates independent of the others while overscoping them
-</center><br>
-  <center><form  method="put">
-  </center><center><input type="range" id="entire_system" oninput="slideres()" name="!home!homeowner!camera_snapshots!settimeout"
-         min="0" max="3600" value="4" step="1" list="tickmarks">
-  <input type="submit" id="essubmit" value="Set to n minutes"></center><br>
-  </form>
-</td><td>
-</td></tr></table>
-</td></tr></table>
-</td>
-<td>
-<table width="150px"><tr><td>
-<textarea cols="35" rows="1" style="font-size: 12pt"  value="In here could be the recipient list">
-In here could be the recipient list
-</textarea>
-<textarea cols="35" style="font-size: 12pt" >FUTURE Ability to send notices to others on a notification list</textarea>
-</td></tr></table>
-</td></tr></table>
-</div><div id="system_wide" class="system_wide" class="tabcontent" style="display:none">
+--></span>
+<div id="system_wide" class="system_wide" class="tabcontent" style="display:none">
 <b>
 <br>System-wide:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None of these this page (combined views page) span months correctly right now<br>
 <table width="2250px">
@@ -2727,10 +2626,112 @@ Hopefully I'll find it soon.
     <br><button onclick="launch()">Sandbox JPG player</button>Only click this after opening latest alert event into the snapshot list
     <input type="button" id="btnposition" style="height:100px;width:100px;font-size:12px;" onmousemove="this.value=event.clientX+':'+event.clientY+', '+event.screenX+':'+event.screenY" value="....................Mouse over me..........................">
 <br>
-</div><div id="futurediv" class="futurediv" class="tabontent" style="display:none">
-</div>
-
+</div><div id="futurediv" class="futurediv" class="tabontent" style="display:none"></div>
 </div><div id="loadingdiv" class="loadingdiv" class="tabcontent" style="display:none">WAIT WHILE PAGE IS LOADING. PERFORM NO USER INPUT WHILE LOADING OR PAGE ELEMENTS WILL ABORT THEIR LOADING</div>
+</div>
+<!--Until a rogue mis-matched tag-end gets fixed this last div is relegated to being at the end here-->
+<div id="disablesandlivelinks" class="disablesandlivelinks" class="tabcontent"  style="display:none">
+<b>Surveillance Camera Stills and Stream videos with links to Live Streams</b></center>
+<table style="border:3px solid black"><tr><td>
+<table style="border:1px solid black"><tr><td>
+<table><tr><td>
+<label>Drag/droppable, cut/pasteable low-res (.../102) and high-res (.../101) camera stream addresses, layed out the way I arrange the players on my screen:</label><br>
+<center>
+<table><tr><td style="border:1px ridge black">
+<center>
+<b>
+<a href="#sd_location_on_page" target="_blank">South East</a></b><br>
+<input disabled id="camapp_ll" size="41" style="border:1px ridge blue;" value="working..." ><br>
+<input disabled id="camapp_ll1" size="41" style="border:1px ridge blue;" value="working..." ><br>
+  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
+  <form  method="put">
+  <input type="range" id="south_driveway" oninput="slidersd()" name="!home!homeowner!camera_snapshots!camera_south_driveway!settimeout"
+         min="0" max="600" value="4" step="1" list="tickmarks">
+  <input type="submit" id="sdsubmit" value="Set to n minutes">
+  </form>
+<br>
+</td></tr><tr><td style="border:1px ridge black">
+<center><b>
+<a href="#sw_corner_location_on_page" target="_blank">Dock</a></b><br>
+<input disabled id="camapp_lr" size="41" style="border:1px ridge blue;" value="working..."><br>
+<input disabled id="camapp_lr1" size="41" style="border:1px ridge blue;" value="working..."><br>
+  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
+  <form  method="put">
+  <input type="range" id="sw_corner" oninput="slidersw()" name="!home!homeowner!camera_snapshots!camera_sw_corner!settimeout"
+         min="0" max="600" value="4" step="1" list="tickmarks">
+  <input type="submit" id="swsubmit" value="Set to n minutes">
+  </form>
+<br>
+</td></tr></table>
+</td>
+<td width="615px">
+<center><table><tr><td style="border:1px ridge black">
+<center><b><a href="#fp_location_on_page" target="_blank">Office</a></b><br>
+<input disabled id="camapp_ul" size="58" style="border:1px ridge blue;" value="working..."><br>
+<input disabled id="camapp_ul1" size="58" style="border:1px ridge blue;" value="working..."><br>
+  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
+  <form  method="put">
+  <input type="range" id="front_parking" oninput="sliderfp()"  name="!home!homeowner!camera_snapshots!camera_front_parking!settimeout"
+         min="0" max="600" value="4" step="1"  list="tickmarks">
+  <input type="submit" id="fpsubmit" value="Set to n minutes">
+  </form>
+<br>
+</td></tr><tr><td style="border:1px ridge black">
+<center><b><a href="#ed_location_on_page" target="_blank">East</a></b><br>
+<input disabled id="camapp_ur" size="42" style="border:1px ridge blue;" value="working..."><br>
+<input disabled id="camapp_ur1" size="42" style="border:1px ridge blue;" value="working..."><br>
+  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
+  <form  method="put">
+  <input type="range" id="east_driveway" oninput="slidered()"  name="!home!homeowner!camera_snapshots!camera_east_driveway!settimeout"
+         min="0" max="600" value="4" step="1" list="tickmarks">
+  <input type="submit" id="edsubmit" value="Set to n minutes">
+  </form>
+ <!--<input type="submit" formaction="" name="PlayAll" value="Start all four">-->
+<!-- <button onclick="playVid()" type="button">Play Video</button>
+<button onclick="pauseVid()" type="button">Pause Video</button><br> 
+
+<video src="" id="camembed_ul" width="320" height="176" autoplay controls debug>
+</video>
+-->
+<br>
+</td></tr><tr><td style="border:1px solid black">
+<center><b><a href="#ne_location_on_page" target="_blank">North</a></b><br>
+<input disabled id="camapp_lst" size="41" style="border:1px ridge blue;" value="working..."><br>
+<input disabled id="camapp_lst1" size="41" style="border:1px ridge blue;" value="working..."><br>
+  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
+  <form method="put">
+  <input type="range" id="ne_corner" oninput="sliderne()" name="!home!homeowner!camera_snapshots!camera_ne_corner!settimeout"
+         min="0" max="600" value="4" step="1" list="tickmarks">
+  <input type="submit" id="nesubmit" value="Set to n minutes">
+   </form>
+<br></center>
+</td></tr></table>
+</td></tr></table>
+</td></tr>
+<tr><td>
+<table width="100%"><tr><td>
+<br>
+  <center><label><b>Entire system short term alerts disable</b></label>
+<br>This disable operates independent of the others while overscoping them
+</center><br>
+  <center><form  method="put">
+  </center><center><input type="range" id="entire_system" oninput="slideres()" name="!home!homeowner!camera_snapshots!settimeout"
+         min="0" max="3600" value="4" step="1" list="tickmarks">
+  <input type="submit" id="essubmit" value="Set to n minutes"></center><br>
+  </form>
+</td><td>
+</td></tr></table>
+</td></tr></table>
+</td>
+<td>
+<table width="150px"><tr><td>
+<textarea cols="35" rows="1" style="font-size: 12pt"  value="In here could be the recipient list">
+In here could be the recipient list
+</textarea>
+<textarea cols="35" style="font-size: 12pt" >FUTURE Ability to send notices to others on a notification list</textarea>
+</td></tr></table>
+</td></tr></table>
+</div>
 <!-- <script>
 onerror="this.data=':1958/silence.mp3';setTimeout(function(){this.data=':15554/silence.mp3';setTimeout(function(){this.data=':14554/silence.mp3';this.data='/var/www/html/silence.mp3';},300)},300);"
 
@@ -3543,13 +3544,10 @@ function notimeoutfilehere() {
  return false;
 }
 
-function slidersd(a) {
 var sdsliderbarinput = document.getElementById("south_driveway");
 var sdsubmit = document.getElementById("sdsubmit");
+function slidersd(a) {
    if (a !== undefined) {sdsliderbarinput.value = a;}
-
-   var timeoutfilename = "/home/homeowner/camera_snapshots/default_timeout_for_newly_added_cameras";
-    var destinationid="sdsubmit";
     sdsubmit.value = "Set to " + sdsliderbarinput.value + " minutes";
 }
 
