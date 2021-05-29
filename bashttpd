@@ -479,9 +479,11 @@ A:active  { color : #000000; font-weight: normal; background-color : transparent
 
 #jpg?aliased?mostrecent'+...
 function serve_dir_or_file_from() {
+echo "${1}/${3}" > /var/log/bashttpd.log
   local URL_PATH="${1}/${3}"
   shift
   URL_PATH=$(urldecode "${URL_PATH}") 
+echo "${URL_PATH}" >> /var/log/bashttpd.log
   local GREPV=${URL_PATH##*\?-}
 #echo "new instance where GREPV=${GREPV}" >> /var/log/bashttpd.log
   GREPV=${GREPV%%\?*}
@@ -532,8 +534,8 @@ local URL_PATHpremins=""
 local URL_PATHpostmins=""
 if [[ "${URL_PATH}" =~ .*\?*[0-9.]{1,2}minutesbefore* ]]; then
 #URL_PATH =~ /var/www/camera_streams/camera_ne_corner/*?1minutesbefore2020-12-18 21:23:41.057728372
-#      echo >> /home/homeowner/bashttpd.log
-#      echo "${URL_PATH}" >> /home/homeowner/bashttpd.log
+#      echo >> /var/log/bashttpd.log
+#      echo "${URL_PATH}" >> /var/log/bashttpd.log
       URL_PATHpremins="${URL_PATH%%minutesbefore*}"
       minutes=${URL_PATHpremins: -2}
       URL_PATHpremins="${URL_PATHpremins:0: -2}"
@@ -600,6 +602,7 @@ print "</a></td></tr>";lines=1;
 } 
 END {print "</table>";if(lines<1){print "Fetched list is too short or too long in " path " to display anything"}}')"
 
+#  elif [[ "${URL_PATH}" =~ .*\*mp4$ ]] || [[ "${URL_PATH}" =~ .*\*jpg$ ]] || [[ true == true ]]; then
   elif [[ "${URL_PATH}" =~ .*\*mp4$ ]] || [[ "${URL_PATH}" =~ .*\*jpg$ ]]; then
       serve_html_string "$(echo "elif3, GREPV=${GREPV} ${URL_PATH}" >> /var/log/bashttpd.log;
 if [[ ${#HEADLINES} == 0 ]] && [[ ${#GREPV} == 0 ]]; then ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH};
@@ -607,7 +610,7 @@ elif [[ ${#HEADLINES} > 0 ]] && [[ ${#GREPV} == 0 ]];then ls -l --full-time --ti
 elif [[ ${#HEADLINES} == 0 ]] && [[ ${#GREPV} > 0 ]];then ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|grep -v ${GREPV};
 elif [[ ${#HEADLINES} > 0 ]] && [[ ${#GREPV} > 0 ]]; then ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|grep -v ${GREPV}|head -n$(( ${HEADLINES} ));
 fi|awk -v openhere="${OPENHERE}" -v headlines=${HEADLINES} -v linkpre="${LINKPRE}" -v aliased=$ALIASED -v css_style="$css_styling" -v cams_needed=$CAMS_ACTIVE -v path="${URL_PATH}" -v plaintext=$PLAINTEXT '
-BEGIN {toptencounter=0;lines=0;if(plaintext=="false"){print css_style "<table class=\"elif3\" style=\"width:100%;\">"}}
+BEGIN {toptencounter=0;lines=0;if(plaintext=="false"){print css_style "<table class=\"elif3\" openhere=\"openhere\" style=\"width:100%;\">"}}
 {
  if(plaintext=="false")
  {
@@ -616,7 +619,7 @@ BEGIN {toptencounter=0;lines=0;if(plaintext=="false"){print css_style "<table cl
  if(substr($1,1,1)!="l"){printf $10}else{printf $12};
 if(plaintext=="false")
 {
- if(substr($10,length($10)-3)=="\.jpg" && openhere=='false'){printf "\" target=\"_blank"}
+ if(substr($10,length($10)-3)=="\.jpg" && openhere=="false"){printf "\" target=\"_blank"}
  printf "\">"
  if(substr($1,1,1)!="l")
  {
@@ -1031,7 +1034,7 @@ END {print "</table>";if(line<2){print "Fetched list is too short or too long in
   elif [[ "${URL_PATH}" =~ .*?.*settimeout=[0-9]{1,6}$ ]]; then
 #URL_PATH=~/var/www/html/index.html?!home!homeowner!camera_snapshots!camera_sw_corner!settimeout=10
       URL_PATH=${URL_PATH##*\?}
-      URL_PATH=${URL_PATH//!/\/}
+      URL_PATH=${URL_PATH//\!/\/}
 #      /home/homeowner/camera_snapshots/settimeout=115
 #      echo >>/home/homeowner/bashttpd.log
        echo "${URL_PATH%?settimeout*}/timeout" >> /home/homeowner/bashttpd.log
