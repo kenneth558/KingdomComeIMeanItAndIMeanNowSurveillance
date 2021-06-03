@@ -83,6 +83,8 @@ url2=':14';                                url4='2';  camapp_lr.value= url0     
                                            url4='1'; camapp_lr1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_lr1dup.value=camapp_lr1.value
 url2=':15';                                url4='2'; camapp_lst.value= url0        + window.location.hostname + url2 + url3 + url4;
                                            url4='1';camapp_lst1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_lst1dup.value=camapp_lst1.value
+url2=':20';                       url4='/capture'; camapp_espcam0.value= 'http://'+ window.location.hostname + url2 +       url4;
+                                 url4=':81/stream';camapp_espcam01.value= 'http://'+ window.location.hostname + url2 +      url4;camapp_espcam01dup.value=camapp_espcam01.value
 slidersd(10);
 slidered(10);
 slidersw(10);
@@ -742,11 +744,13 @@ filenametool2.parentElement.style.borderColor='transparent';filenametool2.parent
 filenametool3.parentElement.style.borderColor='transparent';filenametool3.parentElement.parentElement.style.zIndex=0
 filenametool4.parentElement.style.borderColor='transparent';filenametool4.parentElement.parentElement.style.zIndex=0
 filenametool5.parentElement.style.borderColor='transparent';filenametool5.parentElement.parentElement.style.zIndex=0
+filenametool6.parentElement.style.borderColor='transparent';filenametool6.parentElement.parentElement.style.zIndex=0
 filenametool1.src=sourcesdedicatedjpgviewer[1];
 filenametool2.src=sourcesdedicatedjpgviewer[2];
 filenametool3.src=sourcesdedicatedjpgviewer[3];
 filenametool4.src=sourcesdedicatedjpgviewer[4];
 filenametool5.src=sourcesdedicatedjpgviewer[5];
+filenametool6.src=sourcesdedicatedjpgviewer[6];
 setTimeout(function()
 {
 /*  The following lines will cause console err messages at first pass simply because the referenced elements won't exist before the timeout period ends, but they will exist later when the timeout period ends */
@@ -770,6 +774,10 @@ setTimeout(function()
    {
       filenametool5.parentElement.style.borderColor='rgb(127, 0, 0)';filenametool5.parentElement.style.borderColor='rgba(255, 0, 0, .5)';filenametool5.parentElement.parentElement.style.zIndex=1
    }
+   else if(filenametool0.contentDocument.body.innerText.includes(filenametool6.src.substr(filenametool6.src.indexOf('camera_')+24,7)))
+   {
+      filenametool6.parentElement.style.borderColor='rgb(127, 0, 0)';filenametool6.parentElement.style.borderColor='rgba(255, 0, 0, .5)';filenametool6.parentElement.parentElement.style.zIndex=1
+   }
 },80);
    if( btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnalljpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)'))
    {
@@ -777,14 +785,6 @@ setTimeout(function()
    }
 "></object><!--
 --><input disabled size="0" style="position:relative;top:0px;opacity:0;z-index:2" value=""></div><!--
---><div style="border:0px;display: inline-block;width:444px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btndockjpgs2.onmousedown()" 
-style="border-width:6px 0px 6px 0px;border-style:solid;border-color:transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
-onload="
-if(
-btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btndockjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
-){btndockjpgs2.onmousedown()}
-"></object><!--
---><input disabled id="camapp_lr1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
 --><div style="border:0px;display: inline-block;width:444px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btneastjpgs2.onmousedown()" 
 style="border-width:6px 0px 6px 0px;border-style:solid;border-color:transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer2" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
@@ -793,14 +793,14 @@ btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btn
 ){btneastjpgs2.onmousedown()}
 "></object><!--
 --><input disabled id="camapp_ur1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
---><div style="border:0px;display: inline-block;width:444px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btnseastjpgs2.onmousedown()" 
-style="border-width:6px 0px 6px 0px;border-style:solid;border-color:transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer3" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
+--><div style="border:0px;display: inline-block;width:444px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btndockjpgs2.onmousedown()" 
+style="border-width:6px 0px 6px 0px;border-style:solid;border-color:transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer1" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
-btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnseastjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
-){btnseastjpgs2.onmousedown()}
+btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btndockjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
+){btndockjpgs2.onmousedown()}
 "></object><!--
---><input disabled id="camapp_ll1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
+--><input disabled id="camapp_lr1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
 --><div style="border:0px;display: inline-block;width:444px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btnofficejpgs2.onmousedown()" 
 style="border-width:6px 0px 6px 0px;border-style:solid;border-color:transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer4" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
@@ -809,6 +809,14 @@ btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btn
 ){btnofficejpgs2.onmousedown()}
 "></object><!--
 --><input disabled id="camapp_ul1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
+--><div style="border:0px;display: inline-block;width:444px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btnseastjpgs2.onmousedown()" 
+style="border-width:6px 0px 6px 0px;border-style:solid;border-color:transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer3" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
+onload="
+if(
+btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnseastjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
+){btnseastjpgs2.onmousedown()}
+"></object><!--
+--><input disabled id="camapp_ll1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
 --><div style="border:0px;display: inline-block;width:444px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btnnorthjpgs2.onmousedown()" 
 style="border-width:6px 0px 6px 0px;border-style:solid;border-color:transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer5" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
@@ -817,7 +825,16 @@ btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btn
 ){btnnorthjpgs2.onmousedown()}
 "></object><!--
 --><input disabled id="camapp_lst1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
---></div><!--
+--><div style="border:0px;display: inline-block;width:444px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object 
+onclick="btnespcam0jpgs2.onmousedown()"
+style="border-width:6px 0px 6px 0px;border-style:solid;border-color:transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer6" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
+onload="
+if(
+btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnespcam0jpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
+){btnespcam0jpgs2.onmousedown()}
+"></object><!--
+--><input disabled id="camapp_espcam01dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
+--></div><!--camapp_espcam0
 --><br><i style="position:relative;top:10px;left:70px" class="makefontsmallerforandroid">Upper left is the most recent event of all views and will duplicate that one, which is solid red bordered</i><!--
 --><div id="mainalerts_viewer_buttonsdiv" class="mainalerts_viewer_buttonsdiv" style="position:relative;z-index:0;top:13px"
 notes="this is the snaps middle viewer"><!--
@@ -906,7 +923,7 @@ else if(snapsdirectory.data.includes(alertsdirectorysources[5].substring(7,(snap
 else if(snapsdirectory.data.includes(alertsdirectorysources[6].substring(7,(snapsdirectory.data.indexOf('?')<1?snapsdirectory.data.length:snapsdirectory.data.indexOf('?')-1))))
 {btnnorthjpgs2.onmousedown()}
 else if(snapsdirectory.data.includes(alertsdirectorysources[7].substring(7,(snapsdirectory.data.indexOf('?')<1?snapsdirectory.data.length:snapsdirectory.data.indexOf('?')-1))))
-{btnnorthjpgs2.onmousedown()}
+{btnespcam0jpgs2.onmousedown()}
 "><!--
 --><input type="range" id="show_eventsmainjpgviewer4" notes="11px per line, 25 lines in mode0=275"
 oninput="/*When this slider gets bottomed out, it freezes.  TODO FIX  alert('successful line 921')*/
@@ -1045,7 +1062,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btneastjpgs2.style.background='rgb(215,215,245)';
    btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1063,7 +1080,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1081,7 +1098,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1099,7 +1116,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1118,7 +1135,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900);
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1136,11 +1153,29 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
-   btnseastjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';
+   btnseastjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
 ">North</button>
+
+<button style="position:relative;top:0px;left:0px;white-space:nowrap;background:rgb(215,215,245)
+border:0px solid black;
+border-width:0px 0px 3px 0px;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+"
+id="btnespcam0jpgs2"
+onmousedown="
+   snapsdirectory.children['marker'].value=7
+   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
+   this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';btnnorthjpgs2.style.background='rgb(215,215,245)';
+   btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
+   btnseastjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';
+   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
+/*   show_eventsmainjpgviewer3.style.display='none'*/
+/*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
+">ESP32-CAM0</button>
 <span style="white-space:nowrap;">
 <button style="display:inline;position:relative;top:0px;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
@@ -1150,11 +1185,11 @@ border-bottom-right-radius:10px;
 "
 id="btncustomjpgs2"
 onmousedown="
-   snapsdirectory.children['marker'].value=7
+   snapsdirectory.children['marker'].value=8
    snapsdirectory.data=this.nextElementSibling.value+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
-   btnseastjpgs2.style.background='rgb(215,215,245)';btnnorthjpgs2.style.background='rgb(215,215,245)';
+   btnseastjpgs2.style.background='rgb(215,215,245)';btnnorthjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1206,6 +1241,8 @@ else if(alertsdirectory.data.includes(alertsdirectorysources[5].substring(7,(ale
 else if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))))
 {btnnorthjpgs.onmousedown()}
 else if(alertsdirectory.data.includes(alertsdirectorysources[7].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))))
+{btnespcam0jpgs.onmousedown()}
+else if(alertsdirectory.data.includes(alertsdirectorysources[8].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))))
 {btncustomjpgs.onmousedown()}
 ">
 <input type="range" id="show_eventsmainjpgviewer2" notes="11px per line, 25 lines in mode0=275"
@@ -1435,7 +1472,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[1].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(Math.round(0-show_eventsmainjpgviewer1.value)))/*+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max)?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';btnalljpgs.style.background='rgb(215,215,245)';btneastjpgs.style.background='rgb(215,215,245)';
    btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display=''*/
 }
@@ -1459,7 +1496,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[0].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btneastjpgs.style.background='rgb(215,215,245)';
    btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1483,7 +1520,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[2].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1507,7 +1544,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[3].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1531,7 +1568,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[4].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1555,7 +1592,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[5].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1579,12 +1616,37 @@ if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';
-   btnseastjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';
+   btnseastjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
 ">North</button>
+
+<button style="position:relative;white-space:nowrap;background:rgb(215,215,245)
+border:0px solid black;
+border-width:0px 0px 3px 0px;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+"
+id="btnespcam0jpgs"
+onmousedown="
+if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
+   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.innerText=='Make new alerts audible' ||
+   confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
+  )
+{
+   alertsdirectory.children['marker'].value=7
+   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
+   this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
+   btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';
+   btnseastjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnnorthjpgs.style.background='rgb(215,215,245)';
+   setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
+/*   show_eventsmainjpgviewer1.style.display='none'*/
+}
+/*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
+">ESP32-CAM0</button>
+
 <span style="white-space:nowrap;"><button style="position:relative;display:inline;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
 border-width:0px 0px 3px 0px;
@@ -1598,11 +1660,11 @@ if(alertsdirectory.data.includes(alertsdirectorysources[7].substring(7,(alertsdi
    confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
   )
 {
-   alertsdirectory.children['marker'].value=7
+   alertsdirectory.children['marker'].value=8
    alertsdirectory.data=this.nextElementSibling.value+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';
-   btnseastjpgs.style.background='rgb(215,215,245)';btnnorthjpgs.style.background='rgb(215,215,245)';
+   btnseastjpgs.style.background='rgb(215,215,245)';btnnorthjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1749,13 +1811,14 @@ Other sample custom strings:
 <!--<span style="white-space:nowrap;">/../../etc/emails* </span> -->
 <span style="white-space:nowrap;">/var/www/camera_streams/*/*mp4?aliased </span> 
 <span style="white-space:nowrap;">/../../home/homeowner/unarchiving_place/camera_snapshots/camera_front_parking/*jpg </span>
+<span style="white-space:nowrap;">/../../camera_snapshots/camera_esp32100/latest.jpg </span>
 <div>Options: ?-word Lines containing word (exact case) are disqualified and removed from the results
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?aliased Self evident
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?plaintext Produces non-links output for reduced traffic
 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?mostrecent30 Already controlled by the list length slider; the number may be up to 4 digits
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?mostrecent30 Overruled by the list length slider if set; the number may be up to 4 digits
 </div>
 </div>
 <!--
@@ -2882,7 +2945,16 @@ Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to wh
    </form>
 <br></center>
 </td></tr></table notes="thus ends table began at line 2685">
-
+<b><a href="#espcam0_location_on_page" target="_blank">ESP32-CAM0</a></b><br>
+<input disabled id="camapp_espcam0" size="41" style="border:1px ridge blue;" value="working..."><br>
+<input disabled id="camapp_espcam01" size="41" style="border:1px ridge blue;" value="working..."><br>
+  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
+  <form method="put">
+  <input type="range" id="espcam0_corner" oninput="sliderne()" name="!home!homeowner!camera_snapshots!camera_esp32100!settimeout"
+         min="0" max="1200" value="4" step="1" list="tickmarks">
+  <input type="submit" id="nesubmit" value="Set to n minutes">
+   </form>
+<br>
 
 </td></tr></table notes="thus ends table began at line 2646">
 
@@ -2929,11 +3001,11 @@ function animatealertsdirectorytomainjpgviewer0(rowindex,table_el)
 /*      animatordivalertsdirectorytomainjpgviewer0.style.top='0px'*/
 /*      animatordivalertsdirectorytomainjpgviewer0.style.top=(parseInt(alertsdirectory.height)>350?'42px':'420px')*/
    }
-   var firstmatch=animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
+   var firstmatch=animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '?openhere\"]')
    if(firstmatch==null)
    {
-      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" style=\"height:100%;width:100%;position:absolute;top:0px;z-index:1;object-fit: fill;\" />';
-/*      animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'})*/
+      animatordivalertsdirectorytomainjpgviewer0.innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'?openhere\" style=\"height:100%;width:100%;position:absolute;top:0px;z-index:1;object-fit: fill;\" />';
+/*      animatordivalertsdirectorytomainjpgviewer0.querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '?openhere\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer0.style.display='none'})*/
    }
    else
    {
@@ -2982,11 +3054,11 @@ function animatealertsdirectorytomainjpgviewer2(rowindex,table_el,jpgname)
 /*      animatordivalertsdirectorytomainjpgviewer2.style.top=(parseInt(snapsdirectory.height)>350?'42px':'420px')*/
    }/*Next lines need to return the same or possibly changed index like if the jpg is already here somewhere*/
 /*TODO: when a jpg is to be displayed that is not in the table, figure out how to display it with its filename as the only list member*/
-   var firstmatch=document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]')
+   var firstmatch=document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '?openhere\"]')
    if(firstmatch==null)
    {
-      document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'\" style=\"position:absolute;top:15px;height:100%;width:100%;z-index:2;object-fit: fill;\" />';
-/*      document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer2.style.display='none'})*/
+      document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').innerHTML += '<img src=\"'+table_el.rows[rowindex].cells[1].children[0].href+'?openhere\" style=\"position:absolute;top:15px;height:100%;width:100%;z-index:2;object-fit: fill;\" />';
+/*      document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').querySelector('img[src=\"' + table_el.rows[rowindex].cells[1].children[0].href + '?openhere\"]').addEventListener('mousedown',function(){animatordivalertsdirectorytomainjpgviewer2.style.display='none'})*/
    }
    else
    {
@@ -3060,7 +3132,8 @@ alertsdirectorysources[3] = '/../../camera_snapshots/camera_sw_corner/*jpg?alias
 alertsdirectorysources[4] = '/../../camera_snapshots/camera_front_parking/*jpg?aliased'
 alertsdirectorysources[5] = '/../../camera_snapshots/camera_south_driveway/*jpg?aliased'
 alertsdirectorysources[6] = '/../../camera_snapshots/camera_ne_corner/*jpg?aliased'
-alertsdirectorysources[7] = '/../../camera_snapshots/*/*jpg?-MOTION?aliased'
+alertsdirectorysources[7] = '/../../camera_snapshots/camera_esp32100/*jpg?-MOTION?aliased'
+alertsdirectorysources[8] = '/../../camera_snapshots/*/*jpg?-MOTION?aliased'
 var alertsdirectoryaliases = []
 alertsdirectoryaliases[0] = 'All snapshots, including motion detects which may no longer exist'
 alertsdirectoryaliases[1] = 'Alert-related snapshots'
@@ -3069,7 +3142,8 @@ alertsdirectoryaliases[3] = 'Dock snapshots'
 alertsdirectoryaliases[4] = 'Office snapshots'
 alertsdirectoryaliases[5] = 'S-East snapshots'
 alertsdirectoryaliases[6] = 'North snapshots'
-alertsdirectoryaliases[7] = 'Custom'
+alertsdirectoryaliases[7] = 'ESP32-CAM0'
+alertsdirectoryaliases[8] = 'Custom'
 /*delayedDisplayElements[0].styleleft='379px' disabled for now*/
 var filenameholderdedicatedjpgviewer = []
 var sourcesdedicatedjpgviewer = []
@@ -3079,6 +3153,7 @@ sourcesdedicatedjpgviewer[4]='/../../camera_snapshots/camera_front_parking/*jpg?
 sourcesdedicatedjpgviewer[3]='/../../camera_snapshots/camera_south_driveway/*jpg?mostrecent1?plaintext'
 sourcesdedicatedjpgviewer[1]='/../../camera_snapshots/camera_sw_corner/*jpg?mostrecent1?plaintext'
 sourcesdedicatedjpgviewer[2]='/../../camera_snapshots/camera_east_driveway/*jpg?mostrecent1?plaintext'
+sourcesdedicatedjpgviewer[6]='/../../camera_snapshots/camera_esp32100/*jpg?mostrecent1?plaintext'
 var timerdedicatedjpgviewer;
 var adaptivetimemaster=15000;
 var adaptivetime;
