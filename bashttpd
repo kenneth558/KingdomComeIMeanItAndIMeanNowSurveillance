@@ -610,7 +610,7 @@ if [[ ${#HEADLINES} == 0 ]] && [[ ${#GREPV} == 0 ]]; then ls -l --full-time --ti
 elif [[ ${#HEADLINES} > 0 ]] && [[ ${#GREPV} == 0 ]];then ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|head -n$(( ${HEADLINES} ));
 elif [[ ${#HEADLINES} == 0 ]] && [[ ${#GREPV} > 0 ]];then ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|grep -v ${GREPV};
 elif [[ ${#HEADLINES} > 0 ]] && [[ ${#GREPV} > 0 ]]; then ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|grep -v ${GREPV}|head -n$(( ${HEADLINES} ));
-fi|awk -v openhere=${OPENHERE} -v headlines=${HEADLINES} -v linkpre="${LINKPRE}" -v aliased=$ALIASED -v css_style="$css_styling" -v cams_needed=$CAMS_ACTIVE -v path="${URL_PATH}" -v plaintext=$PLAINTEXT '
+fi|awk -v elif=3 -v openhere=${OPENHERE} -v headlines=${HEADLINES} -v linkpre="${LINKPRE}" -v aliased=$ALIASED -v css_style="$css_styling" -v cams_needed=$CAMS_ACTIVE -v path="${URL_PATH}" -v plaintext=$PLAINTEXT '
 BEGIN {toptencounter=0;lines=0;if(plaintext=="false"){print css_style "<table class=\"elif3\" openhere=" openhere " style=\"width:100%;\">"}}
 {
  if(plaintext=="false")

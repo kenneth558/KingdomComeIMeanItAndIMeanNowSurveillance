@@ -83,8 +83,8 @@ url2=':14';                                url4='2';  camapp_lr.value= url0     
                                            url4='1'; camapp_lr1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_lr1dup.value=camapp_lr1.value
 url2=':15';                                url4='2'; camapp_lst.value= url0        + window.location.hostname + url2 + url3 + url4;
                                            url4='1';camapp_lst1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_lst1dup.value=camapp_lst1.value
-url2=':20';                       url4='/capture'; camapp_espcam0.value= 'http://'+ window.location.hostname + url2 +       url4;
-                                 url4=':81/stream';camapp_espcam01.value= 'http://'+ window.location.hostname + url2 +      url4;camapp_espcam01dup.value=camapp_espcam01.value
+url2=':20';                       url4='080/capture'; camapp_espcam0.value= 'http://'+ window.location.hostname + url2 +       url4;
+                                 url4='554/stream';camapp_espcam01.value= 'http://'+ window.location.hostname + url2 +      url4;camapp_espcam01dup.value=camapp_espcam01.value
 slidersd(10);
 slidered(10);
 slidersw(10);
@@ -136,7 +136,7 @@ for(var i=0;i<objdedicatedjpgviewer.length;i++)
         setTimeout(function()
         {
           document.getElementById('filenametool0').src=sourcesdedicatedjpgviewer[0]
-        },1500)
+        },5500)
      }
    }
    else 
@@ -225,7 +225,7 @@ else
     this.innerText='Alert checking ON';alertCheckdup.innerText=this.innerText
     this.style.background='Chartreuse';alertCheckdup.style.background=this.style.background
     btnaudibleonalert.style.color='#000';btnaudibleonalertdup.style.color=btnaudibleonalert.style.color;
-    if(isAndroid){alertkeepalive.data='/var/www/html/silence.mp3';androidconnection.style.display='inline'}
+    if(isAndroid){alertkeepalive.data='/var/www/html/silent.mp3';androidconnection.style.display='inline'}
     previousalert='waiting';
 
     if(alertsdirectory.nextElementSibling.contentDocument.body.children[0] != 'undefined' && alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0] != null && alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectorynextElementSibling.contentDocument.body.children[0].rows[0].cells[1] != null &&
@@ -242,7 +242,7 @@ else
     }
     alertsdirectory.nextElementSibling.src=alertsdirectory.nextElementSibling.src
     if(isAndroid || 1 == 1)
-    {   alertkeepalive.data='/var/www/html/silence.mp3';
+    {   alertkeepalive.data='/var/www/html/silent.mp3';
         setTimeout(function()
            {   alertkeepalive.contentDocument.body.children[0].muted=true;
                alertkeepalive.contentDocument.body.children[0].loop=true
@@ -267,7 +267,7 @@ else
     this.innerText='Alert checking ON';alertCheckdup.innerText=this.innerText
     this.style.background='Chartreuse';alertCheckdup.style.background=this.style.background
     btnaudibleonalert.style.color='#000';btnaudibleonalertdup.style.color=btnaudibleonalert.style.color
-    if(isAndroid){alertkeepalive.data='/var/www/html/silence.mp3';androidconnection.style.display='inline'}
+    if(isAndroid){alertkeepalive.data='/var/www/html/silent.mp3';androidconnection.style.display='inline'}
     previousalert='waiting';
 
     if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
@@ -284,7 +284,7 @@ else
     }
     alertsdirectory.data=alertsdirectory.data
     if(isAndroid || 1 == 1)
-    {   alertkeepalive.data='/var/www/html/silence.mp3';
+    {   alertkeepalive.data='/var/www/html/silent.mp3';
         setTimeout(function()
            {   alertkeepalive.contentDocument.body.children[0].muted=true;
                alertkeepalive.contentDocument.body.children[0].loop=true
@@ -302,7 +302,7 @@ if(this.innerText=='Alerts now audible'){this.innerText='Make new alerts audible
 btnaudibleonalertdup.innerText=this.innerText"
 >Alerts now audible</button>
  <span id="androidconnection" class="androidconnection" style="display:none;border:0px;z-index:-1;position:absolute">
-   <object id="alertkeepalive" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object><!--
+ <object id="alertkeepalive" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object><!--
 --></span></span><!--
 --><span style="position:relative;top:0px;z-index:4;display: inline;">
 <button value="Sizing sliders" style="margin-left:0.35em;text-align:left;text-indent:-14px;top:0px;height:24px;white-space:nowrap;font-size:10px;width:80px;position:relative;z-index:3;display: inline;" 
@@ -631,7 +631,7 @@ NO SANITY CHECKING YET, SO FOLLOW
 THESE RULES PERFECTLY.</textarea>
 <br>
 <textarea cols="131" rows="5" style="font-size: 9pt" name="name_for_archive">
-Replace this text with a no-space
+Replace this text with a
 descriptive event name to include 
 license plate and colors but not 
 time, day nor month since they will 
@@ -738,7 +738,8 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 style="position:absolute;top:40px;height:225px;left:9px;z-index:-1;display:none;-webkit-appearance: slider-vertical" orient="vertical"><!--
 --></div><!--
 --></div><!--
---><object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:59px;left:30px;" value="Alt jpg viewer" width="409px" height="199px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" onload="
+--><object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:59px;left:30px;" value="Alt jpg viewer" width="409px" height="199px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" 
+onload="
 filenametool1.parentElement.style.borderColor='transparent';filenametool1.parentElement.parentElement.style.zIndex=0
 filenametool2.parentElement.style.borderColor='transparent';filenametool2.parentElement.parentElement.style.zIndex=0
 filenametool3.parentElement.style.borderColor='transparent';filenametool3.parentElement.parentElement.style.zIndex=0
@@ -750,7 +751,7 @@ filenametool2.src=sourcesdedicatedjpgviewer[2];
 filenametool3.src=sourcesdedicatedjpgviewer[3];
 filenametool4.src=sourcesdedicatedjpgviewer[4];
 filenametool5.src=sourcesdedicatedjpgviewer[5];
-filenametool6.src=sourcesdedicatedjpgviewer[6];
+/*filenametool6.src=sourcesdedicatedjpgviewer[6]; disabled due to suspecting it producing unstable operation*/
 setTimeout(function()
 {
 /*  The following lines will cause console err messages at first pass simply because the referenced elements won't exist before the timeout period ends, but they will exist later when the timeout period ends */
@@ -1167,12 +1168,26 @@ border-bottom-right-radius:10px;
 "
 id="btnespcam0jpgs2"
 onmousedown="
-   snapsdirectory.children['marker'].value=7
-   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
+  snapsdirectory.children['marker'].value=7
+  if(this.id.includes('espcam'))
+   {
+      if(dedicatedjpgviewer6.data!=camapp_espcam0.value + '?openhere')/*hardcoded id means not scaleable*/
+      {
+         dedicatedjpgviewer6.data=camapp_espcam0.value + '?openhere'/*not necessarily the best source of this data*/
+      }
+      else
+      {
+         dedicatedjpgviewer6.data=''
+      }
+   }
+   else
+   {
+      snapsdirectory.data=camapp_espcam0.value + '?openhere' 
+   }
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';btnnorthjpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
    btnseastjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';
-   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
+/*   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)*/
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
 ">ESP32-CAM0</button>
@@ -2642,7 +2657,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 <table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholderedjpg" width="1px" height="100%">
 <object id="edjpg" type="text/plain" value="Click here to collect these snapshots" class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_east_driveway?aliased?openhere';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_east_driveway?aliased';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="1000px" 
 height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object></td></tr></table>
@@ -2673,7 +2688,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 <table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholdersdjpg" width="1px" height="100%">
 <object id="sdjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_south_driveway/?aliased?openhere';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_south_driveway/?aliased';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="594px" 
 height="745px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object></td></tr></table>
@@ -2705,7 +2720,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 <table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholderfpjpg" width="1px" height="100%">
 <object id="fpjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_front_parking/?aliased?openhere';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}"
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_front_parking/?aliased';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}"
 width="1000px" 
 height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object></td></tr></table>
@@ -2715,7 +2730,7 @@ height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholderswjpg" width="1px" height="100%">
 <object id="swjpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_sw_corner/?aliased?openhere';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_sw_corner/?aliased';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="945px" 
 height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object></td></tr></table>
@@ -2744,7 +2759,7 @@ onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='Arro
 <table width="1px" cellspacing="0" style="border-collapse:collapse;" border="0" cellpadding="0" notes="This spaceholder is to keep the remainder of page from jumping around too much during refreshes"><tr><td id="spaceholdernejpg" width="1px" height="100%">
 <object id="nejpg" type="text/plain" value="Click here to collect these snapshots"  class="jpgobjmainpg"
 onload="glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '')"
-onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_ne_corner/?aliased?openhere';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
+onclick="if(this.type=='text/plain'){this.type='text/html';this.style.border='3px solid blue';this.style.borderWidth='20px 3px 3px';this.data='/../../camera_snapshots/camera_ne_corner/?aliased';} else {this.type='text/plain';this.style.border='3px solid blue';this.style.borderWidth='20px 30px 3px 3px';this.data='';}" 
 width="960px" 
 height="700px" style="font-size:15px;overflow:auto;border:3px solid blue;border-width:20px 30px 3px 3px;">
 </object></td></tr></table>
@@ -2944,7 +2959,7 @@ Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to wh
   <input type="submit" id="nesubmit" value="Set to n minutes">
    </form>
 <br></center>
-</td></tr></table notes="thus ends table began at line 2685">
+</td></tr></table>
 <b><a href="#espcam0_location_on_page" target="_blank">ESP32-CAM0</a></b><br>
 <input disabled id="camapp_espcam0" size="41" style="border:1px ridge blue;" value="working..."><br>
 <input disabled id="camapp_espcam01" size="41" style="border:1px ridge blue;" value="working..."><br>
@@ -2952,11 +2967,11 @@ Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to wh
   <form method="put">
   <input type="range" id="espcam0_corner" oninput="sliderne()" name="!home!homeowner!camera_snapshots!camera_esp32100!settimeout"
          min="0" max="1200" value="4" step="1" list="tickmarks">
-  <input type="submit" id="nesubmit" value="Set to n minutes">
+  <input type="submit" id="esp01submit" value="Set to n minutes">
    </form>
 <br>
 
-</td></tr></table notes="thus ends table began at line 2646">
+</td></tr></table>
 
 </td></tr>
 <tr><td>
@@ -3132,7 +3147,7 @@ alertsdirectorysources[3] = '/../../camera_snapshots/camera_sw_corner/*jpg?alias
 alertsdirectorysources[4] = '/../../camera_snapshots/camera_front_parking/*jpg?aliased'
 alertsdirectorysources[5] = '/../../camera_snapshots/camera_south_driveway/*jpg?aliased'
 alertsdirectorysources[6] = '/../../camera_snapshots/camera_ne_corner/*jpg?aliased'
-alertsdirectorysources[7] = '/../../camera_snapshots/camera_esp32100/*jpg?-MOTION?aliased'
+alertsdirectorysources[7] = camapp_espcam0.value + '?openhere' /*does not work in this order of rendering*/
 alertsdirectorysources[8] = '/../../camera_snapshots/*/*jpg?-MOTION?aliased'
 var alertsdirectoryaliases = []
 alertsdirectoryaliases[0] = 'All snapshots, including motion detects which may no longer exist'
@@ -3153,7 +3168,7 @@ sourcesdedicatedjpgviewer[4]='/../../camera_snapshots/camera_front_parking/*jpg?
 sourcesdedicatedjpgviewer[3]='/../../camera_snapshots/camera_south_driveway/*jpg?mostrecent1?plaintext'
 sourcesdedicatedjpgviewer[1]='/../../camera_snapshots/camera_sw_corner/*jpg?mostrecent1?plaintext'
 sourcesdedicatedjpgviewer[2]='/../../camera_snapshots/camera_east_driveway/*jpg?mostrecent1?plaintext'
-sourcesdedicatedjpgviewer[6]='/../../camera_snapshots/camera_esp32100/*jpg?mostrecent1?plaintext'
+sourcesdedicatedjpgviewer[6]=camapp_espcam01.value + '?openhere' /*'/../../camera_snapshots/camera_esp32100/*jpg?mostrecent1?plaintext'*/
 var timerdedicatedjpgviewer;
 var adaptivetimemaster=15000;
 var adaptivetime;
