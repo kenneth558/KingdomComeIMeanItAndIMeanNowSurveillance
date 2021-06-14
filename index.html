@@ -255,7 +255,9 @@ else
 "
 onclick="
 if (!this.innerText.endsWith(' OFF'))
-{   if(isAndroid){alertkeepalive.data='';androidconnection.style.display='none';}
+{
+    alertkeepalive.pause()
+    if(isAndroid){alertkeepalive.data='';androidconnection.style.display='none';}
     this.innerText='Alert checking OFF';alertCheckdup.innerText=this.innerText
     this.style.background='pink';alertCheckdup.style.background=this.style.background
     btnaudibleonalert.style.color='#808080';btnaudibleonalertdup.style.color=btnaudibleonalert.style.color
@@ -264,6 +266,7 @@ if (!this.innerText.endsWith(' OFF'))
 } 
 else 
 {
+    alertkeepalive.play()
     this.innerText='Alert checking ON';alertCheckdup.innerText=this.innerText
     this.style.background='Chartreuse';alertCheckdup.style.background=this.style.background
     btnaudibleonalert.style.color='#000';btnaudibleonalertdup.style.color=btnaudibleonalert.style.color
@@ -284,25 +287,40 @@ else
     }
     alertsdirectory.data=alertsdirectory.data
     if(isAndroid || 1 == 1)
-    {   alertkeepalive.data='/var/www/html/silent.mp3';
-        setTimeout(function()
-           {   alertkeepalive.contentDocument.body.children[0].muted=true;
+    {   ;
+/* I forgot what these lines were for        setTimeout(function()
+           {
+               alertsounder.contentDocument.body.children[0].muted=true;
                alertkeepalive.contentDocument.body.children[0].loop=true
                alertkeepalive.contentDocument.body.children[0].play()
            },4000
-        )
+        )*/
     }
     checkingAlerted=setInterval(function(){alertsdirectory.data=alertsdirectory.data},6500)
 }
 ">Alert checking OFF</button>
 <button value="Alerts now audible" style="text-indent:-3px;white-space:nowrap;width:160px;font-size:13px;background-color:#C0C0C0;color:#808080;position:relative" 
-id="btnaudibleonalert" onclick="previousalert='waiting';if(alertvisualblinker!=null){clearInterval(alertvisualblinker);
+id="btnaudibleonalert" 
+onclick="
+previousalert='waiting';if(alertvisualblinker!=null){clearInterval(alertvisualblinker);
 alertvisualblinker=null};
-if(this.innerText=='Alerts now audible'){this.innerText='Make new alerts audible'}else{this.innerText='Alerts now audible'}
-btnaudibleonalertdup.innerText=this.innerText"
->Alerts now audible</button>
- <span id="androidconnection" class="androidconnection" style="display:none;border:0px;z-index:-1;position:absolute">
- <object id="alertkeepalive" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object><!--
+if(this.innerText=='Alerts now audible'){this.innerText='Make new alerts audible'
+alertkeepalive.muted=true
+}else{
+this.innerText='Alerts now audible'
+/*alertkeepalive.data='/var/www/html/silent.mp3';*/
+/*document.getElementById('audioSource').src='keepalive.mp3'*/
+alertkeepalive.muted=false
+/*alertkeepalive.loop=true
+alertkeepalive.play()*/
+}
+btnaudibleonalertdup.innerText=this.innerText
+">Alerts now audible</button>
+ <span id="androidconnection" class="androidconnection" style="display:inline;border:0px;z-index:3;position:relative">
+<audio loop id="alertkeepalive" notes="any size attributes for this only affect the controls, so they will be ignored unless controls are on">
+<source id="audioSource" src="keepalive.mp3" type="audio/mpeg">
+</audio>
+<object id="alertsounder" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object><!--
 --></span></span><!--
 --><span style="position:relative;top:0px;z-index:4;display: inline;">
 <button value="Sizing sliders" style="margin-left:0.35em;text-align:left;text-indent:-14px;top:0px;height:24px;white-space:nowrap;font-size:10px;width:80px;position:relative;z-index:3;display: inline;" 
@@ -1171,9 +1189,9 @@ onmousedown="
   snapsdirectory.children['marker'].value=7
   if(this.id.includes('espcam'))
    {
-      if(dedicatedjpgviewer6.data!=camapp_espcam0.value + '?openhere')/*hardcoded id means not scaleable*/
+      if(dedicatedjpgviewer6.data!=camapp_espcam01.value + '?openhere')/*hardcoded id means not scaleable*/
       {
-         dedicatedjpgviewer6.data=camapp_espcam0.value + '?openhere'/*not necessarily the best source of this data*/
+         dedicatedjpgviewer6.data=camapp_espcam01.value + '?openhere'/*not necessarily the best source of this data*/
       }
       else
       {
@@ -1182,7 +1200,7 @@ onmousedown="
    }
    else
    {
-      snapsdirectory.data=camapp_espcam0.value + '?openhere' 
+      snapsdirectory.data=camapp_espcam01.value + '?openhere' 
    }
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';btnnorthjpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
@@ -1706,7 +1724,7 @@ else
     this.innerText='Alert checking ON';
     alertCheck.style.background='Chartreuse';
     btnaudibleonalert.style.color='#000';
-    if(isAndroid){alertkeepalive.data='/var/www/html/silence.mp3';androidconnection.style.display='inline'}
+    if(isAndroid){alertkeepalive.data='/var/www/html/keepalive.mp3';androidconnection.style.display='inline'}
     previousalert='waiting';
 
     if(alertsdirectory.nextElementSibling.contentDocument.body.children[0] != 'undefined' && alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0] != null && alertsdirectory.nextElementSibling.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectorynextElementSibling.contentDocument.body.children[0].rows[0].cells[1] != null &&
@@ -1723,7 +1741,7 @@ else
     }
     alertsdirectory.nextElementSibling.src=alertsdirectory.nextElementSibling.src
     if(isAndroid || 1 == 1)
-    {   alertkeepalive.data='/var/www/html/silence.mp3';
+    {   alertkeepalive.data='/var/www/html/keepalive.mp3';
         setTimeout(function()
            {   alertkeepalive.contentDocument.body.children[0].muted=true;
                alertkeepalive.contentDocument.body.children[0].loop=true
@@ -1748,7 +1766,7 @@ else
     this.innerText='Alert checking ON';alertCheck.innerText=this.innerText;
     this.style.background='Chartreuse';alertCheck.style.background=this.style.background;
     btnaudibleonalert.style.color='#000';btnaudibleonalertdup.style.color=btnaudibleonalert.style.color;
-    if(isAndroid){alertkeepalive.data='/var/www/html/silence.mp3';androidconnection.style.display='inline'}
+    if(isAndroid){alertkeepalive.data='/var/www/html/keepalive.mp3';androidconnection.style.display='inline'}
     previousalert='waiting';
 
     if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
@@ -1765,7 +1783,7 @@ else
     }
     alertsdirectory.data=alertsdirectory.data
     if(isAndroid || 1 == 1)
-    {   alertkeepalive.data='/var/www/html/silence.mp3';
+    {   alertkeepalive.data='/var/www/html/keepalive.mp3';
         setTimeout(function()
            {   alertkeepalive.contentDocument.body.children[0].muted=true;
                alertkeepalive.contentDocument.body.children[0].loop=true
@@ -2870,7 +2888,7 @@ Hopefully I'll find it soon.
 </div><div id="loadingdiv" class="loadingdiv" class="tabcontent" style="display:none">WAIT WHILE PAGE IS LOADING. PERFORM NO USER INPUT WHILE LOADING OR PAGE ELEMENTS WILL ABORT THEIR LOADING</div>
 </div>
 <!-- <script>
-onerror="this.data=':1958/silence.mp3';setTimeout(function(){this.data=':15554/silence.mp3';setTimeout(function(){this.data=':14554/silence.mp3';this.data='/var/www/html/silence.mp3';},300)},300);"
+onerror="this.data=':1958/keepalive.mp3';setTimeout(function(){this.data=':15554/keepalive.mp3';setTimeout(function(){this.data=':14554/keepalive.mp3';this.data='/var/www/html/keepalive.mp3';},300)},300);"
 
 
 Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to whomsoever he will".  God is HOLY and will NOT allow people that hate Him to team up with Him by using fraud.  Can God really say "Trump honored me, but I'll allow the dishonorable fraud to team with me to get my choice in this time, and I'll choose a man who doesn't even know me [and will take orders from China instead of me] over a man who honors me unprecedentedly to sit rule over my people who are praying en masse against that"? I KNOW BETTER-->
@@ -2961,8 +2979,8 @@ Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to wh
 <br></center>
 </td></tr></table>
 <b><a href="#espcam0_location_on_page" target="_blank">ESP32-CAM0</a></b><br>
-<input disabled id="camapp_espcam0" size="41" style="border:1px ridge blue;" value="working..."><br>
 <input disabled id="camapp_espcam01" size="41" style="border:1px ridge blue;" value="working..."><br>
+<input disabled id="camapp_espcam0" size="41" style="border:1px ridge blue;" value="working..."><br>
   <br><label><b>Short term alerts disable (this camera only)</b></label><br>
   <form method="put">
   <input type="range" id="espcam0_corner" oninput="sliderne()" name="!home!homeowner!camera_snapshots!camera_esp32100!settimeout"
