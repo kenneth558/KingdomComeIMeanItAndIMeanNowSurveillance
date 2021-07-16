@@ -481,11 +481,21 @@ A:active  { color : #000000; font-weight: normal; background-color : transparent
 
 #jpg?aliased?mostrecent'+...
 function serve_dir_or_file_from() {
-echo "${1}/${3}" > /var/log/bashttpd.log
+#echo "${URL_PATH}" >> /var/log/bashttpd.log
+echo "1. ${1}/${3}" > /var/log/bashttpd.log
   local URL_PATH="${1}/${3}"
   shift
   URL_PATH=$(urldecode "${URL_PATH}") 
-echo "${URL_PATH}" >> /var/log/bashttpd.log
+echo "2. ${URL_PATH}" >> /var/log/bashttpd.log
+  if [[ "${URL_PATH}" =~ /?ARDUINO_instruction=* ]]; then
+      URL_PATH=${URL_PATH##*=}
+#      echo "3. ${URL_PATH}" >> /var/log/bashttpd.log
+      echo "${URL_PATH}" > $(ls /dev/ttyA* /dev/ttyU* 2>/dev/null|tail -n1)
+      fail_with 400
+      exit
+    fi
+
+
   local GREPV=${URL_PATH##*\?-}
 #echo "new instance where GREPV=${GREPV}" >> /var/log/bashttpd.log
   GREPV=${GREPV%%\?*}
@@ -557,7 +567,6 @@ fi
    # Serve index file if exists in requested directory 
   [[ -d "${URL_PATH}" && -f "${URL_PATH}/index.html" && -r "${URL_PATH}/index.html" ]] && \
      URL_PATH="${URL_PATH}/index.html"
-echo "${URL_PATH}" >> /var/log/bashttpd.log
   if [[ -f "${URL_PATH}" ]] && [[ ! "${URL_PATH}" =~ latest.jpg$ ]] || [[ $OPENHERE == "true" ]]; then
      [[ -r "${URL_PATH}" ]] &&  serve_file "${URL_PATH}" "$@" || fail_with 403
 
@@ -610,7 +619,7 @@ if [[ ${#HEADLINES} == 0 ]] && [[ ${#GREPV} == 0 ]]; then ls -l --full-time --ti
 elif [[ ${#HEADLINES} > 0 ]] && [[ ${#GREPV} == 0 ]];then ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|head -n$(( ${HEADLINES} ));
 elif [[ ${#HEADLINES} == 0 ]] && [[ ${#GREPV} > 0 ]];then ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|grep -v ${GREPV};
 elif [[ ${#HEADLINES} > 0 ]] && [[ ${#GREPV} > 0 ]]; then ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|grep -v ${GREPV}|head -n$(( ${HEADLINES} ));
-fi|awk -v elif=3 -v openhere=${OPENHERE} -v headlines=${HEADLINES} -v linkpre="${LINKPRE}" -v aliased=$ALIASED -v css_style="$css_styling" -v cams_needed=$CAMS_ACTIVE -v path="${URL_PATH}" -v plaintext=$PLAINTEXT '
+fi|awk -v openhere=${OPENHERE} -v headlines=${HEADLINES} -v linkpre="${LINKPRE}" -v aliased=$ALIASED -v css_style="$css_styling" -v cams_needed=$CAMS_ACTIVE -v path="${URL_PATH}" -v plaintext=$PLAINTEXT '
 BEGIN {toptencounter=0;lines=0;if(plaintext=="false"){print css_style "<table class=\"elif3\" openhere=" openhere " style=\"width:100%;\">"}}
 {
  if(plaintext=="false")
@@ -1057,8 +1066,6 @@ END {print "</table>";if(line<2){print "Fetched list is too short or too long in
 #      [ ! -z $processid ] && echo "$(($processtime + $((60 * ${URL_PATH##*settimeout=}))))" > ${URL_PATH%/settimeout*}/timeout
        [ ${URL_PATH##*settimeout=} -gt 0 ] && echo "$((60 * ${URL_PATH##*settimeout=}))" > ${URL_PATH%?settimeout*}/timeout
 #      [ ! -z $processid ] && kill ${processid}
-      send_response 204
-      exit
 
   elif [[ ${#HEADLINES} > 0 ]]; then
       serve_html_string "$(echo "elif6, ${URL_PATH}" >> /var/log/bashttpd.log;ls -l --full-time --time-style=+%Y" "%b" "%d" "%H:%M:%S.%N -t ${URL_PATH}|head -n$(( $(( ${HEADLINES} )) + 1 ))|awk -v openhere=${OPENHERE} -v linkpre="${LINKPRE}" -v css_style="$css_styling" -v aliased=$ALIASED -v path="${URL_PATH}"  -v plaintext=$PLAINTEXT '
@@ -1262,6 +1269,7 @@ BEGIN {lines=0;print css_style "<table class=\"elif10\" style=\"width:100%;\">"}
  lines=1;
 }
 END {print "</table>";if(lines<1){print "Fetched list is too short or too long in " path " to display anything"}}')" || fail_with 403
+
   else
       echo "Failing 404 with URL_PATH=${URL_PATH} and line=${line}" >> /var/log/bashttpd.log
       fail_with 404

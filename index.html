@@ -8,6 +8,8 @@ THIS WEB PAGE CONTAINS NUMEROUS FEATURES ONLY AVAILABLE IN TANDEM WITH SERVER-SI
 I DON'T KNOW WHETHER STANDARD WEB SERVERS CAN BE SO CUSTOMIZED; I DIDN'T EVEN WANT TO TRY TO. 
 ON MY SERVER,  MY ONLY WEB SERVER IS bashttp BASH SCRIPT WEB SERVER FOUNDATION, WHICH I THEN TRICKED OUT.  
 LOOK FOR IT IN MY GITHUB SPACE.
+
+FUTURE TODO: BUTTONS TO REMOTELY CONTROL DEVICES
 -->
 <style type="text/css">
     body 
@@ -73,7 +75,7 @@ if(isPalemoon){btnlistlength.style.textIndent=-2+'px';btnsliders.style.textInden
 /*Line above is Under Construction----------(isPalemoon?3:(isFirefox?0:(isAndroid?290:5)*/
 url0='rtsp://';
 url1='kERRY123:Kerry123@';
-url2=':9';url3='554/Streaming/Channels/10';url4='2';  camapp_ul.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;
+url2=':9';url3='554/Streaming/channels/10';url4='2';  camapp_ul.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;
                                            url4='1'; camapp_ul1.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;camapp_ul1dup.value=camapp_ul1.value
 url2=':6';                                 url4='2';  camapp_ur.value= url0        + window.location.hostname + url2 + url3 + url4;
                                            url4='1'; camapp_ur1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_ur1dup.value=camapp_ur1.value
@@ -81,10 +83,12 @@ url2=':10';                                url4='2';  camapp_ll.value= url0     
                                            url4='1'; camapp_ll1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_ll1dup.value=camapp_ll1.value
 url2=':14';                                url4='2';  camapp_lr.value= url0        + window.location.hostname + url2 + url3 + url4;
                                            url4='1'; camapp_lr1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_lr1dup.value=camapp_lr1.value
-url2=':15';                                url4='2'; camapp_lst.value= url0        + window.location.hostname + url2 + url3 + url4;
-                                           url4='1';camapp_lst1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_lst1dup.value=camapp_lst1.value
-url2=':20';                       url4='080/capture'; camapp_espcam0.value= 'http://'+ window.location.hostname + url2 +       url4;
-                                 url4='554/stream';camapp_espcam01.value= 'http://'+ window.location.hostname + url2 +      url4;camapp_espcam01dup.value=camapp_espcam01.value
+url2=':15';                                url4='2'; camapp_lst.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;
+                                           url4='1';camapp_lst1.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;camapp_lst1dup.value=camapp_lst1.value
+url2=':16';                                url4='2'; camapp_lrt.value= url0        + window.location.hostname + url2 + url3 + url4;
+                                           url4='1';camapp_lrt1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_lrt1dup.value=camapp_lrt1.value
+url2=':21';                       url4='100/capture'; camapp_espcam0.value= 'http://'+ window.location.hostname + url2 +       url4;
+                                 url4='100/stream';camapp_espcam01.value= 'http://'+ window.location.hostname + url2 +      url4;camapp_espcam01dup.value=camapp_espcam01.value;
 slidersd(10);
 slidered(10);
 slidersw(10);
@@ -118,6 +122,8 @@ if(isAndroid)
    {
       makefontsmallerforandroids[i].style.fontSize='4px'
    }
+   entiredocument.style='pointer-events:auto;'
+   btncheckforsnapshots.click()
 }
 document.title='Surveillance Recordings - blacklist risk if traveling';
 entiredocument.style='pointer-events:auto;'
@@ -135,7 +141,8 @@ for(var i=0;i<objdedicatedjpgviewer.length;i++)
         };
         setTimeout(function()
         {
-          document.getElementById('filenametool0').src=sourcesdedicatedjpgviewer[0]
+          if(btncheckforsnapshots.innerText.endsWith('ON')){document.getElementById('filenametool0').src=sourcesdedicatedjpgviewer[0]}
+          else {document.getElementById('filenametool0').src='http://localhost/#'}
         },5500)
      }
    }
@@ -184,6 +191,9 @@ href="/ultra-important_permanent_saved/
  Then click here to close this message...
 </div>
 <span id="buttonsdiv" style="display:inline-block;position:sticky;top:0px;z-index:4;background:rgba(215,215,245,0.7);padding: 0px 0px 0px 0px;border:0px solid black;border-width:0px 0px 0px 0px;">
+  <button id="btnfuturediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
+onclick="tabactivate(this);btnsizes.style.display='none';slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
+Remote Controls</button>
   <button id="btndivmain" class="tablinks" style="font-size:12px;border:0px solid black;border-width:3px 3px 0px 3px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(255,255,255);margin-right: 0px;" 
 onclick="tabactivate(this);btnsizes.style.display='inline';btnsliders.style.display='inline';btnlistlength.style.display='inline';">
 Main</button>
@@ -199,14 +209,30 @@ Tips</button>
   <button id="btnnotesdiv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
 onclick="tabactivate(this);btnsizes.style.display='none';slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
 Help Manual</button>
-  <button id="btnfuturediv" class="tablinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;" 
-onclick="tabactivate(this);btnsizes.style.display='none';slidervert.style.display='none';sliderhoriz.style.display='none';btnlistlength.style.display='none';btnsliders.style.display='none';snapsheightslider.style.display='none';sliderhint.style.display='none';snapsheightslider.style.display='none';snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';">
-Future</button>
 <span>
   <button  id="btndisablesandlivelinks" style="font-size:12px;border:0px solid black;border-width:0px 0px 3px 0px;border-top-left-radius:10px;border-top-right-radius:10px;background:rgb(215,215,245);margin-left: 0px;margin-right: 0px;opacity:0" 
 onclick="return false">Suspend alerts, Links to live streams</button>
 <span style="position:relative;left:-215px;z-index:4;font-size:12px;opacity:100"><a href="disablesandlivelinks.html" target="_blank" style="position:absolute;top:0px;white-space:nowrap">Suspend alerts, Links to live streams</a>
 </span></span>
+<span style="white-space:nowrap;">
+<button
+id="btncheckforsnapshots"
+style="white-space:nowrap;font-size:15px;background:Chartreuse;border-radius:1px;border-color:black;border-width:0px;"
+value="Watching Incoming Snapshots ON"
+onclick="
+if (!this.innerText.endsWith(' OFF'))
+{
+this.innerText='Watching Incoming Snapshots OFF';
+this.style.background='pink';
+}
+else
+{
+this.style.background='Chartreuse';
+this.innerText='Watching Incoming Snapshots ON';
+document.getElementById('filenametool0').src=sourcesdedicatedjpgviewer[0]
+}
+">Watching Incoming Snapshots ON</button>
+</span>
 <span style="white-space:nowrap;">
 <button
 id="alertCheck" style="white-space:nowrap;font-size:15px;background:pink;border-radius:1px;border-color:black;border-width:0px;" 
@@ -263,7 +289,7 @@ if (!this.innerText.endsWith(' OFF'))
     btnaudibleonalert.style.color='#808080';btnaudibleonalertdup.style.color=btnaudibleonalert.style.color
     clearInterval(checkingAlerted);
     previousalert='waiting';if(alertvisualblinker!=null){clearInterval(alertvisualblinker);alertvisualblinker=null}
-} 
+}
 else 
 {
     alertkeepalive.play()
@@ -323,20 +349,6 @@ btnaudibleonalertdup.innerText=this.innerText
 <object id="alertsounder" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object><!--
 --></span></span><!--
 --><span style="position:relative;top:0px;z-index:4;display: inline;">
-<button value="Sizing sliders" style="margin-left:0.35em;text-align:left;text-indent:-14px;top:0px;height:24px;white-space:nowrap;font-size:10px;width:80px;position:relative;z-index:3;display: inline;" 
-id="btnsliders" onclick="
-if(snapssliderhoriz.style.display=='none')
-{
-sliderhint.style.display='inline';snapssliderhoriz.style.display='inline';
-sliderhoriz.style.display='inline';snapsslidervert.style.display='inline';
-slidervert.style.display='inline';snapsheightslider.style.display='inline';
-}
-else
-{
-snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';
-sliderhoriz.style.display='none';slidervert.style.display='none';
-sliderhint.style.display='none';snapsheightslider.style.display='none';
-}">Sizing sliders</button>
 <button style="position:relative;top:2px;height:24px;white-space:nowrap;z-index:3;text-align:left;display: inline;"
 id="btnsizes"
 onclick="
@@ -353,13 +365,25 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
 }
 if(parseInt(this.attributes['row'].value)<Math.floor(dedicatedjpgviewers.length/2)){var rowvalue=parseInt(this.attributes['row'].value)+1;this.attributes['row'].value=rowvalue;this.innerText='Set widths to arrange to '+rowvalue+' rows'}
 else if(parseInt(this.attributes['row'].value)==Math.floor(dedicatedjpgviewers.length/2)){this.attributes['row'].value=dedicatedjpgviewers.length;this.innerText='Set widths to arrange to '+dedicatedjpgviewers.length+' rows'}
-else {this.attributes['row'].value=1;this.innerText='Set widths to arrange to 1 row'}" row=1>
+else {this.attributes['row'].value=1;this.innerText='Set widths to arrange to 1 row'}" 
+row=1
+>
 Set widths to arrange to 1 row
 </button>
-<button style="text-indent:-15px;text-align:left;width:100px;white-space:nowrap;font-size:10px;position:relative;height:24px;top:0px;z-index:3;display: inline;"
-id="btnlistlength"
-onclick="if(show_eventsmainjpgviewer4.style.display=='none'){show_eventsmainjpgviewer3.style.display='inline';show_eventsmainjpgviewer4.style.display='inline'}else{show_eventsmainjpgviewer3.style.display='none';show_eventsmainjpgviewer4.style.display='none'}"
->List length sliders</button>
+<button value="Sizing sliders" style="margin-left:0.35em;text-align:left;text-indent:-14px;top:0px;height:24px;white-space:nowrap;font-size:10px;width:80px;position:relative;z-index:3;display: inline;" 
+id="btnsliders" onclick="
+if(snapssliderhoriz.style.display=='none')
+{
+sliderhint.style.display='inline';snapssliderhoriz.style.display='inline';
+sliderhoriz.style.display='inline';snapsslidervert.style.display='inline';
+slidervert.style.display='inline';snapsheightslider.style.display='inline';
+}
+else
+{
+snapsslidervert.style.display='none';snapssliderhoriz.style.display='none';
+sliderhoriz.style.display='none';slidervert.style.display='none';
+sliderhint.style.display='none';snapsheightslider.style.display='none';
+}">Sizing sliders</button>
 </span><!--
 -->
 <div id="system_wide" class="system_wide" class="tabcontent" style="display:none">
@@ -369,7 +393,7 @@ onclick="if(show_eventsmainjpgviewer4.style.display=='none'){show_eventsmainjpgv
 <tr><td>
 <table width="1050px">
 <tr><td align="left">
-Every link in here opens in its own new window, or new tab if you have your browser set for tabs <bold> Topmost six motion detections per camera are subject to deletion at any time</bold>
+Every link in here opens in its own new window, or new tab if you have your browser set for tabs <b> Topmost six motion detections per camera are subject to deletion at any time</b>
 <!-- needs to have setInterval, clearInterval with a static var.  Note that a camera of interest might only have motion detects but we still may want to traverse those snaps -->
 <div id="overlayimg_sysjpgmp4_snap" class="overlayimg_sysjpgmp4_snap">
 <script type="text/javascript">
@@ -769,13 +793,13 @@ filenametool2.src=sourcesdedicatedjpgviewer[2];
 filenametool3.src=sourcesdedicatedjpgviewer[3];
 filenametool4.src=sourcesdedicatedjpgviewer[4];
 filenametool5.src=sourcesdedicatedjpgviewer[5];
-/*filenametool6.src=sourcesdedicatedjpgviewer[6]; disabled due to suspecting it producing unstable operation*/
+filenametool6.src=sourcesdedicatedjpgviewer[6]; /*disabled due to suspecting it producing unstable operation*/
 setTimeout(function()
 {
 /*  The following lines will cause console err messages at first pass simply because the referenced elements won't exist before the timeout period ends, but they will exist later when the timeout period ends */
    if(filenametool0.contentDocument.body.innerText.includes(filenametool1.src.substr(filenametool1.src.indexOf('camera_')+24,7)))
    {
-      filenametool1.parentElement.style.borderColor='rgb(127, 0, 0)';filenametool1.parentElement.style.borderColor='rgba(255, 0, 0, .5';filenametool1.parentElement.parentElement.style.zIndex=1
+      filenametool1.parentElement.style.borderColor='rgb(127, 0, 0)';filenametool1.parentElement.style.borderColor='rgba(255, 0, 0, .5)';filenametool1.parentElement.parentElement.style.zIndex=1
    }
    else if(filenametool0.contentDocument.body.innerText.includes(filenametool2.src.substr(filenametool2.src.indexOf('camera_')+24,7)))
    {
@@ -844,9 +868,18 @@ btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btn
 ){btnnorthjpgs2.onmousedown()}
 "></object><!--
 --><input disabled id="camapp_lst1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
---><div style="border:0px;display: inline-block;width:444px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object 
-onclick="btnespcam0jpgs2.onmousedown()"
+--><div style="border:0px;display: inline-block;width:444px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><object onclick="btnspare0jpgs2.onmousedown()" 
 style="border-width:6px 0px 6px 0px;border-style:solid;border-color:transparent;position:absolute;object-fit: fill;" id="dedicatedjpgviewer6" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
+onload="
+if(
+btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnspare0jpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
+){btnspare0jpgs2.onmousedown()}
+"></object><!--
+--><input disabled id="camapp_lrt1dup" size="8" style="position:relative;top:240px;opacity:.55;z-index:2" value="working..."></div><!--
+--><div style="border:0px;display: inline-block;width:444px;height:262px;position:relative;top:0px;background-clip: padding-box;-webkit-background-clip: padding-box;"><div style="position:absolute"><br>ESP32-Cams are snapshot-on-demand & clicking shows a stored snapshot, likely stale on first click
+</div><object 
+onclick="btnespcam0jpgs2.onmousedown()"
+style="border-width:2px 2px 2px 2px;border-style:solid;border-color='rgba(0, 0, 0, 0)';position:absolute;object-fit: fill;" id="dedicatedjpgviewer7" type="text/html" value="Alt jpg viewer" width="100%" height="100%" data="" class="dedicatedjpgviewer"
 onload="
 if(
 btnmostrecentjpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)') && btnespcam0jpgs2.style.backgroundColor.startsWith('rgb(255, 255, 255)')
@@ -942,6 +975,8 @@ else if(snapsdirectory.data.includes(alertsdirectorysources[5].substring(7,(snap
 else if(snapsdirectory.data.includes(alertsdirectorysources[6].substring(7,(snapsdirectory.data.indexOf('?')<1?snapsdirectory.data.length:snapsdirectory.data.indexOf('?')-1))))
 {btnnorthjpgs2.onmousedown()}
 else if(snapsdirectory.data.includes(alertsdirectorysources[7].substring(7,(snapsdirectory.data.indexOf('?')<1?snapsdirectory.data.length:snapsdirectory.data.indexOf('?')-1))))
+{btnspare0jpgs2.onmousedown()}
+else if(snapsdirectory.data.includes(alertsdirectorysources[8].substring(7,(snapsdirectory.data.indexOf('?')<1?snapsdirectory.data.length:snapsdirectory.data.indexOf('?')-1))))
 {btnespcam0jpgs2.onmousedown()}
 "><!--
 --><input type="range" id="show_eventsmainjpgviewer4" notes="11px per line, 25 lines in mode0=275"
@@ -1006,6 +1041,10 @@ style="position:absolute;top:23px;left:40px;z-index:5;height:596px;-webkit-appea
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
 orient="vertical">
+<button style="text-indent:-15px;text-align:left;width:100px;white-space:nowrap;font-size:10px;position:absolute;height:24px;top:0px;left:0px;z-index:3;display:inline;"
+id="btnlistlength"
+onclick="if(show_eventsmainjpgviewer4.style.display=='none'){show_eventsmainjpgviewer3.style.display='inline';show_eventsmainjpgviewer4.style.display='inline'}else{show_eventsmainjpgviewer3.style.display='none';show_eventsmainjpgviewer4.style.display='none'}"
+>List length sliders visibility</button>
 <button id="btnreclaim2" style="background-color:#fff;position:absolute;top:0px;left:65px;z-index:3;display:none" onmousedown="
 animatordivalertsdirectorytomainjpgviewer2.replaceChildren();
 animatordivalertsdirectorytomainjpgviewer2.remove();
@@ -1014,7 +1053,8 @@ animationdivalertsdirectorytomainjpgviewer2=null;
 <object id="snapsdirectory" type="text/html"
 data=""
 onclick="this.data=this.data"
-onload="if(show_eventsmainjpgviewer4.value=='1'){show_eventsmainjpgviewer4.value='0'}
+onload="
+     if(show_eventsmainjpgviewer4.value=='1'){show_eventsmainjpgviewer4.value='0'}
      setTimeout(function(){
        show_eventsmainjpgviewer4.value=(snapsdirectory.contentDocument!='undefined' && snapsdirectory.contentDocument!=null && snapsdirectory.contentDocument.body.children[0] !='undefined' && snapsdirectory.contentDocument.body.children[0] != null && snapsdirectory.contentDocument.body.children[0].rows!='undefined' && snapsdirectory.contentDocument.body.children[0].rows!=null && snapsdirectory.contentDocument.body.children[0].rows.length!='undefined' && snapsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-snapsdirectory.contentDocument.body.children[0].rows.length,show_eventsmainjpgviewer4.value):1;
        if(show_eventsmainjpgviewer4.value<1){
@@ -1081,7 +1121,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btneastjpgs2.style.background='rgb(215,215,245)';
    btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';btnspare0jpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1099,7 +1139,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';btnspare0jpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1117,7 +1157,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';btnspare0jpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1135,7 +1175,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnseastjpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';btnspare0jpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1154,7 +1194,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
-   btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
+   btnnorthjpgs2.style.background='rgb(215,215,245)';btnspare0jpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900);
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1172,7 +1212,7 @@ onmousedown="
    snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
    this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
    btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
-   btnseastjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
+   btnseastjpgs2.style.background='rgb(215,215,245)';btnspare0jpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
 /*   show_eventsmainjpgviewer3.style.display='none'*/
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
@@ -1184,18 +1224,38 @@ border-width:0px 0px 3px 0px;
 border-bottom-left-radius:10px;
 border-bottom-right-radius:10px;
 "
+id="btnspare0jpgs2"
+onmousedown="
+   snapsdirectory.children['marker'].value=7
+   snapsdirectory.data=alertsdirectorysources[snapsdirectory.children['marker'].value]+((show_eventsmainjpgviewer3.value==show_eventsmainjpgviewer3.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer3.value))
+   this.style.background='rgb(255,255,255)';btnalljpgs2.style.background='rgb(215,215,245)';
+   btneastjpgs2.style.background='rgb(215,215,245)';btndockjpgs2.style.background='rgb(215,215,245)';btnofficejpgs2.style.background='rgb(215,215,245)';
+   btnseastjpgs2.style.background='rgb(215,215,245)';btnnorthjpgs2.style.background='rgb(215,215,245)';btncustomjpgs2.style.background='rgb(215,215,245)';btnespcam0jpgs2.style.background='rgb(215,215,245)';
+   setTimeout(function(){show_eventsmainjpgviewer4.oninput()},900)
+/*   show_eventsmainjpgviewer3.style.display='none'*/
+/*+'?mostrecent'+(0-show_eventsmainjpgviewer3.value)*/
+">Spare0</button>
+
+<button style="position:relative;top:0px;left:0px;white-space:nowrap;background:rgb(215,215,245)
+border:0px solid black;
+border-width:0px 0px 3px 0px;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+"
 id="btnespcam0jpgs2"
 onmousedown="
-  snapsdirectory.children['marker'].value=7
+  snapsdirectory.children['marker'].value=8
   if(this.id.includes('espcam'))
    {
-      if(dedicatedjpgviewer6.data!=camapp_espcam01.value + '?openhere')/*hardcoded id means not scaleable*/
+      if(dedicatedjpgviewer7.data!=camapp_espcam01.value + '?openhere')/*hardcoded id means not scaleable*/
       {
-         dedicatedjpgviewer6.data=camapp_espcam01.value + '?openhere'/*not necessarily the best source of this data*/
+         dedicatedjpgviewer7.data=camapp_espcam01.value + '?openhere'/*not necessarily the best source of this data*/
+         dedicatedjpgviewer7.style.borderColor='rgba(0, 0, 0, 0)';
       }
       else
       {
-         dedicatedjpgviewer6.data=''
+         dedicatedjpgviewer7.data=''
+         dedicatedjpgviewer7.style.borderColor='rgba(0, 0, 0, 1.0)';
       }
    }
    else
@@ -1274,8 +1334,10 @@ else if(alertsdirectory.data.includes(alertsdirectorysources[5].substring(7,(ale
 else if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))))
 {btnnorthjpgs.onmousedown()}
 else if(alertsdirectory.data.includes(alertsdirectorysources[7].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))))
-{btnespcam0jpgs.onmousedown()}
+{btnspare0jpgs.onmousedown()}
 else if(alertsdirectory.data.includes(alertsdirectorysources[8].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))))
+{btnespcam0jpgs.onmousedown()}
+else if(alertsdirectory.data.includes(alertsdirectorysources[9].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))))
 {btncustomjpgs.onmousedown()}
 ">
 <input type="range" id="show_eventsmainjpgviewer2" notes="11px per line, 25 lines in mode0=275"
@@ -1407,14 +1469,77 @@ onload="if (!alertCheck.innerText.endsWith(' OFF'))
                         },100)
      glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '');"
 width="365px" height="582px"
-style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 0px 3px;position:absolute;top:29px;
+style="font-size:15px;overflow:auto;border:3px solid black;border-width:15px 3px 0px 3px;position:absolute;top:29px;display:inline;
 ">
    <param name="timestamp" value="initial" />
    <param name="nextfilename" value="initial" />
    <param name="currenttime" value=0 />
    <param name="playingjpgs_number" value="0" />
    <param name="marker" value=0 />
-</object>
+</object><!--
+--><iframe style="width:0px;height:0px;border:0px;display:inline" src="" onload="">
+onload="if (!alertCheck.innerText.endsWith(' OFF'))
+     {
+        if(alertsdirectory.contentDocument.body.children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null &&
+        alertsdirectory.contentDocument.body.children[0].rows[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0] != null &&
+        alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1] != null )
+        {
+           if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != 'undefined' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0] != null)
+           {
+              if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != 'undefined')
+              {
+                 if(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href!=previousalert)
+                 {
+                     if(previousalert!='waiting' && alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href != null)
+                     {
+                        if(btnaudibleonalert.innerText=='Alerts now audible')
+                        {
+                           soundalarm(alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href)
+                        }
+                        show_eventsmainjpgviewer2.value=0;
+                        show_eventsmainjpgviewer2.oninput()
+                     }
+                     else
+                     {   previousalert=alertsdirectory.contentDocument.body.children[0].rows[0].cells[1].children[0].href
+                     }
+                 }
+              }
+           }
+        }
+     }
+                        setTimeout(function(){
+                          if(show_eventsmainjpgviewer2.value=='1'){show_eventsmainjpgviewer2.value='0'}
+                          show_eventsmainjpgviewer2.value=(alertsdirectory.contentDocument!='undefined' && alertsdirectory.contentDocument!=null && alertsdirectory.contentDocument.body.children[0] !='undefined' && alertsdirectory.contentDocument.body.children[0] != null && alertsdirectory.contentDocument.body.children[0].rows!='undefined' && alertsdirectory.contentDocument.body.children[0].rows!=null && alertsdirectory.contentDocument.body.children[0].rows.length!='undefined' && alertsdirectory.contentDocument.body.children[0].rows.length != null)?Math.max(1-alertsdirectory.contentDocument.body.children[0].rows.length,show_eventsmainjpgviewer2.value):1;
+                          if(show_eventsmainjpgviewer2.value<1){
+                      /*alert(parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.0089)*/
+                             var rowselected=Math.round(alertsdirectory.contentDocument.body.children[0].rows.length*(alertsdirectory.contentDocument.body.scrollTop/((parseInt(alertsdirectory.contentDocument.body.scrollHeight)*.9943)))-show_eventsmainjpgviewer2.value)
+                             if(rowselected<alertsdirectory.contentDocument.body.children[0].rows.length){
+                                if(alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].children[0].href.endsWith('.jpg')){
+                                   animatealertsdirectorytomainjpgviewer0(rowselected,alertsdirectory.contentDocument.body.children[0]);
+                                   StartTimeOfInterest=alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[0].outerHTML.substr(18)
+                                   StartTimeOfInterest=StartTimeOfInterest.replace(/&/g,' ').replace(/nbsp;/g,'')
+                                   StartTimeOfInterest=StartTimeOfInterest.substring(0,4) + month[StartTimeOfInterest.substr(5,3)] + StartTimeOfInterest.substring(9,StartTimeOfInterest.indexOf(' ]'))
+                                   StartTimeOfInterestEl.value=StartTimeOfInterest.substr(0,19)
+                                   StartCamOfInterestEl.value=alertsdirectory.contentDocument.body.children[0].rows[rowselected].cells[1].innerText.trim()
+                                }
+                             }
+                             else{
+                                show_eventsmainjpgviewer2.value=(parseInt(show_eventsmainjpgviewer2.value)-(alertsdirectory.contentDocument.body.children[0].rows.length-1-rowselected))
+                             }
+                             show_eventsmainjpgviewer2.oninput()
+                           }
+/*                           else
+                           {
+                              animatordivalertsdirectorytomainjpgviewer0.style.display='none';
+                              if(animatordivalertsdirectorytomainjpgviewer0!='undefined' && animatordivalertsdirectorytomainjpgviewer0 != null){
+                                 if(confirm(animationdivalertsdirectorytomainjpgviewer0.id+' is using memory you might want to recover. Click \'OK\' below to recover its memory')){
+                                    animatordivalertsdirectorytomainjpgviewer0.replaceChildren();animatordivalertsdirectorytomainjpgviewer0.remove();animationdivalertsdirectorytomainjpgviewer0=null;
+                                 }
+                              }
+                           }*/
+                        },100)
+     glonload( this.contentDocument.body.children[0].currentSrc, this, '', '', '', '', '');"
+</iframe>
 </span>
 <!--
 <iframe id="iframealertsdirectory" src="" futuresrc="
@@ -1505,7 +1630,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[1].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(Math.round(0-show_eventsmainjpgviewer1.value)))/*+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max)?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';btnalljpgs.style.background='rgb(215,215,245)';btneastjpgs.style.background='rgb(215,215,245)';
    btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btnspare0jpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display=''*/
 }
@@ -1529,7 +1654,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[0].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btneastjpgs.style.background='rgb(215,215,245)';
    btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btnspare0jpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1553,7 +1678,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[2].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btnspare0jpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1577,7 +1702,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[3].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btnspare0jpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1601,7 +1726,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[4].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnseastjpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btnspare0jpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1625,7 +1750,7 @@ if(alertsdirectory.data.includes(alertsdirectorysources[5].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';
-   btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
+   btnnorthjpgs.style.background='rgb(215,215,245)';btnspare0jpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
@@ -1649,12 +1774,36 @@ if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdi
    alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
    this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
    btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';
-   btnseastjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
+   btnseastjpgs.style.background='rgb(215,215,245)';btnspare0jpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
    setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
 /*   show_eventsmainjpgviewer1.style.display='none'*/
 }
 /*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
 ">North</button>
+
+<button style="position:relative;white-space:nowrap;background:rgb(215,215,245)
+border:0px solid black;
+border-width:0px 0px 3px 0px;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+"
+id="btnspare0jpgs"
+onmousedown="
+if(alertsdirectory.data.includes(alertsdirectorysources[6].substring(7,(alertsdirectory.data.indexOf('?')<1?alertsdirectory.data.length:alertsdirectory.data.indexOf('?')-1))) ||
+   alertCheck.innerText.endsWith(' OFF') || btnaudibleonalert.innerText=='Make new alerts audible' ||
+   confirm('Alert checking is using this listing somehow, so a sound could happen if you continue.  Cancel instead or go ahead anyway, your choice:')
+  )
+{
+   alertsdirectory.children['marker'].value=7
+   alertsdirectory.data=alertsdirectorysources[alertsdirectory.children['marker'].value]+((show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.min)?'':'?mostrecent'+(0-show_eventsmainjpgviewer1.value))/*+(show_eventsmainjpgviewer1.value==show_eventsmainjpgviewer1.max?'?plaintext':'')*/
+   this.style.background='rgb(255,255,255)';alertrelated.style.background='rgb(215,215,245)';btnalljpgs.style.background='rgb(215,215,245)';
+   btneastjpgs.style.background='rgb(215,215,245)';btndockjpgs.style.background='rgb(215,215,245)';btnofficejpgs.style.background='rgb(215,215,245)';
+   btnseastjpgs.style.background='rgb(215,215,245)';btnnorthjpgs.style.background='rgb(215,215,245)';btncustomjpgs.style.background='rgb(215,215,245)';btnespcam0jpgs.style.background='rgb(215,215,245)';
+   setTimeout(function(){show_eventsmainjpgviewer2.oninput()},900)
+/*   show_eventsmainjpgviewer1.style.display='none'*/
+}
+/*+'?mostrecent'+(0-show_eventsmainjpgviewer1.value)*/
+">Spare0</button>
 
 <button style="position:relative;white-space:nowrap;background:rgb(215,215,245)
 border:0px solid black;
@@ -1833,10 +1982,6 @@ else if(parseInt(this.attributes['row'].value)==Math.floor(dedicatedjpgviewers.l
 else {this.attributes['row'].value=1;this.innerText='Set widths to arrange to 1 row'}" row=1>
 Set widths to arrange to 1 row
 </button>
-<button style="text-indent:-15px;text-align:left;width:100px;white-space:nowrap;font-size:10px;position:relative;height:24px;top:0px;z-index:3;display: inline;"
-id="btnlistlengthdup"
-onclick="if(show_eventsmainjpgviewer4.style.display=='none'){show_eventsmainjpgviewer3.style.display='inline';show_eventsmainjpgviewer4.style.display='inline'}else{show_eventsmainjpgviewer3.style.display='none';show_eventsmainjpgviewer4.style.display='none'}"
->List length sliders</button>
 </span>
 </div>
 Other sample custom strings: 
@@ -2884,7 +3029,26 @@ Hopefully I'll find it soon.
     <br><button onclick="launch()">Sandbox JPG player</button>Only click this after opening latest alert event into the snapshot list
     <input type="button" id="btnposition" style="height:100px;width:100px;font-size:12px;" onmousemove="this.value=event.clientX+':'+event.clientY+', '+event.screenX+':'+event.screenY" value="....................Mouse over me..........................">
 <br>
-</div><div id="futurediv" class="futurediv" class="tabontent" style="display:none"></div>
+</div><div id="futurediv" class="futurediv" class="tabontent" style="display:none">
+<table><tr><td valign="top">
+<h3>Office Entryway</h3>
+<!--/*<form method="put">
+<input id="ARD" name="!home!homeowner!camera_snapshots!camera_south_driveway!settimeout" value="4">
+<input type="submit" id="ardsubmit" value="Send command to arduino">
+</form>*/-->
+<button onclick="this.nextElementSibling.nextElementSibling.value='set pin high 13';this.nextElementSibling.nextElementSibling.oninput()"
+>Turn ON Office Entryway Floodlight</button>
+<button onclick="this.nextElementSibling.value='set pin low 13';this.nextElementSibling.oninput()"
+>Turn OFF Office Entryway Floodlight</button>
+  <input id="ardinput" value="">
+<iframe style="width:0px;height:0px;display:inline" src=""></iframe>
+<button onclick="this.previousElementSibling.src=window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '?ARDUINO_instruction='+this.previousElementSibling.previousElementSibling.value"
+style="display:inline">Send Command To Arduino</button>
+<br>
+</td><td valign="top">
+<h3>Other Location</h3>
+
+</td></tr></table></div>
 </div><div id="loadingdiv" class="loadingdiv" class="tabcontent" style="display:none">WAIT WHILE PAGE IS LOADING. PERFORM NO USER INPUT WHILE LOADING OR PAGE ELEMENTS WILL ABORT THEIR LOADING</div>
 </div>
 <!-- <script>
@@ -2966,8 +3130,8 @@ Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to wh
 </video>
 -->
 <br>
-</td></tr><tr><td style="border:1px solid black">
-<center><b><a href="#ne_location_on_page" target="_blank">North</a></b><br>
+</td></tr><tr><td style="border:1px solid black"><center>
+<b><a href="#ne_location_on_page" target="_blank">North</a></b><br>
 <input disabled id="camapp_lst" size="41" style="border:1px ridge blue;" value="working..."><br>
 <input disabled id="camapp_lst1" size="41" style="border:1px ridge blue;" value="working..."><br>
   <br><label><b>Short term alerts disable (this camera only)</b></label><br>
@@ -2976,7 +3140,17 @@ Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to wh
          min="0" max="1200" value="4" step="1" list="tickmarks">
   <input type="submit" id="nesubmit" value="Set to n minutes">
    </form>
-<br></center>
+<b><a href="#s0_location_on_page" target="_blank">Spare0</a></b><br>
+<input disabled id="camapp_lrt" size="41" style="border:1px ridge blue;" value="working..."><br>
+<input disabled id="camapp_lrt1" size="41" style="border:1px ridge blue;" value="working..."><br>
+  <br><label><b>Short term alerts disable (this camera only)</b></label><br>
+  <form method="put">
+  <input type="range" id="spare0" oninput="sliders0()" name="!home!homeowner!camera_snapshots!camera_spare0!settimeout"
+         min="0" max="1200" value="4" step="1" list="tickmarks">
+  <input type="submit" id="s0submit" value="Set to n minutes">
+   </form>
+<br>
+</center>
 </td></tr></table>
 <b><a href="#espcam0_location_on_page" target="_blank">ESP32-CAM0</a></b><br>
 <input disabled id="camapp_espcam01" size="41" style="border:1px ridge blue;" value="working..."><br>
@@ -2999,7 +3173,8 @@ Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to wh
   <center><label><b>Entire system short term alerts disable</b></label>
 <br>This disable operates independent of the others while overscoping them
 </center><br>
-  <center><form  method="put">
+  <center>
+<form  method="put">
   </center><center><input type="range" id="entire_system" oninput="slideres()" name="!home!homeowner!camera_snapshots!settimeout"
          min="0" max="3600" value="4" step="1" list="tickmarks">
   <input type="submit" id="essubmit" value="Set to n minutes"></center><br>
@@ -3165,8 +3340,9 @@ alertsdirectorysources[3] = '/../../camera_snapshots/camera_sw_corner/*jpg?alias
 alertsdirectorysources[4] = '/../../camera_snapshots/camera_front_parking/*jpg?aliased'
 alertsdirectorysources[5] = '/../../camera_snapshots/camera_south_driveway/*jpg?aliased'
 alertsdirectorysources[6] = '/../../camera_snapshots/camera_ne_corner/*jpg?aliased'
-alertsdirectorysources[7] = camapp_espcam0.value + '?openhere' /*does not work in this order of rendering*/
-alertsdirectorysources[8] = '/../../camera_snapshots/*/*jpg?-MOTION?aliased'
+alertsdirectorysources[7] = '/../../camera_snapshots/camera_spare0/*jpg?aliased'
+alertsdirectorysources[8] = camapp_espcam0.value + '?openhere' /*does not work in this order of rendering*/
+alertsdirectorysources[9] = '/../../camera_snapshots/*/*jpg?-MOTION?aliased'
 var alertsdirectoryaliases = []
 alertsdirectoryaliases[0] = 'All snapshots, including motion detects which may no longer exist'
 alertsdirectoryaliases[1] = 'Alert-related snapshots'
@@ -3175,8 +3351,9 @@ alertsdirectoryaliases[3] = 'Dock snapshots'
 alertsdirectoryaliases[4] = 'Office snapshots'
 alertsdirectoryaliases[5] = 'S-East snapshots'
 alertsdirectoryaliases[6] = 'North snapshots'
-alertsdirectoryaliases[7] = 'ESP32-CAM0'
-alertsdirectoryaliases[8] = 'Custom'
+alertsdirectoryaliases[7] = 'Spare0 snapshots'
+alertsdirectoryaliases[8] = 'ESP32-CAM0'
+alertsdirectoryaliases[9] = 'Custom'
 /*delayedDisplayElements[0].styleleft='379px' disabled for now*/
 var filenameholderdedicatedjpgviewer = []
 var sourcesdedicatedjpgviewer = []
@@ -3186,7 +3363,8 @@ sourcesdedicatedjpgviewer[4]='/../../camera_snapshots/camera_front_parking/*jpg?
 sourcesdedicatedjpgviewer[3]='/../../camera_snapshots/camera_south_driveway/*jpg?mostrecent1?plaintext'
 sourcesdedicatedjpgviewer[1]='/../../camera_snapshots/camera_sw_corner/*jpg?mostrecent1?plaintext'
 sourcesdedicatedjpgviewer[2]='/../../camera_snapshots/camera_east_driveway/*jpg?mostrecent1?plaintext'
-sourcesdedicatedjpgviewer[6]=camapp_espcam01.value + '?openhere' /*'/../../camera_snapshots/camera_esp32100/*jpg?mostrecent1?plaintext'*/
+sourcesdedicatedjpgviewer[6]='/../../camera_snapshots/camera_spare0/*jpg?mostrecent1?plaintext'
+sourcesdedicatedjpgviewer[7]=camapp_espcam01.value + '?openhere' /*'/../../camera_snapshots/camera_esp32100/*jpg?mostrecent1?plaintext'*/
 var timerdedicatedjpgviewer;
 var adaptivetimemaster=15000;
 var adaptivetime;
@@ -3270,16 +3448,19 @@ streamListings["fpmp4"] = "/var/www/camera_streams/camera_front_parking/";
 streamListings["nemp4"] = "/var/www/camera_streams/camera_ne_corner/";
 streamListings["edmp4"] = "/var/www/camera_streams/camera_east_driveway/";
 streamListings["sdmp4"] = "/var/www/camera_streams/camera_south_driveway/";
+streamListings["s0mp4"] = "/var/www/camera_streams/camera_spare0/";
 streamListings["swjpg"] = "/../../camera_snapshots/camera_sw_corner/?aliased";
 streamListings["fpjpg"] = "/../../camera_snapshots/camera_front_parking/?aliased";
 streamListings["nejpg"] = "/../../camera_snapshots/camera_ne_corner/?aliased";
 streamListings["edjpg"] = "/../../camera_snapshots/camera_east_driveway/?aliased";
 streamListings["sdjpg"] = "/../../camera_snapshots/camera_south_driveway/?aliased";
+streamListings["s0jpg"] = "/../../camera_snapshots/camera_spare0/?aliased";
 streamListings["11"] = "East" ;/*These correspond to 192.168.0.nn or 192.168.0.n_ since they are 2 characters long extracted from the file name*/
 streamListings["14"] = "Dock"
 streamListings["15"] = "North"
 streamListings["12"] = "Office"
 streamListings["13"] = "S East"
+streamListings["16"] = "High East"
 function checkLaterForLinkToClick(objectelementi=null)
 {
 /*alert('This user acknowledge is needed to avoid some racing condition or something.  May get fixed later...')*/
