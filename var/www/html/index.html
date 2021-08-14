@@ -76,19 +76,19 @@ if(isPalemoon){btnlistlength.style.textIndent=-2+'px';btnsliders.style.textInden
 /*Line above is Under Construction----------(isPalemoon?3:(isFirefox?0:(isAndroid?290:5)*/
 url0='rtsp://';
 url1='kERRY123:Kerry123@';
-url2=':9';url3='554/Streaming/channels/10';url4='2';  camapp_ul.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;
+url2=':9554';url3='/Streaming/channels/10';url4='2';  camapp_ul.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;
                                            url4='1'; camapp_ul1.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;camapp_ul1dup.value=camapp_ul1.value
-url2=':6';                                 url4='2';  camapp_ur.value= url0        + window.location.hostname + url2 + url3 + url4;
+url2=':9553';                                 url4='2';  camapp_ur.value= url0        + window.location.hostname + url2 + url3 + url4;
                                            url4='1'; camapp_ur1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_ur1dup.value=camapp_ur1.value
-url2=':10';                                url4='2';  camapp_ll.value= url0        + window.location.hostname + url2 + url3 + url4;
+url2=':9555';                                url4='2';  camapp_ll.value= url0        + window.location.hostname + url2 + url3 + url4;
                                            url4='1'; camapp_ll1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_ll1dup.value=camapp_ll1.value
-url2=':14';                                url4='2';  camapp_lr.value= url0        + window.location.hostname + url2 + url3 + url4;
+url2=':9556';                                url4='2';  camapp_lr.value= url0        + window.location.hostname + url2 + url3 + url4;
                                            url4='1'; camapp_lr1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_lr1dup.value=camapp_lr1.value
-url2=':15';                                url4='2'; camapp_lst.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;
+url2=':9557';                                url4='2'; camapp_lst.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;
                                            url4='1';camapp_lst1.value= url0 + url1 + window.location.hostname + url2 + url3 + url4;camapp_lst1dup.value=camapp_lst1.value
-url2=':16';                                url4='2'; camapp_lrt.value= url0        + window.location.hostname + url2 + url3 + url4;
+url2=':6091';                                url4='2'; camapp_lrt.value= url0        + window.location.hostname + url2 + url3 + url4;
                                            url4='1';camapp_lrt1.value= url0        + window.location.hostname + url2 + url3 + url4;camapp_lrt1dup.value=camapp_lrt1.value
-url2=':21';                       url4='100/capture'; camapp_espcam0.value= 'http://'+ window.location.hostname + url2 +       url4;
+url2=':6092';                       url4='100/capture'; camapp_espcam0.value= 'http://'+ window.location.hostname + url2 +       url4;
                                  url4='100/stream';camapp_espcam01.value= 'http://'+ window.location.hostname + url2 +      url4;camapp_espcam01dup.value=camapp_espcam01.value;
 slidersd(10);
 slidered(10);
@@ -336,7 +336,7 @@ alertkeepalive.muted=true
 }else{
 this.innerText='Alerts now audible'
 /*alertkeepalive.data='/var/www/html/silent.mp3';*/
-/*document.getElementById('audioSource').src='keepalive.mp3'*/
+/*document.getElementById('audioSource').src='/var/www/html/keepalive.mp3'*/
 alertkeepalive.muted=false
 /*alertkeepalive.loop=true
 alertkeepalive.play()*/
@@ -345,7 +345,7 @@ btnaudibleonalertdup.innerText=this.innerText
 ">Alerts now audible</button>
  <span id="androidconnection" class="androidconnection" style="display:inline;border:0px;z-index:3;position:relative">
 <audio loop id="alertkeepalive" notes="any size attributes for this only affect the controls, so they will be ignored unless controls are on">
-<source id="audioSource" src="keepalive.mp3" type="audio/mpeg">
+<source id="audioSource" src="/var/www/html/keepalive.mp3" type="audio/mpeg">
 </audio>
 <object id="alertsounder" type="audio/mpeg" data="" width="1px" height="1px" style="position:absolute"></object><!--
 --></span></span><!--
@@ -3576,11 +3576,11 @@ function launch(){
     play();
 }
 var soundalarmmp3s = []
-soundalarmmp3s[0] = 'eastdriveway.mp3'
-soundalarmmp3s[1] = 'dockcorner.mp3'
-soundalarmmp3s[2] = 'frontoffice.mp3'
-soundalarmmp3s[3] = 'southeastcorner.mp3'
-soundalarmmp3s[4] = 'frontparkinglot.mp3'
+soundalarmmp3s[0] = '/var/www/html/eastdriveway.mp3'
+soundalarmmp3s[1] = '/var/www/html/dockcorner.mp3'
+soundalarmmp3s[2] = '/var/www/html/frontoffice.mp3'
+soundalarmmp3s[3] = '/var/www/html/southeastcorner.mp3'
+soundalarmmp3s[4] = '/var/www/html/frontparkinglot.mp3'
 var audioelement2ndstage=null
 var audiosrc2ndstage=null
 var audio3rdstage=null
@@ -3588,7 +3588,7 @@ var documenttitle=null
 var documenttitletimer=null
 function soundalarm(causehref=null) 
 { 
-   var audio = new Audio('600hz900mS.mp3'); 
+   var audio = new Audio('/var/www/html/600hz900mS.mp3'); 
    audio.play(); 
    if(btnaudibleonalert.innerText=='Alerts now audible' && !alertCheck.innerText.endsWith(' OFF'))
    {
@@ -3609,7 +3609,7 @@ function soundalarm(causehref=null)
                         audioelement2ndstage.play();
                         audioelement2ndstage.addEventListener('ended', event =>
                         {
-                           audio3rdstage = new Audio('600hz900mS.mp3'); 
+                           audio3rdstage = new Audio('/var/www/html/600hz900mS.mp3'); 
                            if(btnaudibleonalert.innerText=='Alerts now audible' && !alertCheck.innerText.endsWith(' OFF'))
                            {
                                audio3rdstage.play();
