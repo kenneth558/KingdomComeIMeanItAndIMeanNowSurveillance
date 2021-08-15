@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -765,7 +764,7 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
    dedicatedjpgviewers[i].offsetParent.style.width=dedicatedjpgviewers[i].id.endsWith('r0')?(parseInt(dedicatedjpgviewersiwidth)+35)+'px':dedicatedjpgviewersiwidth
 }
 " 
-style="position:absolute;top:33px;width:370px;left:40px;display:none;">
+style="position:absolute;top:33px;width:370px;left:40px;display:none;touch-action: none">
 <input type="range" min="-2800" max="-75" step="1" list="tickmarks" value="-258" id="slidervert"
 oninput="
 var dedicatedjpgviewers=document.getElementsByClassName('dedicatedjpgviewer')
@@ -778,7 +777,7 @@ for(var i=0;i<dedicatedjpgviewers.length;i++)
    dedicatedjpgviewers[i].nextElementSibling.style.top=(dedicatedjpgviewers[i].id.endsWith('r0')?dedicatedjpgviewers[i].nextElementSibling.style.top:(dedicatedjpgviewersiheight.substring(0,dedicatedjpgviewersiheight.length-2)-22)+'px')
 }
 "
-style="position:absolute;top:40px;height:225px;left:9px;z-index:-1;display:none;-webkit-appearance: slider-vertical" orient="vertical"><!--
+style="position:absolute;top:40px;height:225px;left:9px;z-index:-1;display:none;-webkit-appearance: slider-vertical;touch-action: none" orient="vertical"><!--
 --></div><!--
 --></div><!--
 --><object id="dedicatedjpgviewer0" type="text/html" style="border:4px dashed red;position:absolute;top:59px;left:30px;" value="Alt jpg viewer" width="409px" height="199px" data="" onclick="btnalljpgs2.onmousedown()" class="dedicatedjpgviewer" 
@@ -923,13 +922,13 @@ onmousedown="
 oninput="
    document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.height=parseInt(parseInt(0-parseInt(this.value)))+'px'
 " 
-style="position:absolute;top:35px;height:225px;left:20px;z-index:3;display:none;-webkit-appearance: slider-vertical" orient="vertical">
+style="position:absolute;top:35px;height:225px;left:20px;z-index:3;display:none;-webkit-appearance: slider-vertical;touch-action: none" orient="vertical">
 <input type="range" min="20" max="10000" step="1" list="tickmarks" value="840" id="snapssliderhoriz"
 /*FUTURE: determine which element[s] are in rendered area and apply to those only.*/
 oninput="
    document.querySelector('div[id=\'animatordivalertsdirectorytomainjpgviewer2\']').style.width=parseInt(parseInt(this.value))+'px'
 " 
-style="position:absolute;top:20px;width:370px;left:30px;z-index:3;display:none;">
+style="position:absolute;top:20px;width:370px;left:30px;z-index:3;display:none;touch-action: none">
 <br><br><i style="text-indent:-12px;position:relative;width:600px;left:0px;top:0px;padding:0px 0px 10px 20px;display:inline-block" width="600px" class="makefontsmallerforandroid">A sub-range can be made <b>at the <u>bottom</u> of the listed snapshots</b> by putting the <b>right</b> 'list length' slider 
 button <b>below the left one</b>, as follows:</i>
 <i style="text-indent:-12px;position:relative;width:600px;left:0px;top:0px;padding:0px 0px 10px 20px;display:inline-block" width="600px" class="makefontsmallerforandroid">
@@ -951,7 +950,7 @@ Testing has not been extensive enough to prove conclusive reliability when the f
 <td width="400px" valign="top">
 <span style="position:relative;top:0px;display:inline">
 <input type="range" id="show_eventsmainjpgviewer3" name="show_eventsmainjpgviewer3" min="-53" max="-1" value="-1" step="1" list="tickmarks" class="vertical-slider"
-style="position:absolute;top:33px;left:0px;z-index:5;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;display:none;
+style="position:absolute;top:33px;left:0px;z-index:5;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;display:none;touch-action: none
 "
 orient="vertical"
 oninput="
@@ -1037,7 +1036,7 @@ this.oldvalue=this.value
 "  
 name="show_eventsmainjpgviewer4" class="slidersNeedingDelayedDisplay"
 min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;top:23px;left:40px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;display:none
+style="position:absolute;top:23px;left:40px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;display:none;touch-action: none
 " 
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
@@ -1103,7 +1102,7 @@ oninput="
 snapsdirectory.height=(0-this.value)+'px'
 divsnapstabsrow.style.top=((0-this.value)-565)+'px'
 " 
-style="position:absolute;top:10px;height:608px;left:358px;z-index:3;display:none;-webkit-appearance: slider-vertical" orient="vertical">
+style="position:absolute;top:10px;height:608px;left:358px;z-index:3;display:none;-webkit-appearance: slider-vertical;touch-action: none" orient="vertical">
 </span>
 </td></tr>
 </table>
@@ -1308,7 +1307,7 @@ clearInterval(animatetimeralertsdirectorytomainjpgviewer0);animatetimeralertsdir
 <span style="position:absolute;top:0px">
 <input type="range" id="show_eventsmainjpgviewer1" name="show_eventsmainjpgviewer1" min="-53" max="-1" value="-1" step="1" list="tickmarks" class="vertical-slider"
 notes="this alerts element slider needs to be higher in absolute z-index than the snaps element slider above, but their image needs to be the other way around."
-style="position:relative;top:50px;left:20px;z-index:1;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+style="position:relative;top:50px;left:20px;z-index:1;height:585px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;touch-action: none
 "
 orient="vertical"
 oninput="
@@ -1399,7 +1398,7 @@ this.oldvalue=this.value
 "  
 name="show_eventsmainjpgviewer2" class="slidersNeedingDelayedDisplay"
 min="-52" max="1" value="1" step="1"  list="tickmarks" class="vertical_slider" 
-style="position:absolute;top:38px;left:65px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;
+style="position:absolute;top:38px;left:65px;z-index:5;height:596px;-webkit-appearance: slider-vertical;writing-mode: bt-lr;touch-action: none
 " 
 oldvalue=""
 note="1+395/36=11,159+245=1+747/68=11"
@@ -2160,7 +2159,7 @@ TODO: compensate for actual width ofmp4 playback elements
 
 -->
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-<input type="range" id="sldrmaster" oninput="textmaster.value=this.value" name="" min="1" max="10000" step=".1" value="43.5" list="tickmarks">
+<input type="range" id="sldrmaster" oninput="textmaster.value=this.value" name="" min="1" max="10000" step=".1" value="43.5" list="tickmarks" style="touch-action: none">
 
 <textarea id="textmaster" style="font-size: 10pt;resize: none;" contentEditable="true" cols="5" rows="1" value="43.5" 
 onkeydown="if(event.key=='Enter'){this.click();return false};if(event.key=='ArrowUp'){this.value++}else if(event.key=='ArrowDown'){this.value--}" 
@@ -2219,7 +2218,7 @@ height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <a href="/var/www/camera_streams/camera_east_driveway/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
 For<br>best control, drop others into a spare player
 <div id="edmp4scalediv" class="edmp4scalediv" style="position:relative;top:-65px;left:49px">
-<input type="range" id="sldredmp4" class="scaleSlider" oninput="textedmp4.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
+<input type="range" id="sldredmp4" class="scaleSlider" oninput="textedmp4.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks" style="touch-action: none">
 <textarea id="textedmp4" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
 onkeyup="sldredmp4.value=this.value;" 
 onclick="a='edmp4';
@@ -2273,7 +2272,7 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <a href="/var/www/camera_streams/camera_sw_corner/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
  For<br>best control, drop others into a spare player
 <div id="swmp4scalediv" class="swmp4scalediv" style="position:relative;top:-65px;left:49px">
-<input type="range" 
+<input type="range" style="touch-action: none"
 id="sldrswmp4" class="scaleSlider"
 oninput="textswmp4.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
 <textarea id="textswdmp4" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
@@ -2340,7 +2339,7 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <a href="/var/www/camera_streams/camera_south_driveway/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
 For<br>best control, drop others into a spare player
 <div id="sdmp4scalediv" class="sdmp4scalediv" style="position:relative;top:-65px;left:49px">
-<input type="range" id="sldrsdmp4" class="scaleSlider" 
+<input type="range" id="sldrsdmp4" class="scaleSlider" style="touch-action: none"
 oninput="textsdmp4.value=this.value" name="" min="1" max="10000" value="43.5" step=".1" list="tickmarks">
 <textarea id="textsdmp4" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
 onkeyup="sldrsdmp4.value=this.value;" 
@@ -2699,7 +2698,7 @@ height="560px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <a href="/var/www/camera_streams/camera_front_parking/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
 For<br>best control, drop others into a spare player
 <div id="fpmp4scalediv" class="fpmp4scalediv" style="position:relative;top:-65px;left:49px">
-<input type="range" id="sldrfpmp4" class="scaleSlider" 
+<input type="range" id="sldrfpmp4" class="scaleSlider" style="touch-action: none"
 oninput="textfpmp4.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
 <textarea id="textfpmp4" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
 onkeyup="sldrfpmp4.value=this.value;" 
@@ -2746,7 +2745,7 @@ height="720px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 <a href="/var/www/camera_streams/camera_ne_corner/" target="_blank">Streams</a> - <b>top one likely unfinished</b>
 For<br>best control, drop others into a spare player
 <div id="nemp4scalediv" class="nemp4scalediv" style="position:relative;top:-65px;left:49px">
-<input type="range" id="sldrnemp4" class="scaleSlider" 
+<input type="range" id="sldrnemp4" class="scaleSlider" style="touch-action: none"
 oninput="textnemp4.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
 <textarea id="textnemp4" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
 onkeyup="sldrnemp4.value=this.value;" 
@@ -2801,7 +2800,7 @@ East
 <br><br><a href="/../../camera_snapshots/camera_east_driveway/" target="_blank">Event Snapshots</a>; for alt control, drop them
 <br>into a spare viewer
 <div id="edjpgscalediv" class="edjpgscalediv" style="position:relative;top:-65px;left:44px">
-<input type="range" 
+<input type="range" style="touch-action: none"
 id="sldredjpg" class="scaleSlider" 
 oninput="textedjpg.value=this.value" name="" min="1" max="10000" value="43.5" step=".1" list="tickmarks">
 <textarea id="textedjpg" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
@@ -2831,7 +2830,7 @@ SEast
 Event Snapshots</a>; for alt control, drop them
 <br>into a spare viewer
 <div id="sdjpgscalediv" class="sdjpgscalediv" style="position:relative;top:-65px;left:44px">
-<input type="range" 
+<input type="range" style="touch-action: none"
 id="sldrsdjpg" class="scaleSlider" 
 oninput="textsdjpg.value=this.value" name="" min="1" max="10000" value="43.5" step=".1" list="tickmarks">
 <textarea id="textsdjpg" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
@@ -2863,7 +2862,7 @@ Office
 Event Snapshots</a>; for alt control, drop them
 <br>into a spare viewer
 <div id="fpjpgscalediv" class="fpjpgscalediv" style="position:relative;top:-65px;left:44px">
-<input type="range" 
+<input type="range" style="touch-action: none"
 id="sldrfpjpg" class="scaleSlider" 
 oninput="textfpjpg.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
 <textarea id="textfpjpg" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
@@ -2902,7 +2901,7 @@ height="710px" style="font-size:15px;overflow:auto;border:3px solid blue;border-
 Dock
 <br><a href="/../../camera_snapshots/camera_sw_corner/" target="_blank">
 Event Snapshots</a>; for alt control, drop them<br>into a spare viewer
-<br><input type="range" 
+<br><input type="range" style="touch-action: none"
 id="sldrswjpg" class="scaleSlider" 
 oninput="textswjpg.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
 <textarea id="textswjpg" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
@@ -2931,7 +2930,7 @@ North
 <br><a href="/../../camera_snapshots/camera_ne_corner/"  target="_blank">
 Event Snapshots</a>; for alt control, drop them
 <br>into a spare viewer
-<br><input type="range" 
+<br><input type="range" style="touch-action: none"
 id="sldrnejpg" class="scaleSlider" 
 oninput="textnejpg.value=this.value" name="" min="1" max="10000" value="80" step=".1" list="tickmarks">
 <textarea id="textnejpg" class="scaletext" style="font-size: 10pt;resize: none;" cols="5" rows="1" value="43.5" 
@@ -3149,7 +3148,7 @@ Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to wh
   <br><label><b>Short term alerts disable (this camera only)</b></label><br>
   <form  method="put">
   <input type="range" id="south_driveway" oninput="slidersd()" name="!home!homeowner!camera_snapshots!camera_south_driveway!settimeout"
-         min="0" max="1200" value="4" step="1" list="tickmarks">
+         min="0" max="1200" value="4" step="1" list="tickmarks" style="touch-action: none">
   <input type="submit" id="sdsubmit" value="Set to n minutes">
   </form>
 <br>
@@ -3161,7 +3160,7 @@ Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to wh
   <br><label><b>Short term alerts disable (this camera only)</b></label><br>
   <form  method="put">
   <input type="range" id="sw_corner" oninput="slidersw()" name="!home!homeowner!camera_snapshots!camera_sw_corner!settimeout"
-         min="0" max="1200" value="4" step="1" list="tickmarks">
+         min="0" max="1200" value="4" step="1" list="tickmarks" style="touch-action: none">
   <input type="submit" id="swsubmit" value="Set to n minutes">
   </form>
 <br>
@@ -3178,7 +3177,7 @@ Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to wh
   <br><label><b>Short term alerts disable (this camera only)</b></label><br>
   <form  method="put">
   <input type="range" id="front_parking" oninput="sliderfp()"  name="!home!homeowner!camera_snapshots!camera_front_parking!settimeout"
-         min="0" max="1200" value="4" step="1"  list="tickmarks">
+         min="0" max="1200" value="4" step="1"  list="tickmarks" style="touch-action: none">
   <input type="submit" id="fpsubmit" value="Set to n minutes">
   </form>
 <br>
@@ -3189,7 +3188,7 @@ Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to wh
   <br><label><b>Short term alerts disable (this camera only)</b></label><br>
   <form  method="put">
   <input type="range" id="east_driveway" oninput="slidered()"  name="!home!homeowner!camera_snapshots!camera_east_driveway!settimeout"
-         min="0" max="1200" value="4" step="1" list="tickmarks">
+         min="0" max="1200" value="4" step="1" list="tickmarks" style="touch-action: none">
   <input type="submit" id="edsubmit" value="Set to n minutes">
   </form>
  <!--<input type="submit" formaction="" name="PlayAll" value="Start all four">-->
@@ -3207,7 +3206,7 @@ Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to wh
   <br><label><b>Short term alerts disable (this camera only)</b></label><br>
   <form method="put">
   <input type="range" id="ne_corner" oninput="sliderne()" name="!home!homeowner!camera_snapshots!camera_ne_corner!settimeout"
-         min="0" max="1200" value="4" step="1" list="tickmarks">
+         min="0" max="1200" value="4" step="1" list="tickmarks" style="touch-action: none">
   <input type="submit" id="nesubmit" value="Set to n minutes">
    </form>
 <b><a href="#s0_location_on_page" target="_blank">Spare0</a></b><br>
@@ -3216,7 +3215,7 @@ Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to wh
   <br><label><b>Short term alerts disable (this camera only)</b></label><br>
   <form method="put">
   <input type="range" id="spare0" oninput="sliders0()" name="!home!homeowner!camera_snapshots!camera_spare0!settimeout"
-         min="0" max="1200" value="4" step="1" list="tickmarks">
+         min="0" max="1200" value="4" step="1" list="tickmarks" style="touch-action: none">
   <input type="submit" id="s0submit" value="Set to n minutes">
    </form>
 <br>
@@ -3228,7 +3227,7 @@ Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to wh
   <br><label><b>Short term alerts disable (this camera only)</b></label><br>
   <form method="put">
   <input type="range" id="espcam0_corner" oninput="sliderne()" name="!home!homeowner!camera_snapshots!camera_esp32100!settimeout"
-         min="0" max="1200" value="4" step="1" list="tickmarks">
+         min="0" max="1200" value="4" step="1" list="tickmarks" style="touch-action: none">
   <input type="submit" id="esp01submit" value="Set to n minutes">
    </form>
 <br>
@@ -3246,7 +3245,7 @@ Daniel 4:17-ish "the most High ruleth in the kingdom of men, and giveth it to wh
   <center>
 <form  method="put">
   </center><center><input type="range" id="entire_system" oninput="slideres()" name="!home!homeowner!camera_snapshots!settimeout"
-         min="0" max="3600" value="4" step="1" list="tickmarks">
+         min="0" max="3600" value="4" step="1" list="tickmarks" style="touch-action: none">
   <input type="submit" id="essubmit" value="Set to n minutes"></center><br>
   </form>
 </td><td>
