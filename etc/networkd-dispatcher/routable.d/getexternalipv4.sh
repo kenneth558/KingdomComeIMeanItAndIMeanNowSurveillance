@@ -25,6 +25,7 @@ timeout 0.130 curl ifconfig.me > /etc/networkd-dispatcher/routable.d/iplog.txt 2
 timeout 0.130 curl api.ipify.org > /etc/networkd-dispatcher/routable.d/iplog.txt 2> /dev/null || \
 timeout 0.130 curl bot.whatismyipaddress.com > /etc/networkd-dispatcher/routable.d/iplog.txt 2> /dev/null
    ADDRnew="$(grep -m 1 -Eo "([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5]).([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5]).([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5]).([0-9]{1,2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])" /etc/networkd-dispatcher/routable.d/iplog.txt)"
+   printf "${ADDRnew}" > /etc/networkd-dispatcher/routable.d/iplog.txt
    if [ "$ADDRold" != "$ADDRnew" ]; then
       mailingdirname="/etc/emails_awaiting/ipaddchngmail$(date +%Y%m%d%H%M%S)"
       mkdir "$mailingdirname" 2>/dev/null
